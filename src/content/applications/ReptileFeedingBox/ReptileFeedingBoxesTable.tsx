@@ -173,6 +173,7 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({ reptileFe
     Promise.all(selectedReptileFeedingBoxes.map(
         id => DataStore.delete(ReptileFeedingBox, id)
     ))
+    location.reload();
   }
 
   return (
