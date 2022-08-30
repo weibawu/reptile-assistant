@@ -108,7 +108,7 @@ function HeaderUserbox() {
         <Box sx={{ m: 1 }}>
           <Button onClick={signOut} color="primary" fullWidth>
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
-            Sign out
+            登出
           </Button>
         </Box>
       </Popover>
