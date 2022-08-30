@@ -1,5 +1,222 @@
 export const schema = {
     "models": {
+        "Reptile": {
+            "name": "Reptile",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "nickname": {
+                    "name": "nickname",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "gender": {
+                    "name": "gender",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "birthdate": {
+                    "name": "birthdate",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "weight": {
+                    "name": "weight",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "genies": {
+                    "name": "genies",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "userId": {
+                    "name": "userId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "ReptileType": {
+                    "name": "ReptileType",
+                    "isArray": false,
+                    "type": {
+                        "model": "ReptileType"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": "id",
+                        "targetName": "reptileReptileTypeId"
+                    }
+                },
+                "ReptileFeedingBoxIndexCollection": {
+                    "name": "ReptileFeedingBoxIndexCollection",
+                    "isArray": false,
+                    "type": {
+                        "model": "ReptileFeedingBoxIndexCollection"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": "id",
+                        "targetName": "reptileReptileFeedingBoxIndexCollectionId"
+                    }
+                },
+                "ReptileFeedingLogs": {
+                    "name": "ReptileFeedingLogs",
+                    "isArray": true,
+                    "type": {
+                        "model": "ReptileFeedingLog"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "reptileID"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "reptileReptileTypeId": {
+                    "name": "reptileReptileTypeId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "reptileReptileFeedingBoxIndexCollectionId": {
+                    "name": "reptileReptileFeedingBoxIndexCollectionId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            },
+            "syncable": true,
+            "pluralName": "Reptiles",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "ReptileType": {
+            "name": "ReptileType",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "ReptileTypes",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "ReptileFeedingBoxIndexCollection": {
             "name": "ReptileFeedingBoxIndexCollection",
             "fields": {
@@ -185,225 +402,6 @@ export const schema = {
                 }
             ]
         },
-        "Reptile": {
-            "name": "Reptile",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "nickname": {
-                    "name": "nickname",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "gender": {
-                    "name": "gender",
-                    "isArray": false,
-                    "type": {
-                        "enum": "ReptileGenderType"
-                    },
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "birthdate": {
-                    "name": "birthdate",
-                    "isArray": false,
-                    "type": "AWSDate",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "weight": {
-                    "name": "weight",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "genies": {
-                    "name": "genies",
-                    "isArray": true,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
-                },
-                "ReptileFeedingBoxIndexCollection": {
-                    "name": "ReptileFeedingBoxIndexCollection",
-                    "isArray": false,
-                    "type": {
-                        "model": "ReptileFeedingBoxIndexCollection"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "reptileReptileFeedingBoxIndexCollectionId"
-                    }
-                },
-                "ReptileType": {
-                    "name": "ReptileType",
-                    "isArray": false,
-                    "type": {
-                        "model": "ReptileType"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "reptileReptileTypeId"
-                    }
-                },
-                "ReptileFeedingLogs": {
-                    "name": "ReptileFeedingLogs",
-                    "isArray": true,
-                    "type": {
-                        "model": "ReptileFeedingLog"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "reptileID"
-                    }
-                },
-                "userId": {
-                    "name": "userId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "reptileReptileFeedingBoxIndexCollectionId": {
-                    "name": "reptileReptileFeedingBoxIndexCollectionId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "reptileReptileTypeId": {
-                    "name": "reptileReptileTypeId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                }
-            },
-            "syncable": true,
-            "pluralName": "Reptiles",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "ReptileType": {
-            "name": "ReptileType",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "ReptileTypes",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
         "ReptileFeedingBox": {
             "name": "ReptileFeedingBox",
             "fields": {
@@ -430,6 +428,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "userId": {
+                    "name": "userId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "ReptileFeedingBoxIndexCollections": {
                     "name": "ReptileFeedingBoxIndexCollections",
                     "isArray": true,
@@ -443,13 +448,6 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "reptilefeedingboxID"
                     }
-                },
-                "userId": {
-                    "name": "userId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -495,6 +493,13 @@ export const schema = {
         }
     },
     "enums": {
+        "ReptileFeedingBoxType": {
+            "name": "ReptileFeedingBoxType",
+            "values": [
+                "BOX",
+                "CABINET"
+            ]
+        },
         "ReptileGenderType": {
             "name": "ReptileGenderType",
             "values": [
@@ -504,15 +509,8 @@ export const schema = {
                 "POSSIBLE_FAMALE",
                 "UNKNOWN"
             ]
-        },
-        "ReptileFeedingBoxType": {
-            "name": "ReptileFeedingBoxType",
-            "values": [
-                "BOX",
-                "CABINET"
-            ]
         }
     },
     "nonModels": {},
-    "version": "1ff0288e723a5b1759dec2c11cd4bcce"
+    "version": "6efad1cf09675c1f4c3db9c0158b449d"
 };

@@ -42,20 +42,25 @@ function BulkActions({onBulkDeleting}: BulkActionsProps) {
     menuOpen(false);
   };
 
+  const handleBulkDeleting = () => {
+    onBulkDeleting();
+    closeMenu();
+  }
+
   return (
     <>
       <Box display="flex" alignItems="center" justifyContent="space-between">
         <Box display="flex" alignItems="center">
           <Typography variant="h5" color="text.secondary">
-            Bulk actions:
+            批量操作：
           </Typography>
           <ButtonError
             sx={{ ml: 1 }}
             startIcon={<DeleteTwoToneIcon />}
             variant="contained"
-            onClick={onBulkDeleting}
+            onClick={handleBulkDeleting}
           >
-            Delete
+            删除
           </ButtonError>
         </Box>
         <IconButton
@@ -83,11 +88,8 @@ function BulkActions({onBulkDeleting}: BulkActionsProps) {
         }}
       >
         <List sx={{ p: 1 }} component="nav">
-          <ListItem button>
-            <ListItemText primary="Bulk delete selected" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Bulk edit selected" />
+          <ListItem button onClick={handleBulkDeleting}>
+            <ListItemText primary="批量删除选中" />
           </ListItem>
         </List>
       </Menu>

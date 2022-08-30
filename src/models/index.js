@@ -2,6 +2,11 @@
 import { initSchema } from '@aws-amplify/datastore';
 import { schema } from './schema';
 
+const ReptileFeedingBoxType = {
+  "BOX": "BOX",
+  "CABINET": "CABINET"
+};
+
 const ReptileGenderType = {
   "MALE": "MALE",
   "FAMALE": "FAMALE",
@@ -10,19 +15,14 @@ const ReptileGenderType = {
   "UNKNOWN": "UNKNOWN"
 };
 
-const ReptileFeedingBoxType = {
-  "BOX": "BOX",
-  "CABINET": "CABINET"
-};
-
-const { ReptileFeedingBoxIndexCollection, ReptileFeedingLog, Reptile, ReptileType, ReptileFeedingBox } = initSchema(schema);
+const { Reptile, ReptileType, ReptileFeedingBoxIndexCollection, ReptileFeedingLog, ReptileFeedingBox } = initSchema(schema);
 
 export {
-  ReptileFeedingBoxIndexCollection,
-  ReptileFeedingLog,
   Reptile,
   ReptileType,
+  ReptileFeedingBoxIndexCollection,
+  ReptileFeedingLog,
   ReptileFeedingBox,
-  ReptileGenderType,
-  ReptileFeedingBoxType
+  ReptileFeedingBoxType,
+  ReptileGenderType
 };
