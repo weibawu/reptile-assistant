@@ -7,11 +7,13 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import {CssBaseline} from '@mui/material';
 import ThemeProvider from './theme/ThemeProvider';
 import {Authenticator} from "@aws-amplify/ui-react";
-import {Amplify, Hub} from "aws-amplify";
+import {Amplify, DataStore, Hub} from "aws-amplify";
 import amplifyConfig from "./aws-exports";
 
 Amplify.configure(amplifyConfig);
 Amplify.Logger.LOG_LEVEL = 'DEBUG';
+
+DataStore.clear();
 
 function App() {
     const content = useRoutes(router);

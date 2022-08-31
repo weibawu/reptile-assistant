@@ -1,16 +1,16 @@
 import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
-export enum ReptileFeedingBoxType {
-  BOX = "BOX",
-  CABINET = "CABINET"
-}
-
 export enum ReptileGenderType {
   MALE = "MALE",
   FAMALE = "FAMALE",
   POSSIBLE_MALE = "POSSIBLE_MALE",
   POSSIBLE_FAMALE = "POSSIBLE_FAMALE",
   UNKNOWN = "UNKNOWN"
+}
+
+export enum ReptileFeedingBoxType {
+  BOX = "BOX",
+  CABINET = "CABINET"
 }
 
 
@@ -39,7 +39,7 @@ export declare class Reptile {
   readonly id: string;
   readonly name: string;
   readonly nickname?: string | null;
-  readonly gender?: string | null;
+  readonly gender?: ReptileGenderType | keyof typeof ReptileGenderType | null;
   readonly birthdate?: string | null;
   readonly weight?: string | null;
   readonly genies?: (string | null)[] | null;

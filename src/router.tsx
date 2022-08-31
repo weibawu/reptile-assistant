@@ -28,6 +28,9 @@ const Messenger = Loader(
 const FeedingBox = Loader(
   lazy(() => import('src/content/applications/FeedingBox'))
 );
+const Reptile = Loader(
+  lazy(() => import('src/content/applications/Reptile'))
+);
 const UserProfile = Loader(
   lazy(() => import('src/content/applications/Users/profile'))
 );
@@ -75,7 +78,11 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '',
-        element: <Navigate to="reptile-feeding-box/overview" replace />
+        element: <Navigate to="reptile-feeding-box" replace />
+      },
+      {
+        path: 'reptile-feeding-box',
+        element: <Navigate to="overview" replace />
       },
       {
         path: 'reptile-feeding-box/management',
@@ -85,23 +92,35 @@ const routes: RouteObject[] = [
         path: 'reptile-feeding-box/overview',
         element: <div />
       },
-      // {
-      //   path: 'profile',
-      //   children: [
-      //     {
-      //       path: '',
-      //       element: <Navigate to="details" replace />
-      //     },
-      //     {
-      //       path: 'details',
-      //       element: <UserProfile />
-      //     },
-      //     {
-      //       path: 'settings',
-      //       element: <UserSettings />
-      //     }
-      //   ]
-      // }
+      {
+        path: 'reptile',
+        element: <Navigate to="overview" replace />
+      },
+      {
+        path: 'reptile/overview',
+        element: <div />
+      },
+      {
+        path: 'reptile/management',
+        element: <Reptile />
+      },
+      {
+        path: 'profile',
+        children: [
+          {
+            path: '',
+            element: <Navigate to="details" replace />
+          },
+          {
+            path: 'details',
+            element: <UserProfile />
+          },
+          {
+            path: 'settings',
+            element: <UserSettings />
+          }
+        ]
+      }
     ]
   },
 ];

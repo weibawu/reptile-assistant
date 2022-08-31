@@ -27,7 +27,9 @@ export const schema = {
                 "gender": {
                     "name": "gender",
                     "isArray": false,
-                    "type": "String",
+                    "type": {
+                        "enum": "ReptileGenderType"
+                    },
                     "isRequired": false,
                     "attributes": []
                 },
@@ -493,13 +495,6 @@ export const schema = {
         }
     },
     "enums": {
-        "ReptileFeedingBoxType": {
-            "name": "ReptileFeedingBoxType",
-            "values": [
-                "BOX",
-                "CABINET"
-            ]
-        },
         "ReptileGenderType": {
             "name": "ReptileGenderType",
             "values": [
@@ -509,8 +504,15 @@ export const schema = {
                 "POSSIBLE_FAMALE",
                 "UNKNOWN"
             ]
+        },
+        "ReptileFeedingBoxType": {
+            "name": "ReptileFeedingBoxType",
+            "values": [
+                "BOX",
+                "CABINET"
+            ]
         }
     },
     "nonModels": {},
-    "version": "6efad1cf09675c1f4c3db9c0158b449d"
+    "version": "b2c859193ab7b1868d4f8067af25e424"
 };

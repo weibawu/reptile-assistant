@@ -201,6 +201,17 @@ function SidebarMenu() {
                   饲养容器管理
                 </Button>
               </ListItem>
+                <ListItem component="div">
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to="reptile"
+                  startIcon={<TableChartTwoToneIcon />}
+                >
+                  爬宠管理
+                </Button>
+              </ListItem>
             </List>
           </SubMenuWrapper>
         </List>

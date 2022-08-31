@@ -1,0 +1,57 @@
+type Reptile @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  nickname: String
+  gender: ReptileGenderType
+  birthdate: String
+  weight: String
+  genies: [String]
+  userId: ID!
+  ReptileType: ReptileType @hasOne
+  ReptileFeedingBoxIndexCollection: ReptileFeedingBoxIndexCollection @hasOne
+  ReptileFeedingLogs: [ReptileFeedingLog] @hasMany(indexName: "byReptile", fields: ["id"])
+}
+
+type ReptileFeedingBox @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  type: ReptileFeedingBoxType!
+  name: String!
+  userId: String!
+  ReptileFeedingBoxIndexCollections: [ReptileFeedingBoxIndexCollection] @hasMany(indexName: "byReptileFeedingBox", fields: ["id"])
+}
+
+enum ReptileGenderType {
+  MALE
+  FAMALE
+  POSSIBLE_MALE
+  POSSIBLE_FAMALE
+  UNKNOWN
+}
+
+type ReptileFeedingBoxIndexCollection @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  verticalIndex: Int!
+  horizontalIndex: Int!
+  reptilefeedingboxID: ID! @index(name: "byReptileFeedingBox")
+}
+
+type ReptileFeedingLog @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  weight: Float
+  detail: String
+  environmentHumidity: String
+  environmentTemperature: String
+  feedingDateTime: AWSDateTime!
+  reptileID: ID! @index(name: "byReptile")
+}
+
+enum ReptileFeedingBoxType {
+  BOX
+  CABINET
+}
+
+type ReptileType @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+}
+ 

@@ -7,7 +7,7 @@ import {
   MenuItem
 } from '@mui/material';
 import { useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import {NavLink, useLocation} from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 
@@ -65,6 +65,7 @@ const ListWrapper = styled(Box)(
 function HeaderMenu() {
   const ref = useRef<any>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
+  const location = useLocation();
 
   const handleOpen = (): void => {
     setOpen(true);
@@ -84,12 +85,13 @@ function HeaderMenu() {
           }
         }}
       >
+        {/*todo list the menu*/}
         <List disablePadding component={Box} display="flex">
           <ListItem
               classes={{ root: 'MuiListItem-indicators' }}
               button
               component={NavLink}
-              to="/reptile-feeding-box/overview"
+              to={`${location.pathname.split('/')[0] + '/' + location.pathname.split('/')[1]}/overview`}
           >
             <ListItemText
                 primaryTypographyProps={{ noWrap: true }}
@@ -100,7 +102,7 @@ function HeaderMenu() {
             classes={{ root: 'MuiListItem-indicators' }}
             button
             component={NavLink}
-            to="/reptile-feeding-box/management"
+            to={`${location.pathname.split('/')[0] + '/' + location.pathname.split('/')[1]}/management`}
           >
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}
