@@ -198,7 +198,7 @@ function SidebarMenu() {
                   to="reptile-feeding-box"
                   startIcon={<TableChartTwoToneIcon />}
                 >
-                  饲养容器管理
+                  我的饲养容器
                 </Button>
               </ListItem>
                 <ListItem component="div">
@@ -209,7 +209,7 @@ function SidebarMenu() {
                   to="reptile"
                   startIcon={<TableChartTwoToneIcon />}
                 >
-                  爬宠管理
+                  我的爬宠
                 </Button>
               </ListItem>
             </List>

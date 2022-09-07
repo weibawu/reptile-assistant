@@ -51,7 +51,7 @@ function ModifyFeedingBoxModal(props: FeedingBoxModificationModalProps) {
         DataStore.save(new ReptileFeedingBox({
             name: form.name,
             type: form.type.value,
-            userId: user.username,
+            userID: user.username,
         }))
             .then(handleClose)
             .catch(console.error)

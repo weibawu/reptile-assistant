@@ -42,14 +42,15 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
     const validationSchema = yup.object({
         name: yup.string().required().max(20),
         nickname: yup.string().required().max(20),
-        verticalIndex: yup.number().required(),
-        horizontalIndex: yup.string().required(),
+        verticalIndex: yup.number(),
+        horizontalIndex: yup.number(),
         reptileType: yup.object().required(),
         feedingBox: yup.object().required(),
     });
 
     const [reptileTypeOptions, setReptileTypeOptions] = useState<{ label: string, value: ReptileType }[]>();
     const [feedingBoxOptions, setFeedingBoxOptions] = useState<{ label: string, value: ReptileFeedingBox }[]>();
+    const [feedingBoxIndexCollectionOptions, setFeedingBoxIndexCollectionOptions] = useState<{ label: string, value: ReptileFeedingBoxIndexCollection }[]>();
 
     const reptileGenderOptions = [
         {label: '公', value: ReptileGenderType.MALE},
@@ -61,7 +62,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
 
     const {user} = useAuthenticator(ctx => [ctx.user]);
 
-    const {control, handleSubmit, reset, formState: {errors}} = useForm({
+    const {control, handleSubmit, reset, watch, formState: {errors}} = useForm({
         defaultValues: {
             name: editableReptile?.name ?? '',
             nickname: editableReptile?.nickname ?? '',
@@ -69,13 +70,13 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
             birthdate: editableReptile?.birthdate ?? `${Date.now()}`,
             weight: editableReptile?.weight ?? undefined,
             genies: editableReptile?.genies.join('/') ?? undefined,
-            feedingBox: editableReptile ? feedingBoxOptions.find((_) => _.value.id === editableReptile.ReptileFeedingBoxIndexCollection.reptilefeedingboxID) : undefined,
+            feedingBox: editableReptile ? feedingBoxOptions.find((_) => _.value.id === editableReptile.reptileFeedingBoxID) : undefined,
             reptileType: editableReptile ? {
-                label: editableReptile.ReptileType.name,
-                value: editableReptile.ReptileType
+                label: editableReptile ? reptileTypeOptions.find((_) => _.value.id === editableReptile.reptileTypeID)?.label : undefined,
+                value: editableReptile ? reptileTypeOptions.find((_) => _.value.id === editableReptile.reptileTypeID)?.value : undefined,
             } : undefined,
-            verticalIndex: editableReptile?.ReptileFeedingBoxIndexCollection.verticalIndex,
-            horizontalIndex: editableReptile?.ReptileFeedingBoxIndexCollection.horizontalIndex,
+            verticalIndex: editableReptile ? feedingBoxIndexCollectionOptions.find((_) => _.value.id === editableReptile.reptileFeedingBoxIndexCollectionID)?.value.verticalIndex : undefined,
+            horizontalIndex: editableReptile ? feedingBoxIndexCollectionOptions.find((_) => _.value.id === editableReptile.reptileFeedingBoxIndexCollectionID)?.value.horizontalIndex : undefined,
         },
         resolver: yupResolver(validationSchema),
     });
@@ -86,32 +87,31 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
     };
 
     const onSubmit = async form => {
-       try {
-            let feedingBoxIndex;
+        try {
+            let feedingBoxIndexExisted;
 
             if (form.feedingBox) {
                 const feedingBoxIndexes = await DataStore.query(
                     ReptileFeedingBoxIndexCollection,
                     (feedBoxIndexPredicated) =>
-                        feedBoxIndexPredicated.reptilefeedingboxID("eq", form.feedingBox.value.id)
-                            .verticalIndex("eq", Number(form.verticalIndex))
-                            .horizontalIndex("eq", Number(form.horizontalIndex))
+                        feedBoxIndexPredicated.reptileFeedingBoxID("eq", form.feedingBox.value.id)
+                            .verticalIndex("eq", form.verticalIndex)
+                            .horizontalIndex("eq", form.horizontalIndex)
                 );
 
-                console.log(form);
-
                 if (feedingBoxIndexes.length === 0) {
-                    feedingBoxIndex = await DataStore.save(
+                    feedingBoxIndexExisted = await DataStore.save(
                         new ReptileFeedingBoxIndexCollection(
                             {
-                                verticalIndex: Number(form.verticalIndex),
-                                horizontalIndex: Number(form.horizontalIndex),
-                                reptilefeedingboxID: form.feedingBox.value.id,
+                                userID: user.username,
+                                verticalIndex: form.verticalIndex,
+                                horizontalIndex: form.horizontalIndex,
+                                reptileFeedingBoxID: form.feedingBox.value.id,
                             }
                         )
                     )
                 } else {
-                    feedingBoxIndex = feedingBoxIndexes[0];
+                    feedingBoxIndexExisted = feedingBoxIndexes[0];
                 }
             }
 
@@ -119,18 +119,19 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
                 name: form.name,
                 nickname: form.nickname,
                 gender: form.gender.value,
-                birthdate: form.birthdate.toString(),
-                weight: form.weight,
+                birthdate: form.birthdate.toISOString().slice(0, 10),
+                weight: Number(form.weight),
                 genies: form.genies.split('/'),
-                userId: user.username,
-                ReptileType: form.reptileType.value,
-                reptileReptileFeedingBoxIndexCollectionId: feedingBoxIndex.id,
+                userID: user.username,
+                reptileTypeID: form.reptileType.value.id,
+                reptileFeedingBoxID: feedingBoxIndexExisted.reptileFeedingBoxID,
+                reptileFeedingBoxIndexCollectionID: feedingBoxIndexExisted.id,
             }))
 
             handleClose();
         } catch (e) {
-           console.error('Create Reptile Failed',e);
-       }
+            console.error('Create Reptile Failed', e);
+        }
     };
 
     useEffect(() => {
@@ -143,11 +144,23 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
             ))
         });
 
-        DataStore.query(ReptileFeedingBox).then(feedingBoxModels => {
+        DataStore.query(ReptileFeedingBox,
+            (feedBoxPredicated) =>
+                feedBoxPredicated.userID("eq", user.username),
+        ).then(feedingBoxModels => {
             setFeedingBoxOptions(feedingBoxModels.map(
                 feedingBox => ({
                     label: feedingBox.name,
                     value: feedingBox,
+                })
+            ))
+        });
+
+        DataStore.query(ReptileFeedingBoxIndexCollection).then(feedingBoxIndexCollectionModels => {
+            setFeedingBoxIndexCollectionOptions(feedingBoxIndexCollectionModels.map(
+                feedingBoxIndexCollection => ({
+                    label: feedingBoxIndexCollection.id,
+                    value: feedingBoxIndexCollection,
                 })
             ))
         });
@@ -263,30 +276,38 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
                                 )
                             }
                         />
-                        <Controller
-                            name="verticalIndex"
-                            control={control}
-                            render={
-                                ({field}) => <TextField
-                                    fullWidth
-                                    placeholder="第几列"
-                                    error={!!errors.verticalIndex}
-                                    {...field}
+                        {
+                            watch().feedingBox?.value.type === "CABINET"
+                                ? <Controller
+                                    name="horizontalIndex"
+                                    control={control}
+                                    render={
+                                        ({field}) => <TextField
+                                            fullWidth
+                                            placeholder="第几排"
+                                            error={!!errors.horizontalIndex}
+                                            {...field}
+                                        />
+                                    }
                                 />
-                            }
-                        />
-                        <Controller
-                            name="horizontalIndex"
-                            control={control}
-                            render={
-                                ({field}) => <TextField
-                                    fullWidth
-                                    placeholder="第几排"
-                                    error={!!errors.horizontalIndex}
-                                    {...field}
+                                : null
+                        }
+                        {
+                            watch().feedingBox?.value.type === "CABINET"
+                                ? <Controller
+                                    name="verticalIndex"
+                                    control={control}
+                                    render={
+                                        ({field}) => <TextField
+                                            fullWidth
+                                            placeholder="第几列"
+                                            error={!!errors.verticalIndex}
+                                            {...field}
+                                        />
+                                    }
                                 />
-                            }
-                        />
+                                : null
+                        }
                         <Controller
                             name="birthdate"
                             control={control}

@@ -21,7 +21,7 @@ function ApplicationsReptiles() {
         setReptiles(
             await DataStore.query(
                 Reptile,
-                (reptilePredicated) => reptilePredicated.userId(
+                (reptilePredicated) => reptilePredicated.userID(
                     "eq", user.username,
                 )
             )
@@ -84,7 +84,7 @@ function ApplicationsReptiles() {
                             onClick={handleModifyReptileModalOpen}
                             startIcon={<AddTwoToneIcon fontSize="small"/>}
                         >
-                            创建饲养容器
+                            创建新爬宠
                         </Button>
                     </Grid>
                 </Grid>

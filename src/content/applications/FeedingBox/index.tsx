@@ -21,7 +21,7 @@ function ApplicationsFeedingBoxes() {
         setFeedingBoxes(
             await DataStore.query(
                 ReptileFeedingBox,
-                (feedingBoxPredicated) => feedingBoxPredicated.userId(
+                (feedingBoxPredicated) => feedingBoxPredicated.userID(
                     "eq", user.username,
                 )
             )

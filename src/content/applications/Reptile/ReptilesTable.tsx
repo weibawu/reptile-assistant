@@ -1,4 +1,4 @@
-import {ChangeEvent, FC, useState} from 'react';
+import {ChangeEvent, FC, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {
     Box,
@@ -27,8 +27,15 @@ import Label from 'src/components/Label';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
-import {Reptile, ReptileType} from "../../../models";
+import {
+    Reptile,
+    ReptileFeedingBox,
+    ReptileFeedingBoxIndexCollection,
+    ReptileGenderType,
+    ReptileType
+} from "../../../models";
 import {DataStore} from "aws-amplify";
+import {useAuthenticator} from "@aws-amplify/ui-react";
 
 interface ReptilesTableProps {
     className?: string;
@@ -41,22 +48,29 @@ interface Filters {
     type?: ReptileType;
 }
 
-// const getTypeLabel = (reptileType: ReptileType): JSX.Element => {
-//     const map = {
-//         [ReptileType.BOX]: {
-//             text: "饲养盒",
-//             color: 'error'
-//         },
-//         [ReptileType.CABINET]: {
-//             text: "爬柜",
-//             color: 'success'
-//         },
-//     };
-//
-//     const {text, color}: any = map[reptileType];
-//
-//     return <Label color={color}>{text}</Label>;
-// };
+const ReptileTypeLabel: FC<{ reptileType: ReptileType }> = ({reptileType}) => {
+
+    const [reptileTypes, setReptileTypes] = useState<ReptileType[]>([]);
+
+    useEffect(() => {
+        DataStore.query(ReptileType).then(setReptileTypes);
+    }, [])
+
+    const map = [];
+
+    reptileTypes.forEach(
+        _ => map.push({
+            [_.name]: {
+                text: _.name,
+                color: ['primary', 'black', 'secondary', 'error', 'warning', 'success', 'info']
+            }
+        })
+    );
+
+    const {text, color}: any = map[reptileType.name];
+
+    return <Label color={color}>{text}</Label>;
+};
 
 const applyFilters = (
     reptiles: Reptile[],
@@ -82,6 +96,8 @@ const applyPagination = (
 };
 
 const ReptilesTable: FC<ReptilesTableProps> = ({reptiles, onReptileEditing, onReptilesDeleting}) => {
+    const {user} = useAuthenticator(ctx => [ctx.user]);
+
     const [selectedReptiles, setSelectedReptiles] = useState<string[]>(
         []
     );
@@ -91,6 +107,15 @@ const ReptilesTable: FC<ReptilesTableProps> = ({reptiles, onReptileEditing, onRe
     const [filters, setFilters] = useState<Filters>({
         type: null
     });
+    const [reptileTypes, setReptileTypes] = useState<ReptileType[]>([]);
+    const [feedingBoxes, setFeedingBoxes] = useState<ReptileFeedingBox[]>([]);
+    const [feedingBoxIndexes, setFeedingBoxIndexes] = useState<ReptileFeedingBoxIndexCollection[]>([]);
+
+    useEffect(() => {
+        DataStore.query(ReptileType).then(setReptileTypes);
+        DataStore.query(ReptileFeedingBox, (_) => _.userID("eq", user.username)).then(setFeedingBoxes);
+        DataStore.query(ReptileFeedingBoxIndexCollection, (_) => _.userID("eq", user.username)).then(setFeedingBoxIndexes);
+    }, [])
 
     const typeOptions = [
         {
@@ -200,7 +225,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({reptiles, onReptileEditing, onRe
                             </FormControl>
                         </Box>
                     }
-                    title="饲养容器管理"
+                    title="爬宠管理"
                 />
             )}
             <Divider/>
@@ -216,10 +241,14 @@ const ReptilesTable: FC<ReptilesTableProps> = ({reptiles, onReptileEditing, onRe
                                     onChange={handleSelectAllReptiles}
                                 />
                             </TableCell>
-                            <TableCell>名称 / 位置</TableCell>
-                            <TableCell>饲养盒类型</TableCell>
-                            <TableCell>ID</TableCell>
-                            <TableCell align="right">Actions</TableCell>
+                            <TableCell>品系名</TableCell>
+                            <TableCell>别名</TableCell>
+                            <TableCell>基因</TableCell>
+                            <TableCell>体重(g)</TableCell>
+                            <TableCell>出生日期</TableCell>
+                            <TableCell>所属科</TableCell>
+                            <TableCell>所在爬柜/饲养盒</TableCell>
+                            <TableCell align="right">操作</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -255,7 +284,15 @@ const ReptilesTable: FC<ReptilesTableProps> = ({reptiles, onReptileEditing, onRe
                                         </Typography>
                                     </TableCell>
                                     <TableCell>
-                                        {/*{getTypeLabel(reptile.type as ReptileType)}*/}
+                                        <Typography
+                                            variant="body1"
+                                            fontWeight="bold"
+                                            color="text.primary"
+                                            gutterBottom
+                                            noWrap
+                                        >
+                                            {reptile.nickname}
+                                        </Typography>
                                     </TableCell>
                                     <TableCell>
                                         <Typography
@@ -265,7 +302,56 @@ const ReptilesTable: FC<ReptilesTableProps> = ({reptiles, onReptileEditing, onRe
                                             gutterBottom
                                             noWrap
                                         >
-                                            {reptile.id}
+                                            {reptile.genies.join(',')}
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Typography
+                                            variant="body1"
+                                            fontWeight="bold"
+                                            color="text.primary"
+                                            gutterBottom
+                                            noWrap
+                                        >
+                                            {reptile.weight}g
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Typography
+                                            variant="body1"
+                                            fontWeight="bold"
+                                            color="text.primary"
+                                            gutterBottom
+                                            noWrap
+                                        >
+                                            {reptile.birthdate}
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Typography
+                                            variant="body1"
+                                            fontWeight="bold"
+                                            color="text.primary"
+                                            gutterBottom
+                                            noWrap
+                                        >
+                                            {reptileTypes.find(_ => _.id === reptile.reptileTypeID)?.name}
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Typography
+                                            variant="body1"
+                                            fontWeight="bold"
+                                            color="text.primary"
+                                            gutterBottom
+                                            noWrap
+                                        >
+                                            { feedingBoxes.find(_ => _.id === reptile.reptileFeedingBoxID)?.name }
+                                            {
+                                                feedingBoxes.find(_ => _.id === reptile.reptileFeedingBoxID)?.type === "CABINET"
+                                                ? ` 第${feedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.horizontalIndex}排${feedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.verticalIndex}列`
+                                                : ""
+                                            }
                                         </Typography>
                                     </TableCell>
                                     <TableCell align="right">

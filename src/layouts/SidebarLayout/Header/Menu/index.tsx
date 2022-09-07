@@ -63,16 +63,18 @@ const ListWrapper = styled(Box)(
 );
 
 function HeaderMenu() {
-  const ref = useRef<any>(null);
-  const [isOpen, setOpen] = useState<boolean>(false);
+  // const ref = useRef<any>(null);
   const location = useLocation();
 
-  const handleOpen = (): void => {
-    setOpen(true);
-  };
-
-  const handleClose = (): void => {
-    setOpen(false);
+  const routerListMap = {
+    'reptile-feeding-box': [
+      { to: '/reptile-feeding-box/overview', 'title': '饲养情况概览' },
+      { to: '/reptile-feeding-box/management', 'title': '容器管理' },
+    ],
+    'reptile': [
+      { to: '/reptile/overview', 'title': '爬宠饲养日志' },
+      { to: '/reptile/management', 'title': '爬宠管理' },
+    ],
   };
 
   return (
@@ -80,80 +82,29 @@ function HeaderMenu() {
       <ListWrapper
         sx={{
           display: {
-            xs: 'none',
             md: 'block'
           }
         }}
       >
         {/*todo list the menu*/}
         <List disablePadding component={Box} display="flex">
-          <ListItem
-              classes={{ root: 'MuiListItem-indicators' }}
-              button
-              component={NavLink}
-              to={`${location.pathname.split('/')[0] + '/' + location.pathname.split('/')[1]}/overview`}
-          >
-            <ListItemText
-                primaryTypographyProps={{ noWrap: true }}
-                primary="饲养情况概览"
-            />
-          </ListItem>
-          <ListItem
-            classes={{ root: 'MuiListItem-indicators' }}
-            button
-            component={NavLink}
-            to={`${location.pathname.split('/')[0] + '/' + location.pathname.split('/')[1]}/management`}
-          >
-            <ListItemText
-              primaryTypographyProps={{ noWrap: true }}
-              primary="容器管理"
-            />
-          </ListItem>
-          {/*<ListItem*/}
-          {/*  classes={{ root: 'MuiListItem-indicators' }}*/}
-          {/*  button*/}
-          {/*  component={NavLink}*/}
-          {/*  to="/components/forms"*/}
-          {/*>*/}
-          {/*  <ListItemText*/}
-          {/*    primaryTypographyProps={{ noWrap: true }}*/}
-          {/*    primary="Forms"*/}
-          {/*  />*/}
-          {/*</ListItem>*/}
-          {/*<ListItem*/}
-          {/*  classes={{ root: 'MuiListItem-indicators' }}*/}
-          {/*  button*/}
-          {/*  ref={ref}*/}
-          {/*  onClick={handleOpen}*/}
-          {/*>*/}
-          {/*  <ListItemText*/}
-          {/*    primaryTypographyProps={{ noWrap: true }}*/}
-          {/*    primary={*/}
-          {/*      <Box display="flex" alignItems="center">*/}
-          {/*        Others*/}
-          {/*        <Box display="flex" alignItems="center" pl={0.3}>*/}
-          {/*          <ExpandMoreTwoToneIcon fontSize="small" />*/}
-          {/*        </Box>*/}
-          {/*      </Box>*/}
-          {/*    }*/}
-          {/*  />*/}
-          {/*</ListItem>*/}
+          {
+            routerListMap[location.pathname.split('/')[1]]?.map((router) =>
+                <ListItem
+                    classes={{ root: 'MuiListItem-indicators' }}
+                    button
+                    component={NavLink}
+                    to={router.to}
+                >
+                  <ListItemText
+                      primaryTypographyProps={{ noWrap: true }}
+                      primary={router.title}
+                  />
+                </ListItem>
+            )
+          }
         </List>
       </ListWrapper>
-      {/*<Menu anchorEl={ref.current} onClose={handleClose} open={isOpen}>*/}
-      {/*  <MenuItem sx={{ px: 3 }} component={NavLink} to="/overview">*/}
-      {/*    Overview*/}
-      {/*  </MenuItem>*/}
-      {/*  <MenuItem sx={{ px: 3 }} component={NavLink} to="/components/tabs">*/}
-      {/*    Tabs*/}
-      {/*  </MenuItem>*/}
-      {/*  <MenuItem sx={{ px: 3 }} component={NavLink} to="/components/cards">*/}
-      {/*    Cards*/}
-      {/*  </MenuItem>*/}
-      {/*  <MenuItem sx={{ px: 3 }} component={NavLink} to="/components/modals">*/}
-      {/*    Modals*/}
-      {/*  </MenuItem>*/}
-      {/*</Menu>*/}
     </>
   );
 }

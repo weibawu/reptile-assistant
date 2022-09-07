@@ -13,7 +13,8 @@ import amplifyConfig from "./aws-exports";
 Amplify.configure(amplifyConfig);
 Amplify.Logger.LOG_LEVEL = 'DEBUG';
 
-DataStore.clear();
+// @ts-ignore
+window._ = Amplify;
 
 function App() {
     const content = useRoutes(router);
