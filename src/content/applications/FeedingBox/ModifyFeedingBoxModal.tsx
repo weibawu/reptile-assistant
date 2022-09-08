@@ -19,10 +19,6 @@ export interface FeedingBoxModificationModalProps {
 function ModifyFeedingBoxModal(props: FeedingBoxModificationModalProps) {
     const {onClose, open, editableFeedingBox} = props;
 
-    useEffect(() => {
-        console.log(editableFeedingBox);
-    }, [editableFeedingBox])
-
     const validationSchema = yup.object({
         name: yup.string().required().max(20),
     });
@@ -34,10 +30,10 @@ function ModifyFeedingBoxModal(props: FeedingBoxModificationModalProps) {
 
     const {user} = useAuthenticator(ctx => [ctx.user]);
 
-    const {control, handleSubmit, reset, formState: {errors}} = useForm({
+    const {control, handleSubmit, reset, setValue, formState: {errors}} = useForm({
         defaultValues: {
-            name: editableFeedingBox?.name ?? '',
-            type: typeOptions.find(_ => _.value === editableFeedingBox?.type) ?? typeOptions[0],
+            name: '',
+            type: typeOptions[0],
         },
         resolver: yupResolver(validationSchema),
     });
@@ -47,15 +43,38 @@ function ModifyFeedingBoxModal(props: FeedingBoxModificationModalProps) {
         onClose();
     };
 
-    const onSubmit = form => {
-        DataStore.save(new ReptileFeedingBox({
-            name: form.name,
-            type: form.type.value,
-            userID: user.username,
-        }))
-            .then(handleClose)
-            .catch(console.error)
-    };
+    useEffect(() => {
+        if (!!editableFeedingBox) {
+            setValue('name', editableFeedingBox.name);
+            setValue('type', typeOptions.find(_ => _.value === editableFeedingBox?.type));
+        }
+    }, [editableFeedingBox])
+
+    const onSubmit = async form => {
+        try {
+            if (!!editableFeedingBox) {
+                const originalFeedingBox = await DataStore.query(ReptileFeedingBox, editableFeedingBox.id);
+                await DataStore.save(
+                    ReptileFeedingBox.copyOf(
+                        originalFeedingBox, updated => {
+                            updated.name = form.name;
+                            updated.type = form.type.value;
+                        }
+                    )
+                )
+                handleClose();
+            } else {
+                await DataStore.save(new ReptileFeedingBox({
+                    name: form.name,
+                    type: form.type.value,
+                    userID: user.username,
+                }))
+                handleClose();
+            }
+        } catch (e) {
+            console.error('created or updated feeding box error:', e)
+        }
+    }
 
     return (
         <Dialog onClose={handleClose} open={open}>

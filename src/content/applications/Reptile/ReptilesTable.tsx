@@ -114,7 +114,10 @@ const ReptilesTable: FC<ReptilesTableProps> = ({reptiles, onReptileEditing, onRe
     useEffect(() => {
         DataStore.query(ReptileType).then(setReptileTypes);
         DataStore.query(ReptileFeedingBox, (_) => _.userID("eq", user.username)).then(setFeedingBoxes);
-        DataStore.query(ReptileFeedingBoxIndexCollection, (_) => _.userID("eq", user.username)).then(setFeedingBoxIndexes);
+        DataStore.query(ReptileFeedingBoxIndexCollection, (_) => _.userID("eq", user.username)).then((data) => {
+            setFeedingBoxIndexes(data);
+            console.log(data);
+        });
     }, [])
 
     const typeOptions = [

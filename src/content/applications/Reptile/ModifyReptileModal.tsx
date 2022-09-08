@@ -50,7 +50,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
 
     const [reptileTypeOptions, setReptileTypeOptions] = useState<{ label: string, value: ReptileType }[]>();
     const [feedingBoxOptions, setFeedingBoxOptions] = useState<{ label: string, value: ReptileFeedingBox }[]>();
-    const [feedingBoxIndexCollectionOptions, setFeedingBoxIndexCollectionOptions] = useState<{ label: string, value: ReptileFeedingBoxIndexCollection }[]>();
+    const [feedingBoxIndexes, setFeedingBoxIndexes] = useState<ReptileFeedingBoxIndexCollection[]>();
 
     const reptileGenderOptions = [
         {label: '公', value: ReptileGenderType.MALE},
@@ -62,21 +62,18 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
 
     const {user} = useAuthenticator(ctx => [ctx.user]);
 
-    const {control, handleSubmit, reset, watch, formState: {errors}} = useForm({
+    const {control, handleSubmit, reset, setValue, watch, formState: {errors}} = useForm({
         defaultValues: {
-            name: editableReptile?.name ?? '',
-            nickname: editableReptile?.nickname ?? '',
-            gender: editableReptile?.gender ?? reptileGenderOptions[0],
-            birthdate: editableReptile?.birthdate ?? `${Date.now()}`,
-            weight: editableReptile?.weight ?? undefined,
-            genies: editableReptile?.genies.join('/') ?? undefined,
-            feedingBox: editableReptile ? feedingBoxOptions.find((_) => _.value.id === editableReptile.reptileFeedingBoxID) : undefined,
-            reptileType: editableReptile ? {
-                label: editableReptile ? reptileTypeOptions.find((_) => _.value.id === editableReptile.reptileTypeID)?.label : undefined,
-                value: editableReptile ? reptileTypeOptions.find((_) => _.value.id === editableReptile.reptileTypeID)?.value : undefined,
-            } : undefined,
-            verticalIndex: editableReptile ? feedingBoxIndexCollectionOptions.find((_) => _.value.id === editableReptile.reptileFeedingBoxIndexCollectionID)?.value.verticalIndex : undefined,
-            horizontalIndex: editableReptile ? feedingBoxIndexCollectionOptions.find((_) => _.value.id === editableReptile.reptileFeedingBoxIndexCollectionID)?.value.horizontalIndex : undefined,
+            name: '',
+            nickname: '',
+            gender: reptileGenderOptions[0],
+            birthdate: `${Date.now()}`,
+            weight: 0,
+            genies: '',
+            feedingBox: undefined,
+            reptileType: undefined,
+            verticalIndex: undefined,
+            horizontalIndex: undefined,
         },
         resolver: yupResolver(validationSchema),
     });
@@ -115,24 +112,58 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
                 }
             }
 
-            await DataStore.save(new Reptile({
-                name: form.name,
-                nickname: form.nickname,
-                gender: form.gender.value,
-                birthdate: form.birthdate.toISOString().slice(0, 10),
-                weight: Number(form.weight),
-                genies: form.genies.split('/'),
-                userID: user.username,
-                reptileTypeID: form.reptileType.value.id,
-                reptileFeedingBoxID: feedingBoxIndexExisted.reptileFeedingBoxID,
-                reptileFeedingBoxIndexCollectionID: feedingBoxIndexExisted.id,
-            }))
+            if (!!editableReptile) {
+                const originalReptile = await DataStore.query(Reptile, editableReptile.id);
+                await DataStore.save(Reptile.copyOf(
+                    originalReptile, updated => {
+                        updated.name = form.name;
+                        updated.nickname = form.nickname;
+                        updated.gender = form.gender.value;
+                        updated.birthdate = new Date(form.birthdate).toISOString().slice(0, 10);
+                        updated.weight = Number(form.weight);
+                        updated.genies = form.genies.split('/');
+                        updated.userID = user.username;
+                        updated.reptileTypeID = form.reptileType.value.id;
+                        updated.reptileFeedingBoxID = feedingBoxIndexExisted.reptileFeedingBoxID;
+                        updated.reptileFeedingBoxIndexCollectionID = feedingBoxIndexExisted.id;
+                    }
+                ))
+            } else {
+                await DataStore.save(new Reptile({
+                    name: form.name,
+                    nickname: form.nickname,
+                    gender: form.gender.value,
+                    birthdate: form.birthdate.toISOString().slice(0, 10),
+                    weight: Number(form.weight),
+                    genies: form.genies.split('/'),
+                    userID: user.username,
+                    reptileTypeID: form.reptileType.value.id,
+                    reptileFeedingBoxID: feedingBoxIndexExisted.reptileFeedingBoxID,
+                    reptileFeedingBoxIndexCollectionID: feedingBoxIndexExisted.id,
+                }))
+            }
 
             handleClose();
         } catch (e) {
             console.error('Create Reptile Failed', e);
         }
     };
+
+    useEffect(() => {
+        if (!!editableReptile) {
+            setValue('name', editableReptile.name);
+            setValue('nickname', editableReptile.nickname);
+            setValue('gender', reptileGenderOptions.find(_ => _.value === editableReptile.gender));
+            setValue('birthdate', editableReptile.birthdate);
+            setValue('weight', editableReptile.weight);
+            setValue('genies', editableReptile.genies.join('/'));
+            setValue('feedingBox', feedingBoxOptions.find((_) => _.value.id === editableReptile.reptileFeedingBoxID));
+            setValue('reptileType', reptileTypeOptions.find((_) => _.value.id === editableReptile.reptileTypeID));
+            setValue('verticalIndex', feedingBoxIndexes.find((_) => _.id === editableReptile.reptileFeedingBoxIndexCollectionID)?.verticalIndex);
+            setValue('horizontalIndex', feedingBoxIndexes.find((_) => _.id === editableReptile.reptileFeedingBoxIndexCollectionID)?.horizontalIndex);
+            // setValue()
+        }
+    }, [editableReptile])
 
     useEffect(() => {
         DataStore.query(ReptileType).then(reptileTypeModels => {
@@ -156,14 +187,8 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
             ))
         });
 
-        DataStore.query(ReptileFeedingBoxIndexCollection).then(feedingBoxIndexCollectionModels => {
-            setFeedingBoxIndexCollectionOptions(feedingBoxIndexCollectionModels.map(
-                feedingBoxIndexCollection => ({
-                    label: feedingBoxIndexCollection.id,
-                    value: feedingBoxIndexCollection,
-                })
-            ))
-        });
+        DataStore.query(ReptileFeedingBoxIndexCollection, (feedBoxPredicated) =>
+            feedBoxPredicated.userID("eq", user.username)).then(setFeedingBoxIndexes);
     }, [])
 
     return (
