@@ -1,4 +1,4 @@
-import {ChangeEvent, FC, useEffect, useState} from 'react';
+import {ChangeEvent, FC, useEffect, useMemo, useState} from 'react';
 import PropTypes from 'prop-types';
 import {
     Box,
@@ -30,7 +30,7 @@ import BulkActions from './BulkActions';
 import {
     Reptile,
     ReptileFeedingBox,
-    ReptileFeedingBoxIndexCollection,
+    ReptileFeedingBoxIndexCollection, ReptileFeedingBoxType,
     ReptileGenderType,
     ReptileType
 } from "../../../models";
@@ -51,29 +51,40 @@ interface Filters {
     type?: ReptileType;
 }
 
-const ReptileTypeLabel: FC<{ reptileType: ReptileType }> = ({reptileType}) => {
+const getReptileTypeLabel = (reptileType: ReptileType): JSX.Element => {
+    if (!reptileType) return null;
+    const colorMap = ['primary', 'black', 'secondary', 'error', 'warning', 'success', 'info'];
+    return <Label color={colorMap[Math.floor(Math.random() * colorMap.length + 1)] as any}>{reptileType.name}</Label>;
+};
 
-    const [reptileTypes, setReptileTypes] = useState<ReptileType[]>([]);
+const getFeedingBoxTypeLabel = (feedingBoxType: ReptileFeedingBoxType | "BOX" | "CABINET" | undefined): JSX.Element => {
+    if (!feedingBoxType) return null;
+    const map = {
+        [ReptileFeedingBoxType.BOX]: {
+            text: "饲养盒",
+            color: 'error'
+        },
+        [ReptileFeedingBoxType.CABINET]: {
+            text: "爬柜",
+            color: 'success'
+        },
+    };
 
-    useEffect(() => {
-        DataStore.query(ReptileType).then(setReptileTypes);
-    }, [])
-
-    const map = [];
-
-    reptileTypes.forEach(
-        _ => map.push({
-            [_.name]: {
-                text: _.name,
-                color: ['primary', 'black', 'secondary', 'error', 'warning', 'success', 'info']
-            }
-        })
-    );
-
-    const {text, color}: any = map[reptileType.name];
+    const {text, color}: any = map[feedingBoxType];
 
     return <Label color={color}>{text}</Label>;
 };
+
+const getGenieLabel = (genie: string): JSX.Element => {
+    if (!genie) return null;
+    const colorMap = ['primary', 'black', 'secondary', 'error', 'warning', 'success', 'info'];
+    return (<>
+            <Label color={colorMap[Math.floor(Math.random() * colorMap.length + 1)] as any}>{genie}</Label>
+            &nbsp;
+        </>
+    );
+};
+
 
 const applyFilters = (
     reptiles: Reptile[],
@@ -98,7 +109,14 @@ const applyPagination = (
     return reptiles.slice(page * limit, page * limit + limit);
 };
 
-const ReptilesTable: FC<ReptilesTableProps> = ({reptiles, onReptileEditing, onReptilesDeleting, reptileTypes, feedingBoxes, feedingBoxIndexes}) => {
+const ReptilesTable: FC<ReptilesTableProps> = ({
+                                                   reptiles,
+                                                   onReptileEditing,
+                                                   onReptilesDeleting,
+                                                   reptileTypes,
+                                                   feedingBoxes,
+                                                   feedingBoxIndexes
+                                               }) => {
     const [selectedReptiles, setSelectedReptiles] = useState<string[]>(
         []
     );
@@ -294,7 +312,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({reptiles, onReptileEditing, onRe
                                             gutterBottom
                                             noWrap
                                         >
-                                            {reptile.genies.join(',')}
+                                            {reptile.genies.map(genie => getGenieLabel(genie))}
                                         </Typography>
                                     </TableCell>
                                     <TableCell>
@@ -320,15 +338,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({reptiles, onReptileEditing, onRe
                                         </Typography>
                                     </TableCell>
                                     <TableCell>
-                                        <Typography
-                                            variant="body1"
-                                            fontWeight="bold"
-                                            color="text.primary"
-                                            gutterBottom
-                                            noWrap
-                                        >
-                                            {reptileTypes.find(_ => _.id === reptile.reptileTypeID)?.name}
-                                        </Typography>
+                                        {getReptileTypeLabel(reptileTypes.find(_ => _.id === reptile.reptileTypeID))}
                                     </TableCell>
                                     <TableCell>
                                         <Typography
@@ -338,11 +348,11 @@ const ReptilesTable: FC<ReptilesTableProps> = ({reptiles, onReptileEditing, onRe
                                             gutterBottom
                                             noWrap
                                         >
-                                            { feedingBoxes.find(_ => _.id === reptile.reptileFeedingBoxID)?.name }
+                                            {getFeedingBoxTypeLabel(feedingBoxes.find(_ => _.id === reptile.reptileFeedingBoxID)?.type)}
                                             {
                                                 feedingBoxes.find(_ => _.id === reptile.reptileFeedingBoxID)?.type === "CABINET"
-                                                ? ` 第${feedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.horizontalIndex}排${feedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.verticalIndex}列`
-                                                : ""
+                                                    ? ` 第${feedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.horizontalIndex}排${feedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.verticalIndex}列`
+                                                    : ""
                                             }
                                         </Typography>
                                     </TableCell>
