@@ -40,6 +40,9 @@ import {useAuthenticator} from "@aws-amplify/ui-react";
 interface ReptilesTableProps {
     className?: string;
     reptiles: Reptile[];
+    reptileTypes: ReptileType[];
+    feedingBoxes: ReptileFeedingBox[];
+    feedingBoxIndexes: ReptileFeedingBoxIndexCollection[];
     onReptileEditing: (reptile: Reptile) => any;
     onReptilesDeleting: (reptileIds: string[]) => any;
 }
@@ -95,9 +98,7 @@ const applyPagination = (
     return reptiles.slice(page * limit, page * limit + limit);
 };
 
-const ReptilesTable: FC<ReptilesTableProps> = ({reptiles, onReptileEditing, onReptilesDeleting}) => {
-    const {user} = useAuthenticator(ctx => [ctx.user]);
-
+const ReptilesTable: FC<ReptilesTableProps> = ({reptiles, onReptileEditing, onReptilesDeleting, reptileTypes, feedingBoxes, feedingBoxIndexes}) => {
     const [selectedReptiles, setSelectedReptiles] = useState<string[]>(
         []
     );
@@ -107,18 +108,6 @@ const ReptilesTable: FC<ReptilesTableProps> = ({reptiles, onReptileEditing, onRe
     const [filters, setFilters] = useState<Filters>({
         type: null
     });
-    const [reptileTypes, setReptileTypes] = useState<ReptileType[]>([]);
-    const [feedingBoxes, setFeedingBoxes] = useState<ReptileFeedingBox[]>([]);
-    const [feedingBoxIndexes, setFeedingBoxIndexes] = useState<ReptileFeedingBoxIndexCollection[]>([]);
-
-    useEffect(() => {
-        DataStore.query(ReptileType).then(setReptileTypes);
-        DataStore.query(ReptileFeedingBox, (_) => _.userID("eq", user.username)).then(setFeedingBoxes);
-        DataStore.query(ReptileFeedingBoxIndexCollection, (_) => _.userID("eq", user.username)).then((data) => {
-            setFeedingBoxIndexes(data);
-            console.log(data);
-        });
-    }, [])
 
     const typeOptions = [
         {

@@ -32,12 +32,29 @@ import {DatePicker} from "@mui/lab";
 
 export interface ReptileModificationModalProps {
     open: boolean;
+    reptileTypes: ReptileType[];
+    feedingBoxes: ReptileFeedingBox[];
+    feedingBoxIndexes: ReptileFeedingBoxIndexCollection[];
     onClose: () => void;
     editableReptile?: Reptile;
 }
 
 function ModifyReptileModal(props: ReptileModificationModalProps) {
-    const {onClose, open, editableReptile} = props;
+    const {onClose, open, editableReptile, reptileTypes,feedingBoxes, feedingBoxIndexes} = props;
+
+    const reptileTypeOptions = reptileTypes.map(
+        reptileTypeModel => ({
+            label: reptileTypeModel.name,
+            value: reptileTypeModel,
+        })
+    )
+
+    const feedingBoxOptions = feedingBoxes.map(
+        feedingBox => ({
+            label: feedingBox.name,
+            value: feedingBox,
+        })
+    )
 
     const validationSchema = yup.object({
         name: yup.string().required().max(20),
@@ -47,10 +64,6 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
         reptileType: yup.object().required(),
         feedingBox: yup.object().required(),
     });
-
-    const [reptileTypeOptions, setReptileTypeOptions] = useState<{ label: string, value: ReptileType }[]>();
-    const [feedingBoxOptions, setFeedingBoxOptions] = useState<{ label: string, value: ReptileFeedingBox }[]>();
-    const [feedingBoxIndexes, setFeedingBoxIndexes] = useState<ReptileFeedingBoxIndexCollection[]>();
 
     const reptileGenderOptions = [
         {label: '公', value: ReptileGenderType.MALE},
@@ -72,8 +85,8 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
             genies: '',
             feedingBox: undefined,
             reptileType: undefined,
-            verticalIndex: undefined,
-            horizontalIndex: undefined,
+            verticalIndex: 0,
+            horizontalIndex: 0,
         },
         resolver: yupResolver(validationSchema),
     });
@@ -164,32 +177,6 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
             // setValue()
         }
     }, [editableReptile])
-
-    useEffect(() => {
-        DataStore.query(ReptileType).then(reptileTypeModels => {
-            setReptileTypeOptions(reptileTypeModels.map(
-                reptileTypeModel => ({
-                    label: reptileTypeModel.name,
-                    value: reptileTypeModel,
-                })
-            ))
-        });
-
-        DataStore.query(ReptileFeedingBox,
-            (feedBoxPredicated) =>
-                feedBoxPredicated.userID("eq", user.username),
-        ).then(feedingBoxModels => {
-            setFeedingBoxOptions(feedingBoxModels.map(
-                feedingBox => ({
-                    label: feedingBox.name,
-                    value: feedingBox,
-                })
-            ))
-        });
-
-        DataStore.query(ReptileFeedingBoxIndexCollection, (feedBoxPredicated) =>
-            feedBoxPredicated.userID("eq", user.username)).then(setFeedingBoxIndexes);
-    }, [])
 
     return (
         <Dialog onClose={handleClose} open={open}>

@@ -5,7 +5,7 @@ import Footer from 'src/components/Footer';
 import {useEffect, useState} from "react";
 import ModifyReptileModal from "./ModifyReptileModal";
 import AddTwoToneIcon from "@mui/icons-material/AddTwoTone";
-import {Reptile} from "../../../models";
+import {Reptile, ReptileFeedingBox, ReptileFeedingBoxIndexCollection, ReptileType} from "../../../models";
 import {DataStore} from "aws-amplify";
 import ReptilesTable from "./ReptilesTable";
 import {useAuthenticator} from "@aws-amplify/ui-react";
@@ -13,6 +13,10 @@ import {useAuthenticator} from "@aws-amplify/ui-react";
 function ApplicationsReptiles() {
 
     const [reptiles, setReptiles] = useState<Reptile[]>([]);
+    const [reptileTypes, setReptileTypes] = useState<ReptileType[]>([]);
+    const [feedingBoxes, setFeedingBoxes] = useState<ReptileFeedingBox[]>([]);
+    const [feedingBoxIndexes, setFeedingBoxIndexes] = useState<ReptileFeedingBoxIndexCollection[]>([]);
+
     const [modifyModalOpen, setModifyModalOpen] = useState(false);
     const [editableReptile, setEditableReptile] = useState<Reptile | null>();
     const {user} = useAuthenticator(ctx => [ctx.user]);
@@ -25,6 +29,13 @@ function ApplicationsReptiles() {
                     "eq", user.username,
                 )
             )
+        );
+        setReptileTypes(await DataStore.query(ReptileType));
+        setFeedingBoxes(
+            await DataStore.query(ReptileFeedingBox, (_) => _.userID("eq", user.username))
+        );
+        setFeedingBoxIndexes(
+            await DataStore.query(ReptileFeedingBoxIndexCollection, (_) => _.userID("eq", user.username))
         );
     }
 
@@ -60,7 +71,7 @@ function ApplicationsReptiles() {
 
     useEffect(() => {
         if (!!editableReptile) handleModifyReptileModalOpen();
-    }, [editableReptile])
+    }, [editableReptile]);
 
     return (
         <>
@@ -74,7 +85,7 @@ function ApplicationsReptiles() {
                             尾巴屋爬宠管理平台
                         </Typography>
                         <Typography variant="subtitle2">
-                            你好，{ user.attributes.email }！
+                            你好，{user.attributes.email}！
                         </Typography>
                     </Grid>
                     <Grid item>
@@ -101,6 +112,9 @@ function ApplicationsReptiles() {
                         <Card>
                             <ReptilesTable
                                 reptiles={reptiles}
+                                reptileTypes={reptileTypes}
+                                feedingBoxes={feedingBoxes}
+                                feedingBoxIndexes={feedingBoxIndexes}
                                 onReptileEditing={handleEditSpecificReptile}
                                 onReptilesDeleting={handleDeleteReptiles}
                             />
@@ -110,6 +124,9 @@ function ApplicationsReptiles() {
             </Container>
             <Footer/>
             <ModifyReptileModal
+                reptileTypes={reptileTypes}
+                feedingBoxes={feedingBoxes}
+                feedingBoxIndexes={feedingBoxIndexes}
                 open={modifyModalOpen}
                 onClose={handleModifyReptileModalClose}
                 editableReptile={editableReptile}
