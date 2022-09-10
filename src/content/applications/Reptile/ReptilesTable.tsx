@@ -47,7 +47,7 @@ interface ReptilesTableProps {
     onReptilesDeleting: (reptileIds: string[]) => any;
 }
 
-interface Filters {
+interface ReptileTypeFilters {
     type?: ReptileType;
 }
 
@@ -75,6 +75,12 @@ const getFeedingBoxTypeLabel = (feedingBoxType: ReptileFeedingBoxType | "BOX" | 
     return <Label color={color}>{text}</Label>;
 };
 
+const getTextLabel = (feedingBoxName: string): JSX.Element => {
+    if (!feedingBoxName) return null;
+    const colorMap = ['primary', 'black', 'secondary', 'error', 'warning', 'success', 'info'];
+    return <Label color={colorMap[Math.floor(Math.random() * colorMap.length + 1)] as any}>{feedingBoxName}</Label>;
+};
+
 const getGenieLabel = (genie: string): JSX.Element => {
     if (!genie) return null;
     const colorMap = ['primary', 'black', 'secondary', 'error', 'warning', 'success', 'info'];
@@ -86,16 +92,16 @@ const getGenieLabel = (genie: string): JSX.Element => {
 };
 
 
-const applyFilters = (
+const applyReptileTypeFilters = (
     reptiles: Reptile[],
-    filters: Filters,
+    filters: ReptileTypeFilters,
 ): Reptile[] => {
     return reptiles.filter((reptile) => {
         let matches = true;
-        //
-        // if (filters.type && reptile.type !== filters.type) {
-        //     matches = false;
-        // }
+
+        if (filters.type && reptile.reptileTypeID !== filters.type.id) {
+            matches = false;
+        }
 
         return matches;
     });
@@ -123,7 +129,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
     const selectedBulkActions = selectedReptiles.length > 0;
     const [page, setPage] = useState<number>(0);
     const [limit, setLimit] = useState<number>(10);
-    const [filters, setFilters] = useState<Filters>({
+    const [reptileTypeFilters, setReptileTypeFilters] = useState<ReptileTypeFilters>({
         type: null
     });
 
@@ -142,14 +148,14 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
         // },
     ];
 
-    const handleTypeChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const handleReptileTypeChange = (e: ChangeEvent<HTMLInputElement>): void => {
         let value = null;
 
         if (e.target.value !== 'all') {
             value = e.target.value;
         }
 
-        setFilters((prevFilters) => ({
+        setReptileTypeFilters((prevFilters) => ({
             ...prevFilters,
             type: value
         }));
@@ -189,7 +195,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
         setLimit(parseInt(event.target.value));
     };
 
-    const filteredReptiles = applyFilters(reptiles, filters);
+    const filteredReptiles = applyReptileTypeFilters(reptiles, reptileTypeFilters);
     const paginatedReptiles = applyPagination(
         filteredReptiles,
         page,
@@ -221,8 +227,8 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel>Status</InputLabel>
                                 <Select
-                                    value={filters.type || 'all'}
-                                    onChange={handleTypeChange}
+                                    value={reptileTypeFilters.type || 'all'}
+                                    onChange={handleReptileTypeChange}
                                     label="Status"
                                     autoWidth
                                 >
@@ -338,7 +344,8 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                                         </Typography>
                                     </TableCell>
                                     <TableCell>
-                                        {getReptileTypeLabel(reptileTypes.find(_ => _.id === reptile.reptileTypeID))}
+                                        {reptileTypes.find(_ => _.id === reptile.reptileTypeID)?.name}
+                                        {/*{getReptileTypeLabel(reptileTypes.find(_ => _.id === reptile.reptileTypeID))}*/}
                                     </TableCell>
                                     <TableCell>
                                         <Typography
@@ -349,9 +356,12 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                                             noWrap
                                         >
                                             {getFeedingBoxTypeLabel(feedingBoxes.find(_ => _.id === reptile.reptileFeedingBoxID)?.type)}
+                                            &nbsp;
+                                            {getTextLabel(feedingBoxes.find(_ => _.id === reptile.reptileFeedingBoxID)?.name)}
+                                            &nbsp;
                                             {
                                                 feedingBoxes.find(_ => _.id === reptile.reptileFeedingBoxID)?.type === "CABINET"
-                                                    ? ` 第${feedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.horizontalIndex}排${feedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.verticalIndex}列`
+                                                    ? getTextLabel(`第${feedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.horizontalIndex}排${feedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.verticalIndex}列`)
                                                     : ""
                                             }
                                         </Typography>
