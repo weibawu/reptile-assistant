@@ -364,7 +364,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                                             gutterBottom
                                             noWrap
                                         >
-                                            {reptile.gender === "MALE" ? '公' : '母'}
+                                            {reptile.nickname}
                                         </Typography>
                                     </TableCell>
                                     <TableCell align="right">
