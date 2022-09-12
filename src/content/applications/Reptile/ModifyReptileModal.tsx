@@ -80,7 +80,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
             name: '',
             nickname: '',
             gender: reptileGenderOptions[0],
-            birthdate: `${Date.now()}`,
+            birthdate: `${ new Date().toISOString().slice(0, 10) }`,
             weight: 0,
             genies: '',
             feedingBox: undefined,
@@ -142,11 +142,12 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
                     }
                 ))
             } else {
+                const date = new Date(form.birthdate).toISOString().slice(0, 10);
                 await DataStore.save(new Reptile({
                     name: form.name,
                     nickname: form.nickname,
                     gender: form.gender.value,
-                    birthdate: form.birthdate.toISOString().slice(0, 10),
+                    birthdate: new Date(form.birthdate).toISOString().slice(0, 10),
                     weight: Number(form.weight),
                     genies: form.genies.split('/'),
                     userID: user.username,
