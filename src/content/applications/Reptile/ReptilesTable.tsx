@@ -48,14 +48,8 @@ interface ReptilesTableProps {
 }
 
 interface ReptileTypeFilters {
-    type?: ReptileType;
+    type?: string;
 }
-
-const getReptileTypeLabel = (reptileType: ReptileType): JSX.Element => {
-    if (!reptileType) return null;
-    const colorMap = ['primary', 'black', 'secondary', 'error', 'warning', 'success', 'info'];
-    return <Label color={colorMap[Math.floor(Math.random() * colorMap.length + 1)] as any}>{reptileType.name}</Label>;
-};
 
 const getFeedingBoxTypeLabel = (feedingBoxType: ReptileFeedingBoxType | "BOX" | "CABINET" | undefined): JSX.Element => {
     if (!feedingBoxType) return null;
@@ -99,7 +93,7 @@ const applyReptileTypeFilters = (
     return reptiles.filter((reptile) => {
         let matches = true;
 
-        if (filters.type && reptile.reptileTypeID !== filters.type.id) {
+        if (filters.type && reptile.reptileTypeID !== filters.type) {
             matches = false;
         }
 
@@ -133,20 +127,15 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
         type: null
     });
 
-    const typeOptions = [
+    const reptileTypeOptions = [
         {
             id: 'all',
             name: '全部'
         },
-        // {
-        //     id: ReptileType.BOX,
-        //     name: '饲养盒'
-        // },
-        // {
-        //     id: ReptileType.CABINET,
-        //     name: '爬柜'
-        // },
-    ];
+        ...reptileTypes.map(reptileType => ({
+            id: reptileType.id,
+            name: reptileType.name,
+        })),];
 
     const handleReptileTypeChange = (e: ChangeEvent<HTMLInputElement>): void => {
         let value = null;
@@ -225,14 +214,14 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                     action={
                         <Box width={150}>
                             <FormControl fullWidth variant="outlined">
-                                <InputLabel>Status</InputLabel>
+                                <InputLabel>所属科</InputLabel>
                                 <Select
                                     value={reptileTypeFilters.type || 'all'}
                                     onChange={handleReptileTypeChange}
-                                    label="Status"
+                                    label="所属科"
                                     autoWidth
                                 >
-                                    {typeOptions.map((statusOption) => (
+                                    {reptileTypeOptions.map((statusOption) => (
                                         <MenuItem key={statusOption.id} value={statusOption.id}>
                                             {statusOption.name}
                                         </MenuItem>
