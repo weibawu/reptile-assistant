@@ -247,12 +247,13 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                                 />
                             </TableCell>
                             <TableCell>品系名</TableCell>
-                            <TableCell>别名</TableCell>
+                            <TableCell>性别</TableCell>
                             <TableCell>基因</TableCell>
                             <TableCell>体重(g)</TableCell>
                             <TableCell>出生日期</TableCell>
                             <TableCell>所属科</TableCell>
                             <TableCell>所在爬柜/饲养盒</TableCell>
+                            <TableCell>别名</TableCell>
                             <TableCell align="right">操作</TableCell>
                         </TableRow>
                     </TableHead>
@@ -296,7 +297,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                                             gutterBottom
                                             noWrap
                                         >
-                                            {reptile.nickname}
+                                            {reptile.gender === "MALE" ? '公' : '母'}
                                         </Typography>
                                     </TableCell>
                                     <TableCell>
@@ -353,6 +354,17 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                                                     ? getTextLabel(`第${feedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.horizontalIndex}排${feedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.verticalIndex}列`)
                                                     : ""
                                             }
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Typography
+                                            variant="body1"
+                                            fontWeight="bold"
+                                            color="text.primary"
+                                            gutterBottom
+                                            noWrap
+                                        >
+                                            {reptile.gender === "MALE" ? '公' : '母'}
                                         </Typography>
                                     </TableCell>
                                     <TableCell align="right">
