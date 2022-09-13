@@ -26,6 +26,7 @@ import {
 import Label from 'src/components/Label';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+import LogIcon from '@mui/icons-material/CollectionsBookmark';
 import BulkActions from './BulkActions';
 import {
     Reptile,
@@ -45,6 +46,7 @@ interface ReptilesTableProps {
     feedingBoxes: ReptileFeedingBox[];
     feedingBoxIndexes: ReptileFeedingBoxIndexCollection[];
     onReptileEditing: (reptile: Reptile) => any;
+    onLogShowing: (reptile: Reptile) => any;
     onReptilesDeleting: (reptileIds: string[]) => any;
 }
 
@@ -164,6 +166,7 @@ const applyPagination = (
 const ReptilesTable: FC<ReptilesTableProps> = ({
                                                    reptiles,
                                                    onReptileEditing,
+                                                   onLogShowing,
                                                    onReptilesDeleting,
                                                    reptileTypes,
                                                    feedingBoxes,
@@ -207,14 +210,6 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
             name: getFeedingBoxAndFeedingBoxLayerName(_, feedingBoxes, feedingBoxIndexes)
         })))).map(_ => JSON.parse(_)),
     ];
-
-    const a = reptiles.map(_ => ({
-        id: getFeedingBoxAndFeedingBoxLayerName(_, feedingBoxes, feedingBoxIndexes),
-        name: getFeedingBoxAndFeedingBoxLayerName(_, feedingBoxes, feedingBoxIndexes)
-    }));
-
-    console.log(a);
-    console.log(reptiles);
 
     console.log(reptileFeedingBoxAndFeedingBoxLayerOptions);
 
@@ -507,6 +502,21 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                                         </Typography>
                                     </TableCell>
                                     <TableCell align="right">
+                                        <Tooltip title="日志" arrow>
+                                            <IconButton
+                                                sx={{
+                                                    '&:hover': {
+                                                        background: theme.colors.primary.lighter
+                                                    },
+                                                    color: theme.palette.success.main
+                                                }}
+                                                color="inherit"
+                                                size="small"
+                                                onClick={onLogShowing.bind(null, reptile)}
+                                            >
+                                                <LogIcon fontSize="small"/>
+                                            </IconButton>
+                                        </Tooltip>
                                         <Tooltip title="编辑" arrow>
                                             <IconButton
                                                 sx={{

@@ -5,10 +5,19 @@ import Footer from 'src/components/Footer';
 import {useEffect, useState} from "react";
 import ModifyReptileModal from "./ModifyReptileModal";
 import AddTwoToneIcon from "@mui/icons-material/AddTwoTone";
-import {Reptile, ReptileFeedingBox, ReptileFeedingBoxIndexCollection, ReptileType} from "../../../models";
+import {
+    Reptile,
+    ReptileFeedingBox,
+    ReptileFeedingBoxIndexCollection,
+    ReptileFeedingLog,
+    ReptileType
+} from "../../../models";
 import {DataStore} from "aws-amplify";
 import ReptilesTable from "./ReptilesTable";
 import {useAuthenticator} from "@aws-amplify/ui-react";
+import FeedingLogsViewTableModal from "./FeedingLogsViewTableModal";
+import FeedingLogsTable from "../FeedingLog/FeedingLogsTable";
+import FeedingLogsViewTable from "./FeedingLogsViewTable";
 
 function ApplicationsReptiles() {
 
@@ -16,9 +25,12 @@ function ApplicationsReptiles() {
     const [reptileTypes, setReptileTypes] = useState<ReptileType[]>([]);
     const [feedingBoxes, setFeedingBoxes] = useState<ReptileFeedingBox[]>([]);
     const [feedingBoxIndexes, setFeedingBoxIndexes] = useState<ReptileFeedingBoxIndexCollection[]>([]);
+    const [feedingLogs, setFeedingLogs] = useState<ReptileFeedingLog[]>([]);
 
     const [modifyModalOpen, setModifyModalOpen] = useState(false);
+    const [logViewTableModalOpen, setLogViewTableModalOpen] = useState(false);
     const [editableReptile, setEditableReptile] = useState<Reptile | null>();
+    const [showLogReptile, setShowLogReptile] = useState<Reptile | null>();
     const {user} = useAuthenticator(ctx => [ctx.user]);
 
     const initializeReptiles = async () => {
@@ -37,6 +49,14 @@ function ApplicationsReptiles() {
         setFeedingBoxIndexes(
             await DataStore.query(ReptileFeedingBoxIndexCollection, (_) => _.userID("eq", user.username))
         );
+        setFeedingLogs(
+            await DataStore.query(
+                ReptileFeedingLog,
+                (feedingLogPredicated) => feedingLogPredicated.userID(
+                    "eq", user.username,
+                )
+            )
+        );
     }
 
     const handleModifyReptileModalOpen = () => {
@@ -47,9 +67,21 @@ function ApplicationsReptiles() {
         setModifyModalOpen(false);
     };
 
+    const handleLogViewTableModalOpen = () => {
+        setLogViewTableModalOpen(true);
+    };
+
+    const handleLogViewTableModalClose = () => {
+        setLogViewTableModalOpen(false);
+    };
+
     const handleEditSpecificReptile = (reptile: Reptile) => {
         setEditableReptile(reptile);
     };
+
+    const handleShowLog = (reptile: Reptile) => {
+        setShowLogReptile(reptile);
+    }
 
     const handleDeleteReptiles = (reptileIds: string[]) => {
         Promise
@@ -70,8 +102,18 @@ function ApplicationsReptiles() {
     }, [modifyModalOpen]);
 
     useEffect(() => {
+        if (!logViewTableModalOpen) {
+            setShowLogReptile(null);
+        }
+    }, [logViewTableModalOpen]);
+
+    useEffect(() => {
         if (!!editableReptile) handleModifyReptileModalOpen();
     }, [editableReptile]);
+
+    useEffect(() => {
+        if (!!showLogReptile) handleLogViewTableModalOpen();
+    }, [showLogReptile]);
 
     return (
         <>
@@ -111,6 +153,7 @@ function ApplicationsReptiles() {
                     <Grid item xs={12}>
                         <Card>
                             <ReptilesTable
+                                onLogShowing={handleShowLog}
                                 reptiles={reptiles}
                                 reptileTypes={reptileTypes}
                                 feedingBoxes={feedingBoxes}
@@ -123,6 +166,14 @@ function ApplicationsReptiles() {
                 </Grid>
             </Container>
             <Footer/>
+            <FeedingLogsViewTableModal open={logViewTableModalOpen} onClose={handleLogViewTableModalClose}>
+                <FeedingLogsViewTable
+                    feedingBoxIndexes={feedingBoxIndexes}
+                    reptiles={reptiles}
+                    reptileTypes={reptileTypes}
+                    feedingBoxes={feedingBoxes}
+                    reptile={showLogReptile} feedingLogs={feedingLogs}/>
+            </FeedingLogsViewTableModal>
             <ModifyReptileModal
                 reptileTypes={reptileTypes}
                 feedingBoxes={feedingBoxes}
