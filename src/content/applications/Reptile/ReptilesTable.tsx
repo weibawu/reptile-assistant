@@ -135,7 +135,7 @@ const getFeedingBoxAndFeedingBoxLayerName = (
     const box = reptileFeedingBoxes.find(box => reptile.reptileFeedingBoxID === box.id);
     const index = reptileFeedingBoxIndexCollections.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID);
 
-    if (box.type === 'BOX') return box?.name;
+    if (box?.type === 'BOX') return box?.name;
 
     return box?.name + '第' + index?.horizontalIndex + '排';
 }
