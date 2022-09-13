@@ -50,6 +50,9 @@ interface ReptilesTableProps {
 interface ReptileTypeFilters {
     type?: string;
 }
+interface ReptileNameFilters {
+    name?: string;
+}
 
 const getFeedingBoxTypeLabel = (feedingBoxType: ReptileFeedingBoxType | "BOX" | "CABINET" | undefined): JSX.Element => {
     if (!feedingBoxType) return null;
@@ -101,6 +104,21 @@ const applyReptileTypeFilters = (
     });
 };
 
+const applyReptileNameFilters = (
+    reptiles: Reptile[],
+    filters: ReptileNameFilters,
+): Reptile[] => {
+    return reptiles.filter((reptile) => {
+        let matches = true;
+
+        if (filters.name && reptile.name !== filters.name) {
+            matches = false;
+        }
+
+        return matches;
+    });
+};
+
 const applyPagination = (
     reptiles: Reptile[],
     page: number,
@@ -126,6 +144,9 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
     const [reptileTypeFilters, setReptileTypeFilters] = useState<ReptileTypeFilters>({
         type: null
     });
+    const [reptileNameFilters, setReptileNameFilters] = useState<ReptileNameFilters>({
+        name: null
+    });
 
     const reptileTypeOptions = [
         {
@@ -137,6 +158,11 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
             name: reptileType.name,
         })),];
 
+    const reptileNameOptions = [
+        {id: 'all', name: '全部'},
+        ...Array.from(new Set(reptiles.map(_ => JSON.stringify({ id: _.name, name: _.name })))).map(_ => JSON.parse(_)),
+    ];
+
     const handleReptileTypeChange = (e: ChangeEvent<HTMLInputElement>): void => {
         let value = null;
 
@@ -147,6 +173,19 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
         setReptileTypeFilters((prevFilters) => ({
             ...prevFilters,
             type: value
+        }));
+    };
+
+    const handleReptileNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
+        let value = null;
+
+        if (e.target.value !== 'all') {
+            value = e.target.value;
+        }
+
+        setReptileNameFilters((prevFilters) => ({
+            ...prevFilters,
+            name: value
         }));
     };
 
@@ -184,9 +223,10 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
         setLimit(parseInt(event.target.value));
     };
 
-    const filteredReptiles = applyReptileTypeFilters(reptiles, reptileTypeFilters);
+    const filteredReptileTypeReptiles = applyReptileTypeFilters(reptiles, reptileTypeFilters);
+    const filteredReptileNameReptiles = applyReptileNameFilters(filteredReptileTypeReptiles, reptileNameFilters);
     const paginatedReptiles = applyPagination(
-        filteredReptiles,
+        filteredReptileNameReptiles,
         page,
         limit
     );
@@ -212,8 +252,23 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
             {!selectedBulkActions && (
                 <CardHeader
                     action={
-                        <Box width={150}>
-                            <FormControl fullWidth variant="outlined">
+                        <Box width={300}>
+                            <FormControl variant="outlined">
+                                <InputLabel>种类</InputLabel>
+                                <Select
+                                    value={reptileNameFilters.name || 'all'}
+                                    onChange={handleReptileNameChange}
+                                    label="种类"
+                                    autoWidth
+                                >
+                                    {reptileNameOptions.map((statusOption) => (
+                                        <MenuItem key={statusOption.id} value={statusOption.id}>
+                                            {statusOption.name}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                            <FormControl variant="outlined">
                                 <InputLabel>所属科</InputLabel>
                                 <Select
                                     value={reptileTypeFilters.type || 'all'}
@@ -406,7 +461,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
             <Box p={2}>
                 <TablePagination
                     component="div"
-                    count={filteredReptiles.length}
+                    count={filteredReptileNameReptiles.length}
                     onPageChange={handlePageChange}
                     onRowsPerPageChange={handleLimitChange}
                     page={page}

@@ -11,7 +11,7 @@ import {Amplify, DataStore, Hub} from "aws-amplify";
 import amplifyConfig from "./aws-exports";
 
 Amplify.configure(amplifyConfig);
-Amplify.Logger.LOG_LEVEL = 'DEBUG';
+// Amplify.Logger.LOG_LEVEL = 'DEBUG';
 
 // @ts-ignore
 window._ = Amplify;
