@@ -28,6 +28,9 @@ const Messenger = Loader(
 const FeedingBox = Loader(
   lazy(() => import('src/content/applications/FeedingBox'))
 );
+const FeedingLog = Loader(
+    lazy(() => import('src/content/applications/FeedingLog'))
+);
 const Reptile = Loader(
   lazy(() => import('src/content/applications/Reptile'))
 );
@@ -90,7 +93,7 @@ const routes: RouteObject[] = [
       },
       {
         path: 'reptile-feeding-box/overview',
-        element: <div />
+        element: <div>开发中 ( ´▽｀)</div>
       },
       {
         path: 'reptile',
@@ -98,7 +101,7 @@ const routes: RouteObject[] = [
       },
       {
         path: 'reptile/overview',
-        element: <div />
+        element: <FeedingLog />
       },
       {
         path: 'reptile/management',

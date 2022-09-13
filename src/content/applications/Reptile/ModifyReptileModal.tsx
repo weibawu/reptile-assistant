@@ -40,7 +40,7 @@ export interface ReptileModificationModalProps {
 }
 
 function ModifyReptileModal(props: ReptileModificationModalProps) {
-    const {onClose, open, editableReptile, reptileTypes,feedingBoxes, feedingBoxIndexes} = props;
+    const {onClose, open, editableReptile, reptileTypes, feedingBoxes, feedingBoxIndexes} = props;
 
     const reptileTypeOptions = reptileTypes.map(
         reptileTypeModel => ({
