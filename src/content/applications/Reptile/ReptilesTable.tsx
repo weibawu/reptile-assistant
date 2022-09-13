@@ -36,6 +36,7 @@ import {
 } from "../../../models";
 import {DataStore} from "aws-amplify";
 import {useAuthenticator} from "@aws-amplify/ui-react";
+import Stack from "@mui/material/Stack";
 
 interface ReptilesTableProps {
     className?: string;
@@ -50,8 +51,13 @@ interface ReptilesTableProps {
 interface ReptileTypeFilters {
     type?: string;
 }
+
 interface ReptileNameFilters {
     name?: string;
+}
+
+interface ReptileFeedingBoxAndFeedingBoxLayerFilters {
+    nameAndLayer?: string;
 }
 
 const getFeedingBoxTypeLabel = (feedingBoxType: ReptileFeedingBoxType | "BOX" | "CABINET" | undefined): JSX.Element => {
@@ -88,7 +94,6 @@ const getGenieLabel = (genie: string): JSX.Element => {
     );
 };
 
-
 const applyReptileTypeFilters = (
     reptiles: Reptile[],
     filters: ReptileTypeFilters,
@@ -112,6 +117,35 @@ const applyReptileNameFilters = (
         let matches = true;
 
         if (filters.name && reptile.name !== filters.name) {
+            matches = false;
+        }
+
+        return matches;
+    });
+};
+
+const getFeedingBoxAndFeedingBoxLayerName = (
+    reptile: Reptile,
+    reptileFeedingBoxes: ReptileFeedingBox[],
+    reptileFeedingBoxIndexCollections: ReptileFeedingBoxIndexCollection[],
+) => {
+
+    const box = reptileFeedingBoxes.find(box => reptile.reptileFeedingBoxID === box.id);
+    const index = reptileFeedingBoxIndexCollections.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID);
+
+    return box?.name + '第' + index?.horizontalIndex + '排';
+}
+
+const applyReptileFeedingBoxAndFeedingBoxLayerFilters = (
+    reptiles: Reptile[],
+    reptileFeedingBoxes: ReptileFeedingBox[],
+    reptileFeedingBoxIndexCollections: ReptileFeedingBoxIndexCollection[],
+    filters: ReptileFeedingBoxAndFeedingBoxLayerFilters,
+): Reptile[] => {
+    return reptiles.filter((reptile) => {
+        let matches = true;
+
+        if (filters.nameAndLayer && getFeedingBoxAndFeedingBoxLayerName(reptile, reptileFeedingBoxes, reptileFeedingBoxIndexCollections) !== filters.nameAndLayer) {
             matches = false;
         }
 
@@ -147,6 +181,9 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
     const [reptileNameFilters, setReptileNameFilters] = useState<ReptileNameFilters>({
         name: null
     });
+    const [reptileFeedingBoxAndFeedingBoxLayerFilters, setReptileFeedingBoxAndFeedingBoxLayerFilters] = useState<ReptileFeedingBoxAndFeedingBoxLayerFilters>({
+        nameAndLayer: null
+    });
 
     const reptileTypeOptions = [
         {
@@ -160,8 +197,26 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
 
     const reptileNameOptions = [
         {id: 'all', name: '全部'},
-        ...Array.from(new Set(reptiles.map(_ => JSON.stringify({ id: _.name, name: _.name })))).map(_ => JSON.parse(_)),
+        ...Array.from(new Set(reptiles.map(_ => JSON.stringify({id: _.name, name: _.name})))).map(_ => JSON.parse(_)),
     ];
+
+    const reptileFeedingBoxAndFeedingBoxLayerOptions = [
+        {id: 'all', name: '全部'},
+        ...Array.from(new Set(reptiles.map(_ => JSON.stringify({
+            id: getFeedingBoxAndFeedingBoxLayerName(_, feedingBoxes, feedingBoxIndexes),
+            name: getFeedingBoxAndFeedingBoxLayerName(_, feedingBoxes, feedingBoxIndexes)
+        })))).map(_ => JSON.parse(_)),
+    ];
+
+    const a = reptiles.map(_ => ({
+        id: getFeedingBoxAndFeedingBoxLayerName(_, feedingBoxes, feedingBoxIndexes),
+        name: getFeedingBoxAndFeedingBoxLayerName(_, feedingBoxes, feedingBoxIndexes)
+    }));
+
+    console.log(a);
+    console.log(reptiles);
+
+    console.log(reptileFeedingBoxAndFeedingBoxLayerOptions);
 
     const handleReptileTypeChange = (e: ChangeEvent<HTMLInputElement>): void => {
         let value = null;
@@ -186,6 +241,19 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
         setReptileNameFilters((prevFilters) => ({
             ...prevFilters,
             name: value
+        }));
+    };
+
+    const handleReptileFeedingBoxAndFeedingBoxLayerChange = (e: ChangeEvent<HTMLInputElement>): void => {
+        let value = null;
+
+        if (e.target.value !== 'all') {
+            value = e.target.value;
+        }
+
+        setReptileFeedingBoxAndFeedingBoxLayerFilters((prevFilters) => ({
+            ...prevFilters,
+            nameAndLayer: value
         }));
     };
 
@@ -225,8 +293,9 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
 
     const filteredReptileTypeReptiles = applyReptileTypeFilters(reptiles, reptileTypeFilters);
     const filteredReptileNameReptiles = applyReptileNameFilters(filteredReptileTypeReptiles, reptileNameFilters);
+    const filteredFeedingBoxAndFeedingBoxLayerReptiles = applyReptileFeedingBoxAndFeedingBoxLayerFilters(filteredReptileNameReptiles, feedingBoxes, feedingBoxIndexes, reptileFeedingBoxAndFeedingBoxLayerFilters);
     const paginatedReptiles = applyPagination(
-        filteredReptileNameReptiles,
+        filteredFeedingBoxAndFeedingBoxLayerReptiles,
         page,
         limit
     );
@@ -252,7 +321,22 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
             {!selectedBulkActions && (
                 <CardHeader
                     action={
-                        <Box width={300}>
+                        <Stack direction={"row"} justifyContent={"space-around"} width={500}>
+                            <FormControl variant="outlined">
+                                <InputLabel>爬柜</InputLabel>
+                                <Select
+                                    value={reptileFeedingBoxAndFeedingBoxLayerFilters.nameAndLayer || 'all'}
+                                    onChange={handleReptileFeedingBoxAndFeedingBoxLayerChange}
+                                    label="爬柜"
+                                    autoWidth
+                                >
+                                    {reptileFeedingBoxAndFeedingBoxLayerOptions.map((statusOption) => (
+                                        <MenuItem key={statusOption.id} value={statusOption.id}>
+                                            {statusOption.name}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                             <FormControl variant="outlined">
                                 <InputLabel>种类</InputLabel>
                                 <Select
@@ -283,7 +367,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                                     ))}
                                 </Select>
                             </FormControl>
-                        </Box>
+                        </Stack>
                     }
                     title="爬宠管理"
                 />
