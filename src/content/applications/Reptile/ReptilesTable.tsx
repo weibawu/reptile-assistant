@@ -135,6 +135,8 @@ const getFeedingBoxAndFeedingBoxLayerName = (
     const box = reptileFeedingBoxes.find(box => reptile.reptileFeedingBoxID === box.id);
     const index = reptileFeedingBoxIndexCollections.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID);
 
+    if (box.type === 'BOX') return box?.name;
+
     return box?.name + '第' + index?.horizontalIndex + '排';
 }
 
@@ -210,8 +212,6 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
             name: getFeedingBoxAndFeedingBoxLayerName(_, feedingBoxes, feedingBoxIndexes)
         })))).map(_ => JSON.parse(_)),
     ];
-
-    console.log(reptileFeedingBoxAndFeedingBoxLayerOptions);
 
     const handleReptileTypeChange = (e: ChangeEvent<HTMLInputElement>): void => {
         let value = null;
