@@ -2,14 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="add reptile name filter">
-      <change afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/libs/reptile-feeder/ReptileFeeder.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/libs/reptile-feeder/ReptileFeederProvider.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/libs/reptile-feeder/UseReptileFeeder.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Footer/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Label/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Logo/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/LogoSign/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/PageTitle/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/PageTitleWrapper/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Scrollbar/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SuspenseLoader/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Text/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layouts/BaseLayout/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Buttons/Notifications/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Buttons/Search/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Buttons/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Menu/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Userbox/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/Sidebar/SidebarMenu/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/Sidebar/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/context/SidebarContext.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/react-app-env.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/themes/ThemeProvider.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/themes/base.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/themes/schemes/PureLightTheme.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +72,7 @@
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
     "js.linters.configure.manually.selectedeslint": "true",
-    "last_opened_file_path": "/Users/kuku/Tailhome/repos/reptile-assistant-v2",
+    "last_opened_file_path": "/Users/kuku/Tailhome/repos/reptile-assistant-v2/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -63,10 +86,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/libs/context" />
       <recent name="$PROJECT_DIR$/src/content/applications/Reptile" />
       <recent name="$PROJECT_DIR$/src/content/applications" />
       <recent name="$PROJECT_DIR$/src/assets/images" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -87,7 +111,7 @@
       <workItem from="1661855079396" duration="56647000" />
       <workItem from="1662541166409" duration="36478000" />
       <workItem from="1663080532192" duration="573000" />
-      <workItem from="1663144276972" duration="14559000" />
+      <workItem from="1663144276972" duration="19261000" />
     </task>
     <task id="LOCAL-00001" summary="add gender in table">
       <created>1663002729951</created>
@@ -115,6 +139,11 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/index.d.ts" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
