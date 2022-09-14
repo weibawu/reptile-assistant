@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import clsx from 'clsx';
@@ -60,7 +60,6 @@ const TextWrapper = styled('span')(
 );
 
 const Text: FC<TextProps> = ({
-  className,
   color = 'secondary',
   flex,
   children,

@@ -5,7 +5,6 @@ import {
   Button,
   Divider,
   Hidden,
-  lighten,
   Popover,
   Typography
 } from '@mui/material';
@@ -48,7 +47,7 @@ function HeaderUserbox() {
 
   const {user, signOut} = useAuthenticator((ctx) => [ctx.user]);
 
-  const ref = useRef<any>(null);
+  const ref = useRef(null);
   const [isOpen, setOpen] = useState<boolean>(false);
 
   const handleOpen = (): void => {
@@ -64,7 +63,7 @@ function HeaderUserbox() {
       <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
         <Hidden mdDown>
           <UserBoxText>
-            <UserBoxLabel variant="body1">{user.attributes!.email}</UserBoxLabel>
+            <UserBoxLabel variant="body1">{user.attributes?.email}</UserBoxLabel>
           </UserBoxText>
         </Hidden>
         <Hidden smDown>
@@ -86,7 +85,7 @@ function HeaderUserbox() {
       >
         <MenuUserBox sx={{ minWidth: 210 }} display="flex">
           <UserBoxText>
-            <UserBoxLabel variant="body1">{user.attributes!.email}</UserBoxLabel>
+            <UserBoxLabel variant="body1">{user.attributes?.email}</UserBoxLabel>
           </UserBoxText>
         </MenuUserBox>
         <Divider sx={{ mb: 0 }} />

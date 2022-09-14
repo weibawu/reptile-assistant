@@ -46,6 +46,7 @@ function Sidebar() {
           top: 0,
           background:
             theme.palette.mode === 'dark'
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
               ? alpha(lighten(theme.header.background!, 0.1), 0.5)
               : darken(theme.colors.alpha.black[100], 0.5),
           boxShadow:

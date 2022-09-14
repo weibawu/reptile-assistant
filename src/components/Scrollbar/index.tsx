@@ -9,7 +9,7 @@ interface ScrollbarProps {
   children?: ReactNode;
 }
 
-const Scrollbar: FC<ScrollbarProps> = ({ className, children, ...rest }) => {
+const Scrollbar: FC<ScrollbarProps> = ({ children, ...rest }) => {
   const theme = useTheme();
 
   return (

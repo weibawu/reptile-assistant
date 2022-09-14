@@ -62,10 +62,11 @@ const ListWrapper = styled(Box)(
 `
 );
 
-function HeaderMenu() {
-  // const ref = useRef<any>(null);
-  const location = useLocation();
+type ParentPath = 'reptile-feeding-box' | 'reptile'
 
+function HeaderMenu() {
+  const location = useLocation();
+  const parentPath = location.pathname.split('/')[1] as ParentPath;
   const routerListMap = {
     'reptile-feeding-box': [
       { to: '/reptile-feeding-box/overview', 'title': '饲养情况概览' },
@@ -77,6 +78,8 @@ function HeaderMenu() {
     ],
   };
 
+  const routerList = routerListMap[parentPath];
+
   return (
     <>
       <ListWrapper
@@ -86,13 +89,12 @@ function HeaderMenu() {
           }
         }}
       >
-{/*        todo list the menu
         <List disablePadding component={Box} display="flex">
           {
-            routerListMap[location.pathname.split('/')[1]]?.map((router) =>
+            routerList.map((router) =>
               <ListItem
+                key={router.title}
                 classes={{ root: 'MuiListItem-indicators' }}
-                button
                 component={NavLink}
                 to={router.to}
               >
@@ -103,7 +105,7 @@ function HeaderMenu() {
               </ListItem>
             )
           }
-        </List>*/}
+        </List>
       </ListWrapper>
     </>
   );
