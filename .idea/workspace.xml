@@ -2,8 +2,155 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.eslintignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/applications/Reptile/ReptilesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/applications/Reptile/ReptilesTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/.config/project-config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/api/ReptileAssistant/cli-inputs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/api/ReptileAssistant/parameters.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/api/ReptileAssistant/resolvers/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/api/ReptileAssistant/schema.graphql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/api/ReptileAssistant/stacks/CustomResources.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/api/ReptileAssistant/transform.conf.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/auth/ReptileAssistant/cli-inputs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/backend-config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/tags.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/types/amplify-dependent-resources-ref.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/cli.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/team-provider-info.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/_redirects" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/icon-192x192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/icon-256x256.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/icon-384x384.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/icon-512x512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/avatars/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/avatars/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/avatars/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/avatars/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/avatars/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/logo/google.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/logo/material-ui.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/logo/typescript.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/overview/tokyo-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/placeholders/covers/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/placeholders/covers/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/placeholders/covers/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/placeholders/illustrations/1.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/placeholders/illustrations/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/placeholders/illustrations/3.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/placeholders/illustrations/4.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/placeholders/illustrations/5.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/placeholders/illustrations/6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/placeholders/logo/bitcoin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/placeholders/logo/cardano.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/placeholders/logo/ethereum.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/placeholders/logo/google-logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/placeholders/logo/mastercard.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/placeholders/logo/ripple.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/placeholders/logo/visa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/status/404.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/status/500.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/status/coming-soon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/status/maintenance.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Label/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Logo/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LogoSign/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PageTitle/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PageTitleWrapper/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Scrollbar/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SuspenseLoader/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Text/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/FeedingBox/BulkActions.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/FeedingBox/FeedingBoxesTable.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/FeedingBox/ModifyFeedingBoxModal.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/FeedingBox/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/FeedingLog/BulkActions.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/FeedingLog/FeedingLogsTable.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/FeedingLog/ModifyFeedingLogModal.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/FeedingLog/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Messenger/BottomBarContent.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Messenger/ChatContent.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Messenger/SidebarContent.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Messenger/TopBarContent.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Messenger/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Reptile/BulkActions.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Reptile/FeedingLogsViewTable.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Reptile/FeedingLogsViewTableModal.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Reptile/ModifyReptileModal.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Reptile/ReptilesTable.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Reptile/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Users/profile/Addresses.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Users/profile/Feed.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Users/profile/MyCards.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Users/profile/PopularTags.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Users/profile/ProfileCover.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Users/profile/RecentActivity.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Users/profile/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Users/settings/ActivityTab.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Users/settings/EditProfileTab.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Users/settings/NotificationsTab.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Users/settings/PageHeader.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Users/settings/SecurityTab.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/applications/Users/settings/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/dashboards/Crypto/AccountBalance.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/dashboards/Crypto/AccountSecurity.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/dashboards/Crypto/PageHeader.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/dashboards/Crypto/Wallets.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/dashboards/Crypto/WatchList.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/dashboards/Crypto/WatchListColumn.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/dashboards/Crypto/WatchListRow.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/dashboards/Crypto/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/overview/Hero/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/overview/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/pages/Components/Accordions/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/pages/Components/Avatars/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/pages/Components/Badges/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/pages/Components/Buttons/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/pages/Components/Cards/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/pages/Components/Forms/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/pages/Components/Modals/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/pages/Components/Tabs/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/pages/Components/Tooltips/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/pages/Status/ComingSoon/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/pages/Status/Maintenance/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/pages/Status/Status404/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/pages/Status/Status500/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/contexts/SidebarContext.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/BaseLayout/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Buttons/Notifications/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Buttons/Search/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Buttons/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Menu/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Userbox/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/Sidebar/SidebarMenu/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/Sidebar/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/schema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/schema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reportWebVitals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reportWebVitals.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviceWorker.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme/ThemeProvider.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme/base.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme/schemes/PureLightTheme.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui-components/NewReptileBoxDialog.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui-components/NewReptileBoxDialog.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui-components/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +167,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/mvp-version" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -33,28 +180,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;TF_FMT&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/kuku/Tailhome/repos/reptile-assistant&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/kuku/Tailhome/repos/reptile-assistant/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.notifications&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/kuku/Tailhome/repos/reptile-assistant/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TF_FMT": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "js.linters.configure.manually.selectedeslint": "true",
+    "last_opened_file_path": "/Users/kuku/Tailhome/repos/reptile-assistant-v2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/kuku/Tailhome/repos/reptile-assistant/node_modules/prettier",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.notifications",
+    "ts.external.directory.path": "/Users/kuku/Tailhome/repos/reptile-assistant-v2/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/content/applications/Reptile" />
       <recent name="$PROJECT_DIR$/src/content/applications" />
       <recent name="$PROJECT_DIR$/src/assets/images" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -73,6 +226,7 @@
       <workItem from="1661855079396" duration="56647000" />
       <workItem from="1662541166409" duration="36478000" />
       <workItem from="1663080532192" duration="573000" />
+      <workItem from="1663144276972" duration="2187000" />
     </task>
     <task id="LOCAL-00001" summary="add gender in table">
       <created>1663002729951</created>

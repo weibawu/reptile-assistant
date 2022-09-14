@@ -10,11 +10,6 @@
       "StackName": "amplify-reptileassistant-staging-163603",
       "StackId": "arn:aws:cloudformation:us-west-1:600691080472:stack/amplify-reptileassistant-staging-163603/57c00c50-2626-11ed-a807-0216229fea4b",
       "AmplifyAppId": "d14qgav61zvwr7"
-    },
-    "categories": {
-      "auth": {
-        "ReptileAssistant": {}
-      }
     }
   }
 }
