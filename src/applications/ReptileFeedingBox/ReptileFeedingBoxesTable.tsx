@@ -33,16 +33,16 @@ import BulkActions from './BulkActions';
 
 interface ReptileFeedingBoxesTableProps {
     className?: string;
-    reptileFeedingBoxes: ReptileFeedingBox[];
-    onFeedingBoxEditing: (reptileFeedingBox: ReptileFeedingBox) => any;
-    onFeedingBoxesDeleting: (reptileFeedingBoxIds: string[]) => any;
+    reptileReptileFeedingBoxes: ReptileFeedingBox[];
+    onReptileFeedingBoxEditing: (reptileReptileFeedingBox: ReptileFeedingBox) => any;
+    onReptileFeedingBoxesDeleting: (reptileReptileFeedingBoxIds: string[]) => any;
 }
 
 interface Filters {
     type?: ReptileFeedingBoxType;
 }
 
-const getTypeLabel = (reptileFeedingBoxType: ReptileFeedingBoxType): JSX.Element => {
+const getTypeLabel = (reptileReptileFeedingBoxType: ReptileFeedingBoxType): JSX.Element => {
   const map = {
     [ReptileFeedingBoxType.BOX]: {
       text: '饲养盒',
@@ -54,19 +54,19 @@ const getTypeLabel = (reptileFeedingBoxType: ReptileFeedingBoxType): JSX.Element
     },
   };
 
-  const {text, color}: any = map[reptileFeedingBoxType];
+  const {text, color}: any = map[reptileReptileFeedingBoxType];
 
   return <Label color={color}>{text}</Label>;
 };
 
 const applyFilters = (
-  reptileFeedingBoxes: ReptileFeedingBox[],
+  reptileReptileFeedingBoxes: ReptileFeedingBox[],
   filters: Filters,
 ): ReptileFeedingBox[] => {
-  return reptileFeedingBoxes.filter((reptileFeedingBox) => {
+  return reptileReptileFeedingBoxes.filter((reptileReptileFeedingBox) => {
     let matches = true;
 
-    if (filters.type && reptileFeedingBox.type !== filters.type) {
+    if (filters.type && reptileReptileFeedingBox.type !== filters.type) {
       matches = false;
     }
 
@@ -75,18 +75,18 @@ const applyFilters = (
 };
 
 const applyPagination = (
-  reptileFeedingBoxes: ReptileFeedingBox[],
+  reptileReptileFeedingBoxes: ReptileFeedingBox[],
   page: number,
   limit: number
 ): ReptileFeedingBox[] => {
-  return reptileFeedingBoxes.slice(page * limit, page * limit + limit);
+  return reptileReptileFeedingBoxes.slice(page * limit, page * limit + limit);
 };
 
-const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFeedingBoxes, onFeedingBoxEditing, onFeedingBoxesDeleting}) => {
-  const [selectedFeedingBoxes, setSelectedFeedingBoxes] = useState<string[]>(
+const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileReptileFeedingBoxes, onReptileFeedingBoxEditing, onReptileFeedingBoxesDeleting}) => {
+  const [selectedReptileFeedingBoxes, setSelectedReptileFeedingBoxes] = useState<string[]>(
     []
   );
-  const selectedBulkActions = selectedFeedingBoxes.length > 0;
+  const selectedBulkActions = selectedReptileFeedingBoxes.length > 0;
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(10);
   const [filters, setFilters] = useState<Filters>({
@@ -121,28 +121,28 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
     }));
   };
 
-  const handleSelectAllFeedingBoxes = (
+  const handleSelectAllReptileFeedingBoxes = (
     event: ChangeEvent<HTMLInputElement>
   ): void => {
-    setSelectedFeedingBoxes(
+    setSelectedReptileFeedingBoxes(
       event.target.checked
-        ? reptileFeedingBoxes.map((reptileFeedingBoxes) => reptileFeedingBoxes.id)
+        ? reptileReptileFeedingBoxes.map((reptileReptileFeedingBoxes) => reptileReptileFeedingBoxes.id)
         : []
     );
   };
 
-  const handleSelectOneFeedingBox = (
+  const handleSelectOneReptileFeedingBox = (
     event: ChangeEvent<HTMLInputElement>,
-    reptileFeedingBoxId: string
+    reptileReptileFeedingBoxId: string
   ): void => {
-    if (!selectedFeedingBoxes.includes(reptileFeedingBoxId)) {
-      setSelectedFeedingBoxes((prevSelected) => [
+    if (!selectedReptileFeedingBoxes.includes(reptileReptileFeedingBoxId)) {
+      setSelectedReptileFeedingBoxes((prevSelected) => [
         ...prevSelected,
-        reptileFeedingBoxId
+        reptileReptileFeedingBoxId
       ]);
     } else {
-      setSelectedFeedingBoxes((prevSelected) =>
-        prevSelected.filter((id) => id !== reptileFeedingBoxId)
+      setSelectedReptileFeedingBoxes((prevSelected) =>
+        prevSelected.filter((id) => id !== reptileReptileFeedingBoxId)
       );
     }
   };
@@ -155,22 +155,22 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
     setLimit(parseInt(event.target.value));
   };
 
-  const filteredFeedingBoxes = applyFilters(reptileFeedingBoxes, filters);
-  const paginatedFeedingBoxes = applyPagination(
-    filteredFeedingBoxes,
+  const filteredReptileFeedingBoxes = applyFilters(reptileReptileFeedingBoxes, filters);
+  const paginatedReptileFeedingBoxes = applyPagination(
+    filteredReptileFeedingBoxes,
     page,
     limit
   );
-  const selectedSomeFeedingBoxes =
-        selectedFeedingBoxes.length > 0 &&
-        selectedFeedingBoxes.length < reptileFeedingBoxes.length;
-  const selectedAllFeedingBoxes =
-        selectedFeedingBoxes.length === reptileFeedingBoxes.length;
+  const selectedSomeReptileFeedingBoxes =
+        selectedReptileFeedingBoxes.length > 0 &&
+        selectedReptileFeedingBoxes.length < reptileReptileFeedingBoxes.length;
+  const selectedAllReptileFeedingBoxes =
+        selectedReptileFeedingBoxes.length === reptileReptileFeedingBoxes.length;
   const theme = useTheme();
 
   const handleBulkDeleting = () => {
-    onFeedingBoxesDeleting(selectedFeedingBoxes);
-    setSelectedFeedingBoxes([]);
+    onReptileFeedingBoxesDeleting(selectedReptileFeedingBoxes);
+    setSelectedReptileFeedingBoxes([]);
   };
 
   return (
@@ -212,9 +212,9 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
               <TableCell padding="checkbox">
                 <Checkbox
                   color="primary"
-                  checked={selectedAllFeedingBoxes}
-                  indeterminate={selectedSomeFeedingBoxes}
-                  onChange={handleSelectAllFeedingBoxes}
+                  checked={selectedAllReptileFeedingBoxes}
+                  indeterminate={selectedSomeReptileFeedingBoxes}
+                  onChange={handleSelectAllReptileFeedingBoxes}
                 />
               </TableCell>
               <TableCell>名称 / 位置</TableCell>
@@ -224,24 +224,24 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedFeedingBoxes.map((reptileFeedingBox) => {
-              const isFeedingBoxSelected = selectedFeedingBoxes.includes(
-                reptileFeedingBox.id
+            {paginatedReptileFeedingBoxes.map((reptileReptileFeedingBox) => {
+              const isReptileFeedingBoxSelected = selectedReptileFeedingBoxes.includes(
+                reptileReptileFeedingBox.id
               );
               return (
                 <TableRow
                   hover
-                  key={reptileFeedingBox.id}
-                  selected={isFeedingBoxSelected}
+                  key={reptileReptileFeedingBox.id}
+                  selected={isReptileFeedingBoxSelected}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
                       color="primary"
-                      checked={isFeedingBoxSelected}
+                      checked={isReptileFeedingBoxSelected}
                       onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleSelectOneFeedingBox(event, reptileFeedingBox.id)
+                        handleSelectOneReptileFeedingBox(event, reptileReptileFeedingBox.id)
                       }
-                      value={isFeedingBoxSelected}
+                      value={isReptileFeedingBoxSelected}
                     />
                   </TableCell>
                   <TableCell>
@@ -252,11 +252,11 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
                       gutterBottom
                       noWrap
                     >
-                      {reptileFeedingBox.name}
+                      {reptileReptileFeedingBox.name}
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    {getTypeLabel(reptileFeedingBox.type as ReptileFeedingBoxType)}
+                    {getTypeLabel(reptileReptileFeedingBox.type as ReptileFeedingBoxType)}
                   </TableCell>
                   <TableCell>
                     <Typography
@@ -266,7 +266,7 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
                       gutterBottom
                       noWrap
                     >
-                      {reptileFeedingBox.id}
+                      {reptileReptileFeedingBox.id}
                     </Typography>
                   </TableCell>
                   <TableCell align="right">
@@ -280,7 +280,7 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
                         }}
                         color="inherit"
                         size="small"
-                        onClick={onFeedingBoxEditing.bind(null, reptileFeedingBox)}
+                        onClick={onReptileFeedingBoxEditing.bind(null, reptileReptileFeedingBox)}
                       >
                         <EditTwoToneIcon fontSize="small"/>
                       </IconButton>
@@ -293,7 +293,7 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
                         }}
                         color="inherit"
                         size="small"
-                        onClick={onFeedingBoxesDeleting.bind(null, [reptileFeedingBox.id])}
+                        onClick={onReptileFeedingBoxesDeleting.bind(null, [reptileReptileFeedingBox.id])}
                       >
                         <DeleteTwoToneIcon fontSize="small"/>
                       </IconButton>
@@ -308,7 +308,7 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
       <Box p={2}>
         <TablePagination
           component="div"
-          count={filteredFeedingBoxes.length}
+          count={filteredReptileFeedingBoxes.length}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}
@@ -321,11 +321,11 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
 };
 
 ReptileFeedingBoxesTable.propTypes = {
-  reptileFeedingBoxes: PropTypes.array.isRequired
+  reptileReptileFeedingBoxes: PropTypes.array.isRequired
 };
 
 ReptileFeedingBoxesTable.defaultProps = {
-  reptileFeedingBoxes: []
+  reptileReptileFeedingBoxes: []
 };
 
 export default ReptileFeedingBoxesTable;

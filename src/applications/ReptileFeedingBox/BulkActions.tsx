@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 import {
   Box,
@@ -45,7 +45,7 @@ function BulkActions({onBulkDeleting}: BulkActionsProps) {
   const handleBulkDeleting = () => {
     onBulkDeleting();
     closeMenu();
-  }
+  };
 
   return (
     <>
