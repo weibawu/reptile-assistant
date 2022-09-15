@@ -84,7 +84,7 @@ function Header() {
             display: { lg: 'none', xs: 'inline-block' }
           }}
         >
-          <Tooltip arrow title="Toggle Menu">
+          <Tooltip arrow title="显示/隐藏侧边栏">
             <IconButton color="primary" onClick={toggleSidebar}>
               {!sidebarToggle ? (
                 <MenuTwoToneIcon fontSize="small" />

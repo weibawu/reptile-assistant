@@ -1,4 +1,4 @@
-import { Amplify, DataStore } from 'aws-amplify';
+import { DataStore } from 'aws-amplify';
 import {
   Reptile,
   ReptileFeedingBox,
@@ -6,7 +6,6 @@ import {
   ReptileFeedingLog,
   ReptileType
 } from '../../models';
-import amplifyConfig from '../../aws-exports';
 import { Subject } from 'rxjs';
 import {
   CognitoUserAmplify
@@ -45,18 +44,22 @@ interface ReptileFeederProtocol {
   ) => Promise<ReptileFeedingLog>;
 
   readonly updateReptile: (
+    reptileID: string,
     reptile: Reptile
   ) => Promise<Reptile>;
 
   readonly updateReptileFeedingBox: (
+    reptileFeedingBoxID: string,
     reptileFeedingBox: ReptileFeedingBox
   ) => Promise<ReptileFeedingBox>;
 
   readonly updateReptileFeedingBoxIndex: (
+    reptileFeedingBoxIndexID: string,
     reptileFeedingBoxIndex: ReptileFeedingBoxIndexCollection
   ) => Promise<ReptileFeedingBoxIndexCollection>;
 
   readonly updateReptileFeedingLog: (
+    reptileFeedingLogID: string,
     reptileFeedingLog: ReptileFeedingLog
   ) => Promise<ReptileFeedingLog>;
 
@@ -86,9 +89,8 @@ interface ReptileFeederProtocol {
 
 class ReptileFeeder implements ReptileFeederProtocol {
 
-  constructor() {
-    Amplify.configure(amplifyConfig);
-    this.currentUser = Amplify.Auth.currentUser;
+  constructor(currentUser: CognitoUserAmplify) {
+    this.currentUser = currentUser;
   }
 
   readonly currentUser: CognitoUserAmplify;
@@ -214,8 +216,8 @@ class ReptileFeeder implements ReptileFeederProtocol {
     return reptileFeedingLog;
   }
 
-  async updateReptile(reptile: Reptile): Promise<Reptile> {
-    const originalReptile = await DataStore.query(Reptile, reptile.id);
+  async updateReptile(reptileID: string, reptile: Reptile): Promise<Reptile> {
+    const originalReptile = await DataStore.query(Reptile, reptileID);
     if (!originalReptile) throw new Error('update reptile failed');
 
     await DataStore.save(
@@ -241,8 +243,8 @@ class ReptileFeeder implements ReptileFeederProtocol {
     return reptile;
   }
 
-  async updateReptileFeedingBox(reptileFeedingBox: ReptileFeedingBox): Promise<ReptileFeedingBox> {
-    const originalReptileFeedingBox = await DataStore.query(ReptileFeedingBox, reptileFeedingBox.id);
+  async updateReptileFeedingBox(reptileFeedingBoxID: string, reptileFeedingBox: ReptileFeedingBox): Promise<ReptileFeedingBox> {
+    const originalReptileFeedingBox = await DataStore.query(ReptileFeedingBox, reptileFeedingBoxID);
     if (!originalReptileFeedingBox) throw new Error('update reptile feeding box failed');
 
     await DataStore.save(
@@ -260,8 +262,8 @@ class ReptileFeeder implements ReptileFeederProtocol {
     return reptileFeedingBox;
   }
 
-  async updateReptileFeedingBoxIndex(reptileFeedingBoxIndex: ReptileFeedingBoxIndexCollection): Promise<ReptileFeedingBoxIndexCollection> {
-    const originalReptileFeedingBoxIndex = await DataStore.query(ReptileFeedingBoxIndexCollection, reptileFeedingBoxIndex.id);
+  async updateReptileFeedingBoxIndex(reptileFeedingBoxIndexID: string, reptileFeedingBoxIndex: ReptileFeedingBoxIndexCollection): Promise<ReptileFeedingBoxIndexCollection> {
+    const originalReptileFeedingBoxIndex = await DataStore.query(ReptileFeedingBoxIndexCollection, reptileFeedingBoxIndexID);
     if (!originalReptileFeedingBoxIndex) throw new Error('update reptile feeding box failed');
 
     await DataStore.save(
@@ -280,8 +282,8 @@ class ReptileFeeder implements ReptileFeederProtocol {
     return reptileFeedingBoxIndex;
   }
 
-  async updateReptileFeedingLog(reptileFeedingLog: ReptileFeedingLog): Promise<ReptileFeedingLog> {
-    const originalReptileFeedingLog = await DataStore.query(ReptileFeedingLog, reptileFeedingLog.id);
+  async updateReptileFeedingLog(reptileFeedingLogID: string, reptileFeedingLog: ReptileFeedingLog): Promise<ReptileFeedingLog> {
+    const originalReptileFeedingLog = await DataStore.query(ReptileFeedingLog, reptileFeedingLogID);
     if (!originalReptileFeedingLog) throw new Error('update reptile feeding box failed');
 
     await DataStore.save(

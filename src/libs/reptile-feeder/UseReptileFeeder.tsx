@@ -51,5 +51,6 @@ export const useReptileFeeder = () => {
     reptileFeedingBoxIndexes,
     reptileFeedingLogs,
     reptileFeeder,
+    currentUser: reptileFeeder.currentUser,
   };
 };
