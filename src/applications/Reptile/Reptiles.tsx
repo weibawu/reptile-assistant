@@ -55,7 +55,7 @@ function Reptiles() {
     toggleModal();
   };
 
-  const handleEditableReptileModalClose = () => {
+  const handleModifyReptileModalClose = () => {
     setEditableReptile(undefined);
     closeModal();
   };
@@ -135,7 +135,7 @@ function Reptiles() {
       />
       <ModifyReptileModal
         open={ModalToggle}
-        onClose={handleEditableReptileModalClose}
+        onClose={handleModifyReptileModalClose}
         editableReptile={editableReptile}
       />
     </>

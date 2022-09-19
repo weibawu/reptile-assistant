@@ -18,7 +18,7 @@ const FeedingBox = Loader(
   lazy(() => import('./applications/ReptileFeedingBox'))
 );
 const FeedingLog = Loader(
-  lazy(() => import('./applications/FeedingLog'))
+  lazy(() => import('./applications/ReptileFeedingLog'))
 );
 const Reptile = Loader(
   lazy(() => import('./applications/Reptile'))
