@@ -1,15 +1,17 @@
 import React, { useContext, useState } from 'react';
-
+import { Grid, Container, Typography, Button, Card } from '@mui/material';
+import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 
 import PageTitleWrapper from '../../components/PageTitleWrapper';
-import { Grid, Container, Typography, Button, Card } from '@mui/material';
 import Footer from '../../components/Footer';
-import ModifyFeedingBoxModal from './ModifyFeedingBoxModal';
-import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
-import { ReptileFeedingBox } from '../../models';
-import ReptileFeedingBoxesTable from './ReptileFeedingBoxesTable';
-import { useReptileFeeder } from '../../libs/reptile-feeder/UseReptileFeeder';
+
+import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
 import { ModalContext } from '../../libs/context/ModalContext';
+
+import ModifyFeedingBoxModal from './ModifyReptileFeedingBoxModal';
+import ReptileFeedingBoxesTable from './ReptileFeedingBoxesTable';
+
+import { ReptileFeedingBox } from '../../models';
 
 function ReptileFeedingBoxes() {
 
@@ -19,18 +21,19 @@ function ReptileFeedingBoxes() {
   const {
     currentUser,
     reptileFeedingBoxes,
-    reptileFeeder
-  } = useReptileFeeder();
+    reptileRepository
+  } = useReptileRepository();
+
+  const currentUserDisplayedUsername =
+    currentUser.attributes
+      ? currentUser.attributes.email
+      : '新朋友';
 
   const handleDeleteFeedingBoxes = async (feedingBoxIds: string[]) => {
     for await (const feedingBoxId of feedingBoxIds) {
-      await reptileFeeder.removeReptileFeedingBox(feedingBoxId);
+      await reptileRepository.removeReptileFeedingBox(feedingBoxId);
     }
-    await reptileFeeder.fetchAll();
-  };
-
-  const handleCloseFeedingBoxModal = () => {
-    closeModal();
+    await reptileRepository.fetchAll();
   };
 
   const handleOpenFeedingBoxModal = (reptileFeedingBox: ReptileFeedingBox | undefined) => {
@@ -49,11 +52,7 @@ function ReptileFeedingBoxes() {
               尾巴屋爬宠管理平台
             </Typography>
             <Typography variant="subtitle2">
-              你好，{
-                currentUser.attributes
-                  ? currentUser.attributes.email
-                  : '新朋友'
-              }！
+              你好，{currentUserDisplayedUsername}！
             </Typography>
           </Grid>
           <Grid item>
@@ -80,8 +79,8 @@ function ReptileFeedingBoxes() {
             <Card>
               <ReptileFeedingBoxesTable
                 reptileFeedingBoxes={reptileFeedingBoxes}
-                onFeedingBoxEditing={handleOpenFeedingBoxModal}
-                onFeedingBoxesDeleting={handleDeleteFeedingBoxes}
+                onReptileFeedingBoxEditing={handleOpenFeedingBoxModal}
+                onReptileFeedingBoxesDeleting={handleDeleteFeedingBoxes}
               />
             </Card>
           </Grid>
@@ -90,7 +89,7 @@ function ReptileFeedingBoxes() {
       <Footer />
       <ModifyFeedingBoxModal
         open={ModalToggle}
-        onClose={handleCloseFeedingBoxModal}
+        onClose={closeModal}
         editableReptileFeedingBox={editableReptileFeedingBox}
       />
     </>

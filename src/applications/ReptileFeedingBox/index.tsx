@@ -1,5 +1,5 @@
 import React from 'react';
-import ReptileFeedingBoxes from './ReptileFeedingBox';
+import ReptileFeedingBoxes from './ReptileFeedingBoxes';
 import { ModalProvider } from '../../libs/context/ModalContext';
 import { Helmet } from 'react-helmet-async';
 

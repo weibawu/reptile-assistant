@@ -8,7 +8,7 @@ import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 
 import {ReptileFeedingBox, ReptileFeedingBoxType} from '../../models';
-import { useReptileFeeder } from '../../libs/reptile-feeder/UseReptileFeeder';
+import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
 
 export interface ReptileFeedingBoxModificationModalProps {
     open: boolean;
@@ -18,7 +18,7 @@ export interface ReptileFeedingBoxModificationModalProps {
 
 function ModifyReptileFeedingBoxModal(props: ReptileFeedingBoxModificationModalProps) {
   const {onClose, open, editableReptileFeedingBox} = props;
-  const {currentUser, reptileFeeder} = useReptileFeeder();
+  const {currentUser, reptileRepository} = useReptileRepository();
 
   const validationSchema = yup.object({
     name: yup.string().required().max(20),
@@ -61,9 +61,9 @@ function ModifyReptileFeedingBoxModal(props: ReptileFeedingBoxModificationModalP
         userID: currentUser.username,
       });
       if (editableReptileFeedingBox) {
-        await reptileFeeder.updateReptileFeedingBox(editableReptileFeedingBox.id, reptileFeedingBox);
+        await reptileRepository.updateReptileFeedingBox(editableReptileFeedingBox.id, reptileFeedingBox);
       } else {
-        await reptileFeeder.createReptileFeedingBox(reptileFeedingBox);
+        await reptileRepository.createReptileFeedingBox(reptileFeedingBox);
       }
       handleClose();
     } catch (e) {

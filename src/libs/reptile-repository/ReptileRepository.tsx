@@ -11,7 +11,7 @@ import {
   CognitoUserAmplify
 } from '@aws-amplify/ui-react/node_modules/@aws-amplify/ui/dist/types/types/authenticator/user.d';
 
-interface ReptileFeederProtocol {
+interface ReptileRepositoryProtocol {
   readonly currentUser: CognitoUserAmplify;
   readonly reptilesSubject: Subject<Reptile[]>;
   readonly reptileTypesSubject: Subject<ReptileType[]>;
@@ -85,9 +85,24 @@ interface ReptileFeederProtocol {
   readonly onReptileFeedingBoxesFetched: (callback: (reptileFeedingBoxes: ReptileFeedingBox[]) => unknown) => void;
   readonly onReptileFeedingBoxIndexesFetched: (callback: (reptileFeedingBoxIndexes: ReptileFeedingBoxIndexCollection[]) => unknown) => void;
   readonly onReptileFeedingLogsFetched: (callback: (reptileFeedingLogs: ReptileFeedingLog[]) => unknown) => void;
+
+  /* util functions */
+  readonly findReptileFeedingBoxIndexesByVerticalIndex: (
+    reptileFeedingBoxId: string,
+    verticalIndex: number
+  ) => Promise<ReptileFeedingBoxIndexCollection[]>;
+  readonly findReptileFeedingBoxIndexesByHorizontalIndex: (
+    reptileFeedingBoxId: string,
+    horizontalIndex: number
+  ) => Promise<ReptileFeedingBoxIndexCollection[]>;
+  readonly findExactFeedingBoxIndexByHorizontalIndexAndVerticalIndex: (
+    reptileFeedingBoxId: string,
+    verticalIndex: number,
+    horizontalIndex: number
+  ) => Promise<ReptileFeedingBoxIndexCollection | null>;
 }
 
-class ReptileFeeder implements ReptileFeederProtocol {
+class ReptileRepository implements ReptileRepositoryProtocol {
 
   constructor(currentUser: CognitoUserAmplify) {
     this.currentUser = currentUser;
@@ -328,6 +343,46 @@ class ReptileFeeder implements ReptileFeederProtocol {
     await this.fetchAll();
     return true;
   }
+
+  async findExactFeedingBoxIndexByHorizontalIndexAndVerticalIndex(
+    reptileFeedingBoxId: string,
+    verticalIndex: number,
+    horizontalIndex: number
+  ): Promise<ReptileFeedingBoxIndexCollection | null> {
+    const exactReptileFeedingBoxes = await DataStore.query(
+      ReptileFeedingBoxIndexCollection,
+      (reptileFeedBoxIndexPredicated) =>
+        reptileFeedBoxIndexPredicated.reptileFeedingBoxID('eq', reptileFeedingBoxId)
+          .verticalIndex('eq', verticalIndex)
+          .horizontalIndex('eq', horizontalIndex)
+    );
+    if (exactReptileFeedingBoxes.length > 0) return exactReptileFeedingBoxes[0];
+    return null;
+  }
+
+  async findReptileFeedingBoxIndexesByHorizontalIndex(
+    reptileFeedingBoxId: string,
+    horizontalIndex: number
+  ): Promise<ReptileFeedingBoxIndexCollection[]> {
+    return await DataStore.query(
+      ReptileFeedingBoxIndexCollection,
+      (reptileFeedBoxIndexPredicated) =>
+        reptileFeedBoxIndexPredicated.reptileFeedingBoxID('eq', reptileFeedingBoxId)
+          .horizontalIndex('eq', horizontalIndex)
+    );
+  }
+
+  async findReptileFeedingBoxIndexesByVerticalIndex(
+    reptileFeedingBoxId: string,
+    verticalIndex: number
+  ): Promise<ReptileFeedingBoxIndexCollection[]> {
+    return await DataStore.query(
+      ReptileFeedingBoxIndexCollection,
+      (reptileFeedBoxIndexPredicated) =>
+        reptileFeedBoxIndexPredicated.reptileFeedingBoxID('eq', reptileFeedingBoxId)
+          .horizontalIndex('eq', verticalIndex)
+    );
+  }
 }
 
-export default ReptileFeeder;
+export default ReptileRepository;

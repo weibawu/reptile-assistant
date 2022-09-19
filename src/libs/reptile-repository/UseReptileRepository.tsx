@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { ReptileFeederContext } from './ReptileFeederProvider';
+import { ReptileRepositoryContext } from './ReptileRepositoryProvider';
 import {
   Reptile,
   ReptileFeedingBox,
@@ -8,9 +8,9 @@ import {
   ReptileType
 } from '../../models';
 
-export const useReptileFeeder = () => {
-  const reptileFeeder = useContext(ReptileFeederContext);
-  if (!reptileFeeder) throw new Error('reptile feeder is not initialized');
+export const useReptileRepository = () => {
+  const reptileRepository = useContext(ReptileRepositoryContext);
+  if (!reptileRepository) throw new Error('reptile feeder is not initialized');
 
   const [loading, setLoading] = useState<boolean>(false);
   const [reptiles, setReptiles] = useState<Reptile[]>([]);
@@ -19,11 +19,11 @@ export const useReptileFeeder = () => {
   const [reptileFeedingBoxIndexes, setReptilesFeedingBoxIndexes] = useState<ReptileFeedingBoxIndexCollection[]>([]);
   const [reptileFeedingLogs, setReptileFeedingLogs] = useState<ReptileFeedingLog[]>([]);
 
-  reptileFeeder.onReptilesFetched(setReptiles);
-  reptileFeeder.onReptileTypesFetched(setReptileTypes);
-  reptileFeeder.onReptileFeedingBoxesFetched(setReptilesFeedingBoxes);
-  reptileFeeder.onReptileFeedingBoxIndexesFetched(setReptilesFeedingBoxIndexes);
-  reptileFeeder.onReptileFeedingLogsFetched(setReptileFeedingLogs);
+  reptileRepository.onReptilesFetched(setReptiles);
+  reptileRepository.onReptileTypesFetched(setReptileTypes);
+  reptileRepository.onReptileFeedingBoxesFetched(setReptilesFeedingBoxes);
+  reptileRepository.onReptileFeedingBoxIndexesFetched(setReptilesFeedingBoxIndexes);
+  reptileRepository.onReptileFeedingLogsFetched(setReptileFeedingLogs);
 
   const startLoading = () => setLoading(true);
   const stopLoading = () => setLoading(false);
@@ -31,7 +31,7 @@ export const useReptileFeeder = () => {
   const fetchAll = async () => {
     try {
       startLoading();
-      await reptileFeeder.fetchAll();
+      await reptileRepository.fetchAll();
     } catch (e) {
       console.error('Reptile Feeder Fetch Error: ', e);
     } finally {
@@ -50,7 +50,7 @@ export const useReptileFeeder = () => {
     reptileFeedingBoxes,
     reptileFeedingBoxIndexes,
     reptileFeedingLogs,
-    reptileFeeder,
-    currentUser: reptileFeeder.currentUser,
+    reptileRepository: reptileRepository,
+    currentUser: reptileRepository.currentUser,
   };
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import ThemeProvider from './themes/ThemeProvider';
 
 import { Authenticator } from '@aws-amplify/ui-react';
-import { ReptileFeederProvider } from './libs/reptile-feeder/ReptileFeederProvider';
+import { ReptileRepositoryProvider } from './libs/reptile-repository/ReptileRepositoryProvider';
 import { SidebarProvider } from './libs/context/SidebarContext';
 import { useRoutes } from 'react-router-dom';
 import router from './router';
@@ -14,9 +14,9 @@ const App: React.FC = () => {
       <Authenticator>
         <SidebarProvider>
           <Authenticator.Provider>
-            <ReptileFeederProvider>
+            <ReptileRepositoryProvider>
               {content}
-            </ReptileFeederProvider>
+            </ReptileRepositoryProvider>
           </Authenticator.Provider>
         </SidebarProvider>
       </Authenticator>
