@@ -74,7 +74,7 @@ function ModifyReptileFeedingBoxModal(props: ReptileFeedingBoxModificationModalP
   return (
     <Dialog onClose={handleClose} open={open}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <DialogTitle>创建新容器</DialogTitle>
+        <DialogTitle>{ editableReptileFeedingBox ? '修改容器信息' : '创建新容器' }</DialogTitle>
         <DialogContent>
           <Stack spacing={2} sx={{height: 180}}>
             <Controller

@@ -80,7 +80,7 @@ function Reptiles() {
   return (
     <>
       <Helmet>
-        <title>Feeding Box Management</title>
+        <title>尾巴屋爬宠管理平台 - 爬宠管理</title>
       </Helmet>
       <PageTitleWrapper>
         <Grid container justifyContent="space-between" alignItems="center">

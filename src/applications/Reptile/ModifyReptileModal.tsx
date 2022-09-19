@@ -204,7 +204,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
             alignItems="center"
             justifyContent="space-between"
           > <Typography>
-            创建新爬宠
+              { editableReptile ? '修改爬宠信息' : '创建新爬宠' }
             </Typography>
             <IconButton
               edge="start"
