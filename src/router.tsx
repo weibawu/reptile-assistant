@@ -38,11 +38,11 @@ const routes: RouteObject[] = [
         element: <Navigate to="overview" replace />
       },
       {
-        path: 'reptile-feeding-box/management',
+        path: 'reptile-feeding-box/overview',
         element: <FeedingBox />
       },
       {
-        path: 'reptile-feeding-box/overview',
+        path: 'reptile-feeding-box/logs',
         element: <div>开发中 ( ´▽｀)</div>
       },
       {

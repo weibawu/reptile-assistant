@@ -73,8 +73,8 @@ function HeaderMenu() {
       { to: '/reptile-feeding-box/management', 'title': '容器管理' },
     ],
     'reptile': [
-      { to: '/reptile/overview', 'title': '爬宠饲养日志' },
-      { to: '/reptile/management', 'title': '爬宠管理' },
+      { to: '/reptile/overview', 'title': '爬宠管理' },
+      { to: '/reptile/logs', 'title': '饲养日志查询' },
     ],
   };
 

@@ -6,26 +6,24 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Stack,
+  FormControl,
   IconButton,
-  Typography, TextField
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Typography
 } from '@mui/material';
+
 import { Controller, useForm } from 'react-hook-form';
-import {
-  Reptile,
-  ReptileFeedingBox,
-  ReptileFeedingBoxIndexCollection,
-  ReptileGenderType,
-  ReptileType
-} from '../../models';
-import Select from 'react-select';
-import { useAuthenticator } from '@aws-amplify/ui-react';
+import { Reptile, ReptileFeedingBoxIndexCollection, ReptileFeedingBoxType, ReptileGenderType } from '../../models';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import CloseIcon from '@mui/icons-material/Close';
-import { DatePicker } from '@mui/lab';
+import { DatePicker } from '@mui/x-date-pickers';
 import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
 
 export interface ReptileModificationModalProps {
@@ -43,8 +41,8 @@ interface ReptileCreationFormProps {
   birthdate: string,
   weight: number,
   genies: string,
-  reptileFeedingBox: AnySelectOption<ReptileFeedingBox>,
-  reptileType: AnySelectOption<ReptileType>,
+  reptileFeedingBoxId: AnySelectOption<string>,
+  reptileTypeId: AnySelectOption<string>,
   verticalIndex: number,
   horizontalIndex: number
 }
@@ -60,17 +58,17 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
     currentUser
   } = useReptileRepository();
 
-  const reptileTypeOptions: AnySelectOption<ReptileType>[] = reptileTypes.map(
+  const reptileTypeOptions: AnySelectOption<string>[] = reptileTypes.map(
     reptileTypeModel => ({
       label: reptileTypeModel.name!,
-      value: reptileTypeModel
+      value: reptileTypeModel.id
     })
   );
 
-  const reptileFeedingBoxOptions: AnySelectOption<ReptileFeedingBox>[] = reptileFeedingBoxes.map(
+  const reptileFeedingBoxOptions: AnySelectOption<string>[] = reptileFeedingBoxes.map(
     reptileFeedingBox => ({
       label: reptileFeedingBox.name!,
-      value: reptileFeedingBox
+      value: reptileFeedingBox.id
     })
   );
 
@@ -82,31 +80,31 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
     { label: '未知', value: ReptileGenderType.UNKNOWN }
   ];
 
-  // const validationSchema = yup.object({
-  //   name: yup.string().max(40),
-  //   nickname: yup.string().required().max(20),
-  //   verticalIndex: yup.number(),
-  //   horizontalIndex: yup.number(),
-  //   reptileType: yup.object().required(),
-  //   reptileFeedingBox: yup.object().required()
-  // });
+  const validationSchema = yup.object({
+    name: yup.string().required().max(40),
+    nickname: yup.string().max(40),
+    verticalIndex: yup.number(),
+    horizontalIndex: yup.number(),
+    weight: yup.number(),
+    gender: yup.object({value: yup.string().required()}),
+    reptileTypeId: yup.object({value: yup.string().required()}),
+    reptileFeedingBoxId: yup.object({value: yup.string().required()}),
+  });
 
-  const { user } = useAuthenticator(ctx => [ctx.user]);
-
-  const { control, handleSubmit, reset, setValue, watch, formState: { errors } } = useForm<ReptileCreationFormProps>({
-    // defaultValues: {
-    //   name: undefined,
-    //   nickname: undefined,
-    //   gender: undefined,
-    //   birthdate: `${new Date().toISOString().slice(0, 10)}`,
-    //   weight: 0,
-    //   genies: '',
-    //   reptileFeedingBox: undefined,
-    //   reptileType: undefined,
-    //   verticalIndex: 0,
-    //   horizontalIndex: 0
-    // },
-    // resolver: yupResolver(validationSchema)
+  const { control, handleSubmit, reset, setValue, getValues, watch, formState: { errors } } = useForm<ReptileCreationFormProps>({
+    defaultValues: {
+      name: '',
+      nickname: '',
+      gender: reptileGenderOptions[0],
+      birthdate: `${new Date().toISOString().slice(0, 10)}`,
+      weight: '' as unknown as number,
+      genies: '',
+      reptileFeedingBoxId: reptileFeedingBoxOptions[0] ?? { value: '' } as AnySelectOption<string>,
+      reptileTypeId: reptileTypeOptions[0] ?? { value: '' } as AnySelectOption<string>,
+      verticalIndex: '' as unknown as number,
+      horizontalIndex: '' as unknown as number
+    },
+    resolver: yupResolver(validationSchema)
   });
 
   const handleClose = () => {
@@ -114,23 +112,60 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
     onClose();
   };
 
+  const handleEditableReptilePreset = () => {
+    editableReptile?.name && setValue('name', editableReptile.name);
+    editableReptile?.nickname && setValue('nickname', editableReptile.nickname);
+    editableReptile?.birthdate && setValue('birthdate', editableReptile.birthdate);
+    editableReptile?.weight && setValue('weight', editableReptile.weight);
+    editableReptile?.genies?.join('/') && setValue('genies', editableReptile.genies.join('/'));
+
+    const genderPreset = reptileGenderOptions.find(_ => _.value === editableReptile?.gender);
+    genderPreset && setValue('gender', genderPreset);
+
+    const reptileFeedingBoxPreset = reptileFeedingBoxOptions.find((_) => _.value === editableReptile?.reptileFeedingBoxID);
+    reptileFeedingBoxPreset && setValue('reptileFeedingBoxId', reptileFeedingBoxPreset);
+
+    const reptileTypePreset = reptileTypeOptions.find((_) => _.value === editableReptile?.reptileTypeID);
+    reptileTypePreset && setValue('reptileTypeId', reptileTypePreset);
+
+    const verticalIndexPreset = reptileFeedingBoxIndexes.find((_) => _.id === editableReptile?.reptileFeedingBoxIndexCollectionID)?.verticalIndex;
+    verticalIndexPreset && setValue('verticalIndex', verticalIndexPreset);
+
+    const horizontalIndexPreset = reptileFeedingBoxIndexes.find((_) => _.id === editableReptile?.reptileFeedingBoxIndexCollectionID)?.horizontalIndex;
+    horizontalIndexPreset && setValue('horizontalIndex', horizontalIndexPreset);
+  };
+
+  const handleReptileFeedingBoxSelectionChange: () => void = () => {
+    const selectedReptileFeedingBoxId = watch('reptileFeedingBoxId.value');
+    const reptileFeedingBoxType = reptileFeedingBoxes.find(
+      reptileFeedingBox => reptileFeedingBox.id === selectedReptileFeedingBoxId
+    );
+    if (reptileFeedingBoxType && reptileFeedingBoxType.type === ReptileFeedingBoxType.BOX) {
+      setValue('horizontalIndex', 0);
+      setValue('verticalIndex', 0);
+    } else {
+      !getValues('horizontalIndex') && setValue('horizontalIndex', '' as unknown as number);
+      !getValues('verticalIndex') && setValue('verticalIndex', '' as unknown as number);
+    }
+  };
+
   const onSubmit = async (form: ReptileCreationFormProps) => {
     try {
       const reptileFeedingBoxIndexExisted = await reptileRepository
         .findExactFeedingBoxIndexByHorizontalIndexAndVerticalIndex(
-          form.reptileFeedingBox.value.id,
-          form.verticalIndex,
-          form.horizontalIndex
+          form.reptileFeedingBoxId.value,
+          Number(form.verticalIndex),
+          Number(form.horizontalIndex)
         );
 
       if (!reptileFeedingBoxIndexExisted) {
         await reptileRepository.createReptileFeedingBoxIndex(
           new ReptileFeedingBoxIndexCollection(
             {
-              verticalIndex: form.verticalIndex,
-              horizontalIndex: form.horizontalIndex,
-              reptileFeedingBoxID: form.reptileFeedingBox.value.id,
-              userID: currentUser.username,
+              verticalIndex: Number(form.verticalIndex),
+              horizontalIndex: Number(form.horizontalIndex),
+              reptileFeedingBoxID: form.reptileFeedingBoxId.value,
+              userID: currentUser.username
             })
         );
       } else {
@@ -141,8 +176,8 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
           birthdate: new Date(form.birthdate).toISOString().slice(0, 10),
           weight: Number(form.weight),
           genies: form.genies.split('/'),
-          userID: user.username,
-          reptileTypeID: form.reptileType.value.id,
+          userID: currentUser.username,
+          reptileTypeID: form.reptileTypeId.value,
           reptileFeedingBoxID: reptileFeedingBoxIndexExisted.reptileFeedingBoxID,
           reptileFeedingBoxIndexCollectionID: reptileFeedingBoxIndexExisted.id
         });
@@ -156,30 +191,9 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
     }
   };
 
-  const handleEditableReptilePreset = () => {
-    editableReptile?.name && setValue('name', editableReptile.name);
-    editableReptile?.nickname && setValue('nickname', editableReptile.nickname);
-    editableReptile?.birthdate && setValue('birthdate', editableReptile.birthdate);
-    editableReptile?.weight && setValue('weight', editableReptile.weight);
-    editableReptile?.genies?.join('/') && setValue('genies', editableReptile.genies.join('/'));
-
-    const genderPreset = reptileGenderOptions.find(_ => _.value === editableReptile?.gender);
-    genderPreset && setValue('gender', genderPreset);
-
-    const reptileFeedingBoxPreset = reptileFeedingBoxOptions.find((_) => _.value.id === editableReptile?.reptileFeedingBoxID);
-    reptileFeedingBoxPreset && setValue('reptileFeedingBox', reptileFeedingBoxPreset);
-
-    const reptileTypePreset = reptileTypeOptions.find((_) => _.value.id === editableReptile?.reptileTypeID);
-    reptileTypePreset && setValue('reptileType', reptileTypePreset);
-
-    const verticalIndexPreset = reptileFeedingBoxIndexes.find((_) => _.id === editableReptile?.reptileFeedingBoxIndexCollectionID)?.verticalIndex;
-    verticalIndexPreset && setValue('verticalIndex', verticalIndexPreset);
-
-    const horizontalIndexPreset = reptileFeedingBoxIndexes.find((_) => _.id === editableReptile?.reptileFeedingBoxIndexCollectionID)?.horizontalIndex;
-    horizontalIndexPreset && setValue('horizontalIndex', horizontalIndexPreset);
-  };
-
   useEffect(handleEditableReptilePreset, [editableReptile]);
+
+  useEffect(handleReptileFeedingBoxSelectionChange, [watch('reptileFeedingBoxId.value')]);
 
   return (
     <Dialog onClose={handleClose} open={open}>
@@ -227,19 +241,34 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
                 />
               }
             />
-            <Controller
-              name="gender"
-              control={control}
-              render={
-                ({ field }) => (
-                  <Select
-                    {...field}
-                    placeholder={'性别'}
-                    options={reptileGenderOptions}
-                  />
-                )
-              }
-            />
+            <FormControl>
+              <InputLabel id="gender">性别</InputLabel>
+              <Controller
+                render={
+                  () => <Select
+                    onChange={e => setValue('gender', reptileGenderOptions.find(reptileTypeOption => reptileTypeOption.value === e.target.value)!, {shouldValidate: true})}
+                    value={getValues('gender.value')}
+                    labelId="gender"
+                    label="性别"
+                    error={!!errors.gender}
+                  >
+                    {
+                      reptileGenderOptions.map(
+                        reptileGenderOption => (
+                          <MenuItem
+                            key={reptileGenderOption.label}
+                            value={reptileGenderOption.value}>
+                            {reptileGenderOption.label}
+                          </MenuItem>
+                        )
+                      )
+                    }
+                  </Select>
+                }
+                name={'gender'}
+                control={control}
+              />
+            </FormControl>
             <Controller
               name="genies"
               control={control}
@@ -264,35 +293,64 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
                 />
               }
             />
-
-            <Controller
-              name="reptileType"
-              control={control}
-              render={
-                ({ field }) => (
-                  <Select
-                    placeholder={'种类'}
-                    {...field}
-                    options={reptileTypeOptions}
-                  />
-                )
-              }
-            />
-            <Controller
-              name="reptileFeedingBox"
-              control={control}
-              render={
-                ({ field }) => (
-                  <Select
-                    placeholder={'爬柜'}
-                    {...field}
-                    options={reptileFeedingBoxOptions}
-                  />
-                )
-              }
-            />
+            <FormControl>
+              <InputLabel id="reptileType">科/属</InputLabel>
+              <Controller
+                render={
+                  () => <Select
+                    onChange={e => setValue('reptileTypeId', reptileTypeOptions.find(reptileTypeOption => reptileTypeOption.value === e.target.value)!, {shouldValidate: true})}
+                    value={getValues('reptileTypeId.value')}
+                    labelId="reptileType"
+                    label="科/属"
+                    error={!!errors.reptileTypeId}
+                  >
+                    {
+                      reptileTypeOptions.map(
+                        reptileTypeOption => (
+                          <MenuItem
+                            key={reptileTypeOption.label}
+                            value={reptileTypeOption.value}>
+                            {reptileTypeOption.label}
+                          </MenuItem>
+                        )
+                      )
+                    }
+                  </Select>
+                }
+                name={'reptileTypeId'}
+                control={control}
+              />
+            </FormControl>
+            <FormControl>
+              <InputLabel id="reptileFeedingBox">所属饲养容器</InputLabel>
+              <Controller
+                render={
+                  () => <Select
+                    onChange={e => setValue('reptileFeedingBoxId', reptileFeedingBoxOptions.find(reptileFeedingBoxOption => reptileFeedingBoxOption.value === e.target.value)!, {shouldValidate: true})}
+                    value={getValues('reptileFeedingBoxId.value')}
+                    labelId="reptileFeedingBox"
+                    label="所属饲养容器"
+                    error={!!errors.reptileFeedingBoxId}
+                  >
+                    {
+                      reptileFeedingBoxOptions.map(
+                        reptileFeedingBoxOption => (
+                          <MenuItem
+                            key={reptileFeedingBoxOption.label}
+                            value={reptileFeedingBoxOption.value}>
+                            {reptileFeedingBoxOption.label}
+                          </MenuItem>
+                        )
+                      )
+                    }
+                  </Select>
+                }
+                name={'reptileFeedingBoxId'}
+                control={control}
+              />
+            </FormControl>
             {
-              watch().reptileFeedingBox?.value.type === 'CABINET'
+              reptileFeedingBoxes.find(reptileFeedingBox => reptileFeedingBox.id === watch().reptileFeedingBoxId?.value)?.type === 'CABINET'
                 ? <Controller
                   name="horizontalIndex"
                   control={control}
@@ -308,7 +366,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
                 : null
             }
             {
-              watch().reptileFeedingBox?.value.type === 'CABINET'
+              reptileFeedingBoxes.find(reptileFeedingBox => reptileFeedingBox.id === watch().reptileFeedingBoxId?.value)?.type === 'CABINET'
                 ? <Controller
                   name="verticalIndex"
                   control={control}

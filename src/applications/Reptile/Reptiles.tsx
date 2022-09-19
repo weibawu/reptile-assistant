@@ -55,12 +55,22 @@ function Reptiles() {
     toggleModal();
   };
 
+  const handleEditableReptileModalClose = () => {
+    setEditableReptile(undefined);
+    closeModal();
+  };
+
   const handleViewableReptileLogModalOpen = (reptile: Reptile) => {
     setViewableLogReptile(reptile);
     toggleReptileFeedingLogTableModal();
   };
 
-  const handleDeleteReptiles = async (reptileIds: string[]) => {
+  const handleViewableReptileLogModalClose = () => {
+    setViewableLogReptile(undefined);
+    closeReptileFeedingLogTableModal();
+  };
+
+  const handleReptilesDelete = async (reptileIds: string[]) => {
     for await (const reptileId of reptileIds) {
       await reptileRepository.removeReptile(reptileId);
     }
@@ -111,7 +121,7 @@ function Reptiles() {
                 reptileFeedingBoxIndexes={reptileFeedingBoxIndexes}
                 onLogShowing={handleViewableReptileLogModalOpen}
                 onReptileEditing={handleModifyReptileModalOpen}
-                onReptilesDeleting={handleDeleteReptiles}
+                onReptilesDeleting={handleReptilesDelete}
               />
             </Card>
           </Grid>
@@ -120,12 +130,12 @@ function Reptiles() {
       <Footer />
       <ReptileFeedingLogTableModal
         open={ReptileFeedingLogTableModalToggle}
-        onClose={closeReptileFeedingLogTableModal}
+        onClose={handleViewableReptileLogModalClose}
         viewableLogReptile={viewableLogReptile}
       />
       <ModifyReptileModal
         open={ModalToggle}
-        onClose={closeModal}
+        onClose={handleEditableReptileModalClose}
         editableReptile={editableReptile}
       />
     </>

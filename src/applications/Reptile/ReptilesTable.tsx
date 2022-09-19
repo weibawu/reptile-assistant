@@ -83,7 +83,7 @@ const getTextLabel = (text: string): JSX.Element => {
   const index = generateHashNumberInRange(text, labelColorList.length);
   const color = labelColorList[index] as 'primary' | 'black' | 'secondary' | 'error' | 'warning' | 'success' | 'info' | undefined;
 
-  return <Label color={color}>{text}</Label>;
+  return <Label key={text} color={color}>{text}</Label>;
 };
 
 const insertDefaultOptions: (options: AnyFilterOption[]) => AnyFilterOption[] = (options) => ([

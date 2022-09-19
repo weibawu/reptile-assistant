@@ -29,18 +29,23 @@ function ReptileFeedingBoxes() {
       ? currentUser.attributes.email
       : '新朋友';
 
-  const handleDeleteFeedingBoxes = async (feedingBoxIds: string[]) => {
+  const handleFeedingBoxesDelete = async (feedingBoxIds: string[]) => {
     for await (const feedingBoxId of feedingBoxIds) {
       await reptileRepository.removeReptileFeedingBox(feedingBoxId);
     }
     await reptileRepository.fetchAll();
   };
 
-  const handleOpenFeedingBoxModal = (reptileFeedingBox: ReptileFeedingBox | undefined) => {
+  const handleReptileFeedingBoxModalOpen = (reptileFeedingBox: ReptileFeedingBox | undefined) => {
     if (reptileFeedingBox) {
       setEditableReptileFeedingBox(reptileFeedingBox);
     }
     toggleModal();
+  };
+
+  const handleModifyReptileFeedingBoxModalClose = () => {
+    setEditableReptileFeedingBox(undefined);
+    closeModal();
   };
 
   return (
@@ -79,8 +84,8 @@ function ReptileFeedingBoxes() {
             <Card>
               <ReptileFeedingBoxesTable
                 reptileFeedingBoxes={reptileFeedingBoxes}
-                onReptileFeedingBoxEditing={handleOpenFeedingBoxModal}
-                onReptileFeedingBoxesDeleting={handleDeleteFeedingBoxes}
+                onReptileFeedingBoxEditing={handleReptileFeedingBoxModalOpen}
+                onReptileFeedingBoxesDeleting={handleFeedingBoxesDelete}
               />
             </Card>
           </Grid>
@@ -89,7 +94,7 @@ function ReptileFeedingBoxes() {
       <Footer />
       <ModifyFeedingBoxModal
         open={ModalToggle}
-        onClose={closeModal}
+        onClose={handleModifyReptileFeedingBoxModalClose}
         editableReptileFeedingBox={editableReptileFeedingBox}
       />
     </>
