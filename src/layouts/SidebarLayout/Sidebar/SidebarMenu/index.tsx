@@ -166,7 +166,7 @@ function SidebarMenu() {
           component="div"
           subheader={
             <ListSubheader component="div" disableSticky>
-              Management
+              应用
             </ListSubheader>
           }
         >
@@ -177,10 +177,10 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="reptile-feeding-box"
+                  to="feeding-box"
                   startIcon={<TableChartTwoToneIcon />}
                 >
-                  我的饲养容器
+                  饲养容器
                 </Button>
               </ListItem>
               <ListItem component="div">
@@ -191,7 +191,7 @@ function SidebarMenu() {
                   to="reptile"
                   startIcon={<TableChartTwoToneIcon />}
                 >
-                  我的爬宠
+                  爬宠
                 </Button>
               </ListItem>
             </List>

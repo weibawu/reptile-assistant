@@ -32,18 +32,18 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '',
-        element: <Navigate to="reptile-feeding-box" replace />
+        element: <Navigate to="feeding-box" replace />
       },
       {
-        path: 'reptile-feeding-box',
+        path: 'feeding-box',
         element: <Navigate to="overview" replace />
       },
       {
-        path: 'reptile-feeding-box/overview',
+        path: 'feeding-box/management',
         element: <ReptileFeedingBox />
       },
       {
-        path: 'reptile-feeding-box/logs',
+        path: 'feeding-box/overview',
         element: <div>开发中 ( ´▽｀)</div>
       },
       {

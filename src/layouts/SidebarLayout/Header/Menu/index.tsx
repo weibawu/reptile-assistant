@@ -1,15 +1,12 @@
+import React from 'react';
 import {
   Box,
   List,
-  ListItem,
   ListItemText,
-  Menu,
-  MenuItem
+  ListItem
 } from '@mui/material';
-import React, { useRef, useState } from 'react';
 import {NavLink, useLocation} from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 
 const ListWrapper = styled(Box)(
   ({ theme }) => `
@@ -62,15 +59,15 @@ const ListWrapper = styled(Box)(
 `
 );
 
-type ParentPath = 'reptile-feeding-box' | 'reptile'
+type ParentPath = 'feeding-box' | 'reptile'
 
 function HeaderMenu() {
   const location = useLocation();
   const parentPath = location.pathname.split('/')[1] as ParentPath;
   const routerListMap = {
-    'reptile-feeding-box': [
-      { to: '/reptile-feeding-box/overview', 'title': '饲养情况概览' },
-      { to: '/reptile-feeding-box/management', 'title': '容器管理' },
+    'feeding-box': [
+      { to: '/feeding-box/overview', 'title': '饲养情况概览' },
+      { to: '/feeding-box/management', 'title': '容器管理' },
     ],
     'reptile': [
       { to: '/reptile/overview', 'title': '爬宠管理' },
@@ -93,6 +90,7 @@ function HeaderMenu() {
           {
             routerList.map((router) =>
               <ListItem
+                button
                 key={router.title}
                 classes={{ root: 'MuiListItem-indicators' }}
                 component={NavLink}
