@@ -95,12 +95,12 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
     defaultValues: {
       name: '',
       nickname: '',
-      gender: reptileGenderOptions[0],
+      gender: { value: '' } as AnySelectOption<any>,
       birthdate: `${new Date().toISOString().slice(0, 10)}`,
       weight: '' as unknown as number,
       genies: '',
-      reptileFeedingBoxId: reptileFeedingBoxOptions[0] ?? { value: '' } as AnySelectOption<string>,
-      reptileTypeId: reptileTypeOptions[0] ?? { value: '' } as AnySelectOption<string>,
+      reptileFeedingBoxId: { value: '' } as AnySelectOption<string>,
+      reptileTypeId: { value: '' } as AnySelectOption<string>,
       verticalIndex: '' as unknown as number,
       horizontalIndex: '' as unknown as number
     },

@@ -92,25 +92,21 @@ function ReptileFeedingLogs() {
         >
           <Grid item xs={12}>
             <Card>
-              <FeedingLogsTable
-                reptiles={reptiles}
-                reptileTypes={reptileTypes}
-                reptileFeedingBoxes={reptileFeedingBoxes}
-                reptileFeedingBoxIndexes={reptileFeedingBoxIndexes}
-                reptileFeedingLogs={reptileFeedingLogs}
-                onReptileFeedingLogEditing={handleModifyReptileFeedingLogModalOpen}
-                onReptileFeedingLogsDeleting={handleReptileFeedingLogsDelete}
-              />
+              {/*<FeedingLogsTable*/}
+              {/*  reptiles={reptiles}*/}
+              {/*  reptileTypes={reptileTypes}*/}
+              {/*  reptileFeedingBoxes={reptileFeedingBoxes}*/}
+              {/*  reptileFeedingBoxIndexes={reptileFeedingBoxIndexes}*/}
+              {/*  reptileFeedingLogs={reptileFeedingLogs}*/}
+              {/*  onReptileFeedingLogEditing={handleModifyReptileFeedingLogModalOpen}*/}
+              {/*  onReptileFeedingLogsDeleting={handleReptileFeedingLogsDelete}*/}
+              {/*/>*/}
             </Card>
           </Grid>
         </Grid>
       </Container>
       <Footer/>
       <ModifyFeedingLogModal
-        reptiles={reptiles}
-        reptileTypes={reptileTypes}
-        reptileFeedingBoxes={reptileFeedingBoxes}
-        reptileFeedingBoxIndexes={reptileFeedingBoxIndexes}
         open={ModalToggle}
         onClose={handleModifyReptileFeedingLogModalClose}
         editableReptileFeedingLog={editableReptileFeedingLog}
