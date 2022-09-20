@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="add reptile name filter">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxesTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/ModifyFeedingLogModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/ModifyFeedingLogModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Menu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Menu/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,26 +33,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "TF_FMT": "false",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "js.linters.configure.manually.selectedeslint": "true",
-    "last_opened_file_path": "/Users/kuku/Tailhome/repos/reptile-assistant-v2/src/applications/ReptileFeedingLog",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "/Users/kuku/Tailhome/repos/reptile-assistant/node_modules/prettier",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.notifications",
-    "ts.external.directory.path": "/Users/kuku/Tailhome/repos/reptile-assistant-v2/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;TF_FMT&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/kuku/Tailhome/repos/reptile-assistant-v2/src/applications/ReptileFeedingLog&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/kuku/Tailhome/repos/reptile-assistant/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.notifications&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/kuku/Tailhome/repos/reptile-assistant-v2/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/applications/ReptileFeedingLog" />

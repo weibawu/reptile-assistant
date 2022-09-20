@@ -1,0 +1,232 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"b0009fdb-9969-4c36-8c85-cc96fa6987b2\" name=\"Changes\" comment=\"add reptile name filter\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxContext.tsx\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxContext.tsx\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxes.tsx\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxes.tsx\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxesTable.tsx\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxesTable.tsx\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/applications/ReptileFeedingLog/ModifyFeedingLogModal.tsx\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/applications/ReptileFeedingLog/ModifyFeedingLogModal.tsx\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Menu/index.tsx\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Menu/index.tsx\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/router.tsx\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/router.tsx\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"TypeScript File\" />\n        <option value=\"TypeScript JSX File\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2DxO10cXg19cnlezIi1fOuC0xgT\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"TF_FMT\": \"false\",\n    \"WebServerToolWindowFactoryState\": \"false\",\n    \"dart.analysis.tool.window.visible\": \"false\",\n    \"js.linters.configure.manually.selectedeslint\": \"true\",\n    \"last_opened_file_path\": \"/Users/kuku/Tailhome/repos/reptile-assistant-v2/src/applications/ReptileFeedingLog\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.standard\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.standard\": \"\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"prettierjs.PrettierConfiguration.Package\": \"/Users/kuku/Tailhome/repos/reptile-assistant/node_modules/prettier\",\n    \"settings.editor.selected.configurable\": \"reference.settings.ide.settings.notifications\",\n    \"ts.external.directory.path\": \"/Users/kuku/Tailhome/repos/reptile-assistant-v2/node_modules/typescript/lib\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/src/applications/ReptileFeedingLog\" />\n      <recent name=\"$PROJECT_DIR$/src/applications/ReptileFeedingBox\" />\n      <recent name=\"$PROJECT_DIR$/src/applications/Reptile\" />\n      <recent name=\"$PROJECT_DIR$/src/components/BulkActions\" />\n      <recent name=\"$PROJECT_DIR$/src\" />\n    </key>\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$\" />\n    </key>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"SvnConfiguration\">\n    <configuration>$USER_HOME$/.subversion</configuration>\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"b0009fdb-9969-4c36-8c85-cc96fa6987b2\" name=\"Changes\" comment=\"\" />\n      <created>1661637049885</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1661637049885</updated>\n      <workItem from=\"1661637052663\" duration=\"37699000\" />\n      <workItem from=\"1661855079396\" duration=\"56647000\" />\n      <workItem from=\"1662541166409\" duration=\"36478000\" />\n      <workItem from=\"1663080532192\" duration=\"573000\" />\n      <workItem from=\"1663144276972\" duration=\"88910000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"add gender in table\">\n      <created>1663002729951</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1663002729951</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"fix timezone issue\">\n      <created>1663007774322</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1663007774322</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"add reptile name filtergi\">\n      <created>1663056996695</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1663056996695</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"4\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State>\n              <option name=\"CUSTOM_BOOLEAN_PROPERTIES\">\n                <map>\n                  <entry key=\"Show.Git.Branches\" value=\"true\" />\n                </map>\n              </option>\n              <option name=\"FILTERS\">\n                <map>\n                  <entry key=\"branch\">\n                    <value>\n                      <list>\n                        <option value=\"feature/mvp-version\" />\n                      </list>\n                    </value>\n                  </entry>\n                </map>\n              </option>\n            </State>\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"add gender in table\" />\n    <MESSAGE value=\"fix timezone issue\" />\n    <MESSAGE value=\"add reptile name filter\" />\n    <MESSAGE value=\"add reptile name filter\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"add reptile name filter\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 9ff3e754ea0970f2bdfa280fc48c3dee779f4b03)
++++ b/.idea/workspace.xml	(date 1663676020446)
+@@ -3,12 +3,15 @@
+   <component name="ChangeListManager">
+     <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="add reptile name filter">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxContext.tsx" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxes.tsx" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxesTable.tsx" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/ModifyFeedingLogModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/ModifyFeedingLogModal.tsx" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Menu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Menu/index.tsx" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/public/logo192.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/logo192.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/public/logo512.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/logo512.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/applications/Reptile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/Reptile/index.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/index.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/index.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Userbox/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Userbox/index.tsx" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -47,7 +50,7 @@
+     "WebServerToolWindowFactoryState": "false",
+     "dart.analysis.tool.window.visible": "false",
+     "js.linters.configure.manually.selectedeslint": "true",
+-    "last_opened_file_path": "/Users/kuku/Tailhome/repos/reptile-assistant-v2/src/applications/ReptileFeedingLog",
++    "last_opened_file_path": "/Users/kuku/Tailhome/repos/reptile-assistant-v2/public",
+     "node.js.detected.package.eslint": "true",
+     "node.js.detected.package.standard": "true",
+     "node.js.selected.package.eslint": "(autodetect)",
+@@ -61,11 +64,11 @@
+ }]]></component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
++      <recent name="$PROJECT_DIR$/public" />
+       <recent name="$PROJECT_DIR$/src/applications/ReptileFeedingLog" />
+       <recent name="$PROJECT_DIR$/src/applications/ReptileFeedingBox" />
+       <recent name="$PROJECT_DIR$/src/applications/Reptile" />
+       <recent name="$PROJECT_DIR$/src/components/BulkActions" />
+-      <recent name="$PROJECT_DIR$/src" />
+     </key>
+     <key name="MoveFile.RECENT_KEYS">
+       <recent name="$PROJECT_DIR$" />
+@@ -86,7 +89,7 @@
+       <workItem from="1661855079396" duration="56647000" />
+       <workItem from="1662541166409" duration="36478000" />
+       <workItem from="1663080532192" duration="573000" />
+-      <workItem from="1663144276972" duration="88910000" />
++      <workItem from="1663144276972" duration="89485000" />
+     </task>
+     <task id="LOCAL-00001" summary="add gender in table">
+       <created>1663002729951</created>
+Index: src/applications/ReptileFeedingLog/index.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react';\nimport ReptileFeedingLogs from './ReptileFeedingLogs';\nimport { ModalProvider } from './ModalContext';\nimport { Helmet } from 'react-helmet-async';\nimport { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';\nimport { LocalizationProvider } from '@mui/x-date-pickers';\nimport { ReptileFeedingLogProvider } from './ReptileFeedingLogContext';\n\nconst ApplicationsReptileFeedingLog: React.FC = () => (\n  <>\n    <Helmet>\n      <title>尾巴屋爬宠管理平台 - 饲养日志查询</title>\n    </Helmet>\n    <LocalizationProvider dateAdapter={AdapterDateFns}>\n      <ModalProvider>\n        <ReptileFeedingLogProvider>\n          <ReptileFeedingLogs/>\n        </ReptileFeedingLogProvider>\n      </ModalProvider>\n    </LocalizationProvider>\n  </>\n);\n\nexport default ApplicationsReptileFeedingLog;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/applications/ReptileFeedingLog/index.tsx b/src/applications/ReptileFeedingLog/index.tsx
+--- a/src/applications/ReptileFeedingLog/index.tsx	(revision 9ff3e754ea0970f2bdfa280fc48c3dee779f4b03)
++++ b/src/applications/ReptileFeedingLog/index.tsx	(date 1663675849854)
+@@ -5,19 +5,22 @@
+ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+ import { LocalizationProvider } from '@mui/x-date-pickers';
+ import { ReptileFeedingLogProvider } from './ReptileFeedingLogContext';
++import { Authenticator } from '@aws-amplify/ui-react';
+ 
+ const ApplicationsReptileFeedingLog: React.FC = () => (
+   <>
+-    <Helmet>
+-      <title>尾巴屋爬宠管理平台 - 饲养日志查询</title>
+-    </Helmet>
+-    <LocalizationProvider dateAdapter={AdapterDateFns}>
+-      <ModalProvider>
+-        <ReptileFeedingLogProvider>
+-          <ReptileFeedingLogs/>
+-        </ReptileFeedingLogProvider>
+-      </ModalProvider>
+-    </LocalizationProvider>
++    <Authenticator>
++      <Helmet>
++        <title>尾巴屋爬宠管理平台 - 饲养日志查询</title>
++      </Helmet>
++      <LocalizationProvider dateAdapter={AdapterDateFns}>
++        <ModalProvider>
++          <ReptileFeedingLogProvider>
++            <ReptileFeedingLogs/>
++          </ReptileFeedingLogProvider>
++        </ModalProvider>
++      </LocalizationProvider>
++    </Authenticator>
+   </>
+ );
+ 
+Index: src/applications/Reptile/index.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import Reptiles from './Reptiles';\nimport { Helmet } from 'react-helmet-async';\nimport { ModalProvider } from './ModalContext';\nimport {ModalProvider as ReptileFeedingLogModalProvider } from '../ReptileFeedingLog/ModalContext';\nimport {ReptileFeedingLogTableModalProvider} from './ReptileFeedingLogTableModalContext';\nimport React from 'react';\nimport { LocalizationProvider } from '@mui/x-date-pickers';\nimport { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';\nimport { ReptileFeedingLogProvider } from '../ReptileFeedingLog/ReptileFeedingLogContext';\nimport { ReptileProvider } from './ReptileContext';\n\nconst ApplicationsReptiles = () =>(\n  <>\n    <Helmet>\n      <title>尾巴屋爬宠管理平台 - 爬宠管理</title>\n    </Helmet>\n    <LocalizationProvider dateAdapter={AdapterDateFns}>\n      <ReptileFeedingLogModalProvider>\n        <ReptileFeedingLogProvider>\n          <ModalProvider>\n            <ReptileFeedingLogTableModalProvider>\n              <ReptileProvider>\n                <Reptiles/>\n              </ReptileProvider>\n            </ReptileFeedingLogTableModalProvider>\n          </ModalProvider>\n        </ReptileFeedingLogProvider>\n      </ReptileFeedingLogModalProvider>\n    </LocalizationProvider>\n  </>\n);\n\nexport default ApplicationsReptiles;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/applications/Reptile/index.tsx b/src/applications/Reptile/index.tsx
+--- a/src/applications/Reptile/index.tsx	(revision 9ff3e754ea0970f2bdfa280fc48c3dee779f4b03)
++++ b/src/applications/Reptile/index.tsx	(date 1663675849868)
+@@ -8,25 +8,28 @@
+ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+ import { ReptileFeedingLogProvider } from '../ReptileFeedingLog/ReptileFeedingLogContext';
+ import { ReptileProvider } from './ReptileContext';
++import { Authenticator } from "@aws-amplify/ui-react";
+ 
+ const ApplicationsReptiles = () =>(
+   <>
+     <Helmet>
+       <title>尾巴屋爬宠管理平台 - 爬宠管理</title>
+     </Helmet>
+-    <LocalizationProvider dateAdapter={AdapterDateFns}>
+-      <ReptileFeedingLogModalProvider>
+-        <ReptileFeedingLogProvider>
+-          <ModalProvider>
+-            <ReptileFeedingLogTableModalProvider>
+-              <ReptileProvider>
+-                <Reptiles/>
+-              </ReptileProvider>
+-            </ReptileFeedingLogTableModalProvider>
+-          </ModalProvider>
+-        </ReptileFeedingLogProvider>
+-      </ReptileFeedingLogModalProvider>
+-    </LocalizationProvider>
++    <Authenticator>
++      <LocalizationProvider dateAdapter={AdapterDateFns}>
++        <ReptileFeedingLogModalProvider>
++          <ReptileFeedingLogProvider>
++            <ModalProvider>
++              <ReptileFeedingLogTableModalProvider>
++                <ReptileProvider>
++                  <Reptiles/>
++                </ReptileProvider>
++              </ReptileFeedingLogTableModalProvider>
++            </ModalProvider>
++          </ReptileFeedingLogProvider>
++        </ReptileFeedingLogModalProvider>
++      </LocalizationProvider>
++    </Authenticator>
+   </>
+ );
+ 
+Index: src/App.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react';\nimport ThemeProvider from './themes/ThemeProvider';\n\nimport { Authenticator } from '@aws-amplify/ui-react';\nimport { ReptileRepositoryProvider } from './libs/reptile-repository/ReptileRepositoryProvider';\nimport { SidebarProvider } from './libs/context/SidebarContext';\nimport { useRoutes } from 'react-router-dom';\nimport router from './router';\n\nconst App: React.FC = () => {\n  const content = useRoutes(router);\n  return (\n    <ThemeProvider>\n      <Authenticator>\n        <SidebarProvider>\n          <Authenticator.Provider>\n            <ReptileRepositoryProvider>\n              {content}\n            </ReptileRepositoryProvider>\n          </Authenticator.Provider>\n        </SidebarProvider>\n      </Authenticator>\n    </ThemeProvider>\n  );\n};\n\nexport default App;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/App.tsx b/src/App.tsx
+--- a/src/App.tsx	(revision 9ff3e754ea0970f2bdfa280fc48c3dee779f4b03)
++++ b/src/App.tsx	(date 1663675903103)
+@@ -10,17 +10,15 @@
+ const App: React.FC = () => {
+   const content = useRoutes(router);
+   return (
+-    <ThemeProvider>
+-      <Authenticator>
++    <Authenticator.Provider>
++      <ThemeProvider>
+         <SidebarProvider>
+-          <Authenticator.Provider>
+-            <ReptileRepositoryProvider>
+-              {content}
+-            </ReptileRepositoryProvider>
+-          </Authenticator.Provider>
++          <ReptileRepositoryProvider>
++            {content}
++          </ReptileRepositoryProvider>
+         </SidebarProvider>
+-      </Authenticator>
+-    </ThemeProvider>
++      </ThemeProvider>
++    </Authenticator.Provider>
+   );
+ };
+ 
+Index: src/applications/ReptileFeedingBox/index.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react';\nimport ReptileFeedingBoxes from './ReptileFeedingBoxes';\nimport { ModalProvider } from './ModalContext';\nimport { Helmet } from 'react-helmet-async';\nimport { ReptileFeedingBoxProvider } from './ReptileFeedingBoxContext';\n\nconst ApplicationsReptileFeedingBox: React.FC = () => (\n  <>\n    <Helmet>\n      <title>尾巴屋爬宠管理平台 - 容器管理</title>\n    </Helmet>\n    <ModalProvider>\n      <ReptileFeedingBoxProvider>\n        <ReptileFeedingBoxes/>\n      </ReptileFeedingBoxProvider>\n    </ModalProvider>\n  </>\n);\n\nexport default ApplicationsReptileFeedingBox;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/applications/ReptileFeedingBox/index.tsx b/src/applications/ReptileFeedingBox/index.tsx
+--- a/src/applications/ReptileFeedingBox/index.tsx	(revision 9ff3e754ea0970f2bdfa280fc48c3dee779f4b03)
++++ b/src/applications/ReptileFeedingBox/index.tsx	(date 1663675849859)
+@@ -3,17 +3,20 @@
+ import { ModalProvider } from './ModalContext';
+ import { Helmet } from 'react-helmet-async';
+ import { ReptileFeedingBoxProvider } from './ReptileFeedingBoxContext';
++import { Authenticator } from '@aws-amplify/ui-react';
+ 
+ const ApplicationsReptileFeedingBox: React.FC = () => (
+   <>
+-    <Helmet>
+-      <title>尾巴屋爬宠管理平台 - 容器管理</title>
+-    </Helmet>
+-    <ModalProvider>
+-      <ReptileFeedingBoxProvider>
+-        <ReptileFeedingBoxes/>
+-      </ReptileFeedingBoxProvider>
+-    </ModalProvider>
++    <Authenticator>
++      <Helmet>
++        <title>尾巴屋爬宠管理平台 - 容器管理</title>
++      </Helmet>
++      <ModalProvider>
++        <ReptileFeedingBoxProvider>
++          <ReptileFeedingBoxes/>
++        </ReptileFeedingBoxProvider>
++      </ModalProvider>
++    </Authenticator>
+   </>
+ );
+ 
