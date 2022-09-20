@@ -6,7 +6,7 @@ import PageTitleWrapper from '../../components/PageTitleWrapper';
 import Footer from '../../components/Footer';
 
 import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
-import { ModalContext } from '../../libs/context/ModalContext';
+import { ModalContext } from './ModalContext';
 
 import ModifyFeedingBoxModal from './ModifyReptileFeedingBoxModal';
 import ReptileFeedingBoxesTable from './ReptileFeedingBoxesTable';

@@ -1,34 +1,28 @@
-import React, {
+import React, { useEffect } from 'react';
+
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  Input,
-  Box,
   Stack,
   TextField,
-  InputLabel, MenuItem, FormControl, Select
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select
 } from '@mui/material';
-import { Controller, useForm } from 'react-hook-form';
-import {
-  ReptileFeedingBox,
-  ReptileFeedingBoxIndexCollection,
-  ReptileFeedingLog,
-  Reptile,
-  ReptileType, ReptileGenderType
-} from '../../models';
-import { DataStore } from 'aws-amplify';
-import { TextAreaField, useAuthenticator } from '@aws-amplify/ui-react';
+import { DateTimePicker } from '@mui/x-date-pickers';
 
-import * as yup from 'yup';
-import { styled } from '@mui/material/styles';
-import { useEffect } from 'react';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { DatePicker, DateTimePicker } from '@mui/x-date-pickers';
-import { TextArea } from '@aws-amplify/ui-react/dist/types/primitives/TextArea';
 import { deduplicateJSONStringList } from '../../libs/util';
 import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
+
+import { ReptileFeedingLog } from '../../models';
 
 export interface ReptileFeedingLogModificationModalProps {
   open: boolean;
@@ -149,6 +143,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
     editableReptileFeedingLog?.detail && setValue('detail', editableReptileFeedingLog.detail);
 
     const editableReptile = reptiles.find(reptile => reptile.id === editableReptileFeedingLog?.reptileID);
+    console.log(editableReptile);
     const editableReptileBelongedReptileFeedingBox = reptileFeedingBoxes.find(reptileFeedingBox => reptileFeedingBox.id === editableReptile?.reptileFeedingBoxID);
     const editableReptileBelongedReptileFeedingBoxIndex = reptileFeedingBoxIndexes.find(reptileFeedingBoxIndex => reptileFeedingBoxIndex.id === editableReptile?.reptileFeedingBoxIndexCollectionID);
 
@@ -221,12 +216,13 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogTitle>创建新日志</DialogTitle>
         <DialogContent>
-          <Stack spacing={1} sx={{ height: 600, minWidth: 180 }}>
+          <Stack spacing={1} sx={{ height: 600, minWidth: 180, paddingTop: 1 }}>
             <FormControl>
               <InputLabel id="reptileFeedingBoxId">饲养容器</InputLabel>
               <Controller
                 render={
                   () => <Select
+                    disabled={!!editableReptileFeedingLog}
                     onChange={e => setValue('reptileFeedingBoxId', reptileFeedingBoxOptions.find(reptileFeedingBoxOption => reptileFeedingBoxOption.value === e.target.value)!, { shouldValidate: true })}
                     value={watch('reptileFeedingBoxId.value')}
                     labelId="reptileFeedingBoxId"
@@ -256,6 +252,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
                 <Controller
                   render={
                     () => <Select
+                      disabled={!!editableReptileFeedingLog}
                       onChange={e => setValue('reptileFeedingBoxLayerIds', reptileFeedingBoxLayerOptions.find(reptileFeedingBoxLayerOption => reptileFeedingBoxLayerOption.value === e.target.value)!, { shouldValidate: true })}
                       value={watch('reptileFeedingBoxLayerIds.value')}
                       labelId="reptileFeedingBoxLayerIds"
@@ -287,6 +284,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
                 <Controller
                   render={
                     () => <Select
+                      disabled={!!editableReptileFeedingLog}
                       onChange={e => setValue('reptileId', reptileOptions.find(reptileOption => reptileOption.value === e.target.value)!, { shouldValidate: true })}
                       value={watch('reptileId.value')}
                       labelId="reptileId"

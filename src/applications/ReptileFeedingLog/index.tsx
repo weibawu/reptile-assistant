@@ -1,9 +1,10 @@
 import React from 'react';
 import ReptileFeedingLogs from './ReptileFeedingLogs';
-import { ModalProvider } from '../../libs/context/ModalContext';
+import { ModalProvider } from './ModalContext';
 import { Helmet } from 'react-helmet-async';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers';
+import { ReptileFeedingLogProvider } from './ReptileFeedingLogContext';
 
 const ApplicationsReptileFeedingLog: React.FC = () => (
   <>
@@ -12,7 +13,9 @@ const ApplicationsReptileFeedingLog: React.FC = () => (
     </Helmet>
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <ModalProvider>
-        <ReptileFeedingLogs/>
+        <ReptileFeedingLogProvider>
+          <ReptileFeedingLogs/>
+        </ReptileFeedingLogProvider>
       </ModalProvider>
     </LocalizationProvider>
   </>

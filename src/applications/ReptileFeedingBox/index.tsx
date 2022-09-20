@@ -1,6 +1,6 @@
 import React from 'react';
 import ReptileFeedingBoxes from './ReptileFeedingBoxes';
-import { ModalProvider } from '../../libs/context/ModalContext';
+import { ModalProvider } from './ModalContext';
 import { Helmet } from 'react-helmet-async';
 
 const ApplicationsReptileFeedingBox: React.FC = () => (

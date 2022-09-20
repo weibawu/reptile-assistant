@@ -5,7 +5,7 @@ import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { Grid, Container, Typography, Button, Card } from '@mui/material';
 
 import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
-import { ModalContext } from '../../libs/context/ModalContext';
+import { ModalContext } from './ModalContext';
 
 import PageTitleWrapper from '../../components/PageTitleWrapper';
 import Footer from '../../components/Footer';
@@ -67,8 +67,11 @@ function Reptiles() {
   };
 
   const handleViewableReptileLogModalClose = () => {
-    setViewableLogReptile(undefined);
     closeReptileFeedingLogTableModal();
+    // todo try more elegant way to clear viewable log reptile before the modal close(don't use useEffect)
+    setTimeout(() => {
+      setViewableLogReptile(undefined);
+    }, 100);
   };
 
   const handleReptilesDelete = async (reptileIds: string[]) => {

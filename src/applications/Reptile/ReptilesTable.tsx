@@ -1,5 +1,4 @@
-import React, { ChangeEvent, FC, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, useContext, useState } from 'react';
 import {
   Box,
   Card,
@@ -27,17 +26,21 @@ import Label from '../../components/Label';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import LogIcon from '@mui/icons-material/CollectionsBookmark';
+import AddIcon from '@mui/icons-material/Add';
+
 import BulkActions from '../../components/BulkActions';
+
 import {
   Reptile,
   ReptileFeedingBox,
   ReptileFeedingBoxIndexCollection,
-  ReptileFeedingBoxType,
+  ReptileFeedingBoxType, ReptileFeedingLog,
   ReptileType
 } from '../../models';
 import Stack from '@mui/material/Stack';
 import { deduplicateJSONStringList, generateHashNumberInRange } from '../../libs/util';
-import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
+import { ReptileFeedingLogContext } from '../ReptileFeedingLog/ReptileFeedingLogContext';
+import ModifyFeedingLogModal from '../ReptileFeedingLog/ModifyFeedingLogModal';
 
 interface ReptilesTableProps {
   className?: string;
@@ -146,6 +149,13 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
   const [reptileTypeFilters, setReptileTypeFilters] = useState<Filters>({});
   const [reptileNameFilters, setReptileNameFilters] = useState<Filters>({});
   const [reptileFeedingBoxLayerFilters, setReptileFeedingBoxLayerFilters] = useState<Filters>({});
+
+  const  {
+    ModalToggle: ModifyReptileFeedingLogModalToggle,
+    handleModifyReptileFeedingLogModalOpen,
+    handleModifyReptileFeedingLogModalClose,
+    editableReptileFeedingLog,
+  } = useContext(ReptileFeedingLogContext);
 
   const getReptileFeedingBoxLayerName = (reptile: Reptile): string => {
     const reptileFeedingBox = reptileFeedingBoxes.find(
@@ -290,279 +300,301 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
   };
 
   return (
-    <Card>
-      {selectedBulkActions && (
-        <Box flex={1} p={2}>
-          <BulkActions onBulkDeleting={handleBulkDeleting} />
-        </Box>
-      )}
-      {!selectedBulkActions && (
-        <CardHeader
-          action={
-            <Stack direction={'row'} justifyContent={'space-around'} width={500}>
-              <FormControl variant="outlined">
-                <InputLabel>爬柜</InputLabel>
-                <Select
-                  value={reptileFeedingBoxLayerFilters.value || 'all'}
-                  onChange={handleReptileFeedingBoxLayerChange}
-                  label="爬柜"
-                  autoWidth
-                >
-                  {reptileFeedingBoxLayerOptions.map((statusOption) => (
-                    <MenuItem key={statusOption.id} value={statusOption.id}>
-                      {statusOption.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl variant="outlined">
-                <InputLabel>种类</InputLabel>
-                <Select
-                  value={reptileNameFilters.value || 'all'}
-                  onChange={handleReptileNameChange}
-                  label="种类"
-                  autoWidth
-                >
-                  {reptileNameOptions.map((statusOption) => (
-                    <MenuItem key={statusOption.id} value={statusOption.id}>
-                      {statusOption.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl variant="outlined">
-                <InputLabel>所属科</InputLabel>
-                <Select
-                  value={reptileTypeFilters.value || 'all'}
-                  onChange={handleReptileTypeChange}
-                  label="所属科"
-                  autoWidth
-                >
-                  {reptileTypeOptions.map((statusOption) => (
-                    <MenuItem key={statusOption.id} value={statusOption.id}>
-                      {statusOption.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Stack>
-          }
-          title="爬宠管理"
-        />
-      )}
-      <Divider />
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell padding="checkbox">
-                <Checkbox
-                  color="primary"
-                  checked={selectedAllReptiles}
-                  indeterminate={selectedSomeReptiles}
-                  onChange={handleSelectAllReptiles}
-                />
-              </TableCell>
-              <TableCell>品系名</TableCell>
-              <TableCell>性别</TableCell>
-              <TableCell>基因</TableCell>
-              <TableCell>体重(g)</TableCell>
-              <TableCell>出生日期</TableCell>
-              <TableCell>所属科</TableCell>
-              <TableCell>所在爬柜/饲养盒</TableCell>
-              <TableCell>别名</TableCell>
-              <TableCell align="right">操作</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {paginatedReptiles.map((reptile) => {
-              const isReptileSelected = selectedReptiles.includes(
-                reptile.id
-              );
-              return (
-                <TableRow
-                  hover
-                  key={reptile.id}
-                  selected={isReptileSelected}
-                >
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      color="primary"
-                      checked={isReptileSelected}
-                      onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleSelectOneReptile(event, reptile.id)
-                      }
-                      value={isReptileSelected}
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {reptile.name}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {reptile.gender === 'MALE' ? '公' : '母'}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {(reptile.genies ?? []).map(genie => getTextLabel(genie!))}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {reptile.weight}g
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {reptile.birthdate}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    {reptileTypes.find(_ => _.id === reptile.reptileTypeID)?.name}
-                    {/*{getReptileTypeLabel(reptileTypes.find(_ => _.id === reptile.reptileTypeID))}*/}
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {getReptileFeedingBoxTypeLabel(
-                        reptileFeedingBoxes.find(
-                          reptileFeedingBox => reptileFeedingBox.id === reptile.reptileFeedingBoxID
-                        )?.type
-                      )
-                      }
-                      &nbsp;
-                      {
-                        getTextLabel(
+    <>
+      <Card>
+        {selectedBulkActions && (
+          <Box flex={1} p={2}>
+            <BulkActions onBulkDeleting={handleBulkDeleting} />
+          </Box>
+        )}
+        {!selectedBulkActions && (
+          <CardHeader
+            action={
+              <Stack direction={'row'} justifyContent={'space-around'} width={500}>
+                <FormControl variant="outlined">
+                  <InputLabel>爬柜</InputLabel>
+                  <Select
+                    value={reptileFeedingBoxLayerFilters.value || 'all'}
+                    onChange={handleReptileFeedingBoxLayerChange}
+                    label="爬柜"
+                    autoWidth
+                  >
+                    {reptileFeedingBoxLayerOptions.map((statusOption) => (
+                      <MenuItem key={statusOption.id} value={statusOption.id}>
+                        {statusOption.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <FormControl variant="outlined">
+                  <InputLabel>种类</InputLabel>
+                  <Select
+                    value={reptileNameFilters.value || 'all'}
+                    onChange={handleReptileNameChange}
+                    label="种类"
+                    autoWidth
+                  >
+                    {reptileNameOptions.map((statusOption) => (
+                      <MenuItem key={statusOption.id} value={statusOption.id}>
+                        {statusOption.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <FormControl variant="outlined">
+                  <InputLabel>所属科</InputLabel>
+                  <Select
+                    value={reptileTypeFilters.value || 'all'}
+                    onChange={handleReptileTypeChange}
+                    label="所属科"
+                    autoWidth
+                  >
+                    {reptileTypeOptions.map((statusOption) => (
+                      <MenuItem key={statusOption.id} value={statusOption.id}>
+                        {statusOption.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Stack>
+            }
+            title="爬宠管理"
+          />
+        )}
+        <Divider />
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell padding="checkbox">
+                  <Checkbox
+                    color="primary"
+                    checked={selectedAllReptiles}
+                    indeterminate={selectedSomeReptiles}
+                    onChange={handleSelectAllReptiles}
+                  />
+                </TableCell>
+                <TableCell>品系名</TableCell>
+                <TableCell>性别</TableCell>
+                <TableCell>基因</TableCell>
+                <TableCell>体重(g)</TableCell>
+                <TableCell>出生日期</TableCell>
+                <TableCell>所属科</TableCell>
+                <TableCell>所在爬柜/饲养盒</TableCell>
+                <TableCell>别名</TableCell>
+                <TableCell align="right">操作</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {paginatedReptiles.map((reptile) => {
+                const isReptileSelected = selectedReptiles.includes(
+                  reptile.id
+                );
+                return (
+                  <TableRow
+                    hover
+                    key={reptile.id}
+                    selected={isReptileSelected}
+                  >
+                    <TableCell padding="checkbox">
+                      <Checkbox
+                        color="primary"
+                        checked={isReptileSelected}
+                        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                          handleSelectOneReptile(event, reptile.id)
+                        }
+                        value={isReptileSelected}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        color="text.primary"
+                        gutterBottom
+                        noWrap
+                      >
+                        {reptile.name}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        color="text.primary"
+                        gutterBottom
+                        noWrap
+                      >
+                        {reptile.gender === 'MALE' ? '公' : '母'}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        color="text.primary"
+                        gutterBottom
+                        noWrap
+                      >
+                        {(reptile.genies ?? []).map(genie => getTextLabel(genie!))}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        color="text.primary"
+                        gutterBottom
+                        noWrap
+                      >
+                        {reptile.weight}g
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        color="text.primary"
+                        gutterBottom
+                        noWrap
+                      >
+                        {reptile.birthdate}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      {reptileTypes.find(_ => _.id === reptile.reptileTypeID)?.name}
+                      {/*{getReptileTypeLabel(reptileTypes.find(_ => _.id === reptile.reptileTypeID))}*/}
+                    </TableCell>
+                    <TableCell>
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        color="text.primary"
+                        gutterBottom
+                        noWrap
+                      >
+                        {getReptileFeedingBoxTypeLabel(
                           reptileFeedingBoxes.find(
-                            reptileFeedingBox => reptileFeedingBox.id === reptile.reptileFeedingBoxID)?.name
-                          ?? ''
+                            reptileFeedingBox => reptileFeedingBox.id === reptile.reptileFeedingBoxID
+                          )?.type
                         )
-                      }
-                      &nbsp;
-                      {
-                        reptileFeedingBoxes.find(reptileFeedingBox => reptileFeedingBox.id === reptile.reptileFeedingBoxID)?.type === 'CABINET'
-                          ? getTextLabel(
-                            `第${
-                              reptileFeedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.horizontalIndex
-                            }排${
-                              reptileFeedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.verticalIndex}列`
+                        }
+                        &nbsp;
+                        {
+                          getTextLabel(
+                            reptileFeedingBoxes.find(
+                              reptileFeedingBox => reptileFeedingBox.id === reptile.reptileFeedingBoxID)?.name
+                            ?? ''
                           )
-                          : ''
-                      }
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {reptile.nickname}
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="right">
-                    <Tooltip title="日志" arrow>
-                      <IconButton
-                        sx={{
-                          '&:hover': {
-                            background: theme.colors.primary.lighter
-                          },
-                          color: theme.palette.success.main
-                        }}
-                        color="inherit"
-                        size="small"
-                        onClick={onLogShowing.bind(null, reptile)}
+                        }
+                        &nbsp;
+                        {
+                          reptileFeedingBoxes.find(reptileFeedingBox => reptileFeedingBox.id === reptile.reptileFeedingBoxID)?.type === 'CABINET'
+                            ? getTextLabel(
+                              `第${
+                                reptileFeedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.horizontalIndex
+                              }排${
+                                reptileFeedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.verticalIndex}列`
+                            )
+                            : ''
+                        }
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        color="text.primary"
+                        gutterBottom
+                        noWrap
                       >
-                        <LogIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="编辑" arrow>
-                      <IconButton
-                        sx={{
-                          '&:hover': {
-                            background: theme.colors.primary.lighter
-                          },
-                          color: theme.palette.primary.main
-                        }}
-                        color="inherit"
-                        size="small"
-                        onClick={onReptileEditing.bind(null, reptile)}
-                      >
-                        <EditTwoToneIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="删除" arrow>
-                      <IconButton
-                        sx={{
-                          '&:hover': { background: theme.colors.error.lighter },
-                          color: theme.palette.error.main
-                        }}
-                        color="inherit"
-                        size="small"
-                        onClick={onReptilesDeleting.bind(null, [reptile.id])}
-                      >
-                        <DeleteTwoToneIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Box p={2}>
-        <TablePagination
-          component="div"
-          count={filteredReptileNameReptiles.length}
-          onPageChange={handlePageChange}
-          onRowsPerPageChange={handleLimitChange}
-          page={page}
-          rowsPerPage={limit}
-          rowsPerPageOptions={[10, 25, 30]}
-        />
-      </Box>
-    </Card>
+                        {reptile.nickname}
+                      </Typography>
+                    </TableCell>
+                    <TableCell width={200} align="right">
+                      <Tooltip title="添加饲养日志" arrow>
+                        <IconButton
+                          sx={{
+                            '&:hover': {
+                              background: theme.colors.primary.lighter
+                            },
+                            color: theme.palette.success.main
+                          }}
+                          color="inherit"
+                          size="small"
+                          onClick={handleModifyReptileFeedingLogModalOpen.bind(null, new ReptileFeedingLog({ reptileID: reptile.id }))}
+                        >
+                          <AddIcon fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title="查看饲养日志" arrow>
+                        <IconButton
+                          sx={{
+                            '&:hover': {
+                              background: theme.colors.primary.lighter
+                            },
+                            color: theme.palette.success.main
+                          }}
+                          color="inherit"
+                          size="small"
+                          onClick={onLogShowing.bind(null, reptile)}
+                        >
+                          <LogIcon fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title="编辑" arrow>
+                        <IconButton
+                          sx={{
+                            '&:hover': {
+                              background: theme.colors.primary.lighter
+                            },
+                            color: theme.palette.primary.main
+                          }}
+                          color="inherit"
+                          size="small"
+                          onClick={onReptileEditing.bind(null, reptile)}
+                        >
+                          <EditTwoToneIcon fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title="删除" arrow>
+                        <IconButton
+                          sx={{
+                            '&:hover': { background: theme.colors.error.lighter },
+                            color: theme.palette.error.main
+                          }}
+                          color="inherit"
+                          size="small"
+                          onClick={onReptilesDeleting.bind(null, [reptile.id])}
+                        >
+                          <DeleteTwoToneIcon fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Box p={2}>
+          <TablePagination
+            component="div"
+            count={filteredReptileNameReptiles.length}
+            onPageChange={handlePageChange}
+            onRowsPerPageChange={handleLimitChange}
+            page={page}
+            rowsPerPage={limit}
+            rowsPerPageOptions={[10, 25, 30]}
+          />
+        </Box>
+      </Card>
+      <ModifyFeedingLogModal
+        open={ModifyReptileFeedingLogModalToggle}
+        onClose={handleModifyReptileFeedingLogModalClose}
+        editableReptileFeedingLog={editableReptileFeedingLog}
+      />
+    </>
   );
 };
 
