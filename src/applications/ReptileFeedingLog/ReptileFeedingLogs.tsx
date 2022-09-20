@@ -1,19 +1,16 @@
 import React, { useContext, useState } from 'react';
 import {Grid, Container, Typography, Button, Card} from '@mui/material';
-import Footer from '../../components/Footer';
-import ModifyFeedingLogModal from './ModifyFeedingLogModal';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
-import {
-  Reptile,
-  ReptileFeedingBox,
-  ReptileFeedingBoxIndexCollection,
-  ReptileFeedingLog,
-  ReptileType
-} from '../../models';
-import FeedingLogsTable from './ReptileFeedingLogsTable';
+
 import { ModalContext } from '../../libs/context/ModalContext';
 import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
+
 import PageTitleWrapper from '../../components/PageTitleWrapper';
+import Footer from '../../components/Footer';
+
+import { ReptileFeedingLog } from '../../models';
+import ModifyFeedingLogModal from './ModifyFeedingLogModal';
+import FeedingLogsTable from './ReptileFeedingLogsTable';
 
 function ReptileFeedingLogs() {
 
@@ -92,15 +89,12 @@ function ReptileFeedingLogs() {
         >
           <Grid item xs={12}>
             <Card>
-              {/*<FeedingLogsTable*/}
-              {/*  reptiles={reptiles}*/}
-              {/*  reptileTypes={reptileTypes}*/}
-              {/*  reptileFeedingBoxes={reptileFeedingBoxes}*/}
-              {/*  reptileFeedingBoxIndexes={reptileFeedingBoxIndexes}*/}
-              {/*  reptileFeedingLogs={reptileFeedingLogs}*/}
-              {/*  onReptileFeedingLogEditing={handleModifyReptileFeedingLogModalOpen}*/}
-              {/*  onReptileFeedingLogsDeleting={handleReptileFeedingLogsDelete}*/}
-              {/*/>*/}
+              <FeedingLogsTable
+                reptiles={reptiles}
+                reptileFeedingLogs={reptileFeedingLogs}
+                onReptileFeedingLogEditing={handleModifyReptileFeedingLogModalOpen}
+                onReptileFeedingLogsDeleting={handleReptileFeedingLogsDelete}
+              />
             </Card>
           </Grid>
         </Grid>

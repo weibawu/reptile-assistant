@@ -51,10 +51,10 @@ const routes: RouteObject[] = [
       },
       {
         path: 'reptile/overview',
-        element: <FeedingLog />
+        element: <Reptile />
       },
       {
-        path: 'reptile/management',
+        path: 'reptile/logs',
         element: <Reptile />
       },
     ]
