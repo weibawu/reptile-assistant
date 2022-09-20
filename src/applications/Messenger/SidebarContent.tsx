@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { useState, ChangeEvent } from 'react';
 import {
   Box,

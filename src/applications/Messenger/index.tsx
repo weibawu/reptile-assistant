@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { useState } from 'react';
 
 import { Helmet } from 'react-helmet-async';
@@ -8,7 +11,7 @@ import SidebarContent from './SidebarContent';
 import ChatContent from './ChatContent';
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 
-import Scrollbar from 'src/components/Scrollbar';
+import Scrollbar from '../../../components/Scrollbar';
 
 import {
   Box,

@@ -6,6 +6,7 @@ import SidebarLayout from './layouts/SidebarLayout';
 
 import SuspenseLoader from './components/SuspenseLoader';
 
+// eslint-disable-next-line react/display-name
 const Loader = (Component: any) => (props: any) =>
   (
     <Suspense fallback={<SuspenseLoader />}>
@@ -14,10 +15,10 @@ const Loader = (Component: any) => (props: any) =>
   );
 
 // Applications
-const FeedingBox = Loader(
+const ReptileFeedingBox = Loader(
   lazy(() => import('./applications/ReptileFeedingBox'))
 );
-const FeedingLog = Loader(
+const ReptileFeedingLog = Loader(
   lazy(() => import('./applications/ReptileFeedingLog'))
 );
 const Reptile = Loader(
@@ -39,7 +40,7 @@ const routes: RouteObject[] = [
       },
       {
         path: 'reptile-feeding-box/overview',
-        element: <FeedingBox />
+        element: <ReptileFeedingBox />
       },
       {
         path: 'reptile-feeding-box/logs',
@@ -55,7 +56,7 @@ const routes: RouteObject[] = [
       },
       {
         path: 'reptile/logs',
-        element: <Reptile />
+        element: <ReptileFeedingLog />
       },
     ]
   },

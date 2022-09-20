@@ -24,9 +24,6 @@ function ReptileFeedingLogs() {
   const {
     currentUser,
     reptiles,
-    reptileTypes,
-    reptileFeedingBoxes,
-    reptileFeedingBoxIndexes,
     reptileFeedingLogs,
     reptileRepository
   } = useReptileRepository();
@@ -74,7 +71,7 @@ function ReptileFeedingLogs() {
               onClick={toggleModal}
               startIcon={<AddTwoToneIcon fontSize="small" />}
             >
-              创建新爬宠
+              创建饲养日志
             </Button>
           </Grid>
         </Grid>

@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { Helmet } from 'react-helmet-async';
 import Footer from 'src/components/Footer';
 

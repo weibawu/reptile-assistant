@@ -71,7 +71,6 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
     handleSubmit,
     reset,
     watch,
-    getValues,
     setValue,
     formState: { errors }
   } = useForm<ReptileFeedingLogCreationFormProps>({
@@ -100,7 +99,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
       .filter(
         reptileFeedingBoxIndex =>
           reptileFeedingBoxIndex.reptileFeedingBoxID
-          === getValues('reptileFeedingBoxId.value')
+          === watch('reptileFeedingBoxId').value
       ).map(
         filteredReptileFeedingBoxIndex =>
           ({
@@ -118,10 +117,10 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
       reptile => reptileFeedingBoxIndexes.find(
         reptileFeedingBoxIndex =>
           reptileFeedingBoxIndex.horizontalIndex === JSON.parse(
-            getValues('reptileFeedingBoxLayerIds.value')
+            watch('reptileFeedingBoxLayerIds').value
           ).layer
           && reptile.reptileFeedingBoxID === JSON.parse(
-            getValues('reptileFeedingBoxLayerIds.value')
+            watch('reptileFeedingBoxLayerIds').value
           ).reptileFeedingBoxId
           && reptile.reptileFeedingBoxIndexCollectionID === reptileFeedingBoxIndex.id
       )
@@ -232,7 +231,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
                 render={
                   () => <Select
                     onChange={e => setValue('reptileFeedingBoxId', reptileFeedingBoxOptions.find(reptileFeedingBoxOption => reptileFeedingBoxOption.value === e.target.value)!, { shouldValidate: true })}
-                    value={getValues('reptileFeedingBoxId.value')}
+                    value={watch('reptileFeedingBoxId.value')}
                     labelId="reptileFeedingBoxId"
                     label="饲养容器"
                     error={!!errors.reptileFeedingBoxId}
@@ -261,7 +260,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
                   render={
                     () => <Select
                       onChange={e => setValue('reptileFeedingBoxLayerIds', reptileFeedingBoxLayerOptions.find(reptileFeedingBoxLayerOption => reptileFeedingBoxLayerOption.value === e.target.value)!, { shouldValidate: true })}
-                      value={getValues('reptileFeedingBoxLayerIds.value')}
+                      value={watch('reptileFeedingBoxLayerIds.value')}
                       labelId="reptileFeedingBoxLayerIds"
                       label="层"
                       error={!!errors.reptileFeedingBoxLayerIds}
@@ -292,7 +291,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
                   render={
                     () => <Select
                       onChange={e => setValue('reptileId', reptileOptions.find(reptileOption => reptileOption.value === e.target.value)!, { shouldValidate: true })}
-                      value={getValues('reptileId.value')}
+                      value={watch('reptileId.value')}
                       labelId="reptileId"
                       label="爬宠"
                       error={!!errors.reptileFeedingBoxLayerIds}

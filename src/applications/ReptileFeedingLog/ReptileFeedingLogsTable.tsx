@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FC, useState } from 'react';
-
 import PropTypes from 'prop-types';
+
+import { format } from 'date-fns';
 import {
   Box,
   Card,
@@ -268,7 +269,7 @@ const ReptileFeedingLogsTable: FC<ReptileFeedingLogsTableProps> =
                         gutterBottom
                         noWrap
                       >
-                        {reptileFeedingLog.feedingDateTime}
+                        {format(new Date(reptileFeedingLog.feedingDateTime!), 'yyyy年MM月dd日 hh:mm:ss')}
                       </Typography>
                     </TableCell>
                     <TableCell align="right">
