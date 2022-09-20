@@ -66,8 +66,8 @@ function HeaderMenu() {
   const parentPath = location.pathname.split('/')[1] as ParentPath;
   const routerListMap = {
     'feeding-box': [
-      { to: '/feeding-box/overview', 'title': '饲养情况概览' },
-      { to: '/feeding-box/management', 'title': '容器管理' },
+      { to: '/feeding-box/overview', 'title': '容器管理' },
+      // { to: '/feeding-box/management', 'title': '饲养情况概览' },
     ],
     'reptile': [
       { to: '/reptile/overview', 'title': '爬宠管理' },

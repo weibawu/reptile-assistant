@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, useState} from 'react';
+import React, { ChangeEvent, FC, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Box,
@@ -27,19 +27,20 @@ import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import Label from '../../components/Label';
 
-import {ReptileFeedingBox, ReptileFeedingBoxType} from '../../models';
+import { ReptileFeedingBox, ReptileFeedingBoxIndexCollection, ReptileFeedingBoxType } from '../../models';
 
 import BulkActions from '../../components/BulkActions';
 
 interface ReptileFeedingBoxesTableProps {
-    className?: string;
-    reptileFeedingBoxes: ReptileFeedingBox[];
-    onReptileFeedingBoxEditing: (reptileFeedingBox: ReptileFeedingBox) => any;
-    onReptileFeedingBoxesDeleting: (reptileFeedingBoxIds: string[]) => any;
+  className?: string;
+  reptileFeedingBoxes: ReptileFeedingBox[];
+  reptileFeedingBoxIndexes: ReptileFeedingBoxIndexCollection[];
+  onReptileFeedingBoxEditing: (reptileFeedingBox: ReptileFeedingBox) => any;
+  onReptileFeedingBoxesDeleting: (reptileFeedingBoxIds: string[]) => any;
 }
 
 interface Filters {
-    type?: ReptileFeedingBoxType;
+  type?: ReptileFeedingBoxType;
 }
 
 const getTypeLabel = (reptileFeedingBoxType: ReptileFeedingBoxType): JSX.Element => {
@@ -51,17 +52,17 @@ const getTypeLabel = (reptileFeedingBoxType: ReptileFeedingBoxType): JSX.Element
     [ReptileFeedingBoxType.CABINET]: {
       text: '爬柜',
       color: 'success'
-    },
+    }
   };
 
-  const {text, color}: any = map[reptileFeedingBoxType];
+  const { text, color }: any = map[reptileFeedingBoxType];
 
   return <Label color={color}>{text}</Label>;
 };
 
 const applyFilters = (
   reptileFeedingBoxes: ReptileFeedingBox[],
-  filters: Filters,
+  filters: Filters
 ): ReptileFeedingBox[] => {
   return reptileFeedingBoxes.filter((reptileFeedingBox) => {
     let matches = true;
@@ -82,7 +83,12 @@ const applyPagination = (
   return reptileFeedingBoxes.slice(page * limit, page * limit + limit);
 };
 
-const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFeedingBoxes, onReptileFeedingBoxEditing, onReptileFeedingBoxesDeleting}) => {
+const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({
+  reptileFeedingBoxes,
+  reptileFeedingBoxIndexes,
+  onReptileFeedingBoxEditing,
+  onReptileFeedingBoxesDeleting
+}) => {
   const [selectedReptileFeedingBoxes, setSelectedReptileFeedingBoxes] = useState<string[]>(
     []
   );
@@ -105,7 +111,7 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
     {
       id: ReptileFeedingBoxType.CABINET,
       name: '爬柜'
-    },
+    }
   ];
 
   const handleTypeChange: any = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -155,6 +161,10 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
     setLimit(parseInt(event.target.value));
   };
 
+  const calculateIndexCountInCurrentReptileFeedingBox = (reptileFeedingBox: ReptileFeedingBox) => reptileFeedingBoxIndexes.filter(
+    reptileFeedingBoxIndex => reptileFeedingBoxIndex.reptileFeedingBoxID === reptileFeedingBox.id
+  ).length;
+
   const filteredReptileFeedingBoxes = applyFilters(reptileFeedingBoxes, filters);
   const paginatedReptileFeedingBoxes = applyPagination(
     filteredReptileFeedingBoxes,
@@ -162,10 +172,10 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
     limit
   );
   const selectedSomeReptileFeedingBoxes =
-        selectedReptileFeedingBoxes.length > 0 &&
-        selectedReptileFeedingBoxes.length < reptileFeedingBoxes.length;
+    selectedReptileFeedingBoxes.length > 0 &&
+    selectedReptileFeedingBoxes.length < reptileFeedingBoxes.length;
   const selectedAllReptileFeedingBoxes =
-        selectedReptileFeedingBoxes.length === reptileFeedingBoxes.length;
+    selectedReptileFeedingBoxes.length === reptileFeedingBoxes.length;
   const theme = useTheme();
 
   const handleBulkDeleting = () => {
@@ -177,7 +187,7 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
     <Card>
       {selectedBulkActions && (
         <Box flex={1} p={2}>
-          <BulkActions onBulkDeleting={handleBulkDeleting}/>
+          <BulkActions onBulkDeleting={handleBulkDeleting} />
         </Box>
       )}
       {!selectedBulkActions && (
@@ -204,7 +214,7 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
           title="饲养容器管理"
         />
       )}
-      <Divider/>
+      <Divider />
       <TableContainer>
         <Table>
           <TableHead>
@@ -219,7 +229,7 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
               </TableCell>
               <TableCell>名称 / 位置</TableCell>
               <TableCell>饲养盒类型</TableCell>
-              <TableCell>ID</TableCell>
+              <TableCell>在录爬宠</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -266,7 +276,7 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
                       gutterBottom
                       noWrap
                     >
-                      {reptileFeedingBox.id}
+                      {calculateIndexCountInCurrentReptileFeedingBox(reptileFeedingBox)}
                     </Typography>
                   </TableCell>
                   <TableCell align="right">
@@ -282,20 +292,20 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({reptileFee
                         size="small"
                         onClick={onReptileFeedingBoxEditing.bind(null, reptileFeedingBox)}
                       >
-                        <EditTwoToneIcon fontSize="small"/>
+                        <EditTwoToneIcon fontSize="small" />
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="删除" arrow>
                       <IconButton
                         sx={{
-                          '&:hover': {background: theme.colors.error.lighter},
+                          '&:hover': { background: theme.colors.error.lighter },
                           color: theme.palette.error.main
                         }}
                         color="inherit"
                         size="small"
                         onClick={onReptileFeedingBoxesDeleting.bind(null, [reptileFeedingBox.id])}
                       >
-                        <DeleteTwoToneIcon fontSize="small"/>
+                        <DeleteTwoToneIcon fontSize="small" />
                       </IconButton>
                     </Tooltip>
                   </TableCell>

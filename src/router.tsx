@@ -39,13 +39,13 @@ const routes: RouteObject[] = [
         element: <Navigate to="overview" replace />
       },
       {
-        path: 'feeding-box/management',
+        path: 'feeding-box/overview',
         element: <ReptileFeedingBox />
       },
-      {
-        path: 'feeding-box/overview',
-        element: <div>开发中 ( ´▽｀)</div>
-      },
+      // {
+      //   path: 'feeding-box/overview',
+      //   element: <div>开发中 ( ´▽｀)</div>
+      // },
       {
         path: 'reptile',
         element: <Navigate to="overview" replace />

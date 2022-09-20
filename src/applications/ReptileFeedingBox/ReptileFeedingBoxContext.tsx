@@ -1,6 +1,6 @@
 import React, { FC, useState, createContext, useContext } from 'react';
 import { ModalContext } from './ModalContext';
-import { ReptileFeedingBox } from '../../models';
+import { ReptileFeedingBox, ReptileFeedingBoxIndexCollection } from '../../models';
 import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
 
 type ReptileFeedingBoxContext = {
@@ -11,6 +11,7 @@ type ReptileFeedingBoxContext = {
   toggleModal: () => void, // 切换Reptile Modal显隐
 
   reptileFeedingBoxes: ReptileFeedingBox[],
+  reptileFeedingBoxIndexes: ReptileFeedingBoxIndexCollection[],
 
   editableReptileFeedingBox: ReptileFeedingBox | undefined,
   handleModifyReptileFeedingBoxModalOpen: (reptileFeedingBox: ReptileFeedingBox | undefined) => void,
@@ -35,6 +36,7 @@ export const ReptileFeedingBoxProvider: FC<{children: React.ReactNode}> = ({ chi
     loading,
     currentUser,
     reptileFeedingBoxes,
+    reptileFeedingBoxIndexes,
     reptileRepository
   } = useReptileRepository();
 
@@ -72,6 +74,7 @@ export const ReptileFeedingBoxProvider: FC<{children: React.ReactNode}> = ({ chi
         ModalToggle,
         toggleModal,
         reptileFeedingBoxes,
+        reptileFeedingBoxIndexes,
         editableReptileFeedingBox,
         handleModifyReptileFeedingBoxModalOpen,
         handleModifyReptileFeedingBoxModalClose,

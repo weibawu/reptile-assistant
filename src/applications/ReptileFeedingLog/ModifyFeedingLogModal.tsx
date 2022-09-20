@@ -120,7 +120,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
       )
     )
     .map(filteredReptileOption => ({
-      label: 'NO.'
+      label: 'No.'
           + reptileFeedingBoxIndexes.find(reptileFeedingBoxIndex => reptileFeedingBoxIndex.id === filteredReptileOption.reptileFeedingBoxIndexCollectionID)?.verticalIndex
           + ' '
           + filteredReptileOption.name
@@ -178,7 +178,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
       && editableReptile.genies
     ) {
       setValue('reptileId', {
-        label: 'NO.'
+        label: 'No.'
           + editableReptileBelongedReptileFeedingBoxIndex.verticalIndex
           + ' '
           + editableReptile.name
@@ -200,8 +200,11 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
         feedingDateTime: new Date(form.reptileFeedingDateTime).toISOString(),
         detail: form.detail
       });
-      if (!editableReptileFeedingLog) await reptileRepository.createReptileFeedingLog(reptileFeedingLogSaved);
-      else await reptileRepository.updateReptileFeedingLog(reptileFeedingLogSaved.id, reptileFeedingLogSaved);
+
+      if (editableReptileFeedingLog && editableReptileFeedingLog.createdAt) await reptileRepository.updateReptileFeedingLog(reptileFeedingLogSaved.id, reptileFeedingLogSaved);
+      else await reptileRepository.createReptileFeedingLog(reptileFeedingLogSaved);
+
+
       handleClose();
     } catch (e) {
       console.error('created or updated reptileFeeding box error:', e);

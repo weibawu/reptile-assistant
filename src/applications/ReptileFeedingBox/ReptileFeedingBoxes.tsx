@@ -20,6 +20,7 @@ function ReptileFeedingBoxes() {
     toggleModal,
 
     reptileFeedingBoxes,
+    reptileFeedingBoxIndexes,
 
     editableReptileFeedingBox,
     handleModifyReptileFeedingBoxModalOpen,
@@ -64,6 +65,7 @@ function ReptileFeedingBoxes() {
           <Grid item xs={12}>
             <Card>
               <ReptileFeedingBoxesTable
+                reptileFeedingBoxIndexes={reptileFeedingBoxIndexes}
                 reptileFeedingBoxes={reptileFeedingBoxes}
                 onReptileFeedingBoxEditing={handleModifyReptileFeedingBoxModalOpen}
                 onReptileFeedingBoxesDeleting={handleReptileFeedingBoxesDelete}
