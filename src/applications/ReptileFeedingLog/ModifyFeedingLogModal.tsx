@@ -166,8 +166,6 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
     if (
       editableReptileBelongedReptileFeedingBoxIndex
       && editableReptileBelongedReptileFeedingBoxIndex.id
-      && editableReptileBelongedReptileFeedingBoxIndex.horizontalIndex
-      && editableReptileBelongedReptileFeedingBoxIndex.verticalIndex
     ) {
       setValue('reptileFeedingBoxLayerIds', {
         label: '第' + editableReptileBelongedReptileFeedingBoxIndex.horizontalIndex + '层',
@@ -184,7 +182,6 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
       && editableReptile.name
       && editableReptile.id
       && editableReptile.genies
-      && editableReptileBelongedReptileFeedingBoxIndex.verticalIndex
     ) {
       setValue('reptileId', {
         label: 'NO.'
