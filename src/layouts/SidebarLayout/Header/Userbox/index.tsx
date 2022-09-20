@@ -45,7 +45,7 @@ const UserBoxLabel = styled(Typography)(
 
 function HeaderUserbox() {
 
-  // const {user, signOut} = useAuthenticator((ctx) => [ctx.user]);
+  const {user, signOut} = useAuthenticator((ctx) => [ctx.user]);
 
   const ref = useRef(null);
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -63,7 +63,7 @@ function HeaderUserbox() {
       <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
         <Hidden mdDown>
           <UserBoxText>
-            {/*<UserBoxLabel variant="body1">{user?.attributes?.email}</UserBoxLabel>*/}
+            <UserBoxLabel variant="body1">{user.attributes?.email}</UserBoxLabel>
           </UserBoxText>
         </Hidden>
         <Hidden smDown>
@@ -85,15 +85,15 @@ function HeaderUserbox() {
       >
         <MenuUserBox sx={{ minWidth: 210 }} display="flex">
           <UserBoxText>
-            {/*<UserBoxLabel variant="body1">{user.attributes?.email}</UserBoxLabel>*/}
+            <UserBoxLabel variant="body1">{user.attributes?.email}</UserBoxLabel>
           </UserBoxText>
         </MenuUserBox>
         <Divider sx={{ mb: 0 }} />
         <Box sx={{ m: 1 }}>
-          {/*<Button onClick={signOut} color="primary" fullWidth>*/}
-          {/*  <LockOpenTwoToneIcon sx={{ mr: 1 }} />*/}
-          {/*  登出*/}
-          {/*</Button>*/}
+          <Button onClick={signOut} color="primary" fullWidth>
+            <LockOpenTwoToneIcon sx={{ mr: 1 }} />
+            登出
+          </Button>
         </Box>
       </Popover>
     </>
