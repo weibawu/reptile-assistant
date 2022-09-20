@@ -22,6 +22,7 @@ function ReptileFeedingLogs() {
   const [editableReptileFeedingLog, setEditableReptileFeedingLog] = useState<ReptileFeedingLog | undefined>();
 
   const {
+    loading,
     currentUser,
     reptiles,
     reptileFeedingLogs,
@@ -51,6 +52,8 @@ function ReptileFeedingLogs() {
     }
     await reptileRepository.fetchAll();
   };
+
+  if (loading) return null;
 
   return (
     <>

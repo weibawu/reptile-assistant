@@ -35,6 +35,7 @@ function Reptiles() {
   const [viewableLogReptile, setViewableLogReptile] = useState<Reptile | undefined>();
 
   const {
+    loading,
     currentUser,
     reptiles,
     reptileTypes,
@@ -76,6 +77,8 @@ function Reptiles() {
     }
     await reptileRepository.fetchAll();
   };
+
+  if (loading) return null;
 
   return (
     <>

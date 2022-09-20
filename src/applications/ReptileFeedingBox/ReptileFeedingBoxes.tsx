@@ -19,6 +19,7 @@ function ReptileFeedingBoxes() {
   const [editableReptileFeedingBox, setEditableReptileFeedingBox] = useState<ReptileFeedingBox | undefined>();
 
   const {
+    loading,
     currentUser,
     reptileFeedingBoxes,
     reptileRepository
@@ -47,6 +48,8 @@ function ReptileFeedingBoxes() {
     setEditableReptileFeedingBox(undefined);
     closeModal();
   };
+
+  if (loading) return null;
 
   return (
     <>
