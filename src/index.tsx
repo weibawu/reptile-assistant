@@ -10,6 +10,11 @@ import { Amplify } from 'aws-amplify';
 import amplifyConfig from './aws-exports';
 import '@aws-amplify/ui-react/styles.css';
 
+import { I18n } from 'aws-amplify';
+import { translations } from '@aws-amplify/ui-react';
+I18n.putVocabularies(translations);
+I18n.setLanguage('zh');
+
 Amplify.configure(amplifyConfig);
 
 const rootElement = document.getElementById('root');
