@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   alpha,
   Badge,
@@ -41,7 +42,7 @@ const NotificationsBadge = styled(Badge)(
 );
 
 function HeaderNotifications() {
-  const ref = useRef<any>(null);
+  const ref = useRef(null);
   const [isOpen, setOpen] = useState<boolean>(false);
 
   /* kuku modified */

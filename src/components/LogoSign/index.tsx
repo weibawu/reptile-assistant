@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Box,
   Tooltip,
@@ -25,7 +26,7 @@ const LogoWrapper = styled(Link)(
 
 
 const LogoTailHomeWrapper = styled(Box)(
-    () => `
+  () => `
         width: 52px;
         height: 38px;
         display: flex;

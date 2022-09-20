@@ -1,36 +1,27 @@
-import {useRoutes} from 'react-router-dom';
-import router from 'src/router';
+import React from 'react';
+import ThemeProvider from './themes/ThemeProvider';
 
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { Authenticator } from '@aws-amplify/ui-react';
+import { ReptileRepositoryProvider } from './libs/reptile-repository/ReptileRepositoryProvider';
+import { SidebarProvider } from './libs/context/SidebarContext';
+import { useRoutes } from 'react-router-dom';
+import router from './router';
 
-import {CssBaseline} from '@mui/material';
-import ThemeProvider from './theme/ThemeProvider';
-import {Authenticator} from "@aws-amplify/ui-react";
-import {Amplify, DataStore, Hub} from "aws-amplify";
-import amplifyConfig from "./aws-exports";
-
-Amplify.configure(amplifyConfig);
-// Amplify.Logger.LOG_LEVEL = 'DEBUG';
-
-// @ts-ignore
-window._ = Amplify;
-
-function App() {
-    const content = useRoutes(router);
-
-    return (
-        <Authenticator>
-            <Authenticator.Provider>
-                <ThemeProvider>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <CssBaseline/>
-                        {content}
-                    </LocalizationProvider>
-                </ThemeProvider>
-            </Authenticator.Provider>
-        </Authenticator>
-    );
-}
+const App: React.FC = () => {
+  const content = useRoutes(router);
+  return (
+    <ThemeProvider>
+      <Authenticator>
+        <SidebarProvider>
+          <Authenticator.Provider>
+            <ReptileRepositoryProvider>
+              {content}
+            </ReptileRepositoryProvider>
+          </Authenticator.Provider>
+        </SidebarProvider>
+      </Authenticator>
+    </ThemeProvider>
+  );
+};
 
 export default App;

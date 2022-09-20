@@ -1,15 +1,12 @@
+import React from 'react';
 import {
   Box,
   List,
-  ListItem,
   ListItemText,
-  Menu,
-  MenuItem
+  ListItem
 } from '@mui/material';
-import { useRef, useState } from 'react';
 import {NavLink, useLocation} from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 
 const ListWrapper = styled(Box)(
   ({ theme }) => `
@@ -62,20 +59,23 @@ const ListWrapper = styled(Box)(
 `
 );
 
-function HeaderMenu() {
-  // const ref = useRef<any>(null);
-  const location = useLocation();
+type ParentPath = 'feeding-box' | 'reptile'
 
+function HeaderMenu() {
+  const location = useLocation();
+  const parentPath = location.pathname.split('/')[1] as ParentPath;
   const routerListMap = {
-    'reptile-feeding-box': [
-      { to: '/reptile-feeding-box/overview', 'title': '饲养情况概览' },
-      { to: '/reptile-feeding-box/management', 'title': '容器管理' },
+    'feeding-box': [
+      { to: 'feeding-box/overview', 'title': '容器管理' },
+      // { to: '/feeding-box/management', 'title': '饲养情况概览' },
     ],
     'reptile': [
-      { to: '/reptile/overview', 'title': '爬宠饲养日志' },
-      { to: '/reptile/management', 'title': '爬宠管理' },
+      { to: 'reptile/overview', 'title': '爬宠管理' },
+      { to: 'reptile/logs', 'title': '饲养日志查询' },
     ],
   };
+
+  const routerList = routerListMap[parentPath] ?? [];
 
   return (
     <>
@@ -86,21 +86,21 @@ function HeaderMenu() {
           }
         }}
       >
-        {/*todo list the menu*/}
         <List disablePadding component={Box} display="flex">
           {
-            routerListMap[location.pathname.split('/')[1]]?.map((router) =>
-                <ListItem
-                    classes={{ root: 'MuiListItem-indicators' }}
-                    button
-                    component={NavLink}
-                    to={router.to}
-                >
-                  <ListItemText
-                      primaryTypographyProps={{ noWrap: true }}
-                      primary={router.title}
-                  />
-                </ListItem>
+            routerList.map((router) =>
+              <ListItem
+                button
+                key={router.title}
+                classes={{ root: 'MuiListItem-indicators' }}
+                component={NavLink}
+                to={router.to}
+              >
+                <ListItemText
+                  primaryTypographyProps={{ noWrap: true }}
+                  primary={router.title}
+                />
+              </ListItem>
             )
           }
         </List>

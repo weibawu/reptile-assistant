@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Container, Link, Typography, styled } from '@mui/material';
 
 const FooterWrapper = styled(Container)(
