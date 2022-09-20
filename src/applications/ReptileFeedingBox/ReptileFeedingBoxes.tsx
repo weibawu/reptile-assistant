@@ -1,53 +1,31 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Grid, Container, Typography, Button, Card } from '@mui/material';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 
 import PageTitleWrapper from '../../components/PageTitleWrapper';
 import Footer from '../../components/Footer';
 
-import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
-import { ModalContext } from './ModalContext';
-
 import ModifyFeedingBoxModal from './ModifyReptileFeedingBoxModal';
 import ReptileFeedingBoxesTable from './ReptileFeedingBoxesTable';
 
-import { ReptileFeedingBox } from '../../models';
+import { ReptileFeedingBoxContext } from './ReptileFeedingBoxContext';
 
 function ReptileFeedingBoxes() {
 
-  const { toggleModal, closeModal, ModalToggle } = useContext(ModalContext);
-  const [editableReptileFeedingBox, setEditableReptileFeedingBox] = useState<ReptileFeedingBox | undefined>();
-
   const {
     loading,
-    currentUser,
+    currentUserDisplayedUsername,
+
+    ModalToggle,
+    toggleModal,
+
     reptileFeedingBoxes,
-    reptileRepository
-  } = useReptileRepository();
 
-  const currentUserDisplayedUsername =
-    currentUser.attributes
-      ? currentUser.attributes.email
-      : '新朋友';
-
-  const handleFeedingBoxesDelete = async (feedingBoxIds: string[]) => {
-    for await (const feedingBoxId of feedingBoxIds) {
-      await reptileRepository.removeReptileFeedingBox(feedingBoxId);
-    }
-    await reptileRepository.fetchAll();
-  };
-
-  const handleReptileFeedingBoxModalOpen = (reptileFeedingBox: ReptileFeedingBox | undefined) => {
-    if (reptileFeedingBox) {
-      setEditableReptileFeedingBox(reptileFeedingBox);
-    }
-    toggleModal();
-  };
-
-  const handleModifyReptileFeedingBoxModalClose = () => {
-    setEditableReptileFeedingBox(undefined);
-    closeModal();
-  };
+    editableReptileFeedingBox,
+    handleModifyReptileFeedingBoxModalOpen,
+    handleModifyReptileFeedingBoxModalClose,
+    handleReptileFeedingBoxesDelete
+  } = useContext(ReptileFeedingBoxContext);
 
   if (loading) return null;
 
@@ -87,8 +65,8 @@ function ReptileFeedingBoxes() {
             <Card>
               <ReptileFeedingBoxesTable
                 reptileFeedingBoxes={reptileFeedingBoxes}
-                onReptileFeedingBoxEditing={handleReptileFeedingBoxModalOpen}
-                onReptileFeedingBoxesDeleting={handleFeedingBoxesDelete}
+                onReptileFeedingBoxEditing={handleModifyReptileFeedingBoxModalOpen}
+                onReptileFeedingBoxesDeleting={handleReptileFeedingBoxesDelete}
               />
             </Card>
           </Grid>

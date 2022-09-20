@@ -4,15 +4,18 @@ import { Reptile, ReptileFeedingLog } from '../../models';
 import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
 type ReptileFeedingLogContext = {
   loading: boolean,
+  currentUserDisplayedUsername: string,
+
   ModalToggle: boolean,
+  toggleModal: () => void
+
   reptiles: Reptile[],
   reptileFeedingLogs: ReptileFeedingLog[],
-  currentUserDisplayedUsername: string,
+
   editableReptileFeedingLog: ReptileFeedingLog | undefined,
   handleModifyReptileFeedingLogModalOpen: (reptileFeedingLog: ReptileFeedingLog | undefined) => void,
   handleModifyReptileFeedingLogModalClose: () => void,
   handleReptileFeedingLogsDelete: (reptileFeedingLogIds: string[]) => void
-  toggleModal: () => void
 };
 
 export const ReptileFeedingLogContext = createContext<ReptileFeedingLogContext>(
@@ -43,7 +46,6 @@ export const ReptileFeedingLogProvider: FC<{children: React.ReactNode}> = ({ chi
 
   const handleModifyReptileFeedingLogModalOpen = (reptileFeedingLog: ReptileFeedingLog | undefined) => {
     if (reptileFeedingLog) {
-      console.log(reptileFeedingLog);
       setEditableReptileFeedingLog(reptileFeedingLog);
     }
     toggleModal();
@@ -67,11 +69,11 @@ export const ReptileFeedingLogProvider: FC<{children: React.ReactNode}> = ({ chi
     <ReptileFeedingLogContext.Provider
       value={{
         loading,
+        currentUserDisplayedUsername,
         ModalToggle,
         toggleModal,
         reptiles,
         reptileFeedingLogs,
-        currentUserDisplayedUsername,
         editableReptileFeedingLog,
         handleModifyReptileFeedingLogModalOpen,
         handleModifyReptileFeedingLogModalClose,

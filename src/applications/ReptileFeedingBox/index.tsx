@@ -2,6 +2,7 @@ import React from 'react';
 import ReptileFeedingBoxes from './ReptileFeedingBoxes';
 import { ModalProvider } from './ModalContext';
 import { Helmet } from 'react-helmet-async';
+import { ReptileFeedingBoxProvider } from './ReptileFeedingBoxContext';
 
 const ApplicationsReptileFeedingBox: React.FC = () => (
   <>
@@ -9,7 +10,9 @@ const ApplicationsReptileFeedingBox: React.FC = () => (
       <title>尾巴屋爬宠管理平台 - 容器管理</title>
     </Helmet>
     <ModalProvider>
-      <ReptileFeedingBoxes/>
+      <ReptileFeedingBoxProvider>
+        <ReptileFeedingBoxes/>
+      </ReptileFeedingBoxProvider>
     </ModalProvider>
   </>
 );

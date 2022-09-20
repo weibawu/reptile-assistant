@@ -1,4 +1,5 @@
 import React, { FC, useState, createContext } from 'react';
+
 type ModalContext = {
   ModalToggle: boolean;
   toggleModal: () => void;

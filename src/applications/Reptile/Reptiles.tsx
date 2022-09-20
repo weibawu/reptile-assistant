@@ -1,85 +1,43 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { Grid, Container, Typography, Button, Card } from '@mui/material';
 
-import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
-import { ModalContext } from './ModalContext';
-
 import PageTitleWrapper from '../../components/PageTitleWrapper';
 import Footer from '../../components/Footer';
-
-import { ReptileFeedingLogTableModalContext } from './ReptileFeedingLogTableModalContext';
 
 import ModifyReptileModal from './ModifyReptileModal';
 import ReptilesTable from './ReptilesTable';
 import ReptileFeedingLogTableModal from './ReptileFeedingLogTableModal';
 
-import { Reptile } from '../../models';
+import { ReptileContext } from './ReptileContext';
 
 function Reptiles() {
 
   const {
-    toggleModal,
-    ModalToggle,
-    closeModal
-  } = useContext(ModalContext);
-  const [editableReptile, setEditableReptile] = useState<Reptile | undefined>();
-
-  const {
-    toggleReptileFeedingLogTableModal,
-    ReptileFeedingLogTableModalToggle,
-    closeReptileFeedingLogTableModal
-  } = useContext(ReptileFeedingLogTableModalContext);
-  const [viewableLogReptile, setViewableLogReptile] = useState<Reptile | undefined>();
-
-  const {
     loading,
-    currentUser,
+    currentUserDisplayedUsername,
+
+    ModalToggle,
+    toggleModal,
+
+    ReptileFeedingLogTableModalToggle,
+
     reptiles,
     reptileTypes,
     reptileFeedingBoxes,
     reptileFeedingBoxIndexes,
-    reptileRepository
-  } = useReptileRepository();
 
-  const currentUserDisplayedUsername =
-    currentUser.attributes
-      ? currentUser.attributes.email
-      : '新朋友';
+    editableReptile,
+    handleModifyReptileModalOpen,
+    handleModifyReptileModalClose,
+    handleReptilesDelete,
 
-  const handleModifyReptileModalOpen = (reptile: Reptile | undefined) => {
-    if (reptile) {
-      setEditableReptile(reptile);
-    }
-    toggleModal();
-  };
-
-  const handleModifyReptileModalClose = () => {
-    setEditableReptile(undefined);
-    closeModal();
-  };
-
-  const handleViewableReptileLogModalOpen = (reptile: Reptile) => {
-    setViewableLogReptile(reptile);
-    toggleReptileFeedingLogTableModal();
-  };
-
-  const handleViewableReptileLogModalClose = () => {
-    closeReptileFeedingLogTableModal();
-    // todo try more elegant way to clear viewable log reptile before the modal close(don't use useEffect)
-    setTimeout(() => {
-      setViewableLogReptile(undefined);
-    }, 100);
-  };
-
-  const handleReptilesDelete = async (reptileIds: string[]) => {
-    for await (const reptileId of reptileIds) {
-      await reptileRepository.removeReptile(reptileId);
-    }
-    await reptileRepository.fetchAll();
-  };
+    viewableLogReptile,
+    handleViewableReptileLogModalOpen,
+    handleViewableReptileLogModalClose,
+  } = useContext(ReptileContext);
 
   if (loading) return null;
 

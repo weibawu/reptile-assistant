@@ -7,6 +7,7 @@ import React from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { ReptileFeedingLogProvider } from '../ReptileFeedingLog/ReptileFeedingLogContext';
+import { ReptileProvider } from './ReptileContext';
 
 const ApplicationsReptiles = () =>(
   <>
@@ -18,7 +19,9 @@ const ApplicationsReptiles = () =>(
         <ReptileFeedingLogProvider>
           <ModalProvider>
             <ReptileFeedingLogTableModalProvider>
-              <Reptiles/>
+              <ReptileProvider>
+                <Reptiles/>
+              </ReptileProvider>
             </ReptileFeedingLogTableModalProvider>
           </ModalProvider>
         </ReptileFeedingLogProvider>

@@ -143,7 +143,6 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
     editableReptileFeedingLog?.detail && setValue('detail', editableReptileFeedingLog.detail);
 
     const editableReptile = reptiles.find(reptile => reptile.id === editableReptileFeedingLog?.reptileID);
-    console.log(editableReptile);
     const editableReptileBelongedReptileFeedingBox = reptileFeedingBoxes.find(reptileFeedingBox => reptileFeedingBox.id === editableReptile?.reptileFeedingBoxID);
     const editableReptileBelongedReptileFeedingBoxIndex = reptileFeedingBoxIndexes.find(reptileFeedingBoxIndex => reptileFeedingBoxIndex.id === editableReptile?.reptileFeedingBoxIndexCollectionID);
 

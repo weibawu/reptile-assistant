@@ -18,11 +18,14 @@ const ReptileFeedingLogs: React.FC<ReptileFeedingLogsProps> = ({ viewableReptile
 
   const {
     loading,
+    currentUserDisplayedUsername,
+
     ModalToggle,
     toggleModal,
+
     reptiles,
     reptileFeedingLogs,
-    currentUserDisplayedUsername,
+
     editableReptileFeedingLog,
     handleModifyReptileFeedingLogModalOpen,
     handleModifyReptileFeedingLogModalClose,
