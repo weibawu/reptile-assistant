@@ -37,6 +37,7 @@ function Reptiles() {
     viewableLogReptile,
     handleViewableReptileLogModalOpen,
     handleViewableReptileLogModalClose,
+    handleModifyReptileFeedingLogModalOpenInReptileTable,
   } = useContext(ReptileContext);
 
   if (loading) return null;
@@ -86,6 +87,7 @@ function Reptiles() {
                 onLogShowing={handleViewableReptileLogModalOpen}
                 onReptileEditing={handleModifyReptileModalOpen}
                 onReptilesDeleting={handleReptilesDelete}
+                onModifyReptileFeedingLogModalOpen={handleModifyReptileFeedingLogModalOpenInReptileTable}
               />
             </Card>
           </Grid>

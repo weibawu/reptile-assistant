@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="add reptile name filter">
+    <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="fix show modify reptile feeding log modal twice issue.">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -104,7 +104,21 @@
       <option name="project" value="LOCAL" />
       <updated>1663056996695</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fix cannot edit reptile feeding log issue.">
+      <created>1663732553097</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1663732553097</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix show modify reptile feeding log modal twice issue.">
+      <created>1663732622967</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1663732622967</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,6 +157,8 @@
     <MESSAGE value="fix timezone issue" />
     <MESSAGE value="add reptile name filter" />
     <MESSAGE value="add reptile name filter" />
-    <option name="LAST_COMMIT_MESSAGE" value="add reptile name filter" />
+    <MESSAGE value="fix cannot edit reptile feeding log issue." />
+    <MESSAGE value="fix show modify reptile feeding log modal twice issue." />
+    <option name="LAST_COMMIT_MESSAGE" value="fix show modify reptile feeding log modal twice issue." />
   </component>
 </project>

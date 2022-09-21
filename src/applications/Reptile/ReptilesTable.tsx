@@ -51,6 +51,7 @@ interface ReptilesTableProps {
   onReptileEditing: (reptile: Reptile) => any;
   onLogShowing: (reptile: Reptile) => any;
   onReptilesDeleting: (reptileIds: string[]) => any;
+  onModifyReptileFeedingLogModalOpen: (reptile: Reptile, reptileFeedingLog: ReptileFeedingLog) => any;
 }
 
 interface Filters {
@@ -139,7 +140,8 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
   reptileFeedingBoxIndexes,
   onReptileEditing,
   onLogShowing,
-  onReptilesDeleting
+  onReptilesDeleting,
+  onModifyReptileFeedingLogModalOpen
 }) => {
   const [selectedReptiles, setSelectedReptiles] = useState<string[]>([]);
   const selectedBulkActions = selectedReptiles.length > 0;
@@ -149,13 +151,6 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
   const [reptileTypeFilters, setReptileTypeFilters] = useState<Filters>({});
   const [reptileNameFilters, setReptileNameFilters] = useState<Filters>({});
   const [reptileFeedingBoxLayerFilters, setReptileFeedingBoxLayerFilters] = useState<Filters>({});
-
-  const  {
-    ModalToggle: ModifyReptileFeedingLogModalToggle,
-    handleModifyReptileFeedingLogModalOpen,
-    handleModifyReptileFeedingLogModalClose,
-    editableReptileFeedingLog,
-  } = useContext(ReptileFeedingLogContext);
 
   const getReptileFeedingBoxLayerName = (reptile: Reptile): string => {
     const reptileFeedingBox = reptileFeedingBoxes.find(
@@ -522,7 +517,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                           }}
                           color="inherit"
                           size="small"
-                          onClick={handleModifyReptileFeedingLogModalOpen.bind(null, new ReptileFeedingLog({ reptileID: reptile.id }))}
+                          onClick={onModifyReptileFeedingLogModalOpen.bind(null, reptile, new ReptileFeedingLog({ reptileID: reptile.id }))}
                         >
                           <AddIcon fontSize="small" />
                         </IconButton>
@@ -589,11 +584,6 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
           />
         </Box>
       </Card>
-      <ModifyFeedingLogModal
-        open={ModifyReptileFeedingLogModalToggle}
-        onClose={handleModifyReptileFeedingLogModalClose}
-        editableReptileFeedingLog={editableReptileFeedingLog}
-      />
     </>
   );
 };

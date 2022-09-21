@@ -1,8 +1,15 @@
-import React, { FC, useState, createContext, useContext } from 'react';
+import React, { FC, useState, createContext, useContext, useEffect } from 'react';
 import { ModalContext } from './ModalContext';
-import { Reptile, ReptileFeedingBoxIndexCollection, ReptileType, ReptileFeedingBox } from '../../models';
+import {
+  Reptile,
+  ReptileFeedingBoxIndexCollection,
+  ReptileType,
+  ReptileFeedingBox,
+  ReptileFeedingLog
+} from '../../models';
 import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
 import { ReptileFeedingLogTableModalContext } from './ReptileFeedingLogTableModalContext';
+import { ReptileFeedingLogContext } from '../ReptileFeedingLog/ReptileFeedingLogContext';
 type ReptileContext = {
   loading: boolean, // 是否正在获取数据
   currentUserDisplayedUsername: string, // 当前登陆用户用户名 TODO 提取公共Context
@@ -26,6 +33,7 @@ type ReptileContext = {
   viewableLogReptile: Reptile | undefined // 正在查看日志的Reptile
   handleViewableReptileLogModalOpen: (reptile: Reptile) => void // 打开正在查看日志的Reptile
   handleViewableReptileLogModalClose: () => void // 关闭正在查看日志的Reptile
+  handleModifyReptileFeedingLogModalOpenInReptileTable: (reptile: Reptile, reptileFeedingLog: ReptileFeedingLog) => void;
 };
 
 export const ReptileContext = createContext<ReptileContext>(
@@ -47,6 +55,34 @@ export const ReptileProvider: FC<{children: React.ReactNode}> = ({ children }) =
     closeReptileFeedingLogTableModal,
   } = useContext(ReptileFeedingLogTableModalContext);
   const [viewableLogReptile, setViewableLogReptile] = useState<Reptile | undefined>();
+
+  const {
+    ModalToggle: ModifyReptileFeedingLogModalOpenInReptileTableModalToggle,
+    reptileFeedingLogs,
+    handleModifyReptileFeedingLogModalOpen,
+    handleModifyReptileFeedingLogModalClose,
+  } = useContext(ReptileFeedingLogContext);
+
+  const [currentReptileFeedingLog, setCurrentReptileFeedingLog] = useState<ReptileFeedingLog | undefined>();
+
+  const handleModifyReptileFeedingLogModalOpenInReptileTable = (reptile: Reptile, reptileFeedingLog: ReptileFeedingLog) => {
+    handleViewableReptileLogModalOpen(reptile);
+    setCurrentReptileFeedingLog(reptileFeedingLog);
+  };
+
+  const handleModifyReptileFeedingLogModalCloseInReptileTable = () => {
+    setCurrentReptileFeedingLog(undefined);
+    handleModifyReptileFeedingLogModalClose();
+    handleViewableReptileLogModalClose();
+  };
+
+  useEffect(() => {
+    if (currentReptileFeedingLog) handleModifyReptileFeedingLogModalOpen(currentReptileFeedingLog);
+  }, [reptileFeedingLogs]);
+
+  useEffect(() => {
+    if (currentReptileFeedingLog && !ModifyReptileFeedingLogModalOpenInReptileTableModalToggle) handleModifyReptileFeedingLogModalCloseInReptileTable();
+  }, [ModifyReptileFeedingLogModalOpenInReptileTableModalToggle]);
 
   const {
     loading,
@@ -82,10 +118,7 @@ export const ReptileProvider: FC<{children: React.ReactNode}> = ({ children }) =
 
   const handleViewableReptileLogModalClose = () => {
     closeReptileFeedingLogTableModal();
-    // todo try more elegant way to clear viewable log reptile before the modal close(don't use useEffect)
-    setTimeout(() => {
-      setViewableLogReptile(undefined);
-    }, 100);
+    setViewableLogReptile(undefined);
   };
 
   const handleReptilesDelete = async (reptileIds: string[]) => {
@@ -116,6 +149,7 @@ export const ReptileProvider: FC<{children: React.ReactNode}> = ({ children }) =
         viewableLogReptile,
         handleViewableReptileLogModalClose,
         handleViewableReptileLogModalOpen,
+        handleModifyReptileFeedingLogModalOpenInReptileTable,
       }}
     >
       {children}
