@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="refactor the reptile module">
+    <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="fix business logic">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ModifyReptileModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ModifyReptileModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ReptileEditing.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ReptileEditing.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/Reptile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/Reptile.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layouts/ReptileTable/ReptilesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/ReptileTable/ReptilesTable.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/libs/reptile-repository/ReptileRepository.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/reptile-repository/ReptileRepository.tsx" afterDir="false" />
     </list>
@@ -161,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663768392012</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fix business logic">
+      <created>1663772091011</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1663772091011</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,6 +221,7 @@
     <MESSAGE value="fix text and icon issue, add header menu items." />
     <MESSAGE value="remove temp and humidity fields in feeding log" />
     <MESSAGE value="refactor the reptile module" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor the reptile module" />
+    <MESSAGE value="fix business logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix business logic" />
   </component>
 </project>

@@ -358,7 +358,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
                   render={
                     ({ field }) => <TextField
                       fullWidth
-                      placeholder="第几排"
+                      placeholder="第几层"
                       error={!!errors.horizontalIndex}
                       {...field}
                     />

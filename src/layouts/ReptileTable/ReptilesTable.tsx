@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useContext, useState } from 'react';
+import React, { ChangeEvent, FC, useState } from 'react';
 import {
   Box,
   Card,
@@ -6,7 +6,6 @@ import {
   Checkbox,
   Divider,
   FormControl,
-  IconButton,
   InputLabel,
   MenuItem,
   Select, SelectChangeEvent,
@@ -17,16 +16,10 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Tooltip,
   Typography,
-  useTheme
 } from '@mui/material';
 
 import Label from '../../components/Label';
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
-import LogIcon from '@mui/icons-material/CollectionsBookmark';
-import AddIcon from '@mui/icons-material/Add';
 
 import BulkActions from '../../components/BulkActions';
 
@@ -34,13 +27,11 @@ import {
   Reptile,
   ReptileFeedingBox,
   ReptileFeedingBoxIndexCollection,
-  ReptileFeedingBoxType, ReptileFeedingLog,
+  ReptileFeedingBoxType,
   ReptileType
 } from '../../models';
 import Stack from '@mui/material/Stack';
-import { deduplicateJSONStringList, generateHashNumberInRange } from '../../libs/util';
-import { ReptileFeedingLogContext } from '../../applications/ReptileFeedingLog/context/ReptileFeedingLogContext';
-import ModifyFeedingLogModal from '../../applications/ReptileFeedingLog/component/ModifyFeedingLogModal';
+import { deduplicateJSONStringList, generateHashNumber, generateHashNumberInRange } from '../../libs/util';
 
 interface ReptilesTableProps {
   className?: string;
@@ -163,7 +154,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
 
     if (reptileFeedingBox?.type === ReptileFeedingBoxType.BOX) return reptileFeedingBox?.name ?? '';
 
-    return reptileFeedingBox?.name + '第' + reptileFeedingBoxIndex?.horizontalIndex + '排';
+    return reptileFeedingBox?.name + '第' + reptileFeedingBoxIndex?.horizontalIndex + '层';
   };
 
   const reptileTypeOptions = insertDefaultOptions(
@@ -186,12 +177,27 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
   );
 
   const reptileFeedingBoxLayerOptions = insertDefaultOptions(
-    deduplicateJSONStringList(reptiles.map(
-      reptile => ({
-        id: getReptileFeedingBoxLayerName(reptile),
-        name: getReptileFeedingBoxLayerName(reptile)
-      })
-    ))
+    deduplicateJSONStringList(
+      reptiles
+        .sort(
+          (prevReptile, nextReptile) => {
+            if (generateHashNumber(prevReptile.reptileFeedingBoxID) > generateHashNumber(nextReptile.reptileFeedingBoxID)) return 1;
+            if (generateHashNumber(prevReptile.reptileFeedingBoxID) < generateHashNumber(nextReptile.reptileFeedingBoxID)) return -1;
+
+            const prevReptileFeedingBoxIndex = reptileFeedingBoxIndexes.find(reptileFeedingBoxIndex => reptileFeedingBoxIndex.id === prevReptile.reptileFeedingBoxIndexCollectionID);
+            const nextReptileFeedingBoxIndex = reptileFeedingBoxIndexes.find(reptileFeedingBoxIndex => reptileFeedingBoxIndex.id === nextReptile.reptileFeedingBoxIndexCollectionID);
+
+            if (prevReptileFeedingBoxIndex!.horizontalIndex! > nextReptileFeedingBoxIndex!.horizontalIndex!) return 1;
+            if (prevReptileFeedingBoxIndex!.horizontalIndex! < nextReptileFeedingBoxIndex!.horizontalIndex!) return -1;
+            return 0;
+          }
+        )
+        .map(reptile => ({
+          id: getReptileFeedingBoxLayerName(reptile),
+          name: getReptileFeedingBoxLayerName(reptile)
+        })
+        )
+    )
   );
 
   const handleReptileTypeChange = (e: SelectChangeEvent): void => {
@@ -267,7 +273,24 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
     setLimit(parseInt(event.target.value));
   };
 
-  const filteredReptileTypeReptiles = applyFilters(reptiles, reptileTypeFilters, 'reptileTypeID');
+  const reptileFeedingBoxIndexSortedReptiles = reptiles.sort(
+    (prevReptile, nextReptile) => {
+      const prevReptileFeedingBoxIndex = reptileFeedingBoxIndexes.find(reptileFeedingBoxIndex => reptileFeedingBoxIndex.id === prevReptile.reptileFeedingBoxIndexCollectionID);
+      const nextReptileFeedingBoxIndex = reptileFeedingBoxIndexes.find(reptileFeedingBoxIndex => reptileFeedingBoxIndex.id === nextReptile.reptileFeedingBoxIndexCollectionID);
+
+      if (generateHashNumber(prevReptile.reptileFeedingBoxID) > generateHashNumber(nextReptile.reptileFeedingBoxID)) return 1;
+      if (generateHashNumber(prevReptile.reptileFeedingBoxID) < generateHashNumber(nextReptile.reptileFeedingBoxID)) return -1;
+
+      if (prevReptileFeedingBoxIndex!.horizontalIndex! > nextReptileFeedingBoxIndex!.horizontalIndex!) return 1;
+      if (prevReptileFeedingBoxIndex!.horizontalIndex! < nextReptileFeedingBoxIndex!.horizontalIndex!) return -1;
+
+      if (prevReptileFeedingBoxIndex!.verticalIndex! > nextReptileFeedingBoxIndex!.verticalIndex!) return 1;
+      if (prevReptileFeedingBoxIndex!.verticalIndex! < nextReptileFeedingBoxIndex!.verticalIndex!) return -1;
+      return 0;
+    }
+  );
+
+  const filteredReptileTypeReptiles = applyFilters(reptileFeedingBoxIndexSortedReptiles, reptileTypeFilters, 'reptileTypeID');
   const filteredReptileNameReptiles = applyFilters(filteredReptileTypeReptiles, reptileNameFilters, 'name');
 
   const filteredFeedingBoxAndFeedingBoxLayerReptiles = applyFilters(
@@ -495,7 +518,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                             ? getTextLabel(
                               `第${
                                 reptileFeedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.horizontalIndex
-                              }排${
+                              }层${
                                 reptileFeedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.verticalIndex}列`
                             )
                             : ''

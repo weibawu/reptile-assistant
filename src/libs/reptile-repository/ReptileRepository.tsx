@@ -132,7 +132,9 @@ class ReptileRepository implements ReptileRepositoryProtocol {
     const reptiles = await DataStore.query(
       Reptile,
       (reptilePredicted) => reptilePredicted.userID('eq', username),
-      { sort: s => s.createdAt(SortDirection.DESCENDING) }
+      { sort:
+            s => s.createdAt(SortDirection.DESCENDING)
+      }
     );
     this.reptilesSubject.next(reptiles);
   }
