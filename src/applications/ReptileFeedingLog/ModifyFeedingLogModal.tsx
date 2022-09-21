@@ -201,9 +201,8 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
         detail: form.detail
       });
 
-      if (editableReptileFeedingLog && editableReptileFeedingLog.createdAt) await reptileRepository.updateReptileFeedingLog(reptileFeedingLogSaved.id, reptileFeedingLogSaved);
-      else await reptileRepository.createReptileFeedingLog(reptileFeedingLogSaved);
-
+      if (!editableReptileFeedingLog || !editableReptileFeedingLog.createdAt) await reptileRepository.createReptileFeedingLog(reptileFeedingLogSaved);
+      else await reptileRepository.updateReptileFeedingLog(editableReptileFeedingLog.id, reptileFeedingLogSaved);
 
       handleClose();
     } catch (e) {
