@@ -27,8 +27,8 @@ function Footer() {
           variant='subtitle1'
         >
           Crafted by{' '}
-          <Link href='#' target='_blank' rel='noopener noreferrer'>
-            weibawu.com
+          <Link href='https://tailhome.net' target='_blank' rel='noopener noreferrer'>
+            tailhome.net
           </Link>
         </Typography>
       </Box>

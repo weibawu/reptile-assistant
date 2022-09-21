@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="lint and reformat the codebase">
+    <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="hotfix format issue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ModifyReptileModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ModifyReptileModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/ModifyFeedingLogModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/ModifyFeedingLogModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/ModifyTemperatureAndHumidityLogModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/ModifyTemperatureAndHumidityLogModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/ModifyWeightLogModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/ModifyWeightLogModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663778770327</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="hotfix format issue">
+      <created>1663779542773</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1663779542773</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,6 +235,7 @@
     <MESSAGE value="refactor the reptile module" />
     <MESSAGE value="fix business logic" />
     <MESSAGE value="add temperature, humidity and weight log modules" />
-    <option name="LAST_COMMIT_MESSAGE" value="add temperature, humidity and weight log modules" />
+    <MESSAGE value="hotfix format issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="hotfix format issue" />
   </component>
 </project>
