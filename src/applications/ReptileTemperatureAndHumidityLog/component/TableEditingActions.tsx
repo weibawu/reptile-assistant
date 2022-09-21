@@ -4,17 +4,17 @@ import { IconButton, Tooltip, useTheme } from '@mui/material';
 import LogIcon from '@mui/icons-material/CollectionsBookmark';
 import AddIcon from '@mui/icons-material/Add';
 
-import { Reptile, ReptileFeedingLog } from '../../../models';
+import { Reptile, ReptileTemperatureAndHumidityLog } from '../../../models';
 
 interface TableEditingActionsProps {
-  onModifyReptileFeedingLogTableModalOpen: (reptile: Reptile) => any,
-  onModifyReptileFeedingLogEditingModalOpen: (reptile: Reptile, reptileFeedingLog: ReptileFeedingLog) => void;
+  onModifyReptileTemperatureAndHumidityLogTableModalOpen: (reptile: Reptile) => any,
+  onModifyReptileTemperatureAndHumidityLogEditingModalOpen: (reptile: Reptile, reptileTemperatureAndHumidityLog: ReptileTemperatureAndHumidityLog) => void;
   reptile: Reptile;
 }
 
 export const TableEditingActions: React.FC<TableEditingActionsProps> = ({
-  onModifyReptileFeedingLogEditingModalOpen,
-  onModifyReptileFeedingLogTableModalOpen,
+  onModifyReptileTemperatureAndHumidityLogEditingModalOpen,
+  onModifyReptileTemperatureAndHumidityLogTableModalOpen,
   reptile
 }) => {
 
@@ -22,32 +22,32 @@ export const TableEditingActions: React.FC<TableEditingActionsProps> = ({
 
   return (
     <>
-      <Tooltip title="添加饲育日志" arrow>
+      <Tooltip title="添加温湿度日志" arrow>
         <IconButton
           sx={{
             '&:hover': {
               background: theme.colors.primary.lighter
             },
-            color: theme.palette.success.main
+            color: theme.colors.warning.main
           }}
           color="inherit"
           size="small"
-          onClick={onModifyReptileFeedingLogEditingModalOpen.bind(null,reptile, new ReptileFeedingLog({ reptileID: reptile.id }))}
+          onClick={onModifyReptileTemperatureAndHumidityLogEditingModalOpen.bind(null,reptile, new ReptileTemperatureAndHumidityLog({ reptileID: reptile.id }))}
         >
           <AddIcon fontSize="small" />
         </IconButton>
       </Tooltip>
-      <Tooltip title="查看饲育日志" arrow>
+      <Tooltip title="查看温湿度日志" arrow>
         <IconButton
           sx={{
             '&:hover': {
               background: theme.colors.primary.lighter
             },
-            color: theme.palette.success.main
+            color: theme.colors.warning.main
           }}
           color="inherit"
           size="small"
-          onClick={onModifyReptileFeedingLogTableModalOpen.bind(null, reptile)}
+          onClick={onModifyReptileTemperatureAndHumidityLogTableModalOpen.bind(null, reptile)}
         >
           <LogIcon fontSize="small" />
         </IconButton>

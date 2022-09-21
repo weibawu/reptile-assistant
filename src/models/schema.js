@@ -120,8 +120,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "userId": {
-                    "name": "userId",
+                "userID": {
+                    "name": "userID",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -789,5 +789,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "0f143745addb7c0015c0e9d4bf3d25a4"
+    "version": "2b88297a0efb5719588031b87c9dbedb"
 };

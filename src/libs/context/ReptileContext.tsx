@@ -4,7 +4,7 @@ import {
   ReptileFeedingBoxIndexCollection,
   ReptileType,
   ReptileFeedingBox,
-  ReptileFeedingLog
+  ReptileFeedingLog, ReptileWeightLog, ReptileTemperatureAndHumidityLog
 } from '../../models';
 
 import { useReptileRepository } from '../reptile-repository/UseReptileRepository';
@@ -21,6 +21,8 @@ type ReptileContext = {
   reptileFeedingBoxes: ReptileFeedingBox[],
   reptileFeedingBoxIndexes: ReptileFeedingBoxIndexCollection[],
   reptileFeedingLogs: ReptileFeedingLog[],
+  reptileWeightLogs: ReptileWeightLog[],
+  reptileTemperatureAndHumidityLogs: ReptileTemperatureAndHumidityLog[],
   reptileRepository: ReptileRepository,
   currentUser: CognitoUserAmplify,
   currentUserDisplayedUsername: string,
@@ -40,6 +42,8 @@ export const ReptileProvider: FC<{children: React.ReactNode}> = ({ children }) =
     reptileFeedingBoxes,
     reptileFeedingBoxIndexes,
     reptileFeedingLogs,
+    reptileWeightLogs,
+    reptileTemperatureAndHumidityLogs,
     reptileRepository
   } = useReptileRepository();
 
@@ -64,6 +68,8 @@ export const ReptileProvider: FC<{children: React.ReactNode}> = ({ children }) =
         reptileFeedingBoxes,
         reptileFeedingBoxIndexes,
         reptileFeedingLogs,
+        reptileWeightLogs,
+        reptileTemperatureAndHumidityLogs,
         reptileRepository,
         currentUser,
         currentUserDisplayedUsername,

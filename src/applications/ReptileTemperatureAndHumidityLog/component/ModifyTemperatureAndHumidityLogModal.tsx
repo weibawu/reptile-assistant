@@ -22,32 +22,32 @@ import { DateTimePicker } from '@mui/x-date-pickers';
 import { deduplicateJSONStringList } from '../../../libs/util';
 import { useReptileRepository } from '../../../libs/reptile-repository/UseReptileRepository';
 
-import { ReptileFeedingBoxType, ReptileFeedingLog } from '../../../models';
+import { ReptileFeedingBoxType, ReptileTemperatureAndHumidityLog } from "../../../models";
 
-export interface ReptileFeedingLogModificationModalProps {
+export interface ReptileTemperatureAndHumidityLogModificationModalProps {
   open: boolean;
   onClose: () => void;
-  editableReptileFeedingLog?: ReptileFeedingLog;
+  editableReptileTemperatureAndHumidityLog?: ReptileTemperatureAndHumidityLog;
 }
 
 type AnySelectOption<T> = { label: string, value: T };
 
-interface ReptileFeedingLogCreationFormProps {
+interface ReptileTemperatureAndHumidityLogCreationFormProps {
   reptileFeedingBoxId: AnySelectOption<string>,
   reptileFeedingBoxLayerIds: AnySelectOption<string>,
   reptileId: AnySelectOption<string>,
   weight: number,
   environmentHumidity: number,
   environmentTemperature: number,
-  reptileFeedingDateTime: string,
+  meteringDateTime: string,
   detail: string,
 }
 
-function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalProps) {
+function ModifyReptileTemperatureAndHumidityLogModal(props: ReptileTemperatureAndHumidityLogModificationModalProps) {
   const {
     onClose,
     open,
-    editableReptileFeedingLog
+    editableReptileTemperatureAndHumidityLog
   } = props;
 
   const {
@@ -67,7 +67,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
     watch,
     setValue,
     formState: { errors }
-  } = useForm<ReptileFeedingLogCreationFormProps>({
+  } = useForm<ReptileTemperatureAndHumidityLogCreationFormProps>({
     defaultValues: {
       reptileFeedingBoxId: { value: '' } as AnySelectOption<any>,
       reptileFeedingBoxLayerIds: { value: '{}' } as AnySelectOption<any>,
@@ -75,7 +75,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
       weight: '' as unknown as number,
       environmentHumidity: '' as unknown as number,
       environmentTemperature: '' as unknown as number,
-      reptileFeedingDateTime: `${new Date().toISOString()}`,
+      meteringDateTime: `${new Date().toISOString()}`,
       detail: ''
     },
     resolver: yupResolver(validationSchema)
@@ -135,14 +135,12 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
     onClose();
   };
 
-  const handleEditableReptileFeedingLogPreset = () => {
-    editableReptileFeedingLog?.weight && setValue('weight', editableReptileFeedingLog.weight);
-    editableReptileFeedingLog?.environmentTemperature && setValue('environmentTemperature', editableReptileFeedingLog.environmentTemperature);
-    editableReptileFeedingLog?.environmentHumidity && setValue('environmentHumidity', editableReptileFeedingLog.environmentHumidity);
-    editableReptileFeedingLog?.feedingDateTime && setValue('reptileFeedingDateTime', editableReptileFeedingLog.feedingDateTime);
-    editableReptileFeedingLog?.detail && setValue('detail', editableReptileFeedingLog.detail);
+  const handleEditableReptileTemperatureAndHumidityLogPreset = () => {
+    editableReptileTemperatureAndHumidityLog?.environmentTemperature && setValue('environmentTemperature', editableReptileTemperatureAndHumidityLog.environmentTemperature);
+    editableReptileTemperatureAndHumidityLog?.environmentHumidity && setValue('environmentHumidity', editableReptileTemperatureAndHumidityLog.environmentHumidity);
+    editableReptileTemperatureAndHumidityLog?.meteringDateTime && setValue('meteringDateTime', editableReptileTemperatureAndHumidityLog.meteringDateTime);
 
-    const editableReptile = reptiles.find(reptile => reptile.id === editableReptileFeedingLog?.reptileID);
+    const editableReptile = reptiles.find(reptile => reptile.id === editableReptileTemperatureAndHumidityLog?.reptileID);
     const editableReptileBelongedReptileFeedingBox = reptileFeedingBoxes.find(reptileFeedingBox => reptileFeedingBox.id === editableReptile?.reptileFeedingBoxID);
     const editableReptileBelongedReptileFeedingBoxIndex = reptileFeedingBoxIndexes.find(reptileFeedingBoxIndex => reptileFeedingBoxIndex.id === editableReptile?.reptileFeedingBoxIndexCollectionID);
 
@@ -189,28 +187,26 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
     }
   };
 
-  const onSubmit = async (form: ReptileFeedingLogCreationFormProps) => {
+  const onSubmit = async (form: ReptileTemperatureAndHumidityLogCreationFormProps) => {
     try {
-      const reptileFeedingLogSaved = new ReptileFeedingLog({
+      const reptileTemperatureAndHumidityLogSaved = new ReptileTemperatureAndHumidityLog({
         reptileID: form.reptileId.value,
         userID: currentUser.username,
-        weight: Number(form.weight),
-        environmentHumidity: Number(form.environmentHumidity),
         environmentTemperature: Number(form.environmentTemperature),
-        feedingDateTime: new Date(form.reptileFeedingDateTime).toISOString(),
-        detail: form.detail
+        environmentHumidity: Number(form.environmentHumidity),
+        meteringDateTime: new Date(form.meteringDateTime).toISOString(),
       });
 
-      if (!editableReptileFeedingLog || !editableReptileFeedingLog.createdAt) await reptileRepository.createReptileFeedingLog(reptileFeedingLogSaved);
-      else await reptileRepository.updateReptileFeedingLog(editableReptileFeedingLog.id, reptileFeedingLogSaved);
+      if (!editableReptileTemperatureAndHumidityLog || !editableReptileTemperatureAndHumidityLog.createdAt) await reptileRepository.createReptileTemperatureAndHumidityLog(reptileTemperatureAndHumidityLogSaved);
+      else await reptileRepository.updateReptileTemperatureAndHumidityLog(editableReptileTemperatureAndHumidityLog.id, reptileTemperatureAndHumidityLogSaved);
 
       handleClose();
     } catch (e) {
-      console.error('created or updated reptileFeeding box error:', e);
+      console.error('created or updated reptileTemperatureAndHumidity box error:', e);
     }
   };
 
-  useEffect(handleEditableReptileFeedingLogPreset, [editableReptileFeedingLog]);
+  useEffect(handleEditableReptileTemperatureAndHumidityLogPreset, [editableReptileTemperatureAndHumidityLog]);
 
   return (
     <Dialog onClose={handleClose} open={open}>
@@ -223,7 +219,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
               <Controller
                 render={
                   () => <Select
-                    disabled={!!editableReptileFeedingLog}
+                    disabled={!!editableReptileTemperatureAndHumidityLog}
                     onChange={e => setValue('reptileFeedingBoxId', reptileFeedingBoxOptions.find(reptileFeedingBoxOption => reptileFeedingBoxOption.value === e.target.value)!, { shouldValidate: true })}
                     value={watch('reptileFeedingBoxId.value')}
                     labelId="reptileFeedingBoxId"
@@ -253,7 +249,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
                 <Controller
                   render={
                     () => <Select
-                      disabled={!!editableReptileFeedingLog}
+                      disabled={!!editableReptileTemperatureAndHumidityLog}
                       onChange={e => setValue('reptileFeedingBoxLayerIds', reptileFeedingBoxLayerOptions.find(reptileFeedingBoxLayerOption => reptileFeedingBoxLayerOption.value === e.target.value)!, { shouldValidate: true })}
                       value={watch('reptileFeedingBoxLayerIds.value')}
                       labelId="reptileFeedingBoxLayerIds"
@@ -285,7 +281,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
                 <Controller
                   render={
                     () => <Select
-                      disabled={!!editableReptileFeedingLog}
+                      disabled={!!editableReptileTemperatureAndHumidityLog}
                       onChange={e => setValue('reptileId', reptileOptions.find(reptileOption => reptileOption.value === e.target.value)!, { shouldValidate: true })}
                       value={watch('reptileId.value')}
                       labelId="reptileId"
@@ -311,56 +307,14 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
               </FormControl>
               : null
             }
-            {/*{watch('reptileId.value') ? <Controller*/}
-            {/*  name="weight"*/}
-            {/*  control={control}*/}
-            {/*  render={*/}
-            {/*    ({ field }) => (*/}
-            {/*      <TextField*/}
-            {/*        placeholder={'当前体重(g)'}*/}
-            {/*        {...field}*/}
-            {/*      />*/}
-            {/*    )*/}
-            {/*  }*/}
-            {/*/>*/}
-            {/*  : null*/}
-            {/*}*/}
-            {/*{watch('reptileId.value') ? <Controller*/}
-            {/*  name="environmentHumidity"*/}
-            {/*  control={control}*/}
-            {/*  render={*/}
-            {/*    ({ field }) => (*/}
-            {/*      <TextField*/}
-            {/*        placeholder={'环境湿度(%)'}*/}
-            {/*        {...field}*/}
-            {/*      />*/}
-            {/*    )*/}
-            {/*  }*/}
-            {/*/>*/}
-            {/*  : null*/}
-            {/*}*/}
-            {/*{watch('reptileId.value') ? <Controller*/}
-            {/*  name="environmentTemperature"*/}
-            {/*  control={control}*/}
-            {/*  render={*/}
-            {/*    ({ field }) => (*/}
-            {/*      <TextField*/}
-            {/*        placeholder={'环境温度(℃)'}*/}
-            {/*        {...field}*/}
-            {/*      />*/}
-            {/*    )*/}
-            {/*  }*/}
-            {/*/>*/}
-            {/*  : null*/}
-            {/*}*/}
             {watch('reptileId.value') ? <Controller
-              name="reptileFeedingDateTime"
+              name="meteringDateTime"
               control={control}
               render={
                 ({ field }) => (
                   <DateTimePicker
                     {...field}
-                    label={'喂食时间'}
+                    label={'测量时间'}
                     renderInput={(params) => (
                       <TextField
                         sx={{ zIndex: 0 }}
@@ -374,14 +328,26 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
               : null
             }
             {watch('reptileId.value') ? <Controller
-              name="detail"
+              name="environmentTemperature"
               control={control}
               render={
                 ({ field }) => (
                   <TextField
-                    multiline
-                    minRows={5}
-                    placeholder={'喂食详情'}
+                    placeholder={'环境温度(℃)'}
+                    {...field}
+                  />
+                )
+              }
+            />
+              : null
+            }
+            {watch('reptileId.value') ? <Controller
+              name="environmentHumidity"
+              control={control}
+              render={
+                ({ field }) => (
+                  <TextField
+                    placeholder={'环境湿度(%)'}
                     {...field}
                   />
                 )
@@ -399,4 +365,4 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
   );
 }
 
-export default ModifyReptileFeedingLogModal;
+export default ModifyReptileTemperatureAndHumidityLogModal;

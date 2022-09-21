@@ -60,7 +60,7 @@ export declare class ReptileWeightLog {
   readonly id: string;
   readonly weight?: number | null;
   readonly meteringDateTime?: string | null;
-  readonly userId?: string | null;
+  readonly userID?: string | null;
   readonly reptileID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

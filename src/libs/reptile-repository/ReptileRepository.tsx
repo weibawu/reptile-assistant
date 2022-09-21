@@ -3,8 +3,8 @@ import {
   Reptile,
   ReptileFeedingBox,
   ReptileFeedingBoxIndexCollection,
-  ReptileFeedingLog,
-  ReptileType
+  ReptileFeedingLog, ReptileTemperatureAndHumidityLog,
+  ReptileType, ReptileWeightLog
 } from '../../models';
 import { Subject } from 'rxjs';
 import {
@@ -18,6 +18,8 @@ interface ReptileRepositoryProtocol {
   readonly reptileFeedingBoxesSubject: Subject<ReptileFeedingBox[]>;
   readonly reptileFeedingBoxIndexesSubject: Subject<ReptileFeedingBoxIndexCollection[]>;
   readonly reptileFeedingLogsSubject: Subject<ReptileFeedingLog[]>;
+  readonly reptileWeightLogsSubject: Subject<ReptileWeightLog[]>;
+  readonly reptileTemperatureAndHumidityLogsSubject: Subject<ReptileTemperatureAndHumidityLog[]>;
 
   /*methods*/
   readonly fetchAll: () => Promise<void>;
@@ -26,6 +28,8 @@ interface ReptileRepositoryProtocol {
   readonly fetchReptileFeedingBoxes: () => Promise<void>;
   readonly fetchReptileFeedingBoxIndexes: () => Promise<void>;
   readonly fetchReptileFeedingLogs: () => Promise<void>;
+  readonly fetchReptileWeightLogs: () => Promise<void>;
+  readonly fetchReptileTemperatureAndHumidityLogs: () => Promise<void>;
 
   readonly createReptile: (
     reptile: Reptile
@@ -42,6 +46,14 @@ interface ReptileRepositoryProtocol {
   readonly createReptileFeedingLog: (
     reptileFeedingLog: ReptileFeedingLog
   ) => Promise<ReptileFeedingLog>;
+
+  readonly createReptileWeightLog: (
+    reptileWeightLog: ReptileWeightLog
+  ) => Promise<ReptileWeightLog>;
+
+  readonly createReptileTemperatureAndHumidityLog: (
+    reptileTemperatureAndHumidityLog: ReptileTemperatureAndHumidityLog
+  ) => Promise<ReptileTemperatureAndHumidityLog>;
 
   readonly updateReptile: (
     reptileID: string,
@@ -63,6 +75,16 @@ interface ReptileRepositoryProtocol {
     reptileFeedingLog: ReptileFeedingLog
   ) => Promise<ReptileFeedingLog>;
 
+  readonly updateReptileWeightLog: (
+    reptileWeightLogID: string,
+    reptileWeightLog: ReptileFeedingLog
+  ) => Promise<ReptileWeightLog>;
+
+  readonly updateReptileTemperatureAndHumidityLog: (
+    reptileTemperatureAndHumidityLogID: string,
+    reptileTemperatureAndHumidityLog: ReptileTemperatureAndHumidityLog
+  ) => Promise<ReptileTemperatureAndHumidityLog>;
+
   readonly removeReptile: (
     reptileID: string
   ) => Promise<boolean>;
@@ -79,12 +101,22 @@ interface ReptileRepositoryProtocol {
     reptileFeedingLogID: string
   ) => Promise<boolean>;
 
+  readonly removeReptileWeightLog: (
+    reptileTemperatureAndHumidityLogID: string
+  ) => Promise<boolean>;
+
+  readonly removeReptileTemperatureAndHumidityLog: (
+    reptileTemperatureAndHumidityLogID: string
+  ) => Promise<boolean>;
+
   /*events*/
   readonly onReptilesFetched: (callback: (reptiles: Reptile[]) => unknown) => void;
   readonly onReptileTypesFetched: (callback: (reptileTypes: ReptileType[]) => unknown) => void;
   readonly onReptileFeedingBoxesFetched: (callback: (reptileFeedingBoxes: ReptileFeedingBox[]) => unknown) => void;
   readonly onReptileFeedingBoxIndexesFetched: (callback: (reptileFeedingBoxIndexes: ReptileFeedingBoxIndexCollection[]) => unknown) => void;
   readonly onReptileFeedingLogsFetched: (callback: (reptileFeedingLogs: ReptileFeedingLog[]) => unknown) => void;
+  readonly onReptileWeightLogsFetched: (callback: (reptileWeightLogs: ReptileWeightLog[]) => unknown) => void;
+  readonly onReptileTemperatureAndHumidityLogsFetched: (callback: (reptileTemperatureAndHumidityLogs: ReptileTemperatureAndHumidityLog[]) => unknown) => void;
 
   /* util functions */
   readonly findReptileFeedingBoxIndexesByVerticalIndex: (
@@ -115,6 +147,8 @@ class ReptileRepository implements ReptileRepositoryProtocol {
   readonly reptileFeedingBoxesSubject: Subject<ReptileFeedingBox[]> = new Subject();
   readonly reptileFeedingBoxIndexesSubject: Subject<ReptileFeedingBoxIndexCollection[]> = new Subject();
   readonly reptileFeedingLogsSubject: Subject<ReptileFeedingLog[]> = new Subject();
+  readonly reptileWeightLogsSubject: Subject<ReptileWeightLog[]> = new Subject();
+  readonly reptileTemperatureAndHumidityLogsSubject: Subject<ReptileTemperatureAndHumidityLog[]> = new Subject();
 
   async fetchAll(): Promise<void> {
     await this.fetchReptiles();
@@ -122,6 +156,8 @@ class ReptileRepository implements ReptileRepositoryProtocol {
     await this.fetchReptileFeedingBoxes();
     await this.fetchReptileFeedingBoxIndexes();
     await this.fetchReptileFeedingLogs();
+    await this.fetchReptileWeightLogs();
+    await this.fetchReptileTemperatureAndHumidityLogs();
   }
 
   async fetchReptiles(): Promise<void> {
@@ -196,6 +232,32 @@ class ReptileRepository implements ReptileRepositoryProtocol {
     this.reptileFeedingLogsSubject.next(reptileFeedingLogs);
   }
 
+  async fetchReptileWeightLogs(): Promise<void> {
+    if (!this.currentUser || !this.currentUser.username) return;
+
+    const username = this.currentUser.username;
+
+    const reptileWeightLogs = await DataStore.query(
+      ReptileWeightLog,
+      (reptileWeightLogPredicted) => reptileWeightLogPredicted.userID('eq', username),
+      { sort: s => s.createdAt(SortDirection.DESCENDING) }
+    );
+    this.reptileWeightLogsSubject.next(reptileWeightLogs);
+  }
+
+  async fetchReptileTemperatureAndHumidityLogs(): Promise<void> {
+    if (!this.currentUser || !this.currentUser.username) return;
+
+    const username = this.currentUser.username;
+
+    const reptileTemperatureAndHumidityLogs = await DataStore.query(
+      ReptileTemperatureAndHumidityLog,
+      (reptileTemperatureAndHumidityLogPredicted) => reptileTemperatureAndHumidityLogPredicted.userID('eq', username),
+      { sort: s => s.createdAt(SortDirection.DESCENDING) }
+    );
+    this.reptileTemperatureAndHumidityLogsSubject.next(reptileTemperatureAndHumidityLogs);
+  }
+
   onReptilesFetched(callback: (reptiles: Reptile[]) => unknown): void {
     this.reptilesSubject.subscribe(
       reptiles => callback(reptiles)
@@ -226,6 +288,18 @@ class ReptileRepository implements ReptileRepositoryProtocol {
     );
   }
 
+  onReptileWeightLogsFetched(callback: (reptileWeightLogs: ReptileWeightLog[]) => unknown): void {
+    this.reptileWeightLogsSubject.subscribe(
+      reptileWeightLogs => callback(reptileWeightLogs)
+    );
+  }
+
+  onReptileTemperatureAndHumidityLogsFetched(callback: (reptileTemperatureAndHumidityLogs: ReptileTemperatureAndHumidityLog[]) => unknown): void {
+    this.reptileTemperatureAndHumidityLogsSubject.subscribe(
+      reptileTemperatureAndHumidityLogs => callback(reptileTemperatureAndHumidityLogs)
+    );
+  }
+
   async createReptile(reptile: Reptile): Promise<Reptile> {
     await DataStore.save(reptile);
     await this.fetchAll();
@@ -248,6 +322,18 @@ class ReptileRepository implements ReptileRepositoryProtocol {
     await DataStore.save(reptileFeedingLog);
     await this.fetchAll();
     return reptileFeedingLog;
+  }
+
+  async createReptileWeightLog(reptileWeightLog: ReptileWeightLog): Promise<ReptileWeightLog> {
+    await DataStore.save(reptileWeightLog);
+    await this.fetchAll();
+    return reptileWeightLog;
+  }
+
+  async createReptileTemperatureAndHumidityLog(reptileTemperatureAndHumidityLog: ReptileTemperatureAndHumidityLog): Promise<ReptileTemperatureAndHumidityLog> {
+    await DataStore.save(reptileTemperatureAndHumidityLog);
+    await this.fetchAll();
+    return reptileTemperatureAndHumidityLog;
   }
 
   async updateReptile(reptileID: string, reptile: Reptile): Promise<Reptile> {
@@ -339,6 +425,47 @@ class ReptileRepository implements ReptileRepositoryProtocol {
     return reptileFeedingLog;
   }
 
+  async updateReptileWeightLog(reptileWeightLogID: string, reptileWeightLog: ReptileWeightLog): Promise<ReptileWeightLog> {
+    const originalReptileWeightLog = await DataStore.query(ReptileWeightLog, reptileWeightLogID);
+    if (!originalReptileWeightLog) throw new Error('update reptile feeding box failed');
+
+    await DataStore.save(
+      ReptileWeightLog.copyOf(
+        originalReptileWeightLog,
+        updated => {
+          updated.reptileID = reptileWeightLog.reptileID;
+          updated.meteringDateTime = reptileWeightLog.meteringDateTime;
+          updated.weight = reptileWeightLog.weight;
+        }
+      )
+    );
+
+    await this.fetchAll();
+
+    return reptileWeightLog;
+  }
+
+  async updateReptileTemperatureAndHumidityLog(reptileTemperatureAndHumidityLogID: string, reptileTemperatureAndHumidityLog: ReptileTemperatureAndHumidityLog): Promise<ReptileTemperatureAndHumidityLog> {
+    const originalReptileTemperatureAndHumidityLog = await DataStore.query(ReptileTemperatureAndHumidityLog, reptileTemperatureAndHumidityLogID);
+    if (!originalReptileTemperatureAndHumidityLog) throw new Error('update reptile feeding box failed');
+
+    await DataStore.save(
+      ReptileTemperatureAndHumidityLog.copyOf(
+        originalReptileTemperatureAndHumidityLog,
+        updated => {
+          updated.environmentHumidity = reptileTemperatureAndHumidityLog.environmentHumidity;
+          updated.environmentTemperature = reptileTemperatureAndHumidityLog.environmentTemperature;
+          updated.meteringDateTime = reptileTemperatureAndHumidityLog.meteringDateTime;
+          updated.reptileID = reptileTemperatureAndHumidityLog.reptileID;
+        }
+      )
+    );
+
+    await this.fetchAll();
+
+    return reptileTemperatureAndHumidityLog;
+  }
+
   async removeReptile(reptileID: string): Promise<boolean> {
     await DataStore.delete(Reptile, reptileID);
     await this.fetchAll();
@@ -359,6 +486,18 @@ class ReptileRepository implements ReptileRepositoryProtocol {
 
   async removeReptileFeedingLog(reptileFeedingLogID: string): Promise<boolean> {
     await DataStore.delete(ReptileFeedingLog, reptileFeedingLogID);
+    await this.fetchAll();
+    return true;
+  }
+
+  async removeReptileWeightLog(reptileWeightLogID: string): Promise<boolean> {
+    await DataStore.delete(ReptileWeightLog, reptileWeightLogID);
+    await this.fetchAll();
+    return true;
+  }
+
+  async removeReptileTemperatureAndHumidityLog(reptileTemperatureAndHumidityLogID: string): Promise<boolean> {
+    await DataStore.delete(ReptileTemperatureAndHumidityLog, reptileTemperatureAndHumidityLogID);
     await this.fetchAll();
     return true;
   }

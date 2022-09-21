@@ -2,10 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="fix business logic">
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/ModifyTemperatureAndHumidityLogModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/Reptile.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/ReptileTemperatureAndHumidityLogTableModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/ReptileTemperatureAndHumidityLogs.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/ReptileTemperatureAndHumidityLogsTable.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/TableEditingActions.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/context/ModalContext.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/context/ReptileTemperatureAndHumidityLogContext.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/context/ReptileTemperatureAndHumidityLogTableModalContext.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/ModifyWeightLogModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/Reptile.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/ReptileWeightLogTableModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/ReptileWeightLogs.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/ReptileWeightLogsTable.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/TableEditingActions.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/context/ModalContext.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/context/ReptileWeightLogContext.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/context/ReptileWeightLogTableModalContext.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ModifyReptileModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ModifyReptileModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/.config/project-config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/cli.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/team-provider-info.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/ModifyFeedingLogModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/ModifyFeedingLogModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/TableEditingActions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/TableEditingActions.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layouts/ReptileTable/ReptilesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/ReptileTable/ReptilesTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/context/ReptileContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/context/ReptileContext.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/libs/reptile-repository/ReptileRepository.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/reptile-repository/ReptileRepository.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/reptile-repository/UseReptileRepository.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/reptile-repository/UseReptileRepository.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/schema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,31 +66,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;TF_FMT&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/kuku/Tailhome/repos/reptile-assistant-v2/src/applications/Reptile/pages/ReptileFeedingLog/component&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/kuku/Tailhome/repos/reptile-assistant/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.notifications&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/kuku/Tailhome/repos/reptile-assistant-v2/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TF_FMT": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "js.linters.configure.manually.selectedeslint": "true",
+    "last_opened_file_path": "/Users/kuku/Tailhome/repos/reptile-assistant-v2/src/applications",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/kuku/Tailhome/repos/reptile-assistant/node_modules/prettier",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.notifications",
+    "ts.external.directory.path": "/Users/kuku/Tailhome/repos/reptile-assistant-v2/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/applications" />
       <recent name="$PROJECT_DIR$/src/applications/Reptile/pages/ReptileFeedingLog/component" />
       <recent name="$PROJECT_DIR$/src/applications/Reptile/pages/ReptileFeedingLog" />
-      <recent name="$PROJECT_DIR$/src/applications" />
       <recent name="$PROJECT_DIR$/src/applications/ReptileFeedingLog" />
       <recent name="$PROJECT_DIR$/src/applications/ReptileFeedingBox" />
     </key>

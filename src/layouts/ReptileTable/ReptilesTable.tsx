@@ -329,11 +329,11 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
             action={
               <Stack direction={'row'} justifyContent={'space-around'} width={500}>
                 <FormControl variant="outlined">
-                  <InputLabel>爬柜</InputLabel>
+                  <InputLabel>饲育容器</InputLabel>
                   <Select
                     value={reptileFeedingBoxLayerFilters.value || 'all'}
                     onChange={handleReptileFeedingBoxLayerChange}
-                    label="爬柜"
+                    label="饲育容器"
                     autoWidth
                   >
                     {reptileFeedingBoxLayerOptions.map((statusOption) => (

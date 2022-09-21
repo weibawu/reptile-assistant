@@ -21,6 +21,12 @@ const ReptileFeedingBox = Loader(
 const ReptileFeedingLog = Loader(
   lazy(() => import('./applications/ReptileFeedingLog'))
 );
+const ReptileWeightLog = Loader(
+  lazy(() => import('./applications/ReptileWeightLog'))
+);
+const ReptileTemperatureAndHumidityLog = Loader(
+  lazy(() => import('./applications/ReptileTemperatureAndHumidityLog'))
+);
 const Reptile = Loader(
   lazy(() => import('./applications/ReptileEditing'))
 );
@@ -42,10 +48,6 @@ const routes: RouteObject[] = [
         path: 'feeding-box/overview',
         element: <ReptileFeedingBox />
       },
-      // {
-      //   path: 'feeding-box/overview',
-      //   element: <div>开发中 ( ´▽｀)</div>
-      // },
       {
         path: 'reptile',
         element: <Navigate to="overview" replace />
@@ -56,11 +58,11 @@ const routes: RouteObject[] = [
       },
       {
         path: 'reptile/temperature-and-humidity-logs',
-        element: <ReptileFeedingLog />
+        element: <ReptileTemperatureAndHumidityLog />
       },
       {
         path: 'reptile/weight-logs',
-        element: <ReptileFeedingLog />
+        element: <ReptileWeightLog />
       },
       {
         path: 'reptile/feeding-logs',
