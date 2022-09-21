@@ -155,9 +155,6 @@ const ReptileFeedingLogsTable: FC<ReptileFeedingLogsTableProps> =
                 <TableCell>品系名</TableCell>
                 <TableCell>性别</TableCell>
                 <TableCell>基因</TableCell>
-                <TableCell><strong>体重(g)</strong></TableCell>
-                <TableCell><strong>温度</strong></TableCell>
-                <TableCell><strong>湿度</strong></TableCell>
                 <TableCell><strong>日志详情</strong></TableCell>
                 <TableCell>记录时间</TableCell>
                 <TableCell align="right">操作</TableCell>
@@ -217,39 +214,39 @@ const ReptileFeedingLogsTable: FC<ReptileFeedingLogsTableProps> =
                         {(getReptileFromReptileFeedingLog(reptileFeedingLog).genies ?? []).map(genie => getTextLabel(genie!))}
                       </Typography>
                     </TableCell>
-                    <TableCell>
-                      <Typography
-                        variant="body1"
-                        fontWeight="bold"
-                        color="text.primary"
-                        gutterBottom
-                        noWrap
-                      >
-                        {reptileFeedingLog.weight}g
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography
-                        variant="body1"
-                        fontWeight="bold"
-                        color="text.primary"
-                        gutterBottom
-                        noWrap
-                      >
-                        {reptileFeedingLog.environmentTemperature}℃
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography
-                        variant="body1"
-                        fontWeight="bold"
-                        color="text.primary"
-                        gutterBottom
-                        noWrap
-                      >
-                        {reptileFeedingLog.environmentHumidity}%
-                      </Typography>
-                    </TableCell>
+                    {/*<TableCell>*/}
+                    {/*  <Typography*/}
+                    {/*    variant="body1"*/}
+                    {/*    fontWeight="bold"*/}
+                    {/*    color="text.primary"*/}
+                    {/*    gutterBottom*/}
+                    {/*    noWrap*/}
+                    {/*  >*/}
+                    {/*    {reptileFeedingLog.weight}g*/}
+                    {/*  </Typography>*/}
+                    {/*</TableCell>*/}
+                    {/*<TableCell>*/}
+                    {/*  <Typography*/}
+                    {/*    variant="body1"*/}
+                    {/*    fontWeight="bold"*/}
+                    {/*    color="text.primary"*/}
+                    {/*    gutterBottom*/}
+                    {/*    noWrap*/}
+                    {/*  >*/}
+                    {/*    {reptileFeedingLog.environmentTemperature}℃*/}
+                    {/*  </Typography>*/}
+                    {/*</TableCell>*/}
+                    {/*<TableCell>*/}
+                    {/*  <Typography*/}
+                    {/*    variant="body1"*/}
+                    {/*    fontWeight="bold"*/}
+                    {/*    color="text.primary"*/}
+                    {/*    gutterBottom*/}
+                    {/*    noWrap*/}
+                    {/*  >*/}
+                    {/*    {reptileFeedingLog.environmentHumidity}%*/}
+                    {/*  </Typography>*/}
+                    {/*</TableCell>*/}
                     <TableCell>
                       <Typography
                         variant="body1"

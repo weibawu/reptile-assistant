@@ -217,7 +217,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogTitle>创建新日志</DialogTitle>
         <DialogContent>
-          <Stack spacing={1} sx={{ height: 600, minWidth: 180, paddingTop: 1 }}>
+          <Stack spacing={1} sx={{ height: 400, minWidth: 180, paddingTop: 1 }}>
             <FormControl>
               <InputLabel id="reptileFeedingBoxId">饲育容器</InputLabel>
               <Controller
@@ -311,48 +311,48 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
               </FormControl>
               : null
             }
-            {watch('reptileId.value') ? <Controller
-              name="weight"
-              control={control}
-              render={
-                ({ field }) => (
-                  <TextField
-                    placeholder={'当前体重(g)'}
-                    {...field}
-                  />
-                )
-              }
-            />
-              : null
-            }
-            {watch('reptileId.value') ? <Controller
-              name="environmentHumidity"
-              control={control}
-              render={
-                ({ field }) => (
-                  <TextField
-                    placeholder={'环境湿度(%)'}
-                    {...field}
-                  />
-                )
-              }
-            />
-              : null
-            }
-            {watch('reptileId.value') ? <Controller
-              name="environmentTemperature"
-              control={control}
-              render={
-                ({ field }) => (
-                  <TextField
-                    placeholder={'环境温度(℃)'}
-                    {...field}
-                  />
-                )
-              }
-            />
-              : null
-            }
+            {/*{watch('reptileId.value') ? <Controller*/}
+            {/*  name="weight"*/}
+            {/*  control={control}*/}
+            {/*  render={*/}
+            {/*    ({ field }) => (*/}
+            {/*      <TextField*/}
+            {/*        placeholder={'当前体重(g)'}*/}
+            {/*        {...field}*/}
+            {/*      />*/}
+            {/*    )*/}
+            {/*  }*/}
+            {/*/>*/}
+            {/*  : null*/}
+            {/*}*/}
+            {/*{watch('reptileId.value') ? <Controller*/}
+            {/*  name="environmentHumidity"*/}
+            {/*  control={control}*/}
+            {/*  render={*/}
+            {/*    ({ field }) => (*/}
+            {/*      <TextField*/}
+            {/*        placeholder={'环境湿度(%)'}*/}
+            {/*        {...field}*/}
+            {/*      />*/}
+            {/*    )*/}
+            {/*  }*/}
+            {/*/>*/}
+            {/*  : null*/}
+            {/*}*/}
+            {/*{watch('reptileId.value') ? <Controller*/}
+            {/*  name="environmentTemperature"*/}
+            {/*  control={control}*/}
+            {/*  render={*/}
+            {/*    ({ field }) => (*/}
+            {/*      <TextField*/}
+            {/*        placeholder={'环境温度(℃)'}*/}
+            {/*        {...field}*/}
+            {/*      />*/}
+            {/*    )*/}
+            {/*  }*/}
+            {/*/>*/}
+            {/*  : null*/}
+            {/*}*/}
             {watch('reptileId.value') ? <Controller
               name="reptileFeedingDateTime"
               control={control}
@@ -380,7 +380,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
                 ({ field }) => (
                   <TextField
                     multiline
-                    minRows={2}
+                    minRows={5}
                     placeholder={'喂食详情'}
                     {...field}
                   />
