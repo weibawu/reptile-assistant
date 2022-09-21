@@ -65,6 +65,7 @@ function Reptiles() {
           <Grid item xs={12}>
             <Card>
               <ReptilesTable
+                showBulkDeleting={false}
                 reptiles={reptiles}
                 reptileTypes={reptileTypes}
                 reptileFeedingBoxes={reptileFeedingBoxes}

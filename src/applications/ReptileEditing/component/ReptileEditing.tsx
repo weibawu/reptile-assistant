@@ -73,6 +73,7 @@ function ReptileEditing() {
           <Grid item xs={12}>
             <Card>
               <ReptilesTable
+                showBulkDeleting={true}
                 reptiles={reptiles}
                 reptileTypes={reptileTypes}
                 reptileFeedingBoxes={reptileFeedingBoxes}

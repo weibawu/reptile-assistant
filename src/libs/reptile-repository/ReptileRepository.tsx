@@ -1,4 +1,4 @@
-import { DataStore } from 'aws-amplify';
+import { DataStore, Predicates, SortDirection } from 'aws-amplify';
 import {
   Reptile,
   ReptileFeedingBox,
@@ -131,13 +131,18 @@ class ReptileRepository implements ReptileRepositoryProtocol {
 
     const reptiles = await DataStore.query(
       Reptile,
-      (reptilePredicted) => reptilePredicted.userID('eq', username)
+      (reptilePredicted) => reptilePredicted.userID('eq', username),
+      { sort: s => s.createdAt(SortDirection.DESCENDING) }
     );
     this.reptilesSubject.next(reptiles);
   }
 
   async fetchReptileTypes(): Promise<void> {
-    const reptileTypes = await DataStore.query(ReptileType);
+    const reptileTypes = await DataStore.query(
+      ReptileType,
+      Predicates.ALL,
+      { sort: s => s.createdAt(SortDirection.DESCENDING) }
+    );
     this.reptileTypesSubject.next(reptileTypes);
   }
 
@@ -148,7 +153,12 @@ class ReptileRepository implements ReptileRepositoryProtocol {
 
     const reptileFeedingBoxes = await DataStore.query(
       ReptileFeedingBox,
-      (reptileFeedingBoxPredicted) => reptileFeedingBoxPredicted.userID('eq', username)
+      (reptileFeedingBoxPredicted) =>
+        reptileFeedingBoxPredicted.userID('eq', username),
+      { sort: s =>
+        s.type(SortDirection.DESCENDING)
+          .createdAt(SortDirection.DESCENDING)
+      }
     );
     this.reptileFeedingBoxesSubject.next(reptileFeedingBoxes);
   }
@@ -160,7 +170,13 @@ class ReptileRepository implements ReptileRepositoryProtocol {
 
     const reptileFeedingBoxIndexes = await DataStore.query(
       ReptileFeedingBoxIndexCollection,
-      (reptileFeedingBoxIndexPredicted) => reptileFeedingBoxIndexPredicted.userID('eq', username)
+      (reptileFeedingBoxIndexPredicted) => reptileFeedingBoxIndexPredicted.userID('eq', username),
+      { sort: s =>
+        s
+          .createdAt(SortDirection.DESCENDING)
+          .reptileFeedingBoxID(SortDirection.ASCENDING)
+
+      }
     );
     this.reptileFeedingBoxIndexesSubject.next(reptileFeedingBoxIndexes);
   }
@@ -172,7 +188,8 @@ class ReptileRepository implements ReptileRepositoryProtocol {
 
     const reptileFeedingLogs = await DataStore.query(
       ReptileFeedingLog,
-      (reptileFeedingLogPredicted) => reptileFeedingLogPredicted.userID('eq', username)
+      (reptileFeedingLogPredicted) => reptileFeedingLogPredicted.userID('eq', username),
+      { sort: s => s.createdAt(SortDirection.DESCENDING) }
     );
     this.reptileFeedingLogsSubject.next(reptileFeedingLogs);
   }

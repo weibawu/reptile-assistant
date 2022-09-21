@@ -48,10 +48,11 @@ interface ReptilesTableProps {
   reptileTypes: ReptileType[],
   reptileFeedingBoxes: ReptileFeedingBox[],
   reptileFeedingBoxIndexes: ReptileFeedingBoxIndexCollection[],
+  showBulkDeleting: boolean,
   onReptilesDeleting: (reptileIds: string[]) => any;
   children?:
-    | React.ReactElement<{reptile: Reptile}>
-    | React.ReactElement<{reptile: Reptile}>[],
+    | React.ReactElement<{ reptile: Reptile }>
+    | React.ReactElement<{ reptile: Reptile }>[],
 }
 
 interface Filters {
@@ -138,6 +139,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
   reptileTypes,
   reptileFeedingBoxes,
   reptileFeedingBoxIndexes,
+  showBulkDeleting,
   onReptilesDeleting,
   children
 }) => {
@@ -358,14 +360,18 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    color="primary"
-                    checked={selectedAllReptiles}
-                    indeterminate={selectedSomeReptiles}
-                    onChange={handleSelectAllReptiles}
-                  />
-                </TableCell>
+                {
+                  showBulkDeleting
+                    ? <TableCell padding="checkbox">
+                      <Checkbox
+                        color="primary"
+                        checked={selectedAllReptiles}
+                        indeterminate={selectedSomeReptiles}
+                        onChange={handleSelectAllReptiles}
+                      />
+                    </TableCell>
+                    : null
+                }
                 <TableCell>品系名</TableCell>
                 <TableCell>性别</TableCell>
                 <TableCell>基因</TableCell>
@@ -388,16 +394,20 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                     key={reptile.id}
                     selected={isReptileSelected}
                   >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        color="primary"
-                        checked={isReptileSelected}
-                        onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                          handleSelectOneReptile(event, reptile.id)
-                        }
-                        value={isReptileSelected}
-                      />
-                    </TableCell>
+                    {
+                      showBulkDeleting
+                        ? <TableCell padding="checkbox">
+                          <Checkbox
+                            color="primary"
+                            checked={isReptileSelected}
+                            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                              handleSelectOneReptile(event, reptile.id)
+                            }
+                            value={isReptileSelected}
+                          />
+                        </TableCell>
+                        : null
+                    }
                     <TableCell>
                       <Typography
                         variant="body1"
@@ -503,7 +513,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                         {reptile.nickname}
                       </Typography>
                     </TableCell>
-                    <TableCell width={200} align="right">
+                    <TableCell align="right">
                       {
                         React.Children.map(children,
                           child => {

@@ -151,7 +151,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
 
   const onSubmit = async (form: ReptileCreationFormProps) => {
     try {
-      const reptileFeedingBoxIndexExisted = await reptileRepository
+      let reptileFeedingBoxIndexExisted = await reptileRepository
         .findExactFeedingBoxIndexByHorizontalIndexAndVerticalIndex(
           form.reptileFeedingBoxId.value,
           Number(form.verticalIndex),
@@ -159,7 +159,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
         );
 
       if (!reptileFeedingBoxIndexExisted) {
-        await reptileRepository.createReptileFeedingBoxIndex(
+        reptileFeedingBoxIndexExisted = await reptileRepository.createReptileFeedingBoxIndex(
           new ReptileFeedingBoxIndexCollection(
             {
               verticalIndex: Number(form.verticalIndex),
@@ -168,23 +168,24 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
               userID: currentUser.username
             })
         );
-      } else {
-        const reptileSaved = new Reptile({
-          name: form.name,
-          nickname: form.nickname,
-          gender: form.gender.value,
-          birthdate: new Date(form.birthdate).toISOString().slice(0, 10),
-          weight: Number(form.weight),
-          genies: form.genies.split('/'),
-          userID: currentUser.username,
-          reptileTypeID: form.reptileTypeId.value,
-          reptileFeedingBoxID: reptileFeedingBoxIndexExisted.reptileFeedingBoxID,
-          reptileFeedingBoxIndexCollectionID: reptileFeedingBoxIndexExisted.id
-        });
-
-        if (editableReptile) await reptileRepository.updateReptile(editableReptile.id, reptileSaved);
-        else await reptileRepository.createReptile(reptileSaved);
       }
+
+      const reptileSaved = new Reptile({
+        name: form.name,
+        nickname: form.nickname,
+        gender: form.gender.value,
+        birthdate: new Date(form.birthdate).toISOString().slice(0, 10),
+        weight: Number(form.weight),
+        genies: form.genies.split('/'),
+        userID: currentUser.username,
+        reptileTypeID: form.reptileTypeId.value,
+        reptileFeedingBoxID: reptileFeedingBoxIndexExisted.reptileFeedingBoxID,
+        reptileFeedingBoxIndexCollectionID: reptileFeedingBoxIndexExisted.id
+      });
+
+      if (editableReptile) await reptileRepository.updateReptile(editableReptile.id, reptileSaved);
+      else await reptileRepository.createReptile(reptileSaved);
+
       handleClose();
     } catch (e) {
       console.error('Create Reptile Failed', e);
