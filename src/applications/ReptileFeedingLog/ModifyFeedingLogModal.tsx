@@ -219,7 +219,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
         <DialogContent>
           <Stack spacing={1} sx={{ height: 600, minWidth: 180, paddingTop: 1 }}>
             <FormControl>
-              <InputLabel id="reptileFeedingBoxId">饲养容器</InputLabel>
+              <InputLabel id="reptileFeedingBoxId">饲育容器</InputLabel>
               <Controller
                 render={
                   () => <Select
@@ -227,7 +227,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
                     onChange={e => setValue('reptileFeedingBoxId', reptileFeedingBoxOptions.find(reptileFeedingBoxOption => reptileFeedingBoxOption.value === e.target.value)!, { shouldValidate: true })}
                     value={watch('reptileFeedingBoxId.value')}
                     labelId="reptileFeedingBoxId"
-                    label="饲养容器"
+                    label="饲育容器"
                     error={!!errors.reptileFeedingBoxId}
                   >
                     {

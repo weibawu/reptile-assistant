@@ -322,14 +322,14 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
               />
             </FormControl>
             <FormControl>
-              <InputLabel id="reptileFeedingBox">所属饲养容器</InputLabel>
+              <InputLabel id="reptileFeedingBox">所属饲育容器</InputLabel>
               <Controller
                 render={
                   () => <Select
                     onChange={e => setValue('reptileFeedingBoxId', reptileFeedingBoxOptions.find(reptileFeedingBoxOption => reptileFeedingBoxOption.value === e.target.value)!, {shouldValidate: true})}
                     value={getValues('reptileFeedingBoxId.value')}
                     labelId="reptileFeedingBox"
-                    label="所属饲养容器"
+                    label="所属饲育容器"
                     error={!!errors.reptileFeedingBoxId}
                   >
                     {

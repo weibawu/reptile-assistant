@@ -25,7 +25,7 @@ function ModifyReptileFeedingBoxModal(props: ReptileFeedingBoxModificationModalP
   });
 
   const typeOptions = [
-    {label: '饲养盒', value: ReptileFeedingBoxType.BOX},
+    {label: '饲育盒', value: ReptileFeedingBoxType.BOX},
     {label: '爬柜', value: ReptileFeedingBoxType.CABINET},
   ];
 

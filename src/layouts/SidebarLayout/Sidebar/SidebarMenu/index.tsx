@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { NavLink as RouterLink } from 'react-router-dom';
 
 import {
   ListSubheader,
@@ -9,8 +10,9 @@ import {
   Button,
   ListItem
 } from '@mui/material';
-import { NavLink as RouterLink } from 'react-router-dom';
 import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
+import PetsIcon from '@mui/icons-material/Pets';
+
 import {SidebarContext} from '../../../../libs/context/SidebarContext';
 
 
@@ -180,7 +182,7 @@ function SidebarMenu() {
                   to="feeding-box"
                   startIcon={<TableChartTwoToneIcon />}
                 >
-                  饲养容器
+                  饲育容器
                 </Button>
               </ListItem>
               <ListItem component="div">
@@ -189,7 +191,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="reptile"
-                  startIcon={<TableChartTwoToneIcon />}
+                  startIcon={<PetsIcon />}
                 >
                   爬宠
                 </Button>

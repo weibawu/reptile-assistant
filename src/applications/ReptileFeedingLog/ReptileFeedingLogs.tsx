@@ -55,7 +55,7 @@ const ReptileFeedingLogs: React.FC<ReptileFeedingLogsProps> = ({ viewableReptile
                   onClick={toggleModal}
                   startIcon={<AddTwoToneIcon fontSize="small" />}
                 >
-                  创建饲养日志
+                  创建饲育日志
                 </Button>
               </Grid>
             </Grid>

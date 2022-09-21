@@ -67,11 +67,13 @@ function HeaderMenu() {
   const routerListMap = {
     'feeding-box': [
       { to: 'feeding-box/overview', 'title': '容器管理' },
-      // { to: '/feeding-box/management', 'title': '饲养情况概览' },
+      // { to: '/feeding-box/management', 'title': '饲育情况概览' },
     ],
     'reptile': [
       { to: 'reptile/overview', 'title': '爬宠管理' },
-      { to: 'reptile/logs', 'title': '饲养日志查询' },
+      { to: 'reptile/feeding-logs', 'title': '饲育日志' },
+      { to: 'reptile/temperature-and-humidity-logs', 'title': '温湿度日志' },
+      { to: 'reptile/weight-logs', 'title': '体重日志' },
     ],
   };
 

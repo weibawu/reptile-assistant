@@ -136,7 +136,7 @@ const ReptileFeedingLogsTable: FC<ReptileFeedingLogsTableProps> =
         )}
         {!selectedBulkActions && (
           <CardHeader
-            title="饲养日志管理"
+            title="饲育日志管理"
           />
         )}
         <Divider />

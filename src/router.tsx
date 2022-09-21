@@ -55,7 +55,15 @@ const routes: RouteObject[] = [
         element: <Reptile />
       },
       {
-        path: 'reptile/logs',
+        path: 'reptile/temperature-and-humidity-logs',
+        element: <ReptileFeedingLog />
+      },
+      {
+        path: 'reptile/weight-logs',
+        element: <ReptileFeedingLog />
+      },
+      {
+        path: 'reptile/feeding-logs',
         element: <ReptileFeedingLog />
       },
     ]

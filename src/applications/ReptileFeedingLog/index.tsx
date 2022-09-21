@@ -9,7 +9,7 @@ import { ReptileFeedingLogProvider } from './ReptileFeedingLogContext';
 const ApplicationsReptileFeedingLog: React.FC = () => (
   <>
     <Helmet>
-      <title>尾巴屋爬宠管理平台 - 饲养日志查询</title>
+      <title>尾巴屋爬宠管理平台 - 饲育日志查询</title>
     </Helmet>
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <ModalProvider>

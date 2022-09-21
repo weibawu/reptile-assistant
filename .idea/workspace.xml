@@ -2,8 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="fix show modify reptile feeding log modal twice issue.">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/Reptile/ModifyReptileModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/Reptile/ModifyReptileModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/Reptile/ReptilesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/Reptile/ReptilesTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ModifyReptileFeedingBoxModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ModifyReptileFeedingBoxModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/ReptileFeedingBoxesTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/ModifyFeedingLogModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/ModifyFeedingLogModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/ReptileFeedingLogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/ReptileFeedingLogs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/ReptileFeedingLogsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/ReptileFeedingLogsTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Menu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Menu/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/Sidebar/SidebarMenu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/Sidebar/SidebarMenu/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +129,21 @@
       <option name="project" value="LOCAL" />
       <updated>1663732622967</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix show modify reptile feeding log modal twice issue.">
+      <created>1663732696037</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1663732696037</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix show modify reptile feeding log modal twice issue.">
+      <created>1663732710673</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1663732710673</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,7 +165,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="feature/mvp-version" />
+                        <option value="hotfix/0.2.0-issues" />
                       </list>
                     </value>
                   </entry>

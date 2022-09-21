@@ -65,7 +65,7 @@ const labelColorList = ['primary', 'black', 'secondary', 'error', 'warning', 'su
 const getReptileFeedingBoxTypeLabel = (feedingBoxType: ReptileFeedingBoxType | undefined | null | 'BOX' | 'CABINET'): JSX.Element => {
   const map = {
     [ReptileFeedingBoxType.BOX]: {
-      text: '饲养盒',
+      text: '饲育盒',
       color: 'error'
     },
     [ReptileFeedingBoxType.CABINET]: {
@@ -375,7 +375,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                 <TableCell>体重(g)</TableCell>
                 <TableCell>出生日期</TableCell>
                 <TableCell>所属科</TableCell>
-                <TableCell>所在爬柜/饲养盒</TableCell>
+                <TableCell>所在爬柜/饲育盒</TableCell>
                 <TableCell>别名</TableCell>
                 <TableCell align="right">操作</TableCell>
               </TableRow>
@@ -507,7 +507,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                       </Typography>
                     </TableCell>
                     <TableCell width={200} align="right">
-                      <Tooltip title="添加饲养日志" arrow>
+                      <Tooltip title="添加饲育日志" arrow>
                         <IconButton
                           sx={{
                             '&:hover': {
@@ -522,7 +522,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                           <AddIcon fontSize="small" />
                         </IconButton>
                       </Tooltip>
-                      <Tooltip title="查看饲养日志" arrow>
+                      <Tooltip title="查看饲育日志" arrow>
                         <IconButton
                           sx={{
                             '&:hover': {

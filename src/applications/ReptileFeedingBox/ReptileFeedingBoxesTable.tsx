@@ -46,7 +46,7 @@ interface Filters {
 const getTypeLabel = (reptileFeedingBoxType: ReptileFeedingBoxType): JSX.Element => {
   const map = {
     [ReptileFeedingBoxType.BOX]: {
-      text: '饲养盒',
+      text: '饲育盒',
       color: 'error'
     },
     [ReptileFeedingBoxType.CABINET]: {
@@ -106,7 +106,7 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({
     },
     {
       id: ReptileFeedingBoxType.BOX,
-      name: '饲养盒'
+      name: '饲育盒'
     },
     {
       id: ReptileFeedingBoxType.CABINET,
@@ -211,7 +211,7 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({
               </FormControl>
             </Box>
           }
-          title="饲养容器管理"
+          title="饲育容器管理"
         />
       )}
       <Divider />
@@ -228,7 +228,7 @@ const ReptileFeedingBoxesTable: FC<ReptileFeedingBoxesTableProps> = ({
                 />
               </TableCell>
               <TableCell>名称 / 位置</TableCell>
-              <TableCell>饲养盒类型</TableCell>
+              <TableCell>饲育盒类型</TableCell>
               <TableCell>在录爬宠</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
