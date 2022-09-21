@@ -1,8 +1,8 @@
 import React from 'react';
-import ReptileFeedingBoxes from './ReptileFeedingBoxes';
-import { ModalProvider } from './ModalContext';
+import ReptileFeedingBoxes from './component/ReptileFeedingBoxes';
+import { ModalProvider } from './context/ModalContext';
 import { Helmet } from 'react-helmet-async';
-import { ReptileFeedingBoxProvider } from './ReptileFeedingBoxContext';
+import { ReptileFeedingBoxProvider } from './context/ReptileFeedingBoxContext';
 
 const ApplicationsReptileFeedingBox: React.FC = () => (
   <>
@@ -11,7 +11,7 @@ const ApplicationsReptileFeedingBox: React.FC = () => (
     </Helmet>
     <ModalProvider>
       <ReptileFeedingBoxProvider>
-        <ReptileFeedingBoxes/>
+        <ReptileFeedingBoxes />
       </ReptileFeedingBoxProvider>
     </ModalProvider>
   </>

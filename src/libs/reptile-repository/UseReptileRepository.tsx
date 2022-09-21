@@ -5,7 +5,9 @@ import {
   ReptileFeedingBox,
   ReptileFeedingBoxIndexCollection,
   ReptileFeedingLog,
-  ReptileType
+  ReptileTemperatureAndHumidityLog,
+  ReptileType,
+  ReptileWeightLog,
 } from '../../models';
 
 export const useReptileRepository = () => {
@@ -16,14 +18,22 @@ export const useReptileRepository = () => {
   const [reptiles, setReptiles] = useState<Reptile[]>([]);
   const [reptileTypes, setReptileTypes] = useState<ReptileType[]>([]);
   const [reptileFeedingBoxes, setReptilesFeedingBoxes] = useState<ReptileFeedingBox[]>([]);
-  const [reptileFeedingBoxIndexes, setReptilesFeedingBoxIndexes] = useState<ReptileFeedingBoxIndexCollection[]>([]);
+  const [reptileFeedingBoxIndexes, setReptilesFeedingBoxIndexes] = useState<
+    ReptileFeedingBoxIndexCollection[]
+  >([]);
   const [reptileFeedingLogs, setReptileFeedingLogs] = useState<ReptileFeedingLog[]>([]);
+  const [reptileWeightLogs, setReptileWeightLogs] = useState<ReptileWeightLog[]>([]);
+  const [reptileTemperatureAndHumidityLogs, setReptileTemperatureAndHumidityLogs] = useState<
+    ReptileTemperatureAndHumidityLog[]
+  >([]);
 
   reptileRepository.onReptilesFetched(setReptiles);
   reptileRepository.onReptileTypesFetched(setReptileTypes);
   reptileRepository.onReptileFeedingBoxesFetched(setReptilesFeedingBoxes);
   reptileRepository.onReptileFeedingBoxIndexesFetched(setReptilesFeedingBoxIndexes);
   reptileRepository.onReptileFeedingLogsFetched(setReptileFeedingLogs);
+  reptileRepository.onReptileWeightLogsFetched(setReptileWeightLogs);
+  reptileRepository.onReptileTemperatureAndHumidityLogsFetched(setReptileTemperatureAndHumidityLogs);
 
   const startLoading = () => setLoading(true);
   const stopLoading = () => setLoading(false);
@@ -50,6 +60,8 @@ export const useReptileRepository = () => {
     reptileFeedingBoxes,
     reptileFeedingBoxIndexes,
     reptileFeedingLogs,
+    reptileWeightLogs,
+    reptileTemperatureAndHumidityLogs,
     reptileRepository: reptileRepository,
     currentUser: reptileRepository.currentUser,
   };

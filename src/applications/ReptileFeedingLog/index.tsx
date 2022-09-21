@@ -1,21 +1,27 @@
-import React from 'react';
-import ReptileFeedingLogs from './ReptileFeedingLogs';
-import { ModalProvider } from './ModalContext';
 import { Helmet } from 'react-helmet-async';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { ModalProvider } from './context/ModalContext';
+import { ReptileFeedingLogTableModalProvider } from './context/ReptileFeedingLogTableModalContext';
+import React from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { ReptileFeedingLogProvider } from './ReptileFeedingLogContext';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { ReptileFeedingLogProvider } from './context/ReptileFeedingLogContext';
+import { ReptileProvider } from '../../libs/context/ReptileContext';
+import Reptiles from './component/Reptile';
 
-const ApplicationsReptileFeedingLog: React.FC = () => (
+const ApplicationsReptileFeedingLog = () => (
   <>
     <Helmet>
-      <title>尾巴屋爬宠管理平台 - 饲养日志查询</title>
+      <title>尾巴屋爬宠管理平台 - 饲育日志</title>
     </Helmet>
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <ModalProvider>
-        <ReptileFeedingLogProvider>
-          <ReptileFeedingLogs/>
-        </ReptileFeedingLogProvider>
+        <ReptileFeedingLogTableModalProvider>
+          <ReptileProvider>
+            <ReptileFeedingLogProvider>
+              <Reptiles />
+            </ReptileFeedingLogProvider>
+          </ReptileProvider>
+        </ReptileFeedingLogTableModalProvider>
       </ModalProvider>
     </LocalizationProvider>
   </>

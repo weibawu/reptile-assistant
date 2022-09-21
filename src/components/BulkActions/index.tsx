@@ -8,7 +8,7 @@ import {
   ListItemText,
   ListItem,
   List,
-  Typography
+  Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -23,14 +23,14 @@ const ButtonError = styled(Button)(
      &:hover {
         background: ${theme.colors.error.dark};
      }
-    `
+    `,
 );
 
 interface BulkActionsProps {
   onBulkDeleting: () => any
 }
 
-function BulkActions({onBulkDeleting}: BulkActionsProps) {
+function BulkActions({ onBulkDeleting }: BulkActionsProps) {
   const [onMenuOpen, menuOpen] = useState<boolean>(false);
   const moreRef = useRef<HTMLButtonElement | null>(null);
 
@@ -49,26 +49,21 @@ function BulkActions({onBulkDeleting}: BulkActionsProps) {
 
   return (
     <>
-      <Box display="flex" alignItems="center" justifyContent="space-between">
-        <Box display="flex" alignItems="center">
-          <Typography variant="h5" color="text.secondary">
+      <Box display='flex' alignItems='center' justifyContent='space-between'>
+        <Box display='flex' alignItems='center'>
+          <Typography variant='h5' color='text.secondary'>
             批量操作：
           </Typography>
           <ButtonError
             sx={{ ml: 1 }}
             startIcon={<DeleteTwoToneIcon />}
-            variant="contained"
+            variant='contained'
             onClick={handleBulkDeleting}
           >
             删除
           </ButtonError>
         </Box>
-        <IconButton
-          color="primary"
-          onClick={openMenu}
-          ref={moreRef}
-          sx={{ ml: 2, p: 1 }}
-        >
+        <IconButton color='primary' onClick={openMenu} ref={moreRef} sx={{ ml: 2, p: 1 }}>
           <MoreVertTwoToneIcon />
         </IconButton>
       </Box>
@@ -80,16 +75,16 @@ function BulkActions({onBulkDeleting}: BulkActionsProps) {
         onClose={closeMenu}
         anchorOrigin={{
           vertical: 'center',
-          horizontal: 'center'
+          horizontal: 'center',
         }}
         transformOrigin={{
           vertical: 'center',
-          horizontal: 'center'
+          horizontal: 'center',
         }}
       >
-        <List sx={{ p: 1 }} component="nav">
+        <List sx={{ p: 1 }} component='nav'>
           <ListItem button onClick={handleBulkDeleting}>
-            <ListItemText primary="批量删除选中" />
+            <ListItemText primary='批量删除选中' />
           </ListItem>
         </List>
       </Menu>

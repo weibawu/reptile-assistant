@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="add reptile name filter">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="add temperature, humidity and weight log modules">
+      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileEditing/context/ReptileEditingContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileEditing/context/ReptileEditingContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/ModifyTemperatureAndHumidityLogModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/ModifyTemperatureAndHumidityLogModal.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,36 +36,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;TF_FMT&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/kuku/Tailhome/repos/reptile-assistant-v2/src/applications/ReptileFeedingLog&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/kuku/Tailhome/repos/reptile-assistant/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.notifications&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/kuku/Tailhome/repos/reptile-assistant-v2/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TF_FMT": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "js.linters.configure.manually.selectedeslint": "true",
+    "last_opened_file_path": "/Users/kuku/Tailhome/repos/reptile-assistant-v2/src/applications",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/kuku/Tailhome/repos/reptile-assistant/node_modules/prettier",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.notifications",
+    "ts.external.directory.path": "/Users/kuku/Tailhome/repos/reptile-assistant-v2/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/applications" />
+      <recent name="$PROJECT_DIR$/src/applications/Reptile/pages/ReptileFeedingLog/component" />
+      <recent name="$PROJECT_DIR$/src/applications/Reptile/pages/ReptileFeedingLog" />
       <recent name="$PROJECT_DIR$/src/applications/ReptileFeedingLog" />
       <recent name="$PROJECT_DIR$/src/applications/ReptileFeedingBox" />
-      <recent name="$PROJECT_DIR$/src/applications/Reptile" />
-      <recent name="$PROJECT_DIR$/src/components/BulkActions" />
-      <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/libs/context" />
+      <recent name="$PROJECT_DIR$/src/layouts" />
+      <recent name="$PROJECT_DIR$/src/applications/ReptileFeedingBox/component" />
+      <recent name="$PROJECT_DIR$/src/applications/ReptileFeedingBox/context" />
+      <recent name="$PROJECT_DIR$/src/applications" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -104,11 +110,85 @@
       <option name="project" value="LOCAL" />
       <updated>1663056996695</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fix cannot edit reptile feeding log issue.">
+      <created>1663732553097</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1663732553097</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix show modify reptile feeding log modal twice issue.">
+      <created>1663732622967</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1663732622967</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix show modify reptile feeding log modal twice issue.">
+      <created>1663732696037</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1663732696037</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix show modify reptile feeding log modal twice issue.">
+      <created>1663732710673</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1663732710673</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix text and icon issue, add header menu items.">
+      <created>1663733385143</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1663733385143</updated>
+    </task>
+    <task id="LOCAL-00009" summary="remove temp and humidity fields in feeding log">
+      <created>1663733801777</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1663733801777</updated>
+    </task>
+    <task id="LOCAL-00010" summary="refactor the reptile module">
+      <created>1663768392012</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1663768392012</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fix business logic">
+      <created>1663772091011</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1663772091011</updated>
+    </task>
+    <task id="LOCAL-00012" summary="add temperature, humidity and weight log modules">
+      <created>1663778770327</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1663778770327</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -126,7 +206,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="feature/mvp-version" />
+                        <option value="hotfix/0.2.0-issues" />
                       </list>
                     </value>
                   </entry>
@@ -143,6 +223,13 @@
     <MESSAGE value="fix timezone issue" />
     <MESSAGE value="add reptile name filter" />
     <MESSAGE value="add reptile name filter" />
-    <option name="LAST_COMMIT_MESSAGE" value="add reptile name filter" />
+    <MESSAGE value="fix cannot edit reptile feeding log issue." />
+    <MESSAGE value="fix show modify reptile feeding log modal twice issue." />
+    <MESSAGE value="fix text and icon issue, add header menu items." />
+    <MESSAGE value="remove temp and humidity fields in feeding log" />
+    <MESSAGE value="refactor the reptile module" />
+    <MESSAGE value="fix business logic" />
+    <MESSAGE value="add temperature, humidity and weight log modules" />
+    <option name="LAST_COMMIT_MESSAGE" value="add temperature, humidity and weight log modules" />
   </component>
 </project>

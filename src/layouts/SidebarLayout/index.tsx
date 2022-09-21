@@ -6,7 +6,7 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 
 interface SidebarLayoutProps {
-  children?: ReactNode;
+  children?: ReactNode
 }
 
 const SidebarLayout: FC<SidebarLayoutProps> = () => {
@@ -29,16 +29,13 @@ const SidebarLayout: FC<SidebarLayoutProps> = () => {
               theme.palette.mode === 'dark'
                 ? `0 1px 0 ${alpha(
                   lighten(theme.colors.primary.main, 0.7),
-                  0.15
+                  0.15,
                 )}, 0px 2px 4px -3px rgba(0, 0, 0, 0.2), 0px 5px 12px -4px rgba(0, 0, 0, .1)`
                 : `0px 2px 4px -3px ${alpha(
                   theme.colors.alpha.black[100],
-                  0.1
-                )}, 0px 5px 12px -4px ${alpha(
-                  theme.colors.alpha.black[100],
-                  0.05
-                )}`
-          }
+                  0.1,
+                )}, 0px 5px 12px -4px ${alpha(theme.colors.alpha.black[100], 0.05)}`,
+          },
         }}
       >
         <Header />
@@ -51,11 +48,11 @@ const SidebarLayout: FC<SidebarLayoutProps> = () => {
             flex: 1,
             pt: `${theme.header.height}`,
             [theme.breakpoints.up('lg')]: {
-              ml: `${theme.sidebar.width}`
-            }
+              ml: `${theme.sidebar.width}`,
+            },
           }}
         >
-          <Box display="block">
+          <Box display='block'>
             <Outlet />
           </Box>
         </Box>
