@@ -337,7 +337,7 @@ function ModifyReptileWeightLogModal(props: ReptileWeightLogModificationModalPro
                     {...field}
                     label={'测量时间'}
                     renderInput={(params) => (
-                      <TextField sx={{ zIndex: 0 }} {...params} {...field} />
+                      <TextField autoComplete='off' sx={{ zIndex: 0 }} {...params} {...field} />
                     )}
                   />
                 )}
@@ -347,7 +347,9 @@ function ModifyReptileWeightLogModal(props: ReptileWeightLogModificationModalPro
               <Controller
                 name='weight'
                 control={control}
-                render={({ field }) => <TextField type='number' placeholder={'体重'} {...field} />}
+                render={({ field }) => (
+                  <TextField autoComplete='off' type='number' placeholder={'体重'} {...field} />
+                )}
               />
             ) : null}
           </Stack>

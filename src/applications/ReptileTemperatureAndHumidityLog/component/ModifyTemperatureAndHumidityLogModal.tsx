@@ -353,7 +353,7 @@ function ModifyReptileTemperatureAndHumidityLogModal(
                     {...field}
                     label={'测量时间'}
                     renderInput={(params) => (
-                      <TextField sx={{ zIndex: 0 }} {...params} {...field} />
+                      <TextField autoComplete='off' sx={{ zIndex: 0 }} {...params} {...field} />
                     )}
                   />
                 )}
@@ -363,14 +363,28 @@ function ModifyReptileTemperatureAndHumidityLogModal(
               <Controller
                 name='environmentTemperature'
                 control={control}
-                render={({ field }) => <TextField placeholder={'环境温度(℃)'} {...field} />}
+                render={({ field }) => (
+                  <TextField
+                    type='number'
+                    autoComplete='off'
+                    placeholder={'环境温度(℃)'}
+                    {...field}
+                  />
+                )}
               />
             ) : null}
             {watch('reptileId.value') ? (
               <Controller
                 name='environmentHumidity'
                 control={control}
-                render={({ field }) => <TextField placeholder={'环境湿度(%)'} {...field} />}
+                render={({ field }) => (
+                  <TextField
+                    type='number'
+                    autoComplete='off'
+                    placeholder={'环境湿度(%)'}
+                    {...field}
+                  />
+                )}
               />
             ) : null}
           </Stack>

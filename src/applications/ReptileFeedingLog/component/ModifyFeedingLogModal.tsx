@@ -387,7 +387,7 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
                     {...field}
                     label={'喂食时间'}
                     renderInput={(params) => (
-                      <TextField sx={{ zIndex: 0 }} {...params} {...field} />
+                      <TextField autoComplete='off' sx={{ zIndex: 0 }} {...params} {...field} />
                     )}
                   />
                 )}
@@ -398,7 +398,13 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
                 name='detail'
                 control={control}
                 render={({ field }) => (
-                  <TextField multiline minRows={5} placeholder={'喂食详情'} {...field} />
+                  <TextField
+                    autoComplete='off'
+                    multiline
+                    minRows={5}
+                    placeholder={'喂食详情'}
+                    {...field}
+                  />
                 )}
               />
             ) : null}

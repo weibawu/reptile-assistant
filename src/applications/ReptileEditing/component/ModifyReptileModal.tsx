@@ -232,14 +232,26 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
               name='name'
               control={control}
               render={({ field }) => (
-                <TextField fullWidth placeholder='品系名' error={!!errors.name} {...field} />
+                <TextField
+                  autoComplete='off'
+                  fullWidth
+                  placeholder='品系名'
+                  error={!!errors.name}
+                  {...field}
+                />
               )}
             />
             <Controller
               name='nickname'
               control={control}
               render={({ field }) => (
-                <TextField fullWidth placeholder='别名' error={!!errors.nickname} {...field} />
+                <TextField
+                  autoComplete='off'
+                  fullWidth
+                  placeholder='别名'
+                  error={!!errors.nickname}
+                  {...field}
+                />
               )}
             />
             <FormControl>
@@ -288,7 +300,13 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
               name='weight'
               control={control}
               render={({ field }) => (
-                <TextField fullWidth placeholder='当前体重(g)' error={!!errors.weight} {...field} />
+                <TextField
+                  autoComplete='off'
+                  fullWidth
+                  placeholder='当前体重(g)'
+                  error={!!errors.weight}
+                  {...field}
+                />
               )}
             />
             <FormControl>
@@ -395,7 +413,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
                   {...field}
                   label={'出生日期'}
                   renderInput={(params: any) => (
-                    <TextField sx={{ zIndex: 0 }} {...params} {...field} />
+                    <TextField autoComplete='off' sx={{ zIndex: 0 }} {...params} {...field} />
                   )}
                 />
               )}
