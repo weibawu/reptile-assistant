@@ -3,8 +3,8 @@ import React from 'react';
 import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { Reptile } from '../../models';
-import ReptileFeedingLogs from '../ReptileFeedingLog/ReptileFeedingLogs';
+import { Reptile } from '../../../models';
+import ReptileFeedingLogs from './ReptileFeedingLogs';
 
 export interface ReptileFeedingBoxModificationModalProps {
   open: boolean;

@@ -7,8 +7,8 @@ import {Controller, useForm} from 'react-hook-form';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 
-import {ReptileFeedingBox, ReptileFeedingBoxType} from '../../models';
-import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
+import {ReptileFeedingBox, ReptileFeedingBoxType} from '../../../models';
+import { useReptileRepository } from '../../../libs/reptile-repository/UseReptileRepository';
 
 export interface ReptileFeedingBoxModificationModalProps {
     open: boolean;

@@ -1,52 +1,45 @@
 import React, { useContext } from 'react';
-import { Helmet } from 'react-helmet-async';
 
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { Grid, Container, Typography, Button, Card } from '@mui/material';
 
-import PageTitleWrapper from '../../components/PageTitleWrapper';
-import Footer from '../../components/Footer';
+import PageTitleWrapper from '../../../components/PageTitleWrapper';
+import ReptilesTable from '../../../layouts/ReptileTable/ReptilesTable';
+import Footer from '../../../components/Footer';
 
 import ModifyReptileModal from './ModifyReptileModal';
-import ReptilesTable from './ReptilesTable';
-import ReptileFeedingLogTableModal from './ReptileFeedingLogTableModal';
+import { TableEditingActions } from './TableEditingActions';
 
-import { ReptileContext } from './ReptileContext';
+import { ReptileEditingContext } from '../context/ReptileEditingContext';
+import { ReptileContext } from '../../../libs/context/ReptileContext';
 
-function Reptiles() {
+import { Reptile } from '../../../models';
+
+function ReptileEditing() {
 
   const {
     loading,
     currentUserDisplayedUsername,
 
-    ModalToggle,
-    toggleModal,
-
-    ReptileFeedingLogTableModalToggle,
-
     reptiles,
     reptileTypes,
     reptileFeedingBoxes,
     reptileFeedingBoxIndexes,
+  } = useContext(ReptileContext);
 
+  const {
+    ModalToggle,
+    toggleModal,
     editableReptile,
     handleModifyReptileModalOpen,
     handleModifyReptileModalClose,
     handleReptilesDelete,
-
-    viewableLogReptile,
-    handleViewableReptileLogModalOpen,
-    handleViewableReptileLogModalClose,
-    handleModifyReptileFeedingLogModalOpenInReptileTable,
-  } = useContext(ReptileContext);
+  } = useContext(ReptileEditingContext);
 
   if (loading) return null;
 
   return (
     <>
-      <Helmet>
-        <title>尾巴屋爬宠管理平台 - 爬宠管理</title>
-      </Helmet>
       <PageTitleWrapper>
         <Grid container justifyContent="space-between" alignItems="center">
           <Grid item>
@@ -84,21 +77,19 @@ function Reptiles() {
                 reptileTypes={reptileTypes}
                 reptileFeedingBoxes={reptileFeedingBoxes}
                 reptileFeedingBoxIndexes={reptileFeedingBoxIndexes}
-                onLogShowing={handleViewableReptileLogModalOpen}
-                onReptileEditing={handleModifyReptileModalOpen}
                 onReptilesDeleting={handleReptilesDelete}
-                onModifyReptileFeedingLogModalOpen={handleModifyReptileFeedingLogModalOpenInReptileTable}
-              />
+              >
+                <TableEditingActions
+                  onReptileEditing={handleModifyReptileModalOpen}
+                  onReptilesDeleting={handleReptilesDelete}
+                  reptile={{} as Reptile}
+                />
+              </ReptilesTable>
             </Card>
           </Grid>
         </Grid>
       </Container>
       <Footer />
-      <ReptileFeedingLogTableModal
-        open={ReptileFeedingLogTableModalToggle}
-        onClose={handleViewableReptileLogModalClose}
-        viewableLogReptile={viewableLogReptile}
-      />
       <ModifyReptileModal
         open={ModalToggle}
         onClose={handleModifyReptileModalClose}
@@ -108,4 +99,4 @@ function Reptiles() {
   );
 }
 
-export default Reptiles;
+export default ReptileEditing;

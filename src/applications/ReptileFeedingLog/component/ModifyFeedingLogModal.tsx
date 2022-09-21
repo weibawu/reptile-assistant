@@ -19,10 +19,10 @@ import {
 } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers';
 
-import { deduplicateJSONStringList } from '../../libs/util';
-import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
+import { deduplicateJSONStringList } from '../../../libs/util';
+import { useReptileRepository } from '../../../libs/reptile-repository/UseReptileRepository';
 
-import { ReptileFeedingLog } from '../../models';
+import { ReptileFeedingLog } from '../../../models';
 
 export interface ReptileFeedingLogModificationModalProps {
   open: boolean;

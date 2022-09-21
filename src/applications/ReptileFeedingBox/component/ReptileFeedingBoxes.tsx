@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import { Grid, Container, Typography, Button, Card } from '@mui/material';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 
-import PageTitleWrapper from '../../components/PageTitleWrapper';
-import Footer from '../../components/Footer';
+import PageTitleWrapper from '../../../components/PageTitleWrapper';
+import Footer from '../../../components/Footer';
 
 import ModifyFeedingBoxModal from './ModifyReptileFeedingBoxModal';
 import ReptileFeedingBoxesTable from './ReptileFeedingBoxesTable';
 
-import { ReptileFeedingBoxContext } from './ReptileFeedingBoxContext';
+import { ReptileFeedingBoxContext } from '../context/ReptileFeedingBoxContext';
 
 function ReptileFeedingBoxes() {
 

@@ -15,9 +15,11 @@ const ReptileFeedingBoxType = {
   "CABINET": "CABINET"
 };
 
-const { ReptileFeedingLog, ReptileFeedingBoxIndexCollection, Reptile, ReptileFeedingBox, ReptileType } = initSchema(schema);
+const { ReptileTemperatureAndHumidityLog, ReptileWeightLog, ReptileFeedingLog, ReptileFeedingBoxIndexCollection, Reptile, ReptileFeedingBox, ReptileType } = initSchema(schema);
 
 export {
+  ReptileTemperatureAndHumidityLog,
+  ReptileWeightLog,
   ReptileFeedingLog,
   ReptileFeedingBoxIndexCollection,
   Reptile,

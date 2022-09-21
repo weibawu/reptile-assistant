@@ -23,12 +23,12 @@ import {
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 
-import { generateHashNumberInRange } from '../../libs/util';
+import { generateHashNumberInRange } from '../../../libs/util';
 
-import { Reptile, ReptileFeedingLog } from '../../models';
+import { Reptile, ReptileFeedingLog } from '../../../models';
 
-import BulkActions from '../../components/BulkActions';
-import Label from '../../components/Label';
+import BulkActions from '../../../components/BulkActions';
+import Label from '../../../components/Label';
 
 interface ReptileFeedingLogsTableProps {
   className?: string;

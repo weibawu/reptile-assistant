@@ -25,11 +25,11 @@ import {
 
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
-import Label from '../../components/Label';
+import Label from '../../../components/Label';
 
-import { ReptileFeedingBox, ReptileFeedingBoxIndexCollection, ReptileFeedingBoxType } from '../../models';
+import { ReptileFeedingBox, ReptileFeedingBoxIndexCollection, ReptileFeedingBoxType } from '../../../models';
 
-import BulkActions from '../../components/BulkActions';
+import BulkActions from '../../../components/BulkActions';
 
 interface ReptileFeedingBoxesTableProps {
   className?: string;

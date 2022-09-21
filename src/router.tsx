@@ -22,7 +22,7 @@ const ReptileFeedingLog = Loader(
   lazy(() => import('./applications/ReptileFeedingLog'))
 );
 const Reptile = Loader(
-  lazy(() => import('./applications/Reptile'))
+  lazy(() => import('./applications/ReptileEditing'))
 );
 
 const routes: RouteObject[] = [

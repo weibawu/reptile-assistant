@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import {
   Button,
@@ -17,14 +17,14 @@ import {
 } from '@mui/material';
 
 import { Controller, useForm } from 'react-hook-form';
-import { Reptile, ReptileFeedingBoxIndexCollection, ReptileFeedingBoxType, ReptileGenderType } from '../../models';
+import { Reptile, ReptileFeedingBoxIndexCollection, ReptileFeedingBoxType, ReptileGenderType } from '../../../models';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import CloseIcon from '@mui/icons-material/Close';
 import { DatePicker } from '@mui/x-date-pickers';
-import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
+import { ReptileContext } from '../../../libs/context/ReptileContext';
 
 export interface ReptileModificationModalProps {
   open: boolean;
@@ -56,7 +56,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
     reptileFeedingBoxIndexes,
     reptileRepository,
     currentUser
-  } = useReptileRepository();
+  } = useContext(ReptileContext);
 
   const reptileTypeOptions: AnySelectOption<string>[] = reptileTypes.map(
     reptileTypeModel => ({

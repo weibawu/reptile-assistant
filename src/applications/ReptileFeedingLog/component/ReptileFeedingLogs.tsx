@@ -2,13 +2,16 @@ import React, { useContext } from 'react';
 import { Grid, Container, Typography, Button, Card } from '@mui/material';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 
-import PageTitleWrapper from '../../components/PageTitleWrapper';
-import Footer from '../../components/Footer';
+import PageTitleWrapper from '../../../components/PageTitleWrapper';
+import Footer from '../../../components/Footer';
 
-import { Reptile } from '../../models';
 import ModifyFeedingLogModal from './ModifyFeedingLogModal';
 import FeedingLogsTable from './ReptileFeedingLogsTable';
-import { ReptileFeedingLogContext } from './ReptileFeedingLogContext';
+
+import { ReptileFeedingLogContext } from '../context/ReptileFeedingLogContext';
+import { ReptileContext } from '../../../libs/context/ReptileContext';
+
+import { Reptile } from '../../../models';
 
 interface ReptileFeedingLogsProps {
   viewableReptile?: Reptile;
@@ -19,12 +22,13 @@ const ReptileFeedingLogs: React.FC<ReptileFeedingLogsProps> = ({ viewableReptile
   const {
     loading,
     currentUserDisplayedUsername,
-
-    ModalToggle,
-    toggleModal,
-
     reptiles,
     reptileFeedingLogs,
+  } = useContext(ReptileContext);
+
+  const {
+    ModalToggle,
+    toggleModal,
 
     editableReptileFeedingLog,
     handleModifyReptileFeedingLogModalOpen,

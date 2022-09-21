@@ -15,6 +15,14 @@ export enum ReptileFeedingBoxType {
 
 
 
+type ReptileTemperatureAndHumidityLogMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type ReptileWeightLogMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type ReptileFeedingLogMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -33,6 +41,31 @@ type ReptileFeedingBoxMetaData = {
 
 type ReptileTypeMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+export declare class ReptileTemperatureAndHumidityLog {
+  readonly id: string;
+  readonly environmentHumidity?: number | null;
+  readonly environmentTemperature?: number | null;
+  readonly meteringDateTime?: string | null;
+  readonly userID?: string | null;
+  readonly reptileID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<ReptileTemperatureAndHumidityLog, ReptileTemperatureAndHumidityLogMetaData>);
+  static copyOf(source: ReptileTemperatureAndHumidityLog, mutator: (draft: MutableModel<ReptileTemperatureAndHumidityLog, ReptileTemperatureAndHumidityLogMetaData>) => MutableModel<ReptileTemperatureAndHumidityLog, ReptileTemperatureAndHumidityLogMetaData> | void): ReptileTemperatureAndHumidityLog;
+}
+
+export declare class ReptileWeightLog {
+  readonly id: string;
+  readonly weight?: number | null;
+  readonly meteringDateTime?: string | null;
+  readonly userId?: string | null;
+  readonly reptileID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<ReptileWeightLog, ReptileWeightLogMetaData>);
+  static copyOf(source: ReptileWeightLog, mutator: (draft: MutableModel<ReptileWeightLog, ReptileWeightLogMetaData>) => MutableModel<ReptileWeightLog, ReptileWeightLogMetaData> | void): ReptileWeightLog;
 }
 
 export declare class ReptileFeedingLog {
@@ -76,6 +109,8 @@ export declare class Reptile {
   readonly reptileFeedingBoxIndexCollectionID: string;
   readonly reptileFeedingBoxID: string;
   readonly genies?: (string | null)[] | null;
+  readonly ReptileTemperatureAndHumidityLogs?: (ReptileTemperatureAndHumidityLog | null)[] | null;
+  readonly ReptileWeightLogs?: (ReptileWeightLog | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Reptile, ReptileMetaData>);

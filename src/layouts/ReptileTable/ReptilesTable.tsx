@@ -39,8 +39,8 @@ import {
 } from '../../models';
 import Stack from '@mui/material/Stack';
 import { deduplicateJSONStringList, generateHashNumberInRange } from '../../libs/util';
-import { ReptileFeedingLogContext } from '../ReptileFeedingLog/ReptileFeedingLogContext';
-import ModifyFeedingLogModal from '../ReptileFeedingLog/ModifyFeedingLogModal';
+import { ReptileFeedingLogContext } from '../../applications/ReptileFeedingLog/context/ReptileFeedingLogContext';
+import ModifyFeedingLogModal from '../../applications/ReptileFeedingLog/component/ModifyFeedingLogModal';
 
 interface ReptilesTableProps {
   className?: string;
@@ -48,10 +48,10 @@ interface ReptilesTableProps {
   reptileTypes: ReptileType[],
   reptileFeedingBoxes: ReptileFeedingBox[],
   reptileFeedingBoxIndexes: ReptileFeedingBoxIndexCollection[],
-  onReptileEditing: (reptile: Reptile) => any;
-  onLogShowing: (reptile: Reptile) => any;
   onReptilesDeleting: (reptileIds: string[]) => any;
-  onModifyReptileFeedingLogModalOpen: (reptile: Reptile, reptileFeedingLog: ReptileFeedingLog) => any;
+  children?:
+    | React.ReactElement<{reptile: Reptile}>
+    | React.ReactElement<{reptile: Reptile}>[],
 }
 
 interface Filters {
@@ -138,10 +138,8 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
   reptileTypes,
   reptileFeedingBoxes,
   reptileFeedingBoxIndexes,
-  onReptileEditing,
-  onLogShowing,
   onReptilesDeleting,
-  onModifyReptileFeedingLogModalOpen
+  children
 }) => {
   const [selectedReptiles, setSelectedReptiles] = useState<string[]>([]);
   const selectedBulkActions = selectedReptiles.length > 0;
@@ -287,7 +285,6 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
     selectedReptiles.length < reptiles.length;
   const selectedAllReptiles =
     selectedReptiles.length === reptiles.length;
-  const theme = useTheme();
 
   const handleBulkDeleting = () => {
     onReptilesDeleting(selectedReptiles);
@@ -507,64 +504,20 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                       </Typography>
                     </TableCell>
                     <TableCell width={200} align="right">
-                      <Tooltip title="添加饲育日志" arrow>
-                        <IconButton
-                          sx={{
-                            '&:hover': {
-                              background: theme.colors.primary.lighter
-                            },
-                            color: theme.palette.success.main
-                          }}
-                          color="inherit"
-                          size="small"
-                          onClick={onModifyReptileFeedingLogModalOpen.bind(null, reptile, new ReptileFeedingLog({ reptileID: reptile.id }))}
-                        >
-                          <AddIcon fontSize="small" />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title="查看饲育日志" arrow>
-                        <IconButton
-                          sx={{
-                            '&:hover': {
-                              background: theme.colors.primary.lighter
-                            },
-                            color: theme.palette.success.main
-                          }}
-                          color="inherit"
-                          size="small"
-                          onClick={onLogShowing.bind(null, reptile)}
-                        >
-                          <LogIcon fontSize="small" />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title="编辑" arrow>
-                        <IconButton
-                          sx={{
-                            '&:hover': {
-                              background: theme.colors.primary.lighter
-                            },
-                            color: theme.palette.primary.main
-                          }}
-                          color="inherit"
-                          size="small"
-                          onClick={onReptileEditing.bind(null, reptile)}
-                        >
-                          <EditTwoToneIcon fontSize="small" />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title="删除" arrow>
-                        <IconButton
-                          sx={{
-                            '&:hover': { background: theme.colors.error.lighter },
-                            color: theme.palette.error.main
-                          }}
-                          color="inherit"
-                          size="small"
-                          onClick={onReptilesDeleting.bind(null, [reptile.id])}
-                        >
-                          <DeleteTwoToneIcon fontSize="small" />
-                        </IconButton>
-                      </Tooltip>
+                      {
+                        React.Children.map(children,
+                          child => {
+                            {
+                              if (React.isValidElement(child)) {
+                                return React.cloneElement(child, {
+                                  reptile
+                                });
+                              }
+                              return child;
+                            }
+                          }
+                        )
+                      }
                     </TableCell>
                   </TableRow>
                 );

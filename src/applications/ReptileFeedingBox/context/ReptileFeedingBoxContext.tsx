@@ -1,7 +1,7 @@
 import React, { FC, useState, createContext, useContext } from 'react';
 import { ModalContext } from './ModalContext';
-import { ReptileFeedingBox, ReptileFeedingBoxIndexCollection } from '../../models';
-import { useReptileRepository } from '../../libs/reptile-repository/UseReptileRepository';
+import { ReptileFeedingBox, ReptileFeedingBoxIndexCollection } from '../../../models';
+import { useReptileRepository } from '../../../libs/reptile-repository/UseReptileRepository';
 
 type ReptileFeedingBoxContext = {
   loading: boolean, // 是否正在获取数据
