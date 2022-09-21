@@ -3,7 +3,7 @@ export const generateHashNumber = (str: string) => {
   return arr.reduce(
     (hashCode, currentVal) =>
       (hashCode = currentVal.charCodeAt(0) + (hashCode << 6) + (hashCode << 16) - hashCode),
-    0
+    0,
   );
 };
 
@@ -13,9 +13,5 @@ export const generateHashNumberInRange = (str: string, range: number) => {
 };
 
 export const deduplicateJSONStringList = (JSONStringList: any[]) => {
-  return Array.from(
-    new Set(
-      JSONStringList.map(_ => JSON.stringify(_))
-    )
-  ).map(_ => JSON.parse(_));
+  return Array.from(new Set(JSONStringList.map((_) => JSON.stringify(_)))).map((_) => JSON.parse(_));
 };

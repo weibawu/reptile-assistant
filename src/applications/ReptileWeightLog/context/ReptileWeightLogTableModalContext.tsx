@@ -1,16 +1,18 @@
 import React, { FC, useState, createContext } from 'react';
 
 type ReptileWeightLogTableModalContext = {
-  ReptileWeightLogTableModalToggle: boolean;
-  toggleReptileWeightLogTableModal: () => void;
-  closeReptileWeightLogTableModal: () => void;
-};
+  ReptileWeightLogTableModalToggle: boolean
+  toggleReptileWeightLogTableModal: () => void
+  closeReptileWeightLogTableModal: () => void
+}
 
 export const ReptileWeightLogTableModalContext = createContext<ReptileWeightLogTableModalContext>(
-  {} as ReptileWeightLogTableModalContext
+  {} as ReptileWeightLogTableModalContext,
 );
 
-export const ReptileWeightLogTableModalProvider: FC<{children: React.ReactNode}> = ({ children }) => {
+export const ReptileWeightLogTableModalProvider: FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [ReptileWeightLogTableModalToggle, setReptileWeightLogTableModalToggle] = useState(false);
   const toggleReptileWeightLogTableModal = () => {
     setReptileWeightLogTableModalToggle(!ReptileWeightLogTableModalToggle);
@@ -21,7 +23,11 @@ export const ReptileWeightLogTableModalProvider: FC<{children: React.ReactNode}>
 
   return (
     <ReptileWeightLogTableModalContext.Provider
-      value={{ ReptileWeightLogTableModalToggle, toggleReptileWeightLogTableModal, closeReptileWeightLogTableModal }}
+      value={{
+        ReptileWeightLogTableModalToggle,
+        toggleReptileWeightLogTableModal,
+        closeReptileWeightLogTableModal,
+      }}
     >
       {children}
     </ReptileWeightLogTableModalContext.Provider>

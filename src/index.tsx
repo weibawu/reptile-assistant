@@ -24,7 +24,7 @@ const root = createRoot(rootElement);
 root.render(
   <HelmetProvider>
     <BrowserRouter>
-      <App/>
+      <App />
     </BrowserRouter>
-  </HelmetProvider>
+  </HelmetProvider>,
 );

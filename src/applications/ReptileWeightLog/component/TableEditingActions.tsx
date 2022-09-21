@@ -7,49 +7,55 @@ import AddIcon from '@mui/icons-material/Add';
 import { Reptile, ReptileWeightLog } from '../../../models';
 
 interface TableEditingActionsProps {
-  onModifyReptileWeightLogTableModalOpen: (reptile: Reptile) => any,
-  onModifyReptileWeightLogEditingModalOpen: (reptile: Reptile, reptileWeightLog: ReptileWeightLog) => void;
-  reptile: Reptile;
+  onModifyReptileWeightLogTableModalOpen: (reptile: Reptile) => any
+  onModifyReptileWeightLogEditingModalOpen: (
+    reptile: Reptile,
+    reptileWeightLog: ReptileWeightLog,
+  ) => void
+  reptile: Reptile
 }
 
 export const TableEditingActions: React.FC<TableEditingActionsProps> = ({
   onModifyReptileWeightLogEditingModalOpen,
   onModifyReptileWeightLogTableModalOpen,
-  reptile
+  reptile,
 }) => {
-
   const theme = useTheme();
 
   return (
     <>
-      <Tooltip title="添加体重日志" arrow>
+      <Tooltip title='添加体重日志' arrow>
         <IconButton
           sx={{
             '&:hover': {
-              background: theme.colors.primary.lighter
+              background: theme.colors.primary.lighter,
             },
-            color: theme.colors.primary.main
+            color: theme.colors.primary.main,
           }}
-          color="inherit"
-          size="small"
-          onClick={onModifyReptileWeightLogEditingModalOpen.bind(null,reptile, new ReptileWeightLog({ reptileID: reptile.id }))}
+          color='inherit'
+          size='small'
+          onClick={onModifyReptileWeightLogEditingModalOpen.bind(
+            null,
+            reptile,
+            new ReptileWeightLog({ reptileID: reptile.id }),
+          )}
         >
-          <AddIcon fontSize="small" />
+          <AddIcon fontSize='small' />
         </IconButton>
       </Tooltip>
-      <Tooltip title="查看体重日志" arrow>
+      <Tooltip title='查看体重日志' arrow>
         <IconButton
           sx={{
             '&:hover': {
-              background: theme.colors.primary.lighter
+              background: theme.colors.primary.lighter,
             },
-            color: theme.colors.primary.main
+            color: theme.colors.primary.main,
           }}
-          color="inherit"
-          size="small"
+          color='inherit'
+          size='small'
           onClick={onModifyReptileWeightLogTableModalOpen.bind(null, reptile)}
         >
-          <LogIcon fontSize="small" />
+          <LogIcon fontSize='small' />
         </IconButton>
       </Tooltip>
     </>

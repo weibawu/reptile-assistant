@@ -11,7 +11,6 @@ import ReptileFeedingBoxesTable from './ReptileFeedingBoxesTable';
 import { ReptileFeedingBoxContext } from '../context/ReptileFeedingBoxContext';
 
 function ReptileFeedingBoxes() {
-
   const {
     loading,
     currentUserDisplayedUsername,
@@ -25,7 +24,7 @@ function ReptileFeedingBoxes() {
     editableReptileFeedingBox,
     handleModifyReptileFeedingBoxModalOpen,
     handleModifyReptileFeedingBoxModalClose,
-    handleReptileFeedingBoxesDelete
+    handleReptileFeedingBoxesDelete,
   } = useContext(ReptileFeedingBoxContext);
 
   if (loading) return null;
@@ -33,35 +32,27 @@ function ReptileFeedingBoxes() {
   return (
     <>
       <PageTitleWrapper>
-        <Grid container justifyContent="space-between" alignItems="center">
+        <Grid container justifyContent='space-between' alignItems='center'>
           <Grid item>
-            <Typography variant="h3" component="h3" gutterBottom>
+            <Typography variant='h3' component='h3' gutterBottom>
               尾巴屋爬宠管理平台
             </Typography>
-            <Typography variant="subtitle2">
-              你好，{currentUserDisplayedUsername}！
-            </Typography>
+            <Typography variant='subtitle2'>你好，{currentUserDisplayedUsername}！</Typography>
           </Grid>
           <Grid item>
             <Button
               sx={{ mt: { xs: 2, md: 0 } }}
-              variant="contained"
+              variant='contained'
               onClick={toggleModal}
-              startIcon={<AddTwoToneIcon fontSize="small" />}
+              startIcon={<AddTwoToneIcon fontSize='small' />}
             >
               创建饲育容器
             </Button>
           </Grid>
         </Grid>
       </PageTitleWrapper>
-      <Container maxWidth="lg">
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="stretch"
-          spacing={3}
-        >
+      <Container maxWidth='lg'>
+        <Grid container direction='row' justifyContent='center' alignItems='stretch' spacing={3}>
           <Grid item xs={12}>
             <Card>
               <ReptileFeedingBoxesTable

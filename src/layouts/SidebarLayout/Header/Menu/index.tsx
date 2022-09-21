@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  Box,
-  List,
-  ListItemText,
-  ListItem
-} from '@mui/material';
-import {NavLink, useLocation} from 'react-router-dom';
+import { Box, List, ListItemText, ListItem } from '@mui/material';
+import { NavLink, useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 
 const ListWrapper = styled(Box)(
@@ -56,7 +51,7 @@ const ListWrapper = styled(Box)(
                 }
             }
         }
-`
+`,
 );
 
 type ParentPath = 'feeding-box' | 'reptile'
@@ -66,14 +61,14 @@ function HeaderMenu() {
   const parentPath = location.pathname.split('/')[1] as ParentPath;
   const routerListMap = {
     'feeding-box': [
-      { to: 'feeding-box/overview', 'title': '容器管理' },
+      { to: 'feeding-box/overview', title: '容器管理' },
       // { to: '/feeding-box/management', 'title': '饲育情况概览' },
     ],
-    'reptile': [
-      { to: 'reptile/overview', 'title': '爬宠管理' },
-      { to: 'reptile/feeding-logs', 'title': '饲育日志' },
-      { to: 'reptile/temperature-and-humidity-logs', 'title': '温湿度日志' },
-      { to: 'reptile/weight-logs', 'title': '体重日志' },
+    reptile: [
+      { to: 'reptile/overview', title: '爬宠管理' },
+      { to: 'reptile/feeding-logs', title: '饲育日志' },
+      { to: 'reptile/temperature-and-humidity-logs', title: '温湿度日志' },
+      { to: 'reptile/weight-logs', title: '体重日志' },
     ],
   };
 
@@ -84,27 +79,22 @@ function HeaderMenu() {
       <ListWrapper
         sx={{
           display: {
-            md: 'block'
-          }
+            md: 'block',
+          },
         }}
       >
-        <List disablePadding component={Box} display="flex">
-          {
-            routerList.map((router) =>
-              <ListItem
-                button
-                key={router.title}
-                classes={{ root: 'MuiListItem-indicators' }}
-                component={NavLink}
-                to={router.to}
-              >
-                <ListItemText
-                  primaryTypographyProps={{ noWrap: true }}
-                  primary={router.title}
-                />
-              </ListItem>
-            )
-          }
+        <List disablePadding component={Box} display='flex'>
+          {routerList.map((router) => (
+            <ListItem
+              button
+              key={router.title}
+              classes={{ root: 'MuiListItem-indicators' }}
+              component={NavLink}
+              to={router.to}
+            >
+              <ListItemText primaryTypographyProps={{ noWrap: true }} primary={router.title} />
+            </ListItem>
+          ))}
         </List>
       </ListWrapper>
     </>

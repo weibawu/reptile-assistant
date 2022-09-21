@@ -7,13 +7,13 @@ import { Reptile } from '../../../models';
 import ReptileTemperatureAndHumidityLogs from './ReptileTemperatureAndHumidityLogs';
 
 export interface ReptileFeedingBoxModificationModalProps {
-  open: boolean;
-  onClose: () => void;
-  viewableLogReptile?: Reptile;
+  open: boolean
+  onClose: () => void
+  viewableLogReptile?: Reptile
 }
 
 function TemperatureAndHumidityLogTableModal(props: ReptileFeedingBoxModificationModalProps) {
-  const {onClose, open, viewableLogReptile} = props;
+  const { onClose, open, viewableLogReptile } = props;
 
   const handleClose = () => {
     onClose();
@@ -22,12 +22,7 @@ function TemperatureAndHumidityLogTableModal(props: ReptileFeedingBoxModificatio
   return (
     <Dialog onClose={handleClose} open={open} fullScreen>
       <DialogTitle>
-        <IconButton
-          edge="start"
-          color="inherit"
-          onClick={handleClose}
-          aria-label="close"
-        >
+        <IconButton edge='start' color='inherit' onClick={handleClose} aria-label='close'>
           <CloseIcon />
         </IconButton>
       </DialogTitle>

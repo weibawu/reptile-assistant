@@ -7,47 +7,46 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import { Reptile } from '../../../models';
 
 interface TableEditingActionsProps {
-  onReptileEditing: (reptile: Reptile) => any;
-  onReptilesDeleting: (reptileIds: string[]) => any;
-  reptile: Reptile;
+  onReptileEditing: (reptile: Reptile) => any
+  onReptilesDeleting: (reptileIds: string[]) => any
+  reptile: Reptile
 }
 
 export const TableEditingActions: React.FC<TableEditingActionsProps> = ({
   onReptileEditing,
   onReptilesDeleting,
-  reptile
+  reptile,
 }) => {
-
   const theme = useTheme();
 
   return (
     <>
-      <Tooltip title="编辑" arrow>
+      <Tooltip title='编辑' arrow>
         <IconButton
           sx={{
             '&:hover': {
-              background: theme.colors.primary.lighter
+              background: theme.colors.primary.lighter,
             },
-            color: theme.palette.primary.main
+            color: theme.palette.primary.main,
           }}
-          color="inherit"
-          size="small"
+          color='inherit'
+          size='small'
           onClick={onReptileEditing.bind(null, reptile)}
         >
-          <EditTwoToneIcon fontSize="small" />
+          <EditTwoToneIcon fontSize='small' />
         </IconButton>
       </Tooltip>
-      <Tooltip title="删除" arrow>
+      <Tooltip title='删除' arrow>
         <IconButton
           sx={{
             '&:hover': { background: theme.colors.error.lighter },
-            color: theme.palette.error.main
+            color: theme.palette.error.main,
           }}
-          color="inherit"
-          size="small"
+          color='inherit'
+          size='small'
           onClick={onReptilesDeleting.bind(null, [reptile.id])}
         >
-          <DeleteTwoToneIcon fontSize="small" />
+          <DeleteTwoToneIcon fontSize='small' />
         </IconButton>
       </Tooltip>
     </>

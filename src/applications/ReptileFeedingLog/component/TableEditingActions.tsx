@@ -7,49 +7,55 @@ import AddIcon from '@mui/icons-material/Add';
 import { Reptile, ReptileFeedingLog } from '../../../models';
 
 interface TableEditingActionsProps {
-  onModifyReptileFeedingLogTableModalOpen: (reptile: Reptile) => any,
-  onModifyReptileFeedingLogEditingModalOpen: (reptile: Reptile, reptileFeedingLog: ReptileFeedingLog) => void;
-  reptile: Reptile;
+  onModifyReptileFeedingLogTableModalOpen: (reptile: Reptile) => any
+  onModifyReptileFeedingLogEditingModalOpen: (
+    reptile: Reptile,
+    reptileFeedingLog: ReptileFeedingLog,
+  ) => void
+  reptile: Reptile
 }
 
 export const TableEditingActions: React.FC<TableEditingActionsProps> = ({
   onModifyReptileFeedingLogEditingModalOpen,
   onModifyReptileFeedingLogTableModalOpen,
-  reptile
+  reptile,
 }) => {
-
   const theme = useTheme();
 
   return (
     <>
-      <Tooltip title="添加饲育日志" arrow>
+      <Tooltip title='添加饲育日志' arrow>
         <IconButton
           sx={{
             '&:hover': {
-              background: theme.colors.primary.lighter
+              background: theme.colors.primary.lighter,
             },
-            color: theme.palette.success.main
+            color: theme.palette.success.main,
           }}
-          color="inherit"
-          size="small"
-          onClick={onModifyReptileFeedingLogEditingModalOpen.bind(null,reptile, new ReptileFeedingLog({ reptileID: reptile.id }))}
+          color='inherit'
+          size='small'
+          onClick={onModifyReptileFeedingLogEditingModalOpen.bind(
+            null,
+            reptile,
+            new ReptileFeedingLog({ reptileID: reptile.id }),
+          )}
         >
-          <AddIcon fontSize="small" />
+          <AddIcon fontSize='small' />
         </IconButton>
       </Tooltip>
-      <Tooltip title="查看饲育日志" arrow>
+      <Tooltip title='查看饲育日志' arrow>
         <IconButton
           sx={{
             '&:hover': {
-              background: theme.colors.primary.lighter
+              background: theme.colors.primary.lighter,
             },
-            color: theme.palette.success.main
+            color: theme.palette.success.main,
           }}
-          color="inherit"
-          size="small"
+          color='inherit'
+          size='small'
           onClick={onModifyReptileFeedingLogTableModalOpen.bind(null, reptile)}
         >
-          <LogIcon fontSize="small" />
+          <LogIcon fontSize='small' />
         </IconButton>
       </Tooltip>
     </>

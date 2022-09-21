@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { ModalProvider } from './context/ModalContext';
-import {ReptileTemperatureAndHumidityLogTableModalProvider} from './context/ReptileTemperatureAndHumidityLogTableModalContext';
+import { ReptileTemperatureAndHumidityLogTableModalProvider } from './context/ReptileTemperatureAndHumidityLogTableModalContext';
 import React from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -8,7 +8,7 @@ import { ReptileTemperatureAndHumidityLogProvider } from './context/ReptileTempe
 import { ReptileProvider } from '../../libs/context/ReptileContext';
 import Reptiles from './component/Reptile';
 
-const ApplicationsReptileTemperatureAndHumidityLog = () =>(
+const ApplicationsReptileTemperatureAndHumidityLog = () => (
   <>
     <Helmet>
       <title>尾巴屋爬宠管理平台 - 温湿度日志</title>
@@ -18,7 +18,7 @@ const ApplicationsReptileTemperatureAndHumidityLog = () =>(
         <ReptileTemperatureAndHumidityLogTableModalProvider>
           <ReptileProvider>
             <ReptileTemperatureAndHumidityLogProvider>
-              <Reptiles/>
+              <Reptiles />
             </ReptileTemperatureAndHumidityLogProvider>
           </ReptileProvider>
         </ReptileTemperatureAndHumidityLogTableModalProvider>

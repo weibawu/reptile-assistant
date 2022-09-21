@@ -13,11 +13,16 @@ import {
   Select,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from '@mui/material';
 
 import { Controller, useForm } from 'react-hook-form';
-import { Reptile, ReptileFeedingBoxIndexCollection, ReptileFeedingBoxType, ReptileGenderType } from '../../../models';
+import {
+  Reptile,
+  ReptileFeedingBoxIndexCollection,
+  ReptileFeedingBoxType,
+  ReptileGenderType,
+} from '../../../models';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -27,23 +32,23 @@ import { DatePicker } from '@mui/x-date-pickers';
 import { ReptileContext } from '../../../libs/context/ReptileContext';
 
 export interface ReptileModificationModalProps {
-  open: boolean;
-  onClose: () => void;
-  editableReptile?: Reptile;
+  open: boolean
+  onClose: () => void
+  editableReptile?: Reptile
 }
 
-type AnySelectOption<T> = { label: string, value: T };
+type AnySelectOption<T> = { label: string; value: T }
 
 interface ReptileCreationFormProps {
-  name: string,
-  nickname: string,
-  gender: AnySelectOption<ReptileGenderType>,
-  birthdate: string,
-  weight: number,
-  genies: string,
-  reptileFeedingBoxId: AnySelectOption<string>,
-  reptileTypeId: AnySelectOption<string>,
-  verticalIndex: number,
+  name: string
+  nickname: string
+  gender: AnySelectOption<ReptileGenderType>
+  birthdate: string
+  weight: number
+  genies: string
+  reptileFeedingBoxId: AnySelectOption<string>
+  reptileTypeId: AnySelectOption<string>
+  verticalIndex: number
   horizontalIndex: number
 }
 
@@ -55,21 +60,19 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
     reptileFeedingBoxes,
     reptileFeedingBoxIndexes,
     reptileRepository,
-    currentUser
+    currentUser,
   } = useContext(ReptileContext);
 
-  const reptileTypeOptions: AnySelectOption<string>[] = reptileTypes.map(
-    reptileTypeModel => ({
-      label: reptileTypeModel.name!,
-      value: reptileTypeModel.id
-    })
-  );
+  const reptileTypeOptions: AnySelectOption<string>[] = reptileTypes.map((reptileTypeModel) => ({
+    label: reptileTypeModel.name!,
+    value: reptileTypeModel.id,
+  }));
 
   const reptileFeedingBoxOptions: AnySelectOption<string>[] = reptileFeedingBoxes.map(
-    reptileFeedingBox => ({
+    (reptileFeedingBox) => ({
       label: reptileFeedingBox.name!,
-      value: reptileFeedingBox.id
-    })
+      value: reptileFeedingBox.id,
+    }),
   );
 
   const reptileGenderOptions: AnySelectOption<ReptileGenderType>[] = [
@@ -77,7 +80,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
     { label: '母', value: ReptileGenderType.FAMALE },
     { label: '公温', value: ReptileGenderType.POSSIBLE_MALE },
     { label: '母温', value: ReptileGenderType.POSSIBLE_FAMALE },
-    { label: '未知', value: ReptileGenderType.UNKNOWN }
+    { label: '未知', value: ReptileGenderType.UNKNOWN },
   ];
 
   const validationSchema = yup.object({
@@ -86,12 +89,20 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
     verticalIndex: yup.number(),
     horizontalIndex: yup.number(),
     weight: yup.number(),
-    gender: yup.object({value: yup.string().required()}),
-    reptileTypeId: yup.object({value: yup.string().required()}),
-    reptileFeedingBoxId: yup.object({value: yup.string().required()}),
+    gender: yup.object({ value: yup.string().required() }),
+    reptileTypeId: yup.object({ value: yup.string().required() }),
+    reptileFeedingBoxId: yup.object({ value: yup.string().required() }),
   });
 
-  const { control, handleSubmit, reset, setValue, getValues, watch, formState: { errors } } = useForm<ReptileCreationFormProps>({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    setValue,
+    getValues,
+    watch,
+    formState: { errors },
+  } = useForm<ReptileCreationFormProps>({
     defaultValues: {
       name: '',
       nickname: '',
@@ -102,9 +113,9 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
       reptileFeedingBoxId: { value: '' } as AnySelectOption<string>,
       reptileTypeId: { value: '' } as AnySelectOption<string>,
       verticalIndex: '' as unknown as number,
-      horizontalIndex: '' as unknown as number
+      horizontalIndex: '' as unknown as number,
     },
-    resolver: yupResolver(validationSchema)
+    resolver: yupResolver(validationSchema),
   });
 
   const handleClose = () => {
@@ -119,26 +130,34 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
     editableReptile?.weight && setValue('weight', editableReptile.weight);
     editableReptile?.genies?.join('/') && setValue('genies', editableReptile.genies.join('/'));
 
-    const genderPreset = reptileGenderOptions.find(_ => _.value === editableReptile?.gender);
+    const genderPreset = reptileGenderOptions.find((_) => _.value === editableReptile?.gender);
     genderPreset && setValue('gender', genderPreset);
 
-    const reptileFeedingBoxPreset = reptileFeedingBoxOptions.find((_) => _.value === editableReptile?.reptileFeedingBoxID);
+    const reptileFeedingBoxPreset = reptileFeedingBoxOptions.find(
+      (_) => _.value === editableReptile?.reptileFeedingBoxID,
+    );
     reptileFeedingBoxPreset && setValue('reptileFeedingBoxId', reptileFeedingBoxPreset);
 
-    const reptileTypePreset = reptileTypeOptions.find((_) => _.value === editableReptile?.reptileTypeID);
+    const reptileTypePreset = reptileTypeOptions.find(
+      (_) => _.value === editableReptile?.reptileTypeID,
+    );
     reptileTypePreset && setValue('reptileTypeId', reptileTypePreset);
 
-    const verticalIndexPreset = reptileFeedingBoxIndexes.find((_) => _.id === editableReptile?.reptileFeedingBoxIndexCollectionID)?.verticalIndex;
+    const verticalIndexPreset = reptileFeedingBoxIndexes.find(
+      (_) => _.id === editableReptile?.reptileFeedingBoxIndexCollectionID,
+    )?.verticalIndex;
     verticalIndexPreset && setValue('verticalIndex', verticalIndexPreset);
 
-    const horizontalIndexPreset = reptileFeedingBoxIndexes.find((_) => _.id === editableReptile?.reptileFeedingBoxIndexCollectionID)?.horizontalIndex;
+    const horizontalIndexPreset = reptileFeedingBoxIndexes.find(
+      (_) => _.id === editableReptile?.reptileFeedingBoxIndexCollectionID,
+    )?.horizontalIndex;
     horizontalIndexPreset && setValue('horizontalIndex', horizontalIndexPreset);
   };
 
   const handleReptileFeedingBoxSelectionChange: () => void = () => {
     const selectedReptileFeedingBoxId = watch('reptileFeedingBoxId.value');
     const reptileFeedingBoxType = reptileFeedingBoxes.find(
-      reptileFeedingBox => reptileFeedingBox.id === selectedReptileFeedingBoxId
+      (reptileFeedingBox) => reptileFeedingBox.id === selectedReptileFeedingBoxId,
     );
     if (reptileFeedingBoxType && reptileFeedingBoxType.type === ReptileFeedingBoxType.BOX) {
       setValue('horizontalIndex', 0);
@@ -151,22 +170,21 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
 
   const onSubmit = async (form: ReptileCreationFormProps) => {
     try {
-      let reptileFeedingBoxIndexExisted = await reptileRepository
-        .findExactFeedingBoxIndexByHorizontalIndexAndVerticalIndex(
+      let reptileFeedingBoxIndexExisted =
+        await reptileRepository.findExactFeedingBoxIndexByHorizontalIndexAndVerticalIndex(
           form.reptileFeedingBoxId.value,
           Number(form.verticalIndex),
-          Number(form.horizontalIndex)
+          Number(form.horizontalIndex),
         );
 
       if (!reptileFeedingBoxIndexExisted) {
         reptileFeedingBoxIndexExisted = await reptileRepository.createReptileFeedingBoxIndex(
-          new ReptileFeedingBoxIndexCollection(
-            {
-              verticalIndex: Number(form.verticalIndex),
-              horizontalIndex: Number(form.horizontalIndex),
-              reptileFeedingBoxID: form.reptileFeedingBoxId.value,
-              userID: currentUser.username
-            })
+          new ReptileFeedingBoxIndexCollection({
+            verticalIndex: Number(form.verticalIndex),
+            horizontalIndex: Number(form.horizontalIndex),
+            reptileFeedingBoxID: form.reptileFeedingBoxId.value,
+            userID: currentUser.username,
+          }),
         );
       }
 
@@ -180,7 +198,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
         userID: currentUser.username,
         reptileTypeID: form.reptileTypeId.value,
         reptileFeedingBoxID: reptileFeedingBoxIndexExisted.reptileFeedingBoxID,
-        reptileFeedingBoxIndexCollectionID: reptileFeedingBoxIndexExisted.id
+        reptileFeedingBoxIndexCollectionID: reptileFeedingBoxIndexExisted.id,
       });
 
       if (editableReptile) await reptileRepository.updateReptile(editableReptile.id, reptileSaved);
@@ -200,210 +218,192 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
     <Dialog onClose={handleClose} open={open}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogTitle>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-          > <Typography>
-              { editableReptile ? '修改爬宠信息' : '创建新爬宠' }
-            </Typography>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-            >
+          <Stack direction='row' alignItems='center' justifyContent='space-between'>
+            {' '}
+            <Typography>{editableReptile ? '修改爬宠信息' : '创建新爬宠'}</Typography>
+            <IconButton edge='start' color='inherit' onClick={handleClose} aria-label='close'>
               <CloseIcon />
-            </IconButton></Stack>
+            </IconButton>
+          </Stack>
         </DialogTitle>
         <DialogContent>
           <Stack spacing={1} sx={{ height: 600 }}>
             <Controller
-              name="name"
+              name='name'
               control={control}
-              render={
-                ({ field }) => <TextField
-                  fullWidth
-                  placeholder="品系名"
-                  error={!!errors.name}
-                  {...field}
-                />
-              }
+              render={({ field }) => (
+                <TextField fullWidth placeholder='品系名' error={!!errors.name} {...field} />
+              )}
             />
             <Controller
-              name="nickname"
+              name='nickname'
               control={control}
-              render={
-                ({ field }) => <TextField
-                  fullWidth
-                  placeholder="别名"
-                  error={!!errors.nickname}
-                  {...field}
-                />
-              }
+              render={({ field }) => (
+                <TextField fullWidth placeholder='别名' error={!!errors.nickname} {...field} />
+              )}
             />
             <FormControl>
-              <InputLabel id="gender">性别</InputLabel>
+              <InputLabel id='gender'>性别</InputLabel>
               <Controller
-                render={
-                  () => <Select
-                    onChange={e => setValue('gender', reptileGenderOptions.find(reptileTypeOption => reptileTypeOption.value === e.target.value)!, {shouldValidate: true})}
-                    value={getValues('gender.value')}
-                    labelId="gender"
-                    label="性别"
-                    error={!!errors.gender}
-                  >
-                    {
-                      reptileGenderOptions.map(
-                        reptileGenderOption => (
-                          <MenuItem
-                            key={reptileGenderOption.label}
-                            value={reptileGenderOption.value}>
-                            {reptileGenderOption.label}
-                          </MenuItem>
-                        )
+                render={() => (
+                  <Select
+                    onChange={(e) =>
+                      setValue(
+                        'gender',
+                        reptileGenderOptions.find(
+                          (reptileTypeOption) => reptileTypeOption.value === e.target.value,
+                        )!,
+                        { shouldValidate: true },
                       )
                     }
+                    value={getValues('gender.value')}
+                    labelId='gender'
+                    label='性别'
+                    error={!!errors.gender}
+                  >
+                    {reptileGenderOptions.map((reptileGenderOption) => (
+                      <MenuItem key={reptileGenderOption.label} value={reptileGenderOption.value}>
+                        {reptileGenderOption.label}
+                      </MenuItem>
+                    ))}
                   </Select>
-                }
+                )}
                 name={'gender'}
                 control={control}
               />
             </FormControl>
             <Controller
-              name="genies"
+              name='genies'
               control={control}
-              render={
-                ({ field }) => <TextField
+              render={({ field }) => (
+                <TextField
                   fullWidth
                   placeholder='基因(请使用"/"分隔开)'
                   error={!!errors.genies}
                   {...field}
                 />
-              }
+              )}
             />
             <Controller
-              name="weight"
+              name='weight'
               control={control}
-              render={
-                ({ field }) => <TextField
-                  fullWidth
-                  placeholder="当前体重(g)"
-                  error={!!errors.weight}
-                  {...field}
-                />
-              }
+              render={({ field }) => (
+                <TextField fullWidth placeholder='当前体重(g)' error={!!errors.weight} {...field} />
+              )}
             />
             <FormControl>
-              <InputLabel id="reptileType">科/属</InputLabel>
+              <InputLabel id='reptileType'>科/属</InputLabel>
               <Controller
-                render={
-                  () => <Select
-                    onChange={e => setValue('reptileTypeId', reptileTypeOptions.find(reptileTypeOption => reptileTypeOption.value === e.target.value)!, {shouldValidate: true})}
-                    value={getValues('reptileTypeId.value')}
-                    labelId="reptileType"
-                    label="科/属"
-                    error={!!errors.reptileTypeId}
-                  >
-                    {
-                      reptileTypeOptions.map(
-                        reptileTypeOption => (
-                          <MenuItem
-                            key={reptileTypeOption.label}
-                            value={reptileTypeOption.value}>
-                            {reptileTypeOption.label}
-                          </MenuItem>
-                        )
+                render={() => (
+                  <Select
+                    onChange={(e) =>
+                      setValue(
+                        'reptileTypeId',
+                        reptileTypeOptions.find(
+                          (reptileTypeOption) => reptileTypeOption.value === e.target.value,
+                        )!,
+                        { shouldValidate: true },
                       )
                     }
+                    value={getValues('reptileTypeId.value')}
+                    labelId='reptileType'
+                    label='科/属'
+                    error={!!errors.reptileTypeId}
+                  >
+                    {reptileTypeOptions.map((reptileTypeOption) => (
+                      <MenuItem key={reptileTypeOption.label} value={reptileTypeOption.value}>
+                        {reptileTypeOption.label}
+                      </MenuItem>
+                    ))}
                   </Select>
-                }
+                )}
                 name={'reptileTypeId'}
                 control={control}
               />
             </FormControl>
             <FormControl>
-              <InputLabel id="reptileFeedingBox">所属饲育容器</InputLabel>
+              <InputLabel id='reptileFeedingBox'>所属饲育容器</InputLabel>
               <Controller
-                render={
-                  () => <Select
-                    onChange={e => setValue('reptileFeedingBoxId', reptileFeedingBoxOptions.find(reptileFeedingBoxOption => reptileFeedingBoxOption.value === e.target.value)!, {shouldValidate: true})}
-                    value={getValues('reptileFeedingBoxId.value')}
-                    labelId="reptileFeedingBox"
-                    label="所属饲育容器"
-                    error={!!errors.reptileFeedingBoxId}
-                  >
-                    {
-                      reptileFeedingBoxOptions.map(
-                        reptileFeedingBoxOption => (
-                          <MenuItem
-                            key={reptileFeedingBoxOption.label}
-                            value={reptileFeedingBoxOption.value}>
-                            {reptileFeedingBoxOption.label}
-                          </MenuItem>
-                        )
+                render={() => (
+                  <Select
+                    onChange={(e) =>
+                      setValue(
+                        'reptileFeedingBoxId',
+                        reptileFeedingBoxOptions.find(
+                          (reptileFeedingBoxOption) =>
+                            reptileFeedingBoxOption.value === e.target.value,
+                        )!,
+                        { shouldValidate: true },
                       )
                     }
+                    value={getValues('reptileFeedingBoxId.value')}
+                    labelId='reptileFeedingBox'
+                    label='所属饲育容器'
+                    error={!!errors.reptileFeedingBoxId}
+                  >
+                    {reptileFeedingBoxOptions.map((reptileFeedingBoxOption) => (
+                      <MenuItem
+                        key={reptileFeedingBoxOption.label}
+                        value={reptileFeedingBoxOption.value}
+                      >
+                        {reptileFeedingBoxOption.label}
+                      </MenuItem>
+                    ))}
                   </Select>
-                }
+                )}
                 name={'reptileFeedingBoxId'}
                 control={control}
               />
             </FormControl>
-            {
-              reptileFeedingBoxes.find(reptileFeedingBox => reptileFeedingBox.id === watch().reptileFeedingBoxId?.value)?.type === 'CABINET'
-                ? <Controller
-                  name="horizontalIndex"
+            {reptileFeedingBoxes.find(
+              (reptileFeedingBox) => reptileFeedingBox.id === watch().reptileFeedingBoxId?.value,
+            )?.type === 'CABINET' ? (
+                <Controller
+                  name='horizontalIndex'
                   control={control}
-                  render={
-                    ({ field }) => <TextField
+                  render={({ field }) => (
+                    <TextField
                       fullWidth
-                      placeholder="第几层"
+                      placeholder='第几层'
                       error={!!errors.horizontalIndex}
                       {...field}
                     />
-                  }
+                  )}
                 />
-                : null
-            }
-            {
-              reptileFeedingBoxes.find(reptileFeedingBox => reptileFeedingBox.id === watch().reptileFeedingBoxId?.value)?.type === 'CABINET'
-                ? <Controller
-                  name="verticalIndex"
+              ) : null}
+            {reptileFeedingBoxes.find(
+              (reptileFeedingBox) => reptileFeedingBox.id === watch().reptileFeedingBoxId?.value,
+            )?.type === 'CABINET' ? (
+                <Controller
+                  name='verticalIndex'
                   control={control}
-                  render={
-                    ({ field }) => <TextField
+                  render={({ field }) => (
+                    <TextField
                       fullWidth
-                      placeholder="第几列"
+                      placeholder='第几列'
                       error={!!errors.verticalIndex}
                       {...field}
                     />
-                  }
+                  )}
                 />
-                : null
-            }
+              ) : null}
             <Controller
-              name="birthdate"
+              name='birthdate'
               control={control}
-              render={
-                ({ field }) => (
-                  <DatePicker
-                    {...field}
-                    label={'出生日期'}
-                    renderInput={(params: any) => (
-                      <TextField
-                        sx={{ zIndex: 0 }}
-                        {...params}
-                        {...field}
-                      />
-                    )} />
-                )
-              }
+              render={({ field }) => (
+                <DatePicker
+                  {...field}
+                  label={'出生日期'}
+                  renderInput={(params: any) => (
+                    <TextField sx={{ zIndex: 0 }} {...params} {...field} />
+                  )}
+                />
+              )}
             />
           </Stack>
         </DialogContent>
         <DialogActions>
-          <Button type="submit">完成</Button>
+          <Button type='submit'>完成</Button>
         </DialogActions>
       </form>
     </Dialog>

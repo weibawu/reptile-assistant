@@ -3,13 +3,11 @@ import { ThemeProvider } from '@mui/material';
 import { themeCreator } from './base';
 import { StylesProvider } from '@mui/styles';
 
-export const ThemeContext = React.createContext(
-  (themeName: string): void => {
-    throw new Error(themeName + 'is not defined');
-  }
-);
+export const ThemeContext = React.createContext((themeName: string): void => {
+  throw new Error(themeName + 'is not defined');
+});
 
-const ThemeProviderWrapper: React.FC<{children: React.ReactNode}> = (props) => {
+const ThemeProviderWrapper: React.FC<{ children: React.ReactNode }> = (props) => {
   const curThemeName = localStorage.getItem('appTheme') || 'PureLightTheme';
   const [themeName, _setThemeName] = useState(curThemeName);
   const theme = themeCreator(themeName);

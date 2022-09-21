@@ -15,21 +15,13 @@ const Loader = (Component: any) => (props: any) =>
   );
 
 // Applications
-const ReptileFeedingBox = Loader(
-  lazy(() => import('./applications/ReptileFeedingBox'))
-);
-const ReptileFeedingLog = Loader(
-  lazy(() => import('./applications/ReptileFeedingLog'))
-);
-const ReptileWeightLog = Loader(
-  lazy(() => import('./applications/ReptileWeightLog'))
-);
+const ReptileFeedingBox = Loader(lazy(() => import('./applications/ReptileFeedingBox')));
+const ReptileFeedingLog = Loader(lazy(() => import('./applications/ReptileFeedingLog')));
+const ReptileWeightLog = Loader(lazy(() => import('./applications/ReptileWeightLog')));
 const ReptileTemperatureAndHumidityLog = Loader(
-  lazy(() => import('./applications/ReptileTemperatureAndHumidityLog'))
+  lazy(() => import('./applications/ReptileTemperatureAndHumidityLog')),
 );
-const Reptile = Loader(
-  lazy(() => import('./applications/ReptileEditing'))
-);
+const Reptile = Loader(lazy(() => import('./applications/ReptileEditing')));
 
 const routes: RouteObject[] = [
   {
@@ -38,37 +30,37 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '',
-        element: <Navigate to="feeding-box" replace />
+        element: <Navigate to='feeding-box' replace />,
       },
       {
         path: 'feeding-box',
-        element: <Navigate to="overview" replace />
+        element: <Navigate to='overview' replace />,
       },
       {
         path: 'feeding-box/overview',
-        element: <ReptileFeedingBox />
+        element: <ReptileFeedingBox />,
       },
       {
         path: 'reptile',
-        element: <Navigate to="overview" replace />
+        element: <Navigate to='overview' replace />,
       },
       {
         path: 'reptile/overview',
-        element: <Reptile />
+        element: <Reptile />,
       },
       {
         path: 'reptile/temperature-and-humidity-logs',
-        element: <ReptileTemperatureAndHumidityLog />
+        element: <ReptileTemperatureAndHumidityLog />,
       },
       {
         path: 'reptile/weight-logs',
-        element: <ReptileWeightLog />
+        element: <ReptileWeightLog />,
       },
       {
         path: 'reptile/feeding-logs',
-        element: <ReptileFeedingLog />
+        element: <ReptileFeedingLog />,
       },
-    ]
+    ],
   },
 ];
 

@@ -1,15 +1,13 @@
 import React, { FC, useState, createContext } from 'react';
 type ModalContext = {
-  ModalToggle: boolean;
-  toggleModal: () => void;
-  closeModal: () => void;
-};
+  ModalToggle: boolean
+  toggleModal: () => void
+  closeModal: () => void
+}
 
-export const ModalContext = createContext<ModalContext>(
-  {} as ModalContext
-);
+export const ModalContext = createContext<ModalContext>({} as ModalContext);
 
-export const ModalProvider: FC<{children: React.ReactNode}> = ({ children }) => {
+export const ModalProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const [ModalToggle, setModalToggle] = useState(false);
   const toggleModal = () => {
     setModalToggle(!ModalToggle);
@@ -19,9 +17,7 @@ export const ModalProvider: FC<{children: React.ReactNode}> = ({ children }) => 
   };
 
   return (
-    <ModalContext.Provider
-      value={{ ModalToggle, toggleModal, closeModal }}
-    >
+    <ModalContext.Provider value={{ ModalToggle, toggleModal, closeModal }}>
       {children}
     </ModalContext.Provider>
   );

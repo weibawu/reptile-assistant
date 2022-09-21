@@ -23,7 +23,7 @@ function Reptiles() {
     reptileTypes,
     reptileFeedingBoxes,
     reptileFeedingBoxIndexes,
-    handleReptilesDelete
+    handleReptilesDelete,
   } = useContext(ReptileContext);
 
   const {
@@ -32,7 +32,7 @@ function Reptiles() {
 
     viewableLogReptile,
     handleViewableReptileLogModalOpen,
-    handleViewableReptileLogModalClose
+    handleViewableReptileLogModalClose,
   } = useContext(ReptileFeedingLogContext);
 
   if (loading) return null;
@@ -43,25 +43,17 @@ function Reptiles() {
         <title>尾巴屋爬宠管理平台 - 饲育日志</title>
       </Helmet>
       <PageTitleWrapper>
-        <Grid container justifyContent="space-between" alignItems="center">
+        <Grid container justifyContent='space-between' alignItems='center'>
           <Grid item>
-            <Typography variant="h3" component="h3" gutterBottom>
+            <Typography variant='h3' component='h3' gutterBottom>
               尾巴屋爬宠管理平台
             </Typography>
-            <Typography variant="subtitle2">
-              你好，{currentUserDisplayedUsername}！
-            </Typography>
+            <Typography variant='subtitle2'>你好，{currentUserDisplayedUsername}！</Typography>
           </Grid>
         </Grid>
       </PageTitleWrapper>
-      <Container maxWidth="lg">
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="stretch"
-          spacing={3}
-        >
+      <Container maxWidth='lg'>
+        <Grid container direction='row' justifyContent='center' alignItems='stretch' spacing={3}>
           <Grid item xs={12}>
             <Card>
               <ReptilesTable
@@ -73,7 +65,9 @@ function Reptiles() {
                 onReptilesDeleting={handleReptilesDelete}
               >
                 <TableEditingActions
-                  onModifyReptileFeedingLogEditingModalOpen={handleModifyReptileFeedingLogModalOpenInReptileTable}
+                  onModifyReptileFeedingLogEditingModalOpen={
+                    handleModifyReptileFeedingLogModalOpenInReptileTable
+                  }
                   onModifyReptileFeedingLogTableModalOpen={handleViewableReptileLogModalOpen}
                   reptile={{} as Reptile}
                 />

@@ -4,36 +4,34 @@ import {
   ReptileFeedingBoxIndexCollection,
   ReptileType,
   ReptileFeedingBox,
-  ReptileFeedingLog, ReptileWeightLog, ReptileTemperatureAndHumidityLog
+  ReptileFeedingLog,
+  ReptileWeightLog,
+  ReptileTemperatureAndHumidityLog,
 } from '../../models';
 
 import { useReptileRepository } from '../reptile-repository/UseReptileRepository';
 import ReptileRepository from '../reptile-repository/ReptileRepository';
 
-import {
-  CognitoUserAmplify
-} from '@aws-amplify/ui-react/node_modules/@aws-amplify/ui/dist/types/types/authenticator/user.d';
+import { CognitoUserAmplify } from '@aws-amplify/ui-react/node_modules/@aws-amplify/ui/dist/types/types/authenticator/user.d';
 
 type ReptileContext = {
-  loading: boolean, // 是否正在获取数据
-  reptiles: Reptile[],
-  reptileTypes: ReptileType[],
-  reptileFeedingBoxes: ReptileFeedingBox[],
-  reptileFeedingBoxIndexes: ReptileFeedingBoxIndexCollection[],
-  reptileFeedingLogs: ReptileFeedingLog[],
-  reptileWeightLogs: ReptileWeightLog[],
-  reptileTemperatureAndHumidityLogs: ReptileTemperatureAndHumidityLog[],
-  reptileRepository: ReptileRepository,
-  currentUser: CognitoUserAmplify,
-  currentUserDisplayedUsername: string,
+  loading: boolean // 是否正在获取数据
+  reptiles: Reptile[]
+  reptileTypes: ReptileType[]
+  reptileFeedingBoxes: ReptileFeedingBox[]
+  reptileFeedingBoxIndexes: ReptileFeedingBoxIndexCollection[]
+  reptileFeedingLogs: ReptileFeedingLog[]
+  reptileWeightLogs: ReptileWeightLog[]
+  reptileTemperatureAndHumidityLogs: ReptileTemperatureAndHumidityLog[]
+  reptileRepository: ReptileRepository
+  currentUser: CognitoUserAmplify
+  currentUserDisplayedUsername: string
   handleReptilesDelete: (reptileIds: string[]) => void // 处理删除Reptiles逻辑
-};
+}
 
-export const ReptileContext = createContext<ReptileContext>(
-  {} as ReptileContext
-);
+export const ReptileContext = createContext<ReptileContext>({} as ReptileContext);
 
-export const ReptileProvider: FC<{children: React.ReactNode}> = ({ children }) => {
+export const ReptileProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const {
     loading,
     currentUser,
@@ -44,13 +42,12 @@ export const ReptileProvider: FC<{children: React.ReactNode}> = ({ children }) =
     reptileFeedingLogs,
     reptileWeightLogs,
     reptileTemperatureAndHumidityLogs,
-    reptileRepository
+    reptileRepository,
   } = useReptileRepository();
 
-  const currentUserDisplayedUsername =
-    currentUser.attributes
-      ? currentUser.attributes.email
-      : '新朋友';
+  const currentUserDisplayedUsername = currentUser.attributes
+    ? currentUser.attributes.email
+    : '新朋友';
 
   const handleReptilesDelete = async (reptileIds: string[]) => {
     for await (const reptileId of reptileIds) {

@@ -10,7 +10,7 @@ import { ReptileEditingProvider } from './context/ReptileEditingContext';
 import { ReptileProvider } from '../../libs/context/ReptileContext';
 import ReptileEditing from './component/ReptileEditing';
 
-const ApplicationsReptileEditing = () =>(
+const ApplicationsReptileEditing = () => (
   <>
     <Helmet>
       <title>尾巴屋爬宠管理平台 - 爬宠管理</title>
@@ -19,7 +19,7 @@ const ApplicationsReptileEditing = () =>(
       <ModalProvider>
         <ReptileProvider>
           <ReptileEditingProvider>
-            <ReptileEditing/>
+            <ReptileEditing />
           </ReptileEditingProvider>
         </ReptileProvider>
       </ModalProvider>

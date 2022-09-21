@@ -5,11 +5,11 @@ import { useAuthenticator } from '@aws-amplify/ui-react';
 const ReptileRepositoryContext = React.createContext<ReptileRepository>({} as ReptileRepository);
 
 interface ReptileFeederProviderProps {
-  children: React.ReactNode,
+  children: React.ReactNode
 }
 
-const ReptileRepositoryProvider: React.FC<ReptileFeederProviderProps> = ({children}) => {
-  const {user} = useAuthenticator(ctx => [ctx.user]);
+const ReptileRepositoryProvider: React.FC<ReptileFeederProviderProps> = ({ children }) => {
+  const { user } = useAuthenticator((ctx) => [ctx.user]);
   const reptileFeeder = new ReptileRepository(user);
 
   return (
@@ -19,7 +19,4 @@ const ReptileRepositoryProvider: React.FC<ReptileFeederProviderProps> = ({childr
   );
 };
 
-export {
-  ReptileRepositoryProvider,
-  ReptileRepositoryContext,
-};
+export { ReptileRepositoryProvider, ReptileRepositoryContext };

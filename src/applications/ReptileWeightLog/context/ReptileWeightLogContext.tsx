@@ -9,53 +9,54 @@ import { useReptileRepository } from '../../../libs/reptile-repository/UseReptil
 import { Reptile, ReptileWeightLog } from '../../../models';
 
 type ReptileWeightLogContext = {
-  ModalToggle: boolean, // 创建/编辑Reptile Weight Log Modal显隐
-  toggleModal: () => void, // 切换Reptile Weight Log Modal显隐
+  ModalToggle: boolean // 创建/编辑Reptile Weight Log Modal显隐
+  toggleModal: () => void // 切换Reptile Weight Log Modal显隐
 
-  ReptileWeightLogTableModalToggle: boolean, // 查看Reptile Weight Log Modal显隐
-  toggleReptileWeightLogTableModal: () => void, // 切换Reptile Weight Log Modal显隐
+  ReptileWeightLogTableModalToggle: boolean // 查看Reptile Weight Log Modal显隐
+  toggleReptileWeightLogTableModal: () => void // 切换Reptile Weight Log Modal显隐
 
-  editableReptileWeightLog: ReptileWeightLog | undefined,
-  handleModifyReptileWeightLogModalOpen: (reptileWeightLog: ReptileWeightLog | undefined) => void,
-  handleModifyReptileWeightLogModalClose: () => void,
+  editableReptileWeightLog: ReptileWeightLog | undefined
+  handleModifyReptileWeightLogModalOpen: (reptileWeightLog: ReptileWeightLog | undefined) => void
+  handleModifyReptileWeightLogModalClose: () => void
   handleReptileWeightLogsDelete: (reptileWeightLogIds: string[]) => void
 
   viewableLogReptile: Reptile | undefined // 正在查看日志的Reptile
   handleViewableReptileLogModalOpen: (reptile: Reptile) => void // 打开正在查看日志的Reptile
   handleViewableReptileLogModalClose: () => void // 关闭正在查看日志的Reptile
-  handleModifyReptileWeightLogModalOpenInReptileTable: (reptile: Reptile, reptileWeightLog: ReptileWeightLog) => void;
-};
+  handleModifyReptileWeightLogModalOpenInReptileTable: (
+    reptile: Reptile,
+    reptileWeightLog: ReptileWeightLog,
+  ) => void
+}
 
 export const ReptileWeightLogContext = createContext<ReptileWeightLogContext>(
-  {} as ReptileWeightLogContext
+  {} as ReptileWeightLogContext,
 );
 
 export const ReptileWeightLogProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
-
-  const {
-    reptileWeightLogs
-  } = useContext(ReptileContext);
+  const { reptileWeightLogs } = useContext(ReptileContext);
 
   const { reptileRepository } = useReptileRepository();
 
-  const {
-    toggleModal,
-    ModalToggle,
-    closeModal
-  } = useContext(ModalContext);
-  const [editableReptileWeightLog, setEditableReptileWeightLog] = useState<ReptileWeightLog | undefined>();
+  const { toggleModal, ModalToggle, closeModal } = useContext(ModalContext);
+  const [editableReptileWeightLog, setEditableReptileWeightLog] = useState<
+    ReptileWeightLog | undefined
+  >();
 
   const {
     toggleReptileWeightLogTableModal,
     ReptileWeightLogTableModalToggle,
-    closeReptileWeightLogTableModal
+    closeReptileWeightLogTableModal,
   } = useContext(ReptileWeightLogTableModalContext);
   const [viewableLogReptile, setViewableLogReptile] = useState<Reptile | undefined>();
 
-  const [currentReptileWeightLog, setCurrentReptileWeightLog] = useState<ReptileWeightLog | undefined>();
+  const [currentReptileWeightLog, setCurrentReptileWeightLog] = useState<
+    ReptileWeightLog | undefined
+  >();
 
-
-  const handleModifyReptileWeightLogModalOpen = (reptileWeightLog: ReptileWeightLog | undefined) => {
+  const handleModifyReptileWeightLogModalOpen = (
+    reptileWeightLog: ReptileWeightLog | undefined,
+  ) => {
     if (reptileWeightLog) {
       setEditableReptileWeightLog(reptileWeightLog);
     }
@@ -74,7 +75,10 @@ export const ReptileWeightLogProvider: FC<{ children: React.ReactNode }> = ({ ch
     await reptileRepository.fetchAll();
   };
 
-  const handleModifyReptileWeightLogModalOpenInReptileTable = (reptile: Reptile, reptileWeightLog: ReptileWeightLog) => {
+  const handleModifyReptileWeightLogModalOpenInReptileTable = (
+    reptile: Reptile,
+    reptileWeightLog: ReptileWeightLog,
+  ) => {
     handleViewableReptileLogModalOpen(reptile);
     setCurrentReptileWeightLog(reptileWeightLog);
   };
@@ -90,7 +94,8 @@ export const ReptileWeightLogProvider: FC<{ children: React.ReactNode }> = ({ ch
   }, [reptileWeightLogs]);
 
   useEffect(() => {
-    if (currentReptileWeightLog && !ModalToggle) handleModifyReptileWeightLogModalCloseInReptileTable();
+    if (currentReptileWeightLog && !ModalToggle)
+      handleModifyReptileWeightLogModalCloseInReptileTable();
   }, [ModalToggle]);
 
   const handleViewableReptileLogModalOpen = (reptile: Reptile) => {
@@ -120,7 +125,7 @@ export const ReptileWeightLogProvider: FC<{ children: React.ReactNode }> = ({ ch
         viewableLogReptile,
         handleViewableReptileLogModalClose,
         handleViewableReptileLogModalOpen,
-        handleModifyReptileWeightLogModalOpenInReptileTable
+        handleModifyReptileWeightLogModalOpenInReptileTable,
       }}
     >
       {children}

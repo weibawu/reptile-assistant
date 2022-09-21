@@ -4,17 +4,10 @@ import { styled } from '@mui/material/styles';
 import clsx from 'clsx';
 
 interface TextProps {
-  className?: string;
-  color?:
-    | 'primary'
-    | 'secondary'
-    | 'error'
-    | 'warning'
-    | 'success'
-    | 'info'
-    | 'black';
-  flex?: boolean;
-  children?: ReactNode;
+  className?: string
+  color?: 'primary' | 'secondary' | 'error' | 'warning' | 'success' | 'info' | 'black'
+  flex?: boolean
+  children?: ReactNode
 }
 
 const TextWrapper = styled('span')(
@@ -56,20 +49,12 @@ const TextWrapper = styled('span')(
           color: ${theme.palette.info.main}
         }
       }
-`
+`,
 );
 
-const Text: FC<TextProps> = ({
-  color = 'secondary',
-  flex,
-  children,
-  ...rest
-}) => {
+const Text: FC<TextProps> = ({ color = 'secondary', flex, children, ...rest }) => {
   return (
-    <TextWrapper
-      className={clsx('MuiText-' + color, { flexItem: flex })}
-      {...rest}
-    >
+    <TextWrapper className={clsx('MuiText-' + color, { flexItem: flex })} {...rest}>
       {children}
     </TextWrapper>
   );
@@ -78,15 +63,7 @@ const Text: FC<TextProps> = ({
 Text.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  color: PropTypes.oneOf([
-    'primary',
-    'secondary',
-    'error',
-    'warning',
-    'success',
-    'info',
-    'black'
-  ])
+  color: PropTypes.oneOf(['primary', 'secondary', 'error', 'warning', 'success', 'info', 'black']),
 };
 
 export default Text;

@@ -11,7 +11,7 @@ const ApplicationsReptileFeedingBox: React.FC = () => (
     </Helmet>
     <ModalProvider>
       <ReptileFeedingBoxProvider>
-        <ReptileFeedingBoxes/>
+        <ReptileFeedingBoxes />
       </ReptileFeedingBoxProvider>
     </ModalProvider>
   </>

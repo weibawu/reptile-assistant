@@ -1,16 +1,18 @@
 import React, { FC, useState, createContext } from 'react';
 
 type ReptileFeedingLogTableModalContext = {
-  ReptileFeedingLogTableModalToggle: boolean;
-  toggleReptileFeedingLogTableModal: () => void;
-  closeReptileFeedingLogTableModal: () => void;
-};
+  ReptileFeedingLogTableModalToggle: boolean
+  toggleReptileFeedingLogTableModal: () => void
+  closeReptileFeedingLogTableModal: () => void
+}
 
 export const ReptileFeedingLogTableModalContext = createContext<ReptileFeedingLogTableModalContext>(
-  {} as ReptileFeedingLogTableModalContext
+  {} as ReptileFeedingLogTableModalContext,
 );
 
-export const ReptileFeedingLogTableModalProvider: FC<{children: React.ReactNode}> = ({ children }) => {
+export const ReptileFeedingLogTableModalProvider: FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [ReptileFeedingLogTableModalToggle, setReptileFeedingLogTableModalToggle] = useState(false);
   const toggleReptileFeedingLogTableModal = () => {
     setReptileFeedingLogTableModalToggle(!ReptileFeedingLogTableModalToggle);
@@ -21,7 +23,11 @@ export const ReptileFeedingLogTableModalProvider: FC<{children: React.ReactNode}
 
   return (
     <ReptileFeedingLogTableModalContext.Provider
-      value={{ ReptileFeedingLogTableModalToggle, toggleReptileFeedingLogTableModal, closeReptileFeedingLogTableModal }}
+      value={{
+        ReptileFeedingLogTableModalToggle,
+        toggleReptileFeedingLogTableModal,
+        closeReptileFeedingLogTableModal,
+      }}
     >
       {children}
     </ReptileFeedingLogTableModalContext.Provider>

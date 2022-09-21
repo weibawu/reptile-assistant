@@ -1,20 +1,11 @@
 import React, { useContext } from 'react';
 import { NavLink as RouterLink } from 'react-router-dom';
 
-import {
-  ListSubheader,
-  alpha,
-  Box,
-  List,
-  styled,
-  Button,
-  ListItem
-} from '@mui/material';
+import { ListSubheader, alpha, Box, List, styled, Button, ListItem } from '@mui/material';
 import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
 import PetsIcon from '@mui/icons-material/Pets';
 
-import {SidebarContext} from '../../../../libs/context/SidebarContext';
-
+import { SidebarContext } from '../../../../libs/context/SidebarContext';
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -34,7 +25,7 @@ const MenuWrapper = styled(Box)(
       padding: ${theme.spacing(0, 2.5)};
       line-height: 1.4;
     }
-`
+`,
 );
 
 const SubMenuWrapper = styled(Box)(
@@ -130,10 +121,7 @@ const SubMenuWrapper = styled(Box)(
                 content: ' ';
                 background: ${theme.colors.alpha.trueWhite[100]};
                 opacity: 0;
-                transition: ${theme.transitions.create([
-    'transform',
-    'opacity'
-  ])};
+                transition: ${theme.transitions.create(['transform', 'opacity'])};
                 width: 6px;
                 height: 6px;
                 transform: scale(0);
@@ -155,7 +143,7 @@ const SubMenuWrapper = styled(Box)(
         }
       }
     }
-`
+`,
 );
 
 function SidebarMenu() {
@@ -165,32 +153,32 @@ function SidebarMenu() {
     <>
       <MenuWrapper>
         <List
-          component="div"
+          component='div'
           subheader={
-            <ListSubheader component="div" disableSticky>
+            <ListSubheader component='div' disableSticky>
               应用
             </ListSubheader>
           }
         >
           <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div">
+            <List component='div'>
+              <ListItem component='div'>
                 <Button
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="feeding-box"
+                  to='feeding-box'
                   startIcon={<TableChartTwoToneIcon />}
                 >
                   饲育容器
                 </Button>
               </ListItem>
-              <ListItem component="div">
+              <ListItem component='div'>
                 <Button
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="reptile"
+                  to='reptile'
                   startIcon={<PetsIcon />}
                 >
                   爬宠

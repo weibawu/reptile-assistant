@@ -4,8 +4,10 @@ import {
   Reptile,
   ReptileFeedingBox,
   ReptileFeedingBoxIndexCollection,
-  ReptileFeedingLog, ReptileTemperatureAndHumidityLog,
-  ReptileType, ReptileWeightLog
+  ReptileFeedingLog,
+  ReptileTemperatureAndHumidityLog,
+  ReptileType,
+  ReptileWeightLog,
 } from '../../models';
 
 export const useReptileRepository = () => {
@@ -16,10 +18,14 @@ export const useReptileRepository = () => {
   const [reptiles, setReptiles] = useState<Reptile[]>([]);
   const [reptileTypes, setReptileTypes] = useState<ReptileType[]>([]);
   const [reptileFeedingBoxes, setReptilesFeedingBoxes] = useState<ReptileFeedingBox[]>([]);
-  const [reptileFeedingBoxIndexes, setReptilesFeedingBoxIndexes] = useState<ReptileFeedingBoxIndexCollection[]>([]);
+  const [reptileFeedingBoxIndexes, setReptilesFeedingBoxIndexes] = useState<
+    ReptileFeedingBoxIndexCollection[]
+  >([]);
   const [reptileFeedingLogs, setReptileFeedingLogs] = useState<ReptileFeedingLog[]>([]);
   const [reptileWeightLogs, setReptileWeightLogs] = useState<ReptileWeightLog[]>([]);
-  const [reptileTemperatureAndHumidityLogs, setReptileTemperatureAndHumidityLogs] = useState<ReptileTemperatureAndHumidityLog[]>([]);
+  const [reptileTemperatureAndHumidityLogs, setReptileTemperatureAndHumidityLogs] = useState<
+    ReptileTemperatureAndHumidityLog[]
+  >([]);
 
   reptileRepository.onReptilesFetched(setReptiles);
   reptileRepository.onReptileTypesFetched(setReptileTypes);

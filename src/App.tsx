@@ -14,9 +14,7 @@ const App: React.FC = () => {
       <Authenticator>
         <SidebarProvider>
           <Authenticator.Provider>
-            <ReptileRepositoryProvider>
-              {content}
-            </ReptileRepositoryProvider>
+            <ReptileRepositoryProvider>{content}</ReptileRepositoryProvider>
           </Authenticator.Provider>
         </SidebarProvider>
       </Authenticator>

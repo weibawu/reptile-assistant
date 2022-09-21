@@ -8,7 +8,8 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
-  Select, SelectChangeEvent,
+  Select,
+  SelectChangeEvent,
   Table,
   TableBody,
   TableCell,
@@ -28,46 +29,50 @@ import {
   ReptileFeedingBox,
   ReptileFeedingBoxIndexCollection,
   ReptileFeedingBoxType,
-  ReptileType
+  ReptileType,
 } from '../../models';
 import Stack from '@mui/material/Stack';
-import { deduplicateJSONStringList, generateHashNumber, generateHashNumberInRange } from '../../libs/util';
+import {
+  deduplicateJSONStringList,
+  generateHashNumber,
+  generateHashNumberInRange,
+} from '../../libs/util';
 
 interface ReptilesTableProps {
-  className?: string;
-  reptiles: Reptile[],
-  reptileTypes: ReptileType[],
-  reptileFeedingBoxes: ReptileFeedingBox[],
-  reptileFeedingBoxIndexes: ReptileFeedingBoxIndexCollection[],
-  showBulkDeleting: boolean,
-  onReptilesDeleting: (reptileIds: string[]) => any;
-  children?:
-    | React.ReactElement<{ reptile: Reptile }>
-    | React.ReactElement<{ reptile: Reptile }>[],
+  className?: string
+  reptiles: Reptile[]
+  reptileTypes: ReptileType[]
+  reptileFeedingBoxes: ReptileFeedingBox[]
+  reptileFeedingBoxIndexes: ReptileFeedingBoxIndexCollection[]
+  showBulkDeleting: boolean
+  onReptilesDeleting: (reptileIds: string[]) => any
+  children?: React.ReactElement<{ reptile: Reptile }> | React.ReactElement<{ reptile: Reptile }>[]
 }
 
 interface Filters {
-  value?: string;
+  value?: string
 }
 
-type AnyFilterOption = { id: string, name: string };
+type AnyFilterOption = { id: string; name: string }
 
 const labelColorList = ['primary', 'black', 'secondary', 'error', 'warning', 'success', 'info'];
 
-const getReptileFeedingBoxTypeLabel = (feedingBoxType: ReptileFeedingBoxType | undefined | null | 'BOX' | 'CABINET'): JSX.Element => {
+const getReptileFeedingBoxTypeLabel = (
+  feedingBoxType: ReptileFeedingBoxType | undefined | null | 'BOX' | 'CABINET',
+): JSX.Element => {
   const map = {
     [ReptileFeedingBoxType.BOX]: {
       text: '饲育盒',
-      color: 'error'
+      color: 'error',
     },
     [ReptileFeedingBoxType.CABINET]: {
       text: '爬柜',
-      color: 'success'
+      color: 'success',
     },
-    'unknown': {
+    unknown: {
       text: '未知',
-      color: 'primary'
-    }
+      color: 'primary',
+    },
   };
 
   const { text, color }: any = map[feedingBoxType ?? 'unknown'];
@@ -77,51 +82,60 @@ const getReptileFeedingBoxTypeLabel = (feedingBoxType: ReptileFeedingBoxType | u
 
 const getTextLabel = (text: string): JSX.Element => {
   const index = generateHashNumberInRange(text, labelColorList.length);
-  const color = labelColorList[index] as 'primary' | 'black' | 'secondary' | 'error' | 'warning' | 'success' | 'info' | undefined;
+  const color = labelColorList[index] as
+    | 'primary'
+    | 'black'
+    | 'secondary'
+    | 'error'
+    | 'warning'
+    | 'success'
+    | 'info'
+    | undefined;
 
-  return <Label key={text} color={color}>{text}</Label>;
+  return (
+    <Label key={text} color={color}>
+      {text}
+    </Label>
+  );
 };
 
-const insertDefaultOptions: (options: AnyFilterOption[]) => AnyFilterOption[] = (options) => ([
+const insertDefaultOptions: (options: AnyFilterOption[]) => AnyFilterOption[] = (options) => [
   { id: 'all', name: '全部' },
-  ...options
-]);
+  ...options,
+];
 
 const applyFilters = (
   reptiles: Reptile[],
   filters: Filters,
   matchKey?: keyof Reptile,
-  exactStringMatcher?: (reptile: Reptile) => string
+  exactStringMatcher?: (reptile: Reptile) => string,
 ): Reptile[] => {
-  if (matchKey) return reptiles.filter((reptile) => {
-    let matches = true;
+  if (matchKey)
+    return reptiles.filter((reptile) => {
+      let matches = true;
 
-    if (filters.value && reptile[matchKey] !== filters.value) {
-      matches = false;
-    }
+      if (filters.value && reptile[matchKey] !== filters.value) {
+        matches = false;
+      }
 
-    return matches;
-  });
+      return matches;
+    });
 
-  if (exactStringMatcher) return reptiles.filter((reptile) => {
-    let matches = true;
+  if (exactStringMatcher)
+    return reptiles.filter((reptile) => {
+      let matches = true;
 
-    if (filters.value && exactStringMatcher(reptile) !== filters.value) {
-      matches = false;
-    }
+      if (filters.value && exactStringMatcher(reptile) !== filters.value) {
+        matches = false;
+      }
 
-    return matches;
-  });
+      return matches;
+    });
 
   return [];
 };
 
-
-const applyPagination = (
-  reptiles: Reptile[],
-  page: number,
-  limit: number
-): Reptile[] => {
+const applyPagination = (reptiles: Reptile[], page: number, limit: number): Reptile[] => {
   return reptiles.slice(page * limit, page * limit + limit);
 };
 
@@ -132,7 +146,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
   reptileFeedingBoxIndexes,
   showBulkDeleting,
   onReptilesDeleting,
-  children
+  children,
 }) => {
   const [selectedReptiles, setSelectedReptiles] = useState<string[]>([]);
   const selectedBulkActions = selectedReptiles.length > 0;
@@ -145,11 +159,12 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
 
   const getReptileFeedingBoxLayerName = (reptile: Reptile): string => {
     const reptileFeedingBox = reptileFeedingBoxes.find(
-      reptileFeedingBox => reptile.reptileFeedingBoxID === reptileFeedingBox.id
+      (reptileFeedingBox) => reptile.reptileFeedingBoxID === reptileFeedingBox.id,
     );
 
     const reptileFeedingBoxIndex = reptileFeedingBoxIndexes.find(
-      reptileFeedingBoxIndex => reptileFeedingBoxIndex.id === reptile.reptileFeedingBoxIndexCollectionID
+      (reptileFeedingBoxIndex) =>
+        reptileFeedingBoxIndex.id === reptile.reptileFeedingBoxIndexCollectionID,
     );
 
     if (reptileFeedingBox?.type === ReptileFeedingBoxType.BOX) return reptileFeedingBox?.name ?? '';
@@ -159,45 +174,63 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
 
   const reptileTypeOptions = insertDefaultOptions(
     deduplicateJSONStringList(
-      reptileTypes.map(
-        reptileType => ({
-          id: reptileType.id,
-          name: reptileType.name
-        })
-      ))
+      reptileTypes.map((reptileType) => ({
+        id: reptileType.id,
+        name: reptileType.name,
+      })),
+    ),
   );
 
   const reptileNameOptions = insertDefaultOptions(
-    deduplicateJSONStringList(reptiles.map(
-      reptile => ({
+    deduplicateJSONStringList(
+      reptiles.map((reptile) => ({
         id: reptile.name,
-        name: reptile.name
-      })
-    ))
+        name: reptile.name,
+      })),
+    ),
   );
 
   const reptileFeedingBoxLayerOptions = insertDefaultOptions(
     deduplicateJSONStringList(
       reptiles
-        .sort(
-          (prevReptile, nextReptile) => {
-            if (generateHashNumber(prevReptile.reptileFeedingBoxID) > generateHashNumber(nextReptile.reptileFeedingBoxID)) return 1;
-            if (generateHashNumber(prevReptile.reptileFeedingBoxID) < generateHashNumber(nextReptile.reptileFeedingBoxID)) return -1;
+        .sort((prevReptile, nextReptile) => {
+          if (
+            generateHashNumber(prevReptile.reptileFeedingBoxID) >
+            generateHashNumber(nextReptile.reptileFeedingBoxID)
+          )
+            return 1;
+          if (
+            generateHashNumber(prevReptile.reptileFeedingBoxID) <
+            generateHashNumber(nextReptile.reptileFeedingBoxID)
+          )
+            return -1;
 
-            const prevReptileFeedingBoxIndex = reptileFeedingBoxIndexes.find(reptileFeedingBoxIndex => reptileFeedingBoxIndex.id === prevReptile.reptileFeedingBoxIndexCollectionID);
-            const nextReptileFeedingBoxIndex = reptileFeedingBoxIndexes.find(reptileFeedingBoxIndex => reptileFeedingBoxIndex.id === nextReptile.reptileFeedingBoxIndexCollectionID);
+          const prevReptileFeedingBoxIndex = reptileFeedingBoxIndexes.find(
+            (reptileFeedingBoxIndex) =>
+              reptileFeedingBoxIndex.id === prevReptile.reptileFeedingBoxIndexCollectionID,
+          );
+          const nextReptileFeedingBoxIndex = reptileFeedingBoxIndexes.find(
+            (reptileFeedingBoxIndex) =>
+              reptileFeedingBoxIndex.id === nextReptile.reptileFeedingBoxIndexCollectionID,
+          );
 
-            if (prevReptileFeedingBoxIndex!.horizontalIndex! > nextReptileFeedingBoxIndex!.horizontalIndex!) return 1;
-            if (prevReptileFeedingBoxIndex!.horizontalIndex! < nextReptileFeedingBoxIndex!.horizontalIndex!) return -1;
-            return 0;
-          }
-        )
-        .map(reptile => ({
-          id: getReptileFeedingBoxLayerName(reptile),
-          name: getReptileFeedingBoxLayerName(reptile)
+          if (
+            prevReptileFeedingBoxIndex!.horizontalIndex! >
+            nextReptileFeedingBoxIndex!.horizontalIndex!
+          )
+            return 1;
+          if (
+            prevReptileFeedingBoxIndex!.horizontalIndex! <
+            nextReptileFeedingBoxIndex!.horizontalIndex!
+          )
+            return -1;
+          return 0;
         })
-        )
-    )
+        .map((reptile) => ({
+          id: getReptileFeedingBoxLayerName(reptile),
+          name: getReptileFeedingBoxLayerName(reptile),
+        })),
+    ),
   );
 
   const handleReptileTypeChange = (e: SelectChangeEvent): void => {
@@ -209,7 +242,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
 
     setReptileTypeFilters((prevFilters) => ({
       ...prevFilters,
-      value
+      value,
     }));
   };
 
@@ -222,7 +255,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
 
     setReptileNameFilters((prevFilters) => ({
       ...prevFilters,
-      value
+      value,
     }));
   };
 
@@ -235,33 +268,22 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
 
     setReptileFeedingBoxLayerFilters((prevFilters) => ({
       ...prevFilters,
-      value
+      value,
     }));
   };
 
-  const handleSelectAllReptiles = (
-    event: ChangeEvent<HTMLInputElement>
-  ): void => {
-    setSelectedReptiles(
-      event.target.checked
-        ? reptiles.map((reptiles) => reptiles.id)
-        : []
-    );
+  const handleSelectAllReptiles = (event: ChangeEvent<HTMLInputElement>): void => {
+    setSelectedReptiles(event.target.checked ? reptiles.map((reptiles) => reptiles.id) : []);
   };
 
   const handleSelectOneReptile = (
     event: ChangeEvent<HTMLInputElement>,
-    reptileId: string
+    reptileId: string,
   ): void => {
     if (!selectedReptiles.includes(reptileId)) {
-      setSelectedReptiles((prevSelected) => [
-        ...prevSelected,
-        reptileId
-      ]);
+      setSelectedReptiles((prevSelected) => [...prevSelected, reptileId]);
     } else {
-      setSelectedReptiles((prevSelected) =>
-        prevSelected.filter((id) => id !== reptileId)
-      );
+      setSelectedReptiles((prevSelected) => prevSelected.filter((id) => id !== reptileId));
     }
   };
 
@@ -273,43 +295,65 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
     setLimit(parseInt(event.target.value));
   };
 
-  const reptileFeedingBoxIndexSortedReptiles = reptiles.sort(
-    (prevReptile, nextReptile) => {
-      const prevReptileFeedingBoxIndex = reptileFeedingBoxIndexes.find(reptileFeedingBoxIndex => reptileFeedingBoxIndex.id === prevReptile.reptileFeedingBoxIndexCollectionID);
-      const nextReptileFeedingBoxIndex = reptileFeedingBoxIndexes.find(reptileFeedingBoxIndex => reptileFeedingBoxIndex.id === nextReptile.reptileFeedingBoxIndexCollectionID);
+  const reptileFeedingBoxIndexSortedReptiles = reptiles.sort((prevReptile, nextReptile) => {
+    const prevReptileFeedingBoxIndex = reptileFeedingBoxIndexes.find(
+      (reptileFeedingBoxIndex) =>
+        reptileFeedingBoxIndex.id === prevReptile.reptileFeedingBoxIndexCollectionID,
+    );
+    const nextReptileFeedingBoxIndex = reptileFeedingBoxIndexes.find(
+      (reptileFeedingBoxIndex) =>
+        reptileFeedingBoxIndex.id === nextReptile.reptileFeedingBoxIndexCollectionID,
+    );
 
-      if (generateHashNumber(prevReptile.reptileFeedingBoxID) > generateHashNumber(nextReptile.reptileFeedingBoxID)) return 1;
-      if (generateHashNumber(prevReptile.reptileFeedingBoxID) < generateHashNumber(nextReptile.reptileFeedingBoxID)) return -1;
+    if (
+      generateHashNumber(prevReptile.reptileFeedingBoxID) >
+      generateHashNumber(nextReptile.reptileFeedingBoxID)
+    )
+      return 1;
+    if (
+      generateHashNumber(prevReptile.reptileFeedingBoxID) <
+      generateHashNumber(nextReptile.reptileFeedingBoxID)
+    )
+      return -1;
 
-      if (prevReptileFeedingBoxIndex!.horizontalIndex! > nextReptileFeedingBoxIndex!.horizontalIndex!) return 1;
-      if (prevReptileFeedingBoxIndex!.horizontalIndex! < nextReptileFeedingBoxIndex!.horizontalIndex!) return -1;
+    if (prevReptileFeedingBoxIndex!.horizontalIndex! > nextReptileFeedingBoxIndex!.horizontalIndex!)
+      return 1;
+    if (prevReptileFeedingBoxIndex!.horizontalIndex! < nextReptileFeedingBoxIndex!.horizontalIndex!)
+      return -1;
 
-      if (prevReptileFeedingBoxIndex!.verticalIndex! > nextReptileFeedingBoxIndex!.verticalIndex!) return 1;
-      if (prevReptileFeedingBoxIndex!.verticalIndex! < nextReptileFeedingBoxIndex!.verticalIndex!) return -1;
-      return 0;
-    }
+    if (prevReptileFeedingBoxIndex!.verticalIndex! > nextReptileFeedingBoxIndex!.verticalIndex!)
+      return 1;
+    if (prevReptileFeedingBoxIndex!.verticalIndex! < nextReptileFeedingBoxIndex!.verticalIndex!)
+      return -1;
+    return 0;
+  });
+
+  const filteredReptileTypeReptiles = applyFilters(
+    reptileFeedingBoxIndexSortedReptiles,
+    reptileTypeFilters,
+    'reptileTypeID',
   );
-
-  const filteredReptileTypeReptiles = applyFilters(reptileFeedingBoxIndexSortedReptiles, reptileTypeFilters, 'reptileTypeID');
-  const filteredReptileNameReptiles = applyFilters(filteredReptileTypeReptiles, reptileNameFilters, 'name');
+  const filteredReptileNameReptiles = applyFilters(
+    filteredReptileTypeReptiles,
+    reptileNameFilters,
+    'name',
+  );
 
   const filteredFeedingBoxAndFeedingBoxLayerReptiles = applyFilters(
     filteredReptileNameReptiles,
     reptileFeedingBoxLayerFilters,
     undefined,
-    getReptileFeedingBoxLayerName
+    getReptileFeedingBoxLayerName,
   );
 
   const paginatedReptiles = applyPagination(
     filteredFeedingBoxAndFeedingBoxLayerReptiles,
     page,
-    limit
+    limit,
   );
   const selectedSomeReptiles =
-    selectedReptiles.length > 0 &&
-    selectedReptiles.length < reptiles.length;
-  const selectedAllReptiles =
-    selectedReptiles.length === reptiles.length;
+    selectedReptiles.length > 0 && selectedReptiles.length < reptiles.length;
+  const selectedAllReptiles = selectedReptiles.length === reptiles.length;
 
   const handleBulkDeleting = () => {
     onReptilesDeleting(selectedReptiles);
@@ -328,12 +372,12 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
           <CardHeader
             action={
               <Stack direction={'row'} justifyContent={'space-around'} width={500}>
-                <FormControl variant="outlined">
+                <FormControl variant='outlined'>
                   <InputLabel>饲育容器</InputLabel>
                   <Select
                     value={reptileFeedingBoxLayerFilters.value || 'all'}
                     onChange={handleReptileFeedingBoxLayerChange}
-                    label="饲育容器"
+                    label='饲育容器'
                     autoWidth
                   >
                     {reptileFeedingBoxLayerOptions.map((statusOption) => (
@@ -343,12 +387,12 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                     ))}
                   </Select>
                 </FormControl>
-                <FormControl variant="outlined">
+                <FormControl variant='outlined'>
                   <InputLabel>种类</InputLabel>
                   <Select
                     value={reptileNameFilters.value || 'all'}
                     onChange={handleReptileNameChange}
-                    label="种类"
+                    label='种类'
                     autoWidth
                   >
                     {reptileNameOptions.map((statusOption) => (
@@ -358,12 +402,12 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                     ))}
                   </Select>
                 </FormControl>
-                <FormControl variant="outlined">
+                <FormControl variant='outlined'>
                   <InputLabel>所属科</InputLabel>
                   <Select
                     value={reptileTypeFilters.value || 'all'}
                     onChange={handleReptileTypeChange}
-                    label="所属科"
+                    label='所属科'
                     autoWidth
                   >
                     {reptileTypeOptions.map((statusOption) => (
@@ -375,7 +419,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                 </FormControl>
               </Stack>
             }
-            title="爬宠管理"
+            title='爬宠管理'
           />
         )}
         <Divider />
@@ -383,18 +427,16 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
           <Table>
             <TableHead>
               <TableRow>
-                {
-                  showBulkDeleting
-                    ? <TableCell padding="checkbox">
-                      <Checkbox
-                        color="primary"
-                        checked={selectedAllReptiles}
-                        indeterminate={selectedSomeReptiles}
-                        onChange={handleSelectAllReptiles}
-                      />
-                    </TableCell>
-                    : null
-                }
+                {showBulkDeleting ? (
+                  <TableCell padding='checkbox'>
+                    <Checkbox
+                      color='primary'
+                      checked={selectedAllReptiles}
+                      indeterminate={selectedSomeReptiles}
+                      onChange={handleSelectAllReptiles}
+                    />
+                  </TableCell>
+                ) : null}
                 <TableCell>品系名</TableCell>
                 <TableCell>性别</TableCell>
                 <TableCell>基因</TableCell>
@@ -403,39 +445,31 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                 <TableCell>所属科</TableCell>
                 <TableCell>所在爬柜/饲育盒</TableCell>
                 <TableCell>别名</TableCell>
-                <TableCell align="right">操作</TableCell>
+                <TableCell align='right'>操作</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {paginatedReptiles.map((reptile) => {
-                const isReptileSelected = selectedReptiles.includes(
-                  reptile.id
-                );
+                const isReptileSelected = selectedReptiles.includes(reptile.id);
                 return (
-                  <TableRow
-                    hover
-                    key={reptile.id}
-                    selected={isReptileSelected}
-                  >
-                    {
-                      showBulkDeleting
-                        ? <TableCell padding="checkbox">
-                          <Checkbox
-                            color="primary"
-                            checked={isReptileSelected}
-                            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                              handleSelectOneReptile(event, reptile.id)
-                            }
-                            value={isReptileSelected}
-                          />
-                        </TableCell>
-                        : null
-                    }
+                  <TableRow hover key={reptile.id} selected={isReptileSelected}>
+                    {showBulkDeleting ? (
+                      <TableCell padding='checkbox'>
+                        <Checkbox
+                          color='primary'
+                          checked={isReptileSelected}
+                          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                            handleSelectOneReptile(event, reptile.id)
+                          }
+                          value={isReptileSelected}
+                        />
+                      </TableCell>
+                    ) : null}
                     <TableCell>
                       <Typography
-                        variant="body1"
-                        fontWeight="bold"
-                        color="text.primary"
+                        variant='body1'
+                        fontWeight='bold'
+                        color='text.primary'
                         gutterBottom
                         noWrap
                       >
@@ -444,9 +478,9 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                     </TableCell>
                     <TableCell>
                       <Typography
-                        variant="body1"
-                        fontWeight="bold"
-                        color="text.primary"
+                        variant='body1'
+                        fontWeight='bold'
+                        color='text.primary'
                         gutterBottom
                         noWrap
                       >
@@ -455,20 +489,20 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                     </TableCell>
                     <TableCell>
                       <Typography
-                        variant="body1"
-                        fontWeight="bold"
-                        color="text.primary"
+                        variant='body1'
+                        fontWeight='bold'
+                        color='text.primary'
                         gutterBottom
                         noWrap
                       >
-                        {(reptile.genies ?? []).map(genie => getTextLabel(genie!))}
+                        {(reptile.genies ?? []).map((genie) => getTextLabel(genie!))}
                       </Typography>
                     </TableCell>
                     <TableCell>
                       <Typography
-                        variant="body1"
-                        fontWeight="bold"
-                        color="text.primary"
+                        variant='body1'
+                        fontWeight='bold'
+                        color='text.primary'
                         gutterBottom
                         noWrap
                       >
@@ -477,9 +511,9 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                     </TableCell>
                     <TableCell>
                       <Typography
-                        variant="body1"
-                        fontWeight="bold"
-                        color="text.primary"
+                        variant='body1'
+                        fontWeight='bold'
+                        color='text.primary'
                         gutterBottom
                         noWrap
                       >
@@ -487,70 +521,71 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                       </Typography>
                     </TableCell>
                     <TableCell>
-                      {reptileTypes.find(_ => _.id === reptile.reptileTypeID)?.name}
+                      {reptileTypes.find((_) => _.id === reptile.reptileTypeID)?.name}
                       {/*{getReptileTypeLabel(reptileTypes.find(_ => _.id === reptile.reptileTypeID))}*/}
                     </TableCell>
                     <TableCell>
                       <Typography
-                        variant="body1"
-                        fontWeight="bold"
-                        color="text.primary"
+                        variant='body1'
+                        fontWeight='bold'
+                        color='text.primary'
                         gutterBottom
                         noWrap
                       >
                         {getReptileFeedingBoxTypeLabel(
                           reptileFeedingBoxes.find(
-                            reptileFeedingBox => reptileFeedingBox.id === reptile.reptileFeedingBoxID
-                          )?.type
-                        )
-                        }
+                            (reptileFeedingBox) =>
+                              reptileFeedingBox.id === reptile.reptileFeedingBoxID,
+                          )?.type,
+                        )}
                         &nbsp;
-                        {
-                          getTextLabel(
-                            reptileFeedingBoxes.find(
-                              reptileFeedingBox => reptileFeedingBox.id === reptile.reptileFeedingBoxID)?.name
-                            ?? ''
+                        {getTextLabel(
+                          reptileFeedingBoxes.find(
+                            (reptileFeedingBox) =>
+                              reptileFeedingBox.id === reptile.reptileFeedingBoxID,
+                          )?.name ?? '',
+                        )}
+                        &nbsp;
+                        {reptileFeedingBoxes.find(
+                          (reptileFeedingBox) =>
+                            reptileFeedingBox.id === reptile.reptileFeedingBoxID,
+                        )?.type === 'CABINET'
+                          ? getTextLabel(
+                            `第${
+                              reptileFeedingBoxIndexes.find(
+                                (_) => _.id === reptile.reptileFeedingBoxIndexCollectionID,
+                              )?.horizontalIndex
+                            }层${
+                              reptileFeedingBoxIndexes.find(
+                                (_) => _.id === reptile.reptileFeedingBoxIndexCollectionID,
+                              )?.verticalIndex
+                            }列`,
                           )
-                        }
-                        &nbsp;
-                        {
-                          reptileFeedingBoxes.find(reptileFeedingBox => reptileFeedingBox.id === reptile.reptileFeedingBoxID)?.type === 'CABINET'
-                            ? getTextLabel(
-                              `第${
-                                reptileFeedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.horizontalIndex
-                              }层${
-                                reptileFeedingBoxIndexes.find(_ => _.id === reptile.reptileFeedingBoxIndexCollectionID)?.verticalIndex}列`
-                            )
-                            : ''
-                        }
+                          : ''}
                       </Typography>
                     </TableCell>
                     <TableCell>
                       <Typography
-                        variant="body1"
-                        fontWeight="bold"
-                        color="text.primary"
+                        variant='body1'
+                        fontWeight='bold'
+                        color='text.primary'
                         gutterBottom
                         noWrap
                       >
                         {reptile.nickname}
                       </Typography>
                     </TableCell>
-                    <TableCell align="right">
-                      {
-                        React.Children.map(children,
-                          child => {
-                            {
-                              if (React.isValidElement(child)) {
-                                return React.cloneElement(child, {
-                                  reptile
-                                });
-                              }
-                              return child;
-                            }
+                    <TableCell align='right'>
+                      {React.Children.map(children, (child) => {
+                        {
+                          if (React.isValidElement(child)) {
+                            return React.cloneElement(child, {
+                              reptile,
+                            });
                           }
-                        )
-                      }
+                          return child;
+                        }
+                      })}
                     </TableCell>
                   </TableRow>
                 );
@@ -560,7 +595,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
         </TableContainer>
         <Box p={2}>
           <TablePagination
-            component="div"
+            component='div'
             count={filteredReptileNameReptiles.length}
             onPageChange={handlePageChange}
             onRowsPerPageChange={handleLimitChange}

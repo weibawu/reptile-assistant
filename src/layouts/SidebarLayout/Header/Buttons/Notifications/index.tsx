@@ -9,7 +9,7 @@ import {
   ListItem,
   Popover,
   Tooltip,
-  Typography
+  Typography,
 } from '@mui/material';
 import { useRef, useState } from 'react';
 import NotificationsActiveTwoToneIcon from '@mui/icons-material/NotificationsActiveTwoTone';
@@ -38,7 +38,7 @@ const NotificationsBadge = styled(Badge)(
             content: "";
         }
     }
-`
+`,
 );
 
 function HeaderNotifications() {
@@ -56,13 +56,13 @@ function HeaderNotifications() {
 
   return (
     <>
-      <Tooltip arrow title="开发中">
-        <IconButton color="primary" ref={ref} onClick={handleOpen}>
+      <Tooltip arrow title='开发中'>
+        <IconButton color='primary' ref={ref} onClick={handleOpen}>
           <NotificationsBadge
             badgeContent={0}
             anchorOrigin={{
               vertical: 'top',
-              horizontal: 'right'
+              horizontal: 'right',
             }}
           >
             <NotificationsActiveTwoToneIcon />
@@ -75,42 +75,29 @@ function HeaderNotifications() {
         open={isOpen}
         anchorOrigin={{
           vertical: 'top',
-          horizontal: 'right'
+          horizontal: 'right',
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'right'
+          horizontal: 'right',
         }}
       >
-        <Box
-          sx={{ p: 2 }}
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-        >
-          <Typography variant="h5">Notifications</Typography>
+        <Box sx={{ p: 2 }} display='flex' alignItems='center' justifyContent='space-between'>
+          <Typography variant='h5'>Notifications</Typography>
         </Box>
         <Divider />
         <List sx={{ p: 0 }}>
-          <ListItem
-            sx={{ p: 2, minWidth: 350, display: { xs: 'block', sm: 'flex' } }}
-          >
-            <Box flex="1">
-              <Box display="flex" justifyContent="space-between">
-                <Typography sx={{ fontWeight: 'bold' }}>
-                  Messaging Platform
-                </Typography>
-                <Typography variant="caption" sx={{ textTransform: 'none' }}>
+          <ListItem sx={{ p: 2, minWidth: 350, display: { xs: 'block', sm: 'flex' } }}>
+            <Box flex='1'>
+              <Box display='flex' justifyContent='space-between'>
+                <Typography sx={{ fontWeight: 'bold' }}>Messaging Platform</Typography>
+                <Typography variant='caption' sx={{ textTransform: 'none' }}>
                   {formatDistance(subDays(new Date(), 3), new Date(), {
-                    addSuffix: true
+                    addSuffix: true,
                   })}
                 </Typography>
               </Box>
-              <Typography
-                component="span"
-                variant="body2"
-                color="text.secondary"
-              >
+              <Typography component='span' variant='body2' color='text.secondary'>
                 {' '}
                 new messages in your inbox
               </Typography>
