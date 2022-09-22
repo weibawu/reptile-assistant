@@ -1,7 +1,6 @@
 import React, { FC, useState, createContext, useContext } from 'react';
 import { ModalContext } from './ModalContext';
-import { ReptileFeedingBox, ReptileFeedingBoxIndexCollection } from '../../../models';
-import { useReptileRepository } from '../../../libs/reptile-repository/UseReptileRepository';
+import { ReptileFeedingBox, ReptileFeedingBoxIndexCollection } from '../../../models';import { ReptileContext } from '../../../libs/context/ReptileContext';
 
 type ReptileFeedingBoxContext = {
   loading: boolean // 是否正在获取数据
@@ -29,12 +28,13 @@ export const ReptileFeedingBoxProvider: FC<{ children: React.ReactNode }> = ({ c
     ReptileFeedingBox | undefined
   >();
 
-  const { loading, currentUser, reptileFeedingBoxes, reptileFeedingBoxIndexes, reptileRepository } =
-    useReptileRepository();
-
-  const currentUserDisplayedUsername = currentUser.attributes
-    ? currentUser.attributes.email
-    : '新朋友';
+  const {
+    currentUserDisplayedUsername,
+    reptileFeedingBoxes,
+    reptileRepository,
+    loading,
+    reptileFeedingBoxIndexes,
+  } = useContext(ReptileContext);
 
   const handleModifyReptileFeedingBoxModalOpen = (
     reptileFeedingBox: ReptileFeedingBox | undefined,

@@ -9,17 +9,20 @@ import ModifyFeedingBoxModal from './ModifyReptileFeedingBoxModal';
 import ReptileFeedingBoxesTable from './ReptileFeedingBoxesTable';
 
 import { ReptileFeedingBoxContext } from '../context/ReptileFeedingBoxContext';
+import { ReptileContext } from '../../../libs/context/ReptileContext';
 
 function ReptileFeedingBoxes() {
+
   const {
     loading,
     currentUserDisplayedUsername,
-
-    ModalToggle,
-    toggleModal,
-
     reptileFeedingBoxes,
     reptileFeedingBoxIndexes,
+  } = useContext(ReptileContext);
+
+  const {
+    ModalToggle,
+    toggleModal,
 
     editableReptileFeedingBox,
     handleModifyReptileFeedingBoxModalOpen,

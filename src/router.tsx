@@ -60,6 +60,14 @@ const routes: RouteObject[] = [
         path: 'reptile/feeding-logs',
         element: <ReptileFeedingLog />,
       },
+      {
+        path: 'analyzer',
+        element: <Navigate to='routine' replace />,
+      },
+      {
+        path: 'analyzer/routine',
+        element: <div>开发中( ´▽｀)</div>,
+      },
     ],
   },
 ];

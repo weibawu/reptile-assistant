@@ -42,9 +42,9 @@ export const useReptileRepository = () => {
     try {
       startLoading();
       await reptileRepository.fetchAll();
+      stopLoading();
     } catch (e) {
       console.error('Reptile Feeder Fetch Error: ', e);
-    } finally {
       stopLoading();
     }
   };

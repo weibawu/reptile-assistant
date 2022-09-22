@@ -6,7 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { ReptileWeightLogProvider } from './context/ReptileWeightLogContext';
 import { ReptileProvider } from '../../libs/context/ReptileContext';
-import Reptiles from './component/Reptile';
+import Reptiles from './component/Reptiles';
 
 const ApplicationsReptileWeightLog = () => (
   <>

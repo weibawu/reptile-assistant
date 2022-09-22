@@ -156,7 +156,7 @@ function SidebarMenu() {
           component='div'
           subheader={
             <ListSubheader component='div' disableSticky>
-              应用
+              爬宠日常 / Routine+
             </ListSubheader>
           }
         >
@@ -170,7 +170,7 @@ function SidebarMenu() {
                   to='feeding-box'
                   startIcon={<TableChartTwoToneIcon />}
                 >
-                  饲育容器
+                  饲育容器管理
                 </Button>
               </ListItem>
               <ListItem component='div'>
@@ -181,7 +181,31 @@ function SidebarMenu() {
                   to='reptile'
                   startIcon={<PetsIcon />}
                 >
-                  爬宠
+                  爬宠 / 日志
+                </Button>
+              </ListItem>
+            </List>
+          </SubMenuWrapper>
+        </List>
+        <List
+          component='div'
+          subheader={
+            <ListSubheader component='div' disableSticky>
+              爬宠可视化 / View More
+            </ListSubheader>
+          }
+        >
+          <SubMenuWrapper>
+            <List component='div'>
+              <ListItem component='div'>
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to='analyzer/routine'
+                  startIcon={<TableChartTwoToneIcon />}
+                >
+                  饲育日常分析
                 </Button>
               </ListItem>
             </List>
