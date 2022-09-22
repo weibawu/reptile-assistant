@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="fix loading issue, add new submenu">
+    <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="add chart pages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ModifyReptileModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ModifyReptileModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ReptileEditing.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ReptileEditing.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/Reptiles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/Reptiles.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/ModifyTemperatureAndHumidityLogModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/ModifyTemperatureAndHumidityLogModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/Reptiles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/Reptiles.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/ModifyWeightLogModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/ModifyWeightLogModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/Reptiles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/Reptiles.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/ReptileTable/ReptilesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/ReptileTable/ReptilesTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Menu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/Header/Menu/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/Sidebar/SidebarMenu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/Sidebar/SidebarMenu/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +89,7 @@
       <workItem from="1662541166409" duration="36478000" />
       <workItem from="1663080532192" duration="573000" />
       <workItem from="1663144276972" duration="88910000" />
-      <workItem from="1663828082315" duration="11368000" />
+      <workItem from="1663828082315" duration="12753000" />
     </task>
     <task id="LOCAL-00001" summary="add gender in table">
       <created>1663002729951</created>
@@ -229,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663861855811</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="remove weight from reptile entity, add indicator icon for weight log's result">
+      <created>1663865327011</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1663865327011</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -293,6 +295,8 @@
     <MESSAGE value="fix create feeding box page's ui" />
     <MESSAGE value="fix icons" />
     <MESSAGE value="fix loading issue, add new submenu" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix loading issue, add new submenu" />
+    <MESSAGE value="remove weight from reptile entity, add indicator icon for weight log's result" />
+    <MESSAGE value="add chart pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="add chart pages" />
   </component>
 </project>

@@ -61,12 +61,16 @@ const routes: RouteObject[] = [
         element: <ReptileFeedingLog />,
       },
       {
-        path: 'analyzer',
-        element: <Navigate to='routine' replace />,
+        path: 'chart',
+        element: <Navigate to='reptile-dashboard' replace />,
       },
       {
-        path: 'analyzer/routine',
-        element: <div>开发中( ´▽｀)</div>,
+        path: 'chart/routine-analyzing',
+        element: <div style={{ width: '100%', height: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>开发中( ´▽｀)</div>,
+      },
+      {
+        path: 'chart/reptile-dashboard',
+        element: <div style={{ width: '100%', height: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>开发中( ´▽｀)</div>,
       },
     ],
   },

@@ -70,6 +70,10 @@ function HeaderMenu() {
       { to: 'reptile/temperature-and-humidity-logs', title: '温湿度日志' },
       { to: 'reptile/weight-logs', title: '体重日志' },
     ],
+    chart: [
+      { to: 'chart/reptile-dashboard', title: '种群分析' },
+      { to: 'chart/routine-analyzing', title: '成长曲线' },
+    ],
   };
 
   const routerList = routerListMap[parentPath] ?? [];

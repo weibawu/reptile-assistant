@@ -2,8 +2,9 @@ import React, { useContext } from 'react';
 import { NavLink as RouterLink } from 'react-router-dom';
 
 import { ListSubheader, alpha, Box, List, styled, Button, ListItem } from '@mui/material';
-import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
+import GridOnIcon from '@mui/icons-material/GridOn';
 import PetsIcon from '@mui/icons-material/Pets';
+import TimelineIcon from '@mui/icons-material/Timeline';
 
 import { SidebarContext } from '../../../../libs/context/SidebarContext';
 
@@ -168,7 +169,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to='feeding-box'
-                  startIcon={<TableChartTwoToneIcon />}
+                  startIcon={<GridOnIcon />}
                 >
                   饲育容器管理
                 </Button>
@@ -202,10 +203,10 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to='analyzer/routine'
-                  startIcon={<TableChartTwoToneIcon />}
+                  to='chart'
+                  startIcon={<TimelineIcon />}
                 >
-                  饲育日常分析
+                  饲育分析
                 </Button>
               </ListItem>
             </List>
