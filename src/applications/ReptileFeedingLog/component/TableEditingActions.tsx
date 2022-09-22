@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton, Tooltip, useTheme } from '@mui/material';
 
-import LogIcon from '@mui/icons-material/CollectionsBookmark';
+import LogIcon from '@mui/icons-material/Dining';
 import AddIcon from '@mui/icons-material/Add';
 
 import { Reptile, ReptileFeedingLog } from '../../../models';

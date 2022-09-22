@@ -437,12 +437,12 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                     />
                   </TableCell>
                 ) : null}
+                <TableCell>所属科</TableCell>
                 <TableCell>品种</TableCell>
                 <TableCell>性别</TableCell>
                 <TableCell>基因</TableCell>
                 <TableCell>体重(g)</TableCell>
                 <TableCell>出生日期</TableCell>
-                <TableCell>所属科</TableCell>
                 <TableCell>所在爬柜/饲育盒</TableCell>
                 <TableCell>别名</TableCell>
                 <TableCell align='right'>操作</TableCell>
@@ -465,6 +465,17 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                         />
                       </TableCell>
                     ) : null}
+                    <TableCell>
+                      <Typography
+                        variant='body1'
+                        fontWeight='bold'
+                        color='text.primary'
+                        gutterBottom
+                        noWrap
+                      >
+                        {reptileTypes.find((_) => _.id === reptile.reptileTypeID)?.name}
+                      </Typography>
+                    </TableCell>
                     <TableCell>
                       <Typography
                         variant='body1'
@@ -519,10 +530,6 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                       >
                         {reptile.birthdate}
                       </Typography>
-                    </TableCell>
-                    <TableCell>
-                      {reptileTypes.find((_) => _.id === reptile.reptileTypeID)?.name}
-                      {/*{getReptileTypeLabel(reptileTypes.find(_ => _.id === reptile.reptileTypeID))}*/}
                     </TableCell>
                     <TableCell>
                       <Typography

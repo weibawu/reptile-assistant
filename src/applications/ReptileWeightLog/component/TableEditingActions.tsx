@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton, Tooltip, useTheme } from '@mui/material';
 
-import LogIcon from '@mui/icons-material/CollectionsBookmark';
+import LogIcon from '@mui/icons-material/Scale';
 import AddIcon from '@mui/icons-material/Add';
 
 import { Reptile, ReptileWeightLog } from '../../../models';
@@ -30,7 +30,7 @@ export const TableEditingActions: React.FC<TableEditingActionsProps> = ({
             '&:hover': {
               background: theme.colors.primary.lighter,
             },
-            color: theme.colors.primary.main,
+            color: theme.colors.shadows,
           }}
           color='inherit'
           size='small'
@@ -49,7 +49,7 @@ export const TableEditingActions: React.FC<TableEditingActionsProps> = ({
             '&:hover': {
               background: theme.colors.primary.lighter,
             },
-            color: theme.colors.primary.main,
+            color: theme.colors.shadows,
           }}
           color='inherit'
           size='small'
