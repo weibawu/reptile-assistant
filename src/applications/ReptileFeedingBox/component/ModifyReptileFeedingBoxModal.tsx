@@ -6,11 +6,14 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Input,
+  FormControl,
+  InputLabel,
+  MenuItem,
   Stack,
+  TextField,
+  Select,
 } from '@mui/material';
 
-import Select from 'react-select';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -18,10 +21,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ReptileFeedingBox, ReptileFeedingBoxType } from '../../../models';
 import { useReptileRepository } from '../../../libs/reptile-repository/UseReptileRepository';
 
+type AnySelectOption<T> = { label: string; value: T }
+
 export interface ReptileFeedingBoxModificationModalProps {
   open: boolean
   onClose: () => void
   editableReptileFeedingBox?: ReptileFeedingBox
+}
+
+interface ReptileFeedingBoxCreationFormProps {
+  name: string
+  type: AnySelectOption<ReptileFeedingBoxType>
 }
 
 function ModifyReptileFeedingBoxModal(props: ReptileFeedingBoxModificationModalProps) {
@@ -42,8 +52,9 @@ function ModifyReptileFeedingBoxModal(props: ReptileFeedingBoxModificationModalP
     handleSubmit,
     reset,
     setValue,
+    watch,
     formState: { errors },
-  } = useForm({
+  } = useForm<ReptileFeedingBoxCreationFormProps>({
     defaultValues: {
       name: '',
       type: typeOptions[0],
@@ -99,14 +110,43 @@ function ModifyReptileFeedingBoxModal(props: ReptileFeedingBoxModificationModalP
               name='name'
               control={control}
               render={({ field }) => (
-                <Input fullWidth placeholder='容器名称 / 位置' error={!!errors.name} {...field} />
+                <TextField
+                  autoComplete='off'
+                  fullWidth
+                  placeholder='容器名称 / 位置'
+                  error={!!errors.name}
+                  {...field}
+                />
               )}
             />
-            <Controller
-              name='type'
-              control={control}
-              render={({ field }) => <Select {...field} options={typeOptions} />}
-            />
+            <FormControl>
+              <InputLabel id='type'>饲育容器</InputLabel>
+              <Controller
+                render={() => (
+                  <Select
+                    onChange={(e) =>
+                      setValue(
+                        'type',
+                        typeOptions.find((typeOption) => typeOption.value === e.target.value)!,
+                        { shouldValidate: true },
+                      )
+                    }
+                    value={watch('type.value')}
+                    labelId='type'
+                    label='层'
+                    error={!!errors.type}
+                  >
+                    {typeOptions.map((typeOption) => (
+                      <MenuItem key={typeOption.label} value={typeOption.value}>
+                        {typeOption.label}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+                name={'type'}
+                control={control}
+              />
+            </FormControl>
           </Stack>
         </DialogContent>
         <DialogActions>

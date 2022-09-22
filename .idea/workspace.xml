@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="fix website title">
+    <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="fix input text issue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/Messenger/SidebarContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/Messenger/SidebarContent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ModifyReptileModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ModifyReptileModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/ModifyFeedingLogModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/ModifyFeedingLogModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/ReptileFeedingLogsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/ReptileFeedingLogsTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/ReptileTemperatureAndHumidityLogsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/ReptileTemperatureAndHumidityLogsTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/ReptileWeightLogsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/ReptileWeightLogsTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/ReptileTable/ReptilesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/ReptileTable/ReptilesTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/component/ModifyReptileFeedingBoxModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/component/ModifyReptileFeedingBoxModal.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +87,7 @@
       <workItem from="1662541166409" duration="36478000" />
       <workItem from="1663080532192" duration="573000" />
       <workItem from="1663144276972" duration="88910000" />
-      <workItem from="1663828082315" duration="656000" />
+      <workItem from="1663828082315" duration="2274000" />
     </task>
     <task id="LOCAL-00001" summary="add gender in table">
       <created>1663002729951</created>
@@ -200,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663779927571</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="fix input text issue">
+      <created>1663838194656</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1663838194656</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,6 +261,7 @@
     <MESSAGE value="hotfix format issue" />
     <MESSAGE value="fix website path" />
     <MESSAGE value="fix website title" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix website title" />
+    <MESSAGE value="fix input text issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix input text issue" />
   </component>
 </project>
