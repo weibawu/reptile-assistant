@@ -174,6 +174,7 @@ function SidebarContent() {
           mt: 2,
           mb: 1,
         }}
+        autoComplete='off'
         size='small'
         fullWidth
         InputProps={{

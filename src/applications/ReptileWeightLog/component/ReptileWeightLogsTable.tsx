@@ -144,7 +144,7 @@ const ReptileWeightLogsTable: FC<ReptileWeightLogsTableProps> = ({
                   onChange={handleSelectAllReptileWeightLogs}
                 />
               </TableCell>
-              <TableCell>品系名</TableCell>
+              <TableCell>品种</TableCell>
               <TableCell>性别</TableCell>
               <TableCell>基因</TableCell>
               <TableCell>记录体重(g)</TableCell>

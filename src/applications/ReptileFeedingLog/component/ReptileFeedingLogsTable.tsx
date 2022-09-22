@@ -145,7 +145,7 @@ const ReptileFeedingLogsTable: FC<ReptileFeedingLogsTableProps> = ({
                   onChange={handleSelectAllReptileFeedingLogs}
                 />
               </TableCell>
-              <TableCell>品系名</TableCell>
+              <TableCell>品种</TableCell>
               <TableCell>性别</TableCell>
               <TableCell>基因</TableCell>
               <TableCell>

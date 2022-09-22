@@ -336,48 +336,6 @@ function ModifyReptileFeedingLogModal(props: ReptileFeedingLogModificationModalP
                 />
               </FormControl>
             ) : null}
-            {/*{watch('reptileId.value') ? <Controller*/}
-            {/*  name="weight"*/}
-            {/*  control={control}*/}
-            {/*  render={*/}
-            {/*    ({ field }) => (*/}
-            {/*      <TextField*/}
-            {/*        placeholder={'当前体重(g)'}*/}
-            {/*        {...field}*/}
-            {/*      />*/}
-            {/*    )*/}
-            {/*  }*/}
-            {/*/>*/}
-            {/*  : null*/}
-            {/*}*/}
-            {/*{watch('reptileId.value') ? <Controller*/}
-            {/*  name="environmentHumidity"*/}
-            {/*  control={control}*/}
-            {/*  render={*/}
-            {/*    ({ field }) => (*/}
-            {/*      <TextField*/}
-            {/*        placeholder={'环境湿度(%)'}*/}
-            {/*        {...field}*/}
-            {/*      />*/}
-            {/*    )*/}
-            {/*  }*/}
-            {/*/>*/}
-            {/*  : null*/}
-            {/*}*/}
-            {/*{watch('reptileId.value') ? <Controller*/}
-            {/*  name="environmentTemperature"*/}
-            {/*  control={control}*/}
-            {/*  render={*/}
-            {/*    ({ field }) => (*/}
-            {/*      <TextField*/}
-            {/*        placeholder={'环境温度(℃)'}*/}
-            {/*        {...field}*/}
-            {/*      />*/}
-            {/*    )*/}
-            {/*  }*/}
-            {/*/>*/}
-            {/*  : null*/}
-            {/*}*/}
             {watch('reptileId.value') ? (
               <Controller
                 name='reptileFeedingDateTime'

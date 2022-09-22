@@ -235,7 +235,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
                 <TextField
                   autoComplete='off'
                   fullWidth
-                  placeholder='品系名'
+                  placeholder='品种(例: 玉米蛇、肥尾守宫)'
                   error={!!errors.name}
                   {...field}
                 />
@@ -289,6 +289,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
               control={control}
               render={({ field }) => (
                 <TextField
+                  autoComplete='off'
                   fullWidth
                   placeholder='基因(请使用"/"分隔开)'
                   error={!!errors.genies}
@@ -381,6 +382,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
                   control={control}
                   render={({ field }) => (
                     <TextField
+                      autoComplete='off'
                       fullWidth
                       placeholder='第几层'
                       error={!!errors.horizontalIndex}
@@ -397,6 +399,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
                   control={control}
                   render={({ field }) => (
                     <TextField
+                      autoComplete='off'
                       fullWidth
                       placeholder='第几列'
                       error={!!errors.verticalIndex}

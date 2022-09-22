@@ -162,7 +162,7 @@ const ReptileTemperatureAndHumidityLogsTable: FC<ReptileTemperatureAndHumidityLo
                   onChange={handleSelectAllReptileTemperatureAndHumidityLogs}
                 />
               </TableCell>
-              <TableCell>品系名</TableCell>
+              <TableCell>品种</TableCell>
               <TableCell>性别</TableCell>
               <TableCell>基因</TableCell>
               <TableCell>温度(°c)</TableCell>

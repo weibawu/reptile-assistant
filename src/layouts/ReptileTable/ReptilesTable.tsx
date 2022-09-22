@@ -388,11 +388,11 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                   </Select>
                 </FormControl>
                 <FormControl variant='outlined'>
-                  <InputLabel>种类</InputLabel>
+                  <InputLabel>品种</InputLabel>
                   <Select
                     value={reptileNameFilters.value || 'all'}
                     onChange={handleReptileNameChange}
-                    label='种类'
+                    label='品种'
                     autoWidth
                   >
                     {reptileNameOptions.map((statusOption) => (
@@ -437,7 +437,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                     />
                   </TableCell>
                 ) : null}
-                <TableCell>品系名</TableCell>
+                <TableCell>品种</TableCell>
                 <TableCell>性别</TableCell>
                 <TableCell>基因</TableCell>
                 <TableCell>体重(g)</TableCell>
