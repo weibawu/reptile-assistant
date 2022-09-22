@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="fix icons">
+    <list default="true" id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="fix loading issue, add new submenu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/component/ReptileFeedingBoxes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/component/ReptileFeedingBoxes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/context/ReptileFeedingBoxContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/context/ReptileFeedingBoxContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingBox/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/Reptile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/Reptiles.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/Reptile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/Reptiles.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/Reptile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/Reptiles.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileWeightLog/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/SidebarLayout/Sidebar/SidebarMenu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/SidebarLayout/Sidebar/SidebarMenu/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/reptile-repository/UseReptileRepository.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/reptile-repository/UseReptileRepository.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ModifyReptileModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ModifyReptileModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ReptileEditing.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileEditing/component/ReptileEditing.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/Reptiles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileFeedingLog/component/Reptiles.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/ModifyTemperatureAndHumidityLogModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/ModifyTemperatureAndHumidityLogModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/Reptiles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileTemperatureAndHumidityLog/component/Reptiles.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/ModifyWeightLogModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/ModifyWeightLogModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/Reptiles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileWeightLog/component/Reptiles.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/ReptileTable/ReptilesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/ReptileTable/ReptilesTable.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="feature/feeding-chart" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -99,7 +94,7 @@
       <workItem from="1662541166409" duration="36478000" />
       <workItem from="1663080532192" duration="573000" />
       <workItem from="1663144276972" duration="88910000" />
-      <workItem from="1663828082315" duration="8321000" />
+      <workItem from="1663828082315" duration="11368000" />
     </task>
     <task id="LOCAL-00001" summary="add gender in table">
       <created>1663002729951</created>
@@ -227,7 +222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663855743864</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="fix loading issue, add new submenu">
+      <created>1663861855811</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1663861855811</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -290,6 +292,7 @@
     <MESSAGE value="fix input text issue" />
     <MESSAGE value="fix create feeding box page's ui" />
     <MESSAGE value="fix icons" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix icons" />
+    <MESSAGE value="fix loading issue, add new submenu" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix loading issue, add new submenu" />
   </component>
 </project>

@@ -23,6 +23,7 @@ function Reptiles() {
     reptileTypes,
     reptileFeedingBoxes,
     reptileFeedingBoxIndexes,
+    reptileWeightLogs,
     handleReptilesDelete,
   } = useContext(ReptileContext);
 
@@ -57,6 +58,7 @@ function Reptiles() {
           <Grid item xs={12}>
             <Card>
               <ReptilesTable
+                reptileWeightLogs={reptileWeightLogs}
                 showBulkDeleting={false}
                 reptiles={reptiles}
                 reptileTypes={reptileTypes}

@@ -24,6 +24,7 @@ function ReptileEditing() {
     reptileTypes,
     reptileFeedingBoxes,
     reptileFeedingBoxIndexes,
+    reptileWeightLogs
   } = useContext(ReptileContext);
 
   const {
@@ -64,6 +65,7 @@ function ReptileEditing() {
           <Grid item xs={12}>
             <Card>
               <ReptilesTable
+                reptileWeightLogs={reptileWeightLogs}
                 showBulkDeleting={true}
                 reptiles={reptiles}
                 reptileTypes={reptileTypes}

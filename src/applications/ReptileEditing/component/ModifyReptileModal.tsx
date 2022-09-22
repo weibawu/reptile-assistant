@@ -44,7 +44,7 @@ interface ReptileCreationFormProps {
   nickname: string
   gender: AnySelectOption<ReptileGenderType>
   birthdate: string
-  weight: number
+  // weight: number
   genies: string
   reptileFeedingBoxId: AnySelectOption<string>
   reptileTypeId: AnySelectOption<string>
@@ -88,7 +88,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
     nickname: yup.string().max(40),
     verticalIndex: yup.number(),
     horizontalIndex: yup.number(),
-    weight: yup.number(),
+    // weight: yup.number(),
     gender: yup.object({ value: yup.string().required() }),
     reptileTypeId: yup.object({ value: yup.string().required() }),
     reptileFeedingBoxId: yup.object({ value: yup.string().required() }),
@@ -108,7 +108,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
       nickname: '',
       gender: { value: '' } as AnySelectOption<any>,
       birthdate: `${new Date().toISOString().slice(0, 10)}`,
-      weight: '' as unknown as number,
+      // weight: '' as unknown as number,
       genies: '',
       reptileFeedingBoxId: { value: '' } as AnySelectOption<string>,
       reptileTypeId: { value: '' } as AnySelectOption<string>,
@@ -127,7 +127,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
     editableReptile?.name && setValue('name', editableReptile.name);
     editableReptile?.nickname && setValue('nickname', editableReptile.nickname);
     editableReptile?.birthdate && setValue('birthdate', editableReptile.birthdate);
-    editableReptile?.weight && setValue('weight', editableReptile.weight);
+    // editableReptile?.weight && setValue('weight', editableReptile.weight);
     editableReptile?.genies?.join('/') && setValue('genies', editableReptile.genies.join('/'));
 
     const genderPreset = reptileGenderOptions.find((_) => _.value === editableReptile?.gender);
@@ -193,7 +193,7 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
         nickname: form.nickname,
         gender: form.gender.value,
         birthdate: new Date(form.birthdate).toISOString().slice(0, 10),
-        weight: Number(form.weight),
+        // weight: Number(form.weight),
         genies: form.genies.split('/'),
         userID: currentUser.username,
         reptileTypeID: form.reptileTypeId.value,
@@ -297,19 +297,19 @@ function ModifyReptileModal(props: ReptileModificationModalProps) {
                 />
               )}
             />
-            <Controller
-              name='weight'
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  autoComplete='off'
-                  fullWidth
-                  placeholder='当前体重(g)'
-                  error={!!errors.weight}
-                  {...field}
-                />
-              )}
-            />
+            {/*<Controller*/}
+            {/*  name='weight'*/}
+            {/*  control={control}*/}
+            {/*  render={({ field }) => (*/}
+            {/*    <TextField*/}
+            {/*      autoComplete='off'*/}
+            {/*      fullWidth*/}
+            {/*      placeholder='当前体重(g)'*/}
+            {/*      error={!!errors.weight}*/}
+            {/*      {...field}*/}
+            {/*    />*/}
+            {/*  )}*/}
+            {/*/>*/}
             <FormControl>
               <InputLabel id='reptileType'>科/属</InputLabel>
               <Controller

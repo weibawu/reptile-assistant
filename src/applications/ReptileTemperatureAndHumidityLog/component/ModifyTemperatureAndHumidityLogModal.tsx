@@ -56,7 +56,10 @@ function ModifyReptileTemperatureAndHumidityLogModal(
     currentUser,
   } = useReptileRepository();
 
-  const validationSchema = yup.object({});
+  const validationSchema = yup.object({
+    environmentHumidity: yup.number(),
+    environmentTemperature: yup.number(),
+  });
 
   const {
     control,
@@ -365,6 +368,7 @@ function ModifyReptileTemperatureAndHumidityLogModal(
                 control={control}
                 render={({ field }) => (
                   <TextField
+                    error={!!errors.environmentTemperature}
                     type='number'
                     autoComplete='off'
                     placeholder={'环境温度(℃)'}
@@ -379,6 +383,7 @@ function ModifyReptileTemperatureAndHumidityLogModal(
                 control={control}
                 render={({ field }) => (
                   <TextField
+                    error={!!errors.environmentHumidity}
                     type='number'
                     autoComplete='off'
                     placeholder={'环境湿度(%)'}
