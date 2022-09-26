@@ -28,7 +28,7 @@ import {
   Reptile,
   ReptileFeedingBox,
   ReptileFeedingBoxIndexCollection,
-  ReptileFeedingBoxType,
+  ReptileFeedingBoxType, ReptileGenderType,
   ReptileType, ReptileWeightLog
 } from '../../models';
 import Stack from '@mui/material/Stack';
@@ -59,6 +59,19 @@ interface Filters {
 }
 
 type AnyFilterOption = { id: string; name: string }
+
+type ReptileGenderLabelMap = {
+  [key in ReptileGenderType]: string;
+};
+
+const reptileGenderLabelMap: ReptileGenderLabelMap = {
+  [ReptileGenderType.MALE]: '公',
+  [ReptileGenderType.FAMALE]: '母',
+  [ReptileGenderType.POSSIBLE_MALE]: '公温',
+  [ReptileGenderType.POSSIBLE_FAMALE]: '母温',
+  [ReptileGenderType.UNKNOWN]: '未知',
+};
+
 
 const labelColorList = ['primary', 'black', 'secondary', 'error', 'warning', 'success', 'info'];
 
@@ -561,7 +574,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                         gutterBottom
                         noWrap
                       >
-                        {reptile.gender === 'MALE' ? '公' : '母'}
+                        {reptileGenderLabelMap[reptile.gender as ReptileGenderType]}
                       </Typography>
                     </TableCell>
                     <TableCell>
@@ -572,7 +585,12 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                         gutterBottom
                         noWrap
                       >
-                        {(reptile.genies ?? []).map((genie) => getTextLabel(genie!))}
+                        {
+                          (reptile.genies ?? [])
+                            .slice()
+                            .sort((prev, next) => generateHashNumber(prev!) - generateHashNumber(next!))
+                            .map((genie) => getTextLabel(genie!))
+                        }
                       </Typography>
                     </TableCell>
                     <TableCell>
