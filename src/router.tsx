@@ -23,7 +23,7 @@ const ReptileTemperatureAndHumidityLog = Loader(
 );
 const Reptile = Loader(lazy(() => import('./applications/ReptileEditing')));
 
-const ChartCountingAnalyzing = Loader(lazy(() => import('./applications/ChartCountingAnalyzing')));
+const ReptileDashboard = Loader(lazy(() => import('./applications/ReptileDashboard')));
 
 const routes: RouteObject[] = [
   {
@@ -84,7 +84,7 @@ const routes: RouteObject[] = [
       },
       {
         path: 'chart/reptile-dashboard',
-        element: <ChartCountingAnalyzing />,
+        element: <ReptileDashboard />,
       },
     ],
   },

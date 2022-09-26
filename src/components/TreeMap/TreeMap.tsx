@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
+import { Box } from '@mui/material';
 
 type RawNode = {
   [key: string]: RawNode
@@ -13,7 +14,7 @@ interface TreeNode {
   children?: TreeNode[]
 }
 
-export const TreeMap: React.FC<{ rawData: RawNode; title: string }> = ({ rawData, title }) => {
+export const TreeMap: React.FC<{ rawData: RawNode; title: string, rootName: string }> = ({ rawData, title, rootName }) => {
   const chartRef = useRef<any>();
 
   useEffect(() => {
@@ -49,14 +50,18 @@ export const TreeMap: React.FC<{ rawData: RawNode; title: string }> = ({ rawData
     convert(rawData, data, '');
 
     myChart.setOption({
+      title: {
+        text: title,
+        left: 'center',
+      },
       tooltip: {},
       series: [
         {
-          name: title,
+          name: rootName,
           type: 'treemap',
           visibleMin: 300,
           data: data.children,
-          leafDepth: 2,
+          leafDepth: 1,
           levels: [
             {
               itemStyle: {},
@@ -78,5 +83,7 @@ export const TreeMap: React.FC<{ rawData: RawNode; title: string }> = ({ rawData
       ],
     });
   }, [chartRef, rawData]);
-  return <div ref={chartRef} style={{ height: '80vh' }}></div>;
+  return <Box sx={{ height: 400, width: '100%' }}>
+    <div ref={chartRef} style={{ height: '100%' }}></div>
+  </Box>;
 };
