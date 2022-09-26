@@ -55,7 +55,7 @@ function ModifyReptileWeightLogModal(props: ReptileWeightLogModificationModalPro
   } = useReptileRepository();
 
   const validationSchema = yup.object({
-    weight: yup.number()
+    weight: yup.number(),
   });
 
   const {
@@ -350,7 +350,13 @@ function ModifyReptileWeightLogModal(props: ReptileWeightLogModificationModalPro
                 name='weight'
                 control={control}
                 render={({ field }) => (
-                  <TextField error={!!errors.weight} autoComplete='off' type='number' placeholder={'体重'} {...field} />
+                  <TextField
+                    error={!!errors.weight}
+                    autoComplete='off'
+                    type='number'
+                    placeholder={'体重'}
+                    {...field}
+                  />
                 )}
               />
             ) : null}

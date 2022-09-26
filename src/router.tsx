@@ -68,11 +68,23 @@ const routes: RouteObject[] = [
       },
       {
         path: 'chart/routine-analyzing',
-        element: <div style={{ width: '100%', height: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>开发中( ´▽｀)</div>,
+        element: (
+          <div
+            style={{
+              width: '100%',
+              height: '80vh',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            开发中( ´▽｀)
+          </div>
+        ),
       },
       {
         path: 'chart/reptile-dashboard',
-        element: <ChartCountingAnalyzing/>,
+        element: <ChartCountingAnalyzing />,
       },
     ],
   },

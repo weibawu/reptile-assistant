@@ -24,7 +24,7 @@ function ReptileEditing() {
     reptileTypes,
     reptileFeedingBoxes,
     reptileFeedingBoxIndexes,
-    reptileWeightLogs
+    reptileWeightLogs,
   } = useContext(ReptileContext);
 
   const {

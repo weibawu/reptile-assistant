@@ -12,13 +12,8 @@ import { ReptileFeedingBoxContext } from '../context/ReptileFeedingBoxContext';
 import { ReptileContext } from '../../../libs/context/ReptileContext';
 
 function ReptileFeedingBoxes() {
-
-  const {
-    loading,
-    currentUserDisplayedUsername,
-    reptileFeedingBoxes,
-    reptileFeedingBoxIndexes,
-  } = useContext(ReptileContext);
+  const { loading, currentUserDisplayedUsername, reptileFeedingBoxes, reptileFeedingBoxIndexes } =
+    useContext(ReptileContext);
 
   const {
     ModalToggle,

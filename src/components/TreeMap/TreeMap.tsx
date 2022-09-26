@@ -2,18 +2,18 @@ import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 
 type RawNode = {
-  [key: string]: RawNode;
+  [key: string]: RawNode
 } & {
-  $count: number;
-};
-
-interface TreeNode {
-  name: string;
-  value: number;
-  children?: TreeNode[];
+  $count: number
 }
 
-export const TreeMap: React.FC<{rawData: RawNode, title: string}> = ({ rawData, title }) => {
+interface TreeNode {
+  name: string
+  value: number
+  children?: TreeNode[]
+}
+
+export const TreeMap: React.FC<{ rawData: RawNode; title: string }> = ({ rawData, title }) => {
   const chartRef = useRef<any>();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export const TreeMap: React.FC<{rawData: RawNode, title: string}> = ({ rawData, 
         if (!key.match(/^\$/)) {
           target.children = target.children || [];
           const child = {
-            name: path
+            name: path,
           } as TreeNode;
           target.children.push(child);
           convert(source[key], child, path);
@@ -37,55 +37,46 @@ export const TreeMap: React.FC<{rawData: RawNode, title: string}> = ({ rawData, 
       } else {
         target.children.push({
           name: basePath,
-          value: source.$count
+          value: source.$count,
         });
       }
     }
 
     const data = {
-      children: [] as TreeNode[]
+      children: [] as TreeNode[],
     } as TreeNode;
 
     convert(rawData, data, '');
 
-    myChart.setOption(
-      {
-        tooltip: {},
-        series: [
-          {
-            name: title,
-            type: 'treemap',
-            visibleMin: 300,
-            data: data.children,
-            leafDepth: 2,
-            levels: [
-              {
-                itemStyle: {
-                }
-              },
-              {
-                colorSaturation: [0.3, 0.5],
-                itemStyle: {
-                }
-              },
-              {
-                colorSaturation: [0.3, 0.6],
-                itemStyle: {
-                }
-              },
-              {
-                colorSaturation: [0.3, 0.6]
-              }
-            ],
-            roam: false,
-          }
-        ]
-      }
-    );
-
-
+    myChart.setOption({
+      tooltip: {},
+      series: [
+        {
+          name: title,
+          type: 'treemap',
+          visibleMin: 300,
+          data: data.children,
+          leafDepth: 2,
+          levels: [
+            {
+              itemStyle: {},
+            },
+            {
+              colorSaturation: [0.3, 0.5],
+              itemStyle: {},
+            },
+            {
+              colorSaturation: [0.3, 0.6],
+              itemStyle: {},
+            },
+            {
+              colorSaturation: [0.3, 0.6],
+            },
+          ],
+          roam: false,
+        },
+      ],
+    });
   }, [chartRef, rawData]);
-  return (
-    <div ref={chartRef} style={{ height: '80vh' }}></div>
-  );
+  return <div ref={chartRef} style={{ height: '80vh' }}></div>;
 };
