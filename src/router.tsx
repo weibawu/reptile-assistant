@@ -23,6 +23,8 @@ const ReptileTemperatureAndHumidityLog = Loader(
 );
 const Reptile = Loader(lazy(() => import('./applications/ReptileEditing')));
 
+const ChartCountingAnalyzing = Loader(lazy(() => import('./applications/ChartCountingAnalyzing')));
+
 const routes: RouteObject[] = [
   {
     path: '',
@@ -66,11 +68,23 @@ const routes: RouteObject[] = [
       },
       {
         path: 'chart/routine-analyzing',
-        element: <div style={{ width: '100%', height: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>开发中( ´▽｀)</div>,
+        element: (
+          <div
+            style={{
+              width: '100%',
+              height: '80vh',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            开发中( ´▽｀)
+          </div>
+        ),
       },
       {
         path: 'chart/reptile-dashboard',
-        element: <div style={{ width: '100%', height: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>开发中( ´▽｀)</div>,
+        element: <ChartCountingAnalyzing />,
       },
     ],
   },
