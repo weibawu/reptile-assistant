@@ -16,15 +16,19 @@ const PieMap: React.FC<{ title: string, rawData: any }> = ({ title, rawData }) =
       tooltip: {
         trigger: 'item'
       },
-      legend: {
-        orient: 'vertical',
-        left: 'left'
-      },
+      // legend: {
+      //   type: 'scroll',
+      //   orient: 'vertical',
+      //   right: 0,
+      //   top: 20,
+      //   bottom: 20,
+      //   data: rawData
+      // },
       series: [
         {
-          name: 'Access From',
           type: 'pie',
           radius: '50%',
+          center: ['50%', '50%'],
           data: rawData,
           emphasis: {
             itemStyle: {

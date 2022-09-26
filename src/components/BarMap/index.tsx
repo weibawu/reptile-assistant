@@ -12,17 +12,24 @@ const BarMap: React.FC<{ title: string, rawData: any }> = ({ title, rawData }) =
       legend: {},
       tooltip: {},
       dataset: {
-        source: rawData
+        source: rawData,
       },
-      xAxis: { type: 'category' },
+      xAxis: {
+        type: 'category',
+        boundaryGap: true,
+        axisTick: {
+          show: true
+        },
+        show: false,
+      },
       yAxis: {},
       // Declare several bar series, each will be mapped
       // to a column of dataset.source by default.
-      series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }]
+      series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' },{ type: 'bar' }, { type: 'bar' }]
     });
 
   }, [chartRef]);
-  return <Box sx={{ height: 400, width: '100%' }}>
+  return <Box sx={{ height: 500, width: '100%' }}>
     <div ref={chartRef} style={{ height: '100%' }}></div>
   </Box>;
 };
