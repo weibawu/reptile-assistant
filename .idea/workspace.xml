@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e2368c88-a243-4952-9a8e-8dc64df3bae6" name="Changes" comment="fix issues">
+    <list default="true" id="e2368c88-a243-4952-9a8e-8dc64df3bae6" name="Changes" comment="fix display issues.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/ReptileRoutineAnalyzing/component/ReptileRoutineAnalyzing.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileRoutineAnalyzing/component/ReptileRoutineAnalyzing.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/ReptileTable/ReptilesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/ReptileTable/ReptilesTable.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +89,7 @@
       <workItem from="1663828082315" duration="12753000" />
       <workItem from="1664433132716" duration="41000" />
       <workItem from="1664434539833" duration="1809000" />
-      <workItem from="1666274974271" duration="5025000" />
+      <workItem from="1666274974271" duration="5566000" />
     </task>
     <task id="LOCAL-00001" summary="add gender in table">
       <created>1663002729951</created>
@@ -268,7 +266,21 @@
       <option name="project" value="LOCAL" />
       <updated>1666332876751</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="fix display issues.">
+      <created>1666333021212</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1666333021212</updated>
+    </task>
+    <task id="LOCAL-00027" summary="fix display issues.">
+      <created>1666334141812</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1666334141812</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,7 +326,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add gender in table" />
     <MESSAGE value="fix timezone issue" />
     <MESSAGE value="add reptile name filter" />
     <MESSAGE value="add reptile name filter" />
@@ -339,6 +350,7 @@
     <MESSAGE value="fix chart style" />
     <MESSAGE value="add routine analyzing line chart page" />
     <MESSAGE value="fix issues" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix issues" />
+    <MESSAGE value="fix display issues." />
+    <option name="LAST_COMMIT_MESSAGE" value="fix display issues." />
   </component>
 </project>
