@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e2368c88-a243-4952-9a8e-8dc64df3bae6" name="Changes" comment="add chart pages">
-      <change afterPath="$PROJECT_DIR$/src/applications/ChartCountingAnalyzing/TreeMapAnalyzing.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/TreeMap/TreeMap.tsx" afterDir="false" />
+    <list default="true" id="e2368c88-a243-4952-9a8e-8dc64df3bae6" name="Changes" comment="fix issues">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/ReptileRoutineAnalyzing/component/ReptileRoutineAnalyzing.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/ReptileRoutineAnalyzing/component/ReptileRoutineAnalyzing.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layouts/ReptileTable/ReptilesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/ReptileTable/ReptilesTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,34 +35,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;TF_FMT&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/kuku/Tailhome/repos/reptile-assistant-v2/src/applications&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;/Users/kuku/.nvm/versions/node/v16.17.0/bin/node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/kuku/Tailhome/repos/reptile-assistant/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.nodejs&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/kuku/Tailhome/repos/reptile-assistant-v2/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TF_FMT": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "js.linters.configure.manually.selectedeslint": "true",
+    "last_opened_file_path": "/Users/kuku/Tailhome/repos/reptile-assistant-v2/src/components",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "nodejs_interpreter_path": "/Users/kuku/.nvm/versions/node/v16.17.0/bin/node",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/kuku/Tailhome/repos/reptile-assistant/node_modules/prettier",
+    "settings.editor.selected.configurable": "settings.nodejs",
+    "ts.external.directory.path": "/Users/kuku/Tailhome/repos/reptile-assistant-v2/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
+      <recent name="$PROJECT_DIR$/src/applications/ReptileRoutineAnalyzing/component" />
       <recent name="$PROJECT_DIR$/src/applications" />
       <recent name="$PROJECT_DIR$/src/applications/Reptile/pages/ReptileFeedingLog/component" />
       <recent name="$PROJECT_DIR$/src/applications/Reptile/pages/ReptileFeedingLog" />
-      <recent name="$PROJECT_DIR$/src/applications/ReptileFeedingLog" />
-      <recent name="$PROJECT_DIR$/src/applications/ReptileFeedingBox" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/libs/context" />
@@ -83,7 +78,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b0009fdb-9969-4c36-8c85-cc96fa6987b2" name="Changes" comment="" />
+      <changelist id="e2368c88-a243-4952-9a8e-8dc64df3bae6" name="Changes" comment="fix chart style" />
       <created>1661637049885</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -94,6 +89,9 @@
       <workItem from="1663080532192" duration="573000" />
       <workItem from="1663144276972" duration="88910000" />
       <workItem from="1663828082315" duration="12753000" />
+      <workItem from="1664433132716" duration="41000" />
+      <workItem from="1664434539833" duration="1809000" />
+      <workItem from="1666274974271" duration="5025000" />
     </task>
     <task id="LOCAL-00001" summary="add gender in table">
       <created>1663002729951</created>
@@ -235,7 +233,42 @@
       <option name="project" value="LOCAL" />
       <updated>1663865327011</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="fix path error">
+      <created>1664176757080</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1664176757080</updated>
+    </task>
+    <task id="LOCAL-00022" summary="add chart group">
+      <created>1664183638812</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1664183638812</updated>
+    </task>
+    <task id="LOCAL-00023" summary="fix chart style">
+      <created>1664186789735</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1664186789735</updated>
+    </task>
+    <task id="LOCAL-00024" summary="add routine analyzing line chart page">
+      <created>1666332055780</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1666332055780</updated>
+    </task>
+    <task id="LOCAL-00025" summary="fix issues">
+      <created>1666332876751</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1666332876751</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,6 +334,11 @@
     <MESSAGE value="fix loading issue, add new submenu" />
     <MESSAGE value="remove weight from reptile entity, add indicator icon for weight log's result" />
     <MESSAGE value="add chart pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="add chart pages" />
+    <MESSAGE value="fix path error" />
+    <MESSAGE value="add chart group" />
+    <MESSAGE value="fix chart style" />
+    <MESSAGE value="add routine analyzing line chart page" />
+    <MESSAGE value="fix issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix issues" />
   </component>
 </project>
