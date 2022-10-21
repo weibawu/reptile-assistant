@@ -501,7 +501,7 @@ const ReptilesTable: FC<ReptilesTableProps> = ({
                 </FormControl>
               </Stack>
             }
-            title='爬宠管理'
+            title=''
           />
         )}
         <Divider />
