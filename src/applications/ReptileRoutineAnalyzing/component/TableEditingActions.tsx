@@ -2,8 +2,6 @@ import React from 'react';
 import { IconButton, Tooltip, useTheme } from '@mui/material';
 
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 
 import { Reptile } from '../../../models';
 
