@@ -2,8 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { Box } from '@mui/material';
 
-
-const PieMap: React.FC<{ title: string, rawData: any }> = ({ title, rawData }) => {
+const PieMap: React.FC<{ title: string; rawData: any }> = ({ title, rawData }) => {
   const chartRef = useRef<any>();
 
   useEffect(() => {
@@ -11,10 +10,10 @@ const PieMap: React.FC<{ title: string, rawData: any }> = ({ title, rawData }) =
     myChart.setOption({
       title: {
         text: title,
-        left: 'center'
+        left: 'center',
       },
       tooltip: {
-        trigger: 'item'
+        trigger: 'item',
       },
       // legend: {
       //   type: 'scroll',
@@ -34,17 +33,18 @@ const PieMap: React.FC<{ title: string, rawData: any }> = ({ title, rawData }) =
             itemStyle: {
               shadowBlur: 10,
               shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-          }
-        }
-      ]
+              shadowColor: 'rgba(0, 0, 0, 0.5)',
+            },
+          },
+        },
+      ],
     });
-
   }, [chartRef]);
-  return <Box sx={{ height: 400, width: '100%' }}>
-    <div ref={chartRef} style={{ height: '100%' }}></div>
-  </Box>;
+  return (
+    <Box sx={{ height: 400, width: '100%' }}>
+      <div ref={chartRef} style={{ height: '100%' }}></div>
+    </Box>
+  );
 };
 
 export default PieMap;

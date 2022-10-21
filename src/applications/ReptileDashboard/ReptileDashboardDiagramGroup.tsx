@@ -22,7 +22,7 @@ const reptileGenderLabelMap: ReptileGenderLabelMap = {
   [ReptileGenderType.FAMALE]: '母',
   [ReptileGenderType.POSSIBLE_MALE]: '公温',
   [ReptileGenderType.POSSIBLE_FAMALE]: '母温',
-  [ReptileGenderType.UNKNOWN]: '未知'
+  [ReptileGenderType.UNKNOWN]: '未知',
 };
 
 const getReptileRawData = (reptiles: Reptile[], reptileTypes: ReptileType[]) => {
@@ -30,15 +30,16 @@ const getReptileRawData = (reptiles: Reptile[], reptileTypes: ReptileType[]) => 
 
   for (const reptileType of reptileTypes) {
     const reptilesInSpecificType = reptiles.filter(
-      (reptile) => reptile.reptileTypeID === reptileType.id
+      (reptile) => reptile.reptileTypeID === reptileType.id,
     );
-    if (reptilesInSpecificType.length !== 0) rawData[reptileType.name ?? reptileType.id] = {} as RawNode;
+    if (reptilesInSpecificType.length !== 0)
+      rawData[reptileType.name ?? reptileType.id] = {} as RawNode;
 
     const reptileNames = Array.from(new Set(reptilesInSpecificType.map((reptile) => reptile.name)));
 
     for (const reptileName of reptileNames) {
       const reptilesWithSpecificName = reptilesInSpecificType.filter(
-        (reptile) => reptile.name === reptileName
+        (reptile) => reptile.name === reptileName,
       );
       rawData[reptileType.name ?? reptileType.id][reptileName!] = {} as RawNode;
 
@@ -50,10 +51,10 @@ const getReptileRawData = (reptiles: Reptile[], reptileTypes: ReptileType[]) => 
               (reptile.genies ?? [])
                 .slice()
                 .sort((prev, next) => generateHashNumber(prev!) - generateHashNumber(next!))
-                .join('、')
-            ].join(' - ')
-          )
-        )
+                .join('、'),
+            ].join(' - '),
+          ),
+        ),
       );
 
       for (const reptileGenie of reptileGenies) {
@@ -64,15 +65,15 @@ const getReptileRawData = (reptiles: Reptile[], reptileTypes: ReptileType[]) => 
               (reptile.genies ?? [])
                 .slice()
                 .sort((prev, next) => generateHashNumber(prev!) - generateHashNumber(next!))
-                .join('、')
-            ].join(' - ') === reptileGenie
+                .join('、'),
+            ].join(' - ') === reptileGenie,
         );
         rawData[reptileType.name ?? reptileType.id][reptileName!][reptileGenie.split(' - ')[1]] =
           {} as RawNode;
 
         for (const reptileGender in ReptileGenderType) {
           const reptilesWithSpecificGender = reptilesWithSpecificGenie.filter(
-            (reptile) => reptile.gender === reptileGender
+            (reptile) => reptile.gender === reptileGender,
           );
           const reptileWithSpecificGenderCount = reptilesWithSpecificGender.length;
 
@@ -90,14 +91,12 @@ const getReptileRawData = (reptiles: Reptile[], reptileTypes: ReptileType[]) => 
 };
 
 const getReptilePieMapGroupData = (reptiles: Reptile[]) => {
-  const pieMapGroup: {title: string, diagramRawData: {name: string, value: number}[]}[] = [];
+  const pieMapGroup: { title: string; diagramRawData: { name: string; value: number }[] }[] = [];
 
   const reptileNames = Array.from(new Set(reptiles.map((reptile) => reptile.name)));
 
   for (const reptileName of reptileNames) {
-    const reptilesWithSpecificName = reptiles.filter(
-      (reptile) => reptile.name === reptileName
-    );
+    const reptilesWithSpecificName = reptiles.filter((reptile) => reptile.name === reptileName);
 
     const reptileGenies = Array.from(
       new Set(
@@ -107,15 +106,15 @@ const getReptilePieMapGroupData = (reptiles: Reptile[]) => {
             (reptile.genies ?? [])
               .slice()
               .sort((prev, next) => generateHashNumber(prev!) - generateHashNumber(next!))
-              .join('、')
-          ].join(' - ')
-        )
-      )
+              .join('、'),
+          ].join(' - '),
+        ),
+      ),
     );
 
     pieMapGroup.push({
       title: reptileName + '基因、性别分布',
-      diagramRawData: []
+      diagramRawData: [],
     });
 
     for (const reptileGenie of reptileGenies) {
@@ -126,14 +125,16 @@ const getReptilePieMapGroupData = (reptiles: Reptile[]) => {
             (reptile.genies ?? [])
               .slice()
               .sort((prev, next) => generateHashNumber(prev!) - generateHashNumber(next!))
-              .join('、')
-          ].join(' - ') === reptileGenie
+              .join('、'),
+          ].join(' - ') === reptileGenie,
       );
 
-      const index = pieMapGroup.findIndex(genderPieMap => genderPieMap.title === reptileName + '基因、性别分布');
+      const index = pieMapGroup.findIndex(
+        (genderPieMap) => genderPieMap.title === reptileName + '基因、性别分布',
+      );
       pieMapGroup[index].diagramRawData.push({
         name: reptileGenie,
-        value: reptilesWithSpecificGenie.length
+        value: reptilesWithSpecificGenie.length,
       });
     }
   }
@@ -149,18 +150,16 @@ const getReptileBarMapGroupData = (reptiles: Reptile[]) => {
       reptileGenderLabelMap[ReptileGenderType.FAMALE],
       reptileGenderLabelMap[ReptileGenderType.POSSIBLE_MALE],
       reptileGenderLabelMap[ReptileGenderType.POSSIBLE_FAMALE],
-      reptileGenderLabelMap[ReptileGenderType.UNKNOWN]
+      reptileGenderLabelMap[ReptileGenderType.UNKNOWN],
     ],
   ];
 
-  const barMapGroup: { title: string, diagramRawData: any }[] = [];
+  const barMapGroup: { title: string; diagramRawData: any }[] = [];
 
   const reptileNames = Array.from(new Set(reptiles.map((reptile) => reptile.name)));
 
   for (const reptileName of reptileNames) {
-    const reptilesWithSpecificName = reptiles.filter(
-      (reptile) => reptile.name === reptileName
-    );
+    const reptilesWithSpecificName = reptiles.filter((reptile) => reptile.name === reptileName);
 
     const reptileGenies = Array.from(
       new Set(
@@ -170,10 +169,10 @@ const getReptileBarMapGroupData = (reptiles: Reptile[]) => {
             (reptile.genies ?? [])
               .slice()
               .sort((prev, next) => generateHashNumber(prev!) - generateHashNumber(next!))
-              .join('、')
-          ].join(' - ')
-        )
-      )
+              .join('、'),
+          ].join(' - '),
+        ),
+      ),
     );
 
     barMapGroup.push({
@@ -189,19 +188,23 @@ const getReptileBarMapGroupData = (reptiles: Reptile[]) => {
             (reptile.genies ?? [])
               .slice()
               .sort((prev, next) => generateHashNumber(prev!) - generateHashNumber(next!))
-              .join('、')
-          ].join(' - ') === reptileGenie
+              .join('、'),
+          ].join(' - ') === reptileGenie,
       );
 
-      const parentIndex = barMapGroup.findIndex(barMap => barMap.title === reptileName + '基因 / 性别关系图');
+      const parentIndex = barMapGroup.findIndex(
+        (barMap) => barMap.title === reptileName + '基因 / 性别关系图',
+      );
       barMapGroup[parentIndex].diagramRawData.push([reptileGenie]);
 
       for (const reptileGender in ReptileGenderType) {
         const reptilesWithSpecificGender = reptilesWithSpecificGenie.filter(
-          (reptile) => reptile.gender === reptileGender
+          (reptile) => reptile.gender === reptileGender,
         );
         const reptileWithSpecificGenderCount = reptilesWithSpecificGender.length;
-        const childIndex = barMapGroup[parentIndex].diagramRawData.findIndex((rawData: any) => rawData[0] === reptileGenie);
+        const childIndex = barMapGroup[parentIndex].diagramRawData.findIndex(
+          (rawData: any) => rawData[0] === reptileGenie,
+        );
         barMapGroup[parentIndex].diagramRawData[childIndex].push(reptileWithSpecificGenderCount);
       }
     }
@@ -217,31 +220,29 @@ const ReptileDashboardDiagramGroup = () => {
 
   if (loading) return null;
 
-  const reptileTreeMapRawData =getReptileRawData(reptiles, reptileTypes);
+  const reptileTreeMapRawData = getReptileRawData(reptiles, reptileTypes);
 
   const pieMapGroup = getReptilePieMapGroupData(reptiles);
 
   const barMapGroup = getReptileBarMapGroupData(reptiles);
 
-  return (<Grid container justifyContent={'center'} padding={2}>
-    <Grid padding={4} xs={11}>
-      <TreeMap rootName={'全部'} title={'种群分布'} rawData={reptileTreeMapRawData} />
+  return (
+    <Grid container justifyContent={'center'} padding={2}>
+      <Grid padding={4} xs={11}>
+        <TreeMap rootName={'全部'} title={'种群分布'} rawData={reptileTreeMapRawData} />
+      </Grid>
+      {pieMapGroup.map((pieMap, index) => (
+        <>
+          <Grid key={pieMapGroup[index].title} padding={4} xs={11}>
+            <PieMap rawData={pieMapGroup[index].diagramRawData} title={pieMapGroup[index].title} />
+          </Grid>
+          <Grid key={barMapGroup[index].title} padding={4} xs={11}>
+            <BarMap rawData={barMapGroup[index].diagramRawData} title={barMapGroup[index].title} />
+          </Grid>
+        </>
+      ))}
     </Grid>
-    {
-      pieMapGroup.map(
-        (pieMap, index) => (
-          <>
-            <Grid key={pieMapGroup[index].title} padding={4} xs={11}>
-              <PieMap rawData={pieMapGroup[index].diagramRawData} title={pieMapGroup[index].title} />
-            </Grid>
-            <Grid key={barMapGroup[index].title} padding={4} xs={11}>
-              <BarMap rawData={barMapGroup[index].diagramRawData} title={barMapGroup[index].title} />
-            </Grid>
-          </>
-        )
-      )
-    }
-  </Grid>);
+  );
 };
 
 export default ReptileDashboardDiagramGroup;

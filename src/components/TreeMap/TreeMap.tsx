@@ -14,7 +14,11 @@ interface TreeNode {
   children?: TreeNode[]
 }
 
-export const TreeMap: React.FC<{ rawData: RawNode; title: string, rootName: string }> = ({ rawData, title, rootName }) => {
+export const TreeMap: React.FC<{ rawData: RawNode; title: string; rootName: string }> = ({
+  rawData,
+  title,
+  rootName,
+}) => {
   const chartRef = useRef<any>();
 
   useEffect(() => {
@@ -83,7 +87,9 @@ export const TreeMap: React.FC<{ rawData: RawNode; title: string, rootName: stri
       ],
     });
   }, [chartRef, rawData]);
-  return <Box sx={{ height: 400, width: '100%' }}>
-    <div ref={chartRef} style={{ height: '100%' }}></div>
-  </Box>;
+  return (
+    <Box sx={{ height: 400, width: '100%' }}>
+      <div ref={chartRef} style={{ height: '100%' }}></div>
+    </Box>
+  );
 };
